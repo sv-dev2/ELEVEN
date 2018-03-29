@@ -146,6 +146,7 @@
     <Compile Include="MDIParentForm.Designer.cs">
       <DependentUpon>MDIParentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\FinexTickercs.cs" />
     <Compile Include="Model\LocationModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +262,10 @@
     <Content Include="Resources\DockPanel.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ELEVEN.Services\ELEVEN.Services.csproj">
+      <Project>{af388a6c-e192-410b-8a0d-409241b7f2e7}</Project>
+      <Name>ELEVEN.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WinFormsUI\WinFormsUI.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
