@@ -97,49 +97,20 @@ namespace ELEVEN
                 switch (item.formName)
                 {
                     case "frmMarketWatch":
-                        frmMarketWatch marketWatch = new frmMarketWatch();
-                        if (item.WindowState == "Minimized")
-                        {
-                            marketWatch.WindowState = FormWindowState.Normal;
-                        }
-                        else if (item.WindowState == "Maximized")
-                        {
-                            WindowState = FormWindowState.Maximized;
-                        }
-                        marketWatch.Location = new Point(item.LocationX, item.LocationY);
-                        marketWatch.Size = new Size(item.SizeX, item.SizeY);
-                        marketWatch.MdiParent = this;
-                        marketWatch.Show();
+                        frmMarketWatchWin marketWatch = new frmMarketWatchWin();
+                        OpenWindows(marketWatch, item);
+                        break; /* optional */
+                    case "frmMarketWatchWin":
+                        frmMarketWatchWin WatchWindow = new frmMarketWatchWin();
+                        OpenWindows(WatchWindow, item);
                         break; /* optional */
                     case "frmCharts":
                         frmCharts charts = new frmCharts();
-                        if (item.WindowState == "Minimized")
-                        {
-                            charts.WindowState = FormWindowState.Normal;
-                        }
-                        else if (item.WindowState == "Maximized")
-                        {
-                            WindowState = FormWindowState.Maximized;
-                        }
-                        charts.Location = new Point(item.LocationX, item.LocationY);
-                        charts.Size = new Size(item.SizeX, item.SizeY);
-                        charts.MdiParent = this;
-                        charts.Show();
+                        OpenWindows(charts, item);
                         break;
                     case "frmOrders":
                         frmOrders orders = new frmOrders();
-                        if (item.WindowState == "Minimized")
-                        {
-                            orders.WindowState = FormWindowState.Normal;
-                        }
-                        else if (item.WindowState == "Maximized")
-                        {
-                            WindowState = FormWindowState.Maximized;
-                        }
-                        orders.Location = new Point(item.LocationX, item.LocationY);
-                        orders.Size = new Size(item.SizeX, item.SizeY);
-                        orders.MdiParent = this;
-                        orders.Show();
+                        OpenWindows(orders, item);
                         break;
                     default: /* Optional */
 
@@ -148,7 +119,21 @@ namespace ELEVEN
 
             }
         }
-
+        private void OpenWindows(Form window, LocationModel item)
+        {
+            if (item.WindowState == "Minimized")
+            {
+                window.WindowState = FormWindowState.Normal;
+            }
+            else if (item.WindowState == "Maximized")
+            {
+                window.WindowState = FormWindowState.Maximized;
+            }
+            window.Location = new Point(item.LocationX, item.LocationY);
+            window.Size = new Size(item.SizeX, item.SizeY);
+            window.MdiParent = this;
+            window.Show();
+        }
         private void ChartToolStripButton_Click(object sender, EventArgs e)
         {
             //if (Application.OpenForms.OfType<frmCharts>().Count() == 1)
@@ -199,11 +184,13 @@ namespace ELEVEN
             //}
             //else
             //{
-            frmMarketWatch m_toolbox = new frmMarketWatch();
-            dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
-            m_toolbox.Show(dockPanel);
+            frmMarketWatchWin watch = new frmMarketWatchWin();
+            watch.MdiParent = this;
+            watch.Show();
+            //dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
+            //m_toolbox.Show(dockPanel);
             //}
-            dockPanel.Width = 330;
+            //dockPanel.Width = 330;
         }
 
         private void MDIParentForm_FormClosing(object sender, FormClosingEventArgs e)

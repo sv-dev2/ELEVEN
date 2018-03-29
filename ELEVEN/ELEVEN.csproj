@@ -116,6 +116,12 @@
     <Compile Include="frmMarketWatch.Designer.cs">
       <DependentUpon>frmMarketWatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMarketWatchWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMarketWatchWin.Designer.cs">
+      <DependentUpon>frmMarketWatchWin.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarketWatch.resx">
       <DependentUpon>frmMarketWatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMarketWatchWin.resx">
+      <DependentUpon>frmMarketWatchWin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOrders.resx">
       <DependentUpon>frmOrders.cs</DependentUpon>
