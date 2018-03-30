@@ -153,6 +153,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Market Watch";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMarketWatchWin_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMarketData)).EndInit();
             this.ResumeLayout(false);
 

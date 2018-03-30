@@ -14,9 +14,11 @@ namespace ELEVEN
 {
     public partial class frmCharts : Form
     {
-        public frmCharts()
+        private MDIParentForm parentForm;
+        public frmCharts(MDIParentForm parentForm)
         {
             InitializeComponent();
+            this.parentForm = parentForm;
         }
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
@@ -65,6 +67,13 @@ namespace ELEVEN
                     Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(64, 79, 86))
                 }
             });
+        }
+
+        private void frmCharts_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            TabControl tabControl = parentForm.Controls["tabControl1"] as TabControl;
+            tabControl.TabPages.RemoveByKey(this.Name);
         }
     }
 }

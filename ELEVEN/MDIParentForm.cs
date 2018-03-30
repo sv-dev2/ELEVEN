@@ -45,12 +45,20 @@ namespace ELEVEN
             }
             else
             {
+                string name = Guid.NewGuid().ToString();
                 frmOrders order = new frmOrders();
                 order.MdiParent = this;
+                order.Name = name;
+                TabPage tabPage = new TabPage();
+                tabPage.Text = order.Text;              
+                tabPage.Name = name;
+                this.tabControl1.TabPages.Add(tabPage);
                 order.Show();
             }
 
         }
+
+      
 
         private void OpenFile(object sender, EventArgs e)
         {
@@ -88,6 +96,8 @@ namespace ELEVEN
         {
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
             ReteriveWindowLocations();
+           
+                  
         }
         private void ReteriveWindowLocations()
         {
@@ -105,18 +115,26 @@ namespace ELEVEN
                         OpenWindows(WatchWindow, item);
                         break; /* optional */
                     case "frmCharts":
-                        frmCharts charts = new frmCharts();
+                        frmCharts charts = new frmCharts(this);
                         OpenWindows(charts, item);
                         break;
                     case "frmOrders":
                         frmOrders orders = new frmOrders();
                         OpenWindows(orders, item);
                         break;
+                    case "frmPositions":
+                        frmPositions positions = new frmPositions();
+                        OpenWindows(positions, item);
+                        break;
+                    case "frmClosedPosition":
+                        frmClosedPosition closedPosition = new frmClosedPosition();
+                        OpenWindows(closedPosition, item);
+                        break;
                     default: /* Optional */
 
                         break;
                 }
-
+               
             }
         }
         private void OpenWindows(Form window, LocationModel item)
@@ -129,8 +147,11 @@ namespace ELEVEN
             {
                 window.WindowState = FormWindowState.Maximized;
             }
+            string name = Guid.NewGuid().ToString();
+            tabControl1.TabPages.Add(name,window.Text);
             window.Location = new Point(item.LocationX, item.LocationY);
             window.Size = new Size(item.SizeX, item.SizeY);
+            window.Name = name;
             window.MdiParent = this;
             window.Show();
         }
@@ -142,12 +163,13 @@ namespace ELEVEN
             //}
             //else
             //{
-            frmCharts chart = new frmCharts();
+            string name = Guid.NewGuid().ToString();
+            frmCharts chart = new frmCharts(this);
             chart.MdiParent = this;
+            chart.Name = name;
             chart.Show();
-
+            tabControl1.TabPages.Add(name,chart.Text);
             //}
-
 
         }
 
@@ -184,9 +206,12 @@ namespace ELEVEN
             //}
             //else
             //{
+            var name = Guid.NewGuid().ToString();
             frmMarketWatchWin watch = new frmMarketWatchWin();
             watch.MdiParent = this;
+            watch.Name = name;
             watch.Show();
+            this.tabControl1.TabPages.Add(name, watch.Text);
             //dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
             //m_toolbox.Show(dockPanel);
             //}
@@ -223,6 +248,46 @@ namespace ELEVEN
                 model.WindowState = winState.ToString();
                 SQLiteDBOperation.AddFormsLocation(model);
             }
+        }
+
+        private void positionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (Application.OpenForms.OfType<frmPositions>().Count() == 1)
+            {
+                Application.OpenForms.OfType<frmPositions>().First().Activate();
+            }
+            else
+            {
+                var name = Guid.NewGuid().ToString();
+                frmPositions positions = new frmPositions();
+                positions.MdiParent = this;
+                positions.Name = name;
+                tabControl1.TabPages.Add(name,positions.Text);
+                positions.Show();
+            }
+        }
+
+        private void closedPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<frmClosedPosition>().Count() == 1)
+            {
+                Application.OpenForms.OfType<frmClosedPosition>().First().Activate();
+            }
+            else
+            {
+                var name = Guid.NewGuid().ToString();
+                frmClosedPosition positions = new frmClosedPosition();
+                positions.MdiParent = this;
+                positions.Name = name;
+                tabControl1.TabPages.Add(name,positions.Text);
+                positions.Show();
+            }
+        }
+
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

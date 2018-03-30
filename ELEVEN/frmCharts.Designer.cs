@@ -54,6 +54,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Chart";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCharts_FormClosing);
             this.Load += new System.EventHandler(this.CustomizedLineSeries_Load);
             this.ResumeLayout(false);
 

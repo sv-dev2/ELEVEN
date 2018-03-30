@@ -16,5 +16,11 @@ namespace ELEVEN
         {
             InitializeComponent();
         }
+
+        private void frmPositions_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
+            tabControl.TabPages.RemoveByKey(this.Name);
+        }
     }
 }

@@ -50,7 +50,10 @@ namespace ELEVEN
             txtSecurity.Text = "";
         }
 
-
-
+        private void frmOrders_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
+            tabControl.TabPages.RemoveByKey(this.Name);
+        }
     }
 }
