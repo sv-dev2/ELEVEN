@@ -35,14 +35,23 @@ namespace ELEVEN
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             string symbols = new StreamReader("Symbols.txt").ReadLine();
-            string[][] ticker = PbBitfinexAPI.Get<FinexTicker>($"tickers?symbols="+ symbols);
-            dt.Clear();
-            for (int i= 0;i< ticker.Length;i++)
+            string[][] ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols="+ symbols);
+            
+            if(ticker!=null)
             {
-                dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");
+                dt.Clear();
+                for (int i = 0; i < ticker.Length; i++)
+                {
+                    dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");
+                }
+                dataGridMarketData.DataSource = null;
+                dataGridMarketData.DataSource = dt;
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             }
-            dataGridMarketData.DataSource = null;
-            dataGridMarketData.DataSource = dt;
+           else
+            {
+                dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            }
             //worker.DoWork += worker_DoWork;
             //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             //worker.RunWorkerAsync();

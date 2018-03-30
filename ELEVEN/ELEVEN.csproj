@@ -271,6 +271,7 @@
     <Content Include="Images\TaskListWindow.ico" />
     <Content Include="Images\ToolboxWindow.ico" />
     <Content Include="Images\XmlFile.ico" />
+    <Content Include="Resources\Symbols.txt" />
     <None Include="Resources\01.jpg" />
     <Content Include="Resources\DockPanel.xml" />
   </ItemGroup>
