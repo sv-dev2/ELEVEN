@@ -43,7 +43,7 @@ namespace ELEVEN.Services
             return "";
         }
 
-        public static T Get<T>(string url)
+        public static string[][] Get<T>(string url)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace ELEVEN.Services
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    var tmp = JsonConvert.DeserializeObject<T>(result);
+                    var tmp = JsonConvert.DeserializeObject<string[][]>(result);
                     return tmp;
                 }
 
@@ -68,7 +68,7 @@ namespace ELEVEN.Services
 
             }
 
-            return default(T);
+            return default(string[][]);
         }
     }
 }

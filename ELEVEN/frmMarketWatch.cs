@@ -20,10 +20,14 @@ namespace ELEVEN
     {
         //private readonly BackgroundWorker worker = new BackgroundWorker();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        string symbols = "";
+        DataTable dt = new DataTable();
         public frmMarketWatch()
         {
             InitializeComponent();
+            dt.Columns.AddRange(new[]
+            {
+                new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Spread"),new DataColumn("Manage"),
+            });
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
@@ -31,10 +35,14 @@ namespace ELEVEN
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             string symbols = new StreamReader("Symbols.txt").ReadLine();
-             FinexTicker ticker = PbBitfinexAPI.Get<FinexTicker>($"tickers?symbols="+ symbols);
-
+            string[][] ticker = PbBitfinexAPI.Get<FinexTicker>($"tickers?symbols="+ symbols);
+            dt.Clear();
+            for (int i= 0;i< ticker.Length;i++)
+            {
+                dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");
+            }
             dataGridMarketData.DataSource = null;
-            dataGridMarketData.DataSource = ticker;
+            dataGridMarketData.DataSource = dt;
             //worker.DoWork += worker_DoWork;
             //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             //worker.RunWorkerAsync();
