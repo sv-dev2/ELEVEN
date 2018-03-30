@@ -16,17 +16,12 @@ namespace ELEVEN.Model
         public string high { get; set; }
         public string volume { get; set; }
         public string timestamp { get; set; }
+        public string pair { get; set; }
     }
 
     public class FinexStats
     {
         public int period { get; set; }
         public string volume { get; set; }
-    }
-
-    public class User
-    {
-
-        public string Symbol { get; set; }
     }
 }
