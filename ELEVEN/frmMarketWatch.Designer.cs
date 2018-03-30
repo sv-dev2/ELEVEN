@@ -85,6 +85,8 @@
             this.dataGridMarketData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridMarketData.Size = new System.Drawing.Size(402, 306);
             this.dataGridMarketData.TabIndex = 0;
+            this.dataGridMarketData.Tag = "frmMarketWatch";
+            this.dataGridMarketData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellContentClick);
             // 
             // frmMarketWatch
             // 

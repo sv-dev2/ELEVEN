@@ -189,6 +189,7 @@
             this.Name = "frmPositions";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.Tag = "frmPositions";
             this.Text = "Positions";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPositions_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

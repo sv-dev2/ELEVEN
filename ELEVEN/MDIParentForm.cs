@@ -317,7 +317,7 @@ namespace ELEVEN
                     size = childForm.RestoreBounds.Size;
                 }
                 LocationModel model = new LocationModel();
-                model.formName = childForm.Name;
+                model.formName = childForm.Tag.ToString();
                 model.LocationX = location.X;
                 model.LocationY = location.Y;
                 model.SizeX = size.Width;

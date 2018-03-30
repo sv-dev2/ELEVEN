@@ -333,6 +333,7 @@
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Tag = "frmOrders";
             this.Text = "Orders";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmOrders_FormClosing);
             this.Load += new System.EventHandler(this.frmOrders_Load);

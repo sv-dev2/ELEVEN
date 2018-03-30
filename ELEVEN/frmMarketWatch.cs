@@ -26,7 +26,8 @@ namespace ELEVEN
             InitializeComponent();
             dt.Columns.AddRange(new[]
             {
-                new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Spread"),new DataColumn("Manage"),
+               // new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Spread"),new DataColumn("Manage"),
+                new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume")
             });
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
@@ -35,26 +36,42 @@ namespace ELEVEN
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             string symbols = new StreamReader("Symbols.txt").ReadLine();
-            string[][] ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols="+ symbols);
-            
-            if(ticker!=null)
+            string[][] ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+
+            if (ticker != null)
             {
+
                 dt.Clear();
                 for (int i = 0; i < ticker.Length; i++)
                 {
-                    dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");
+                    //dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");
+                    dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8]);
                 }
-                dataGridMarketData.DataSource = null;
+
                 dataGridMarketData.DataSource = dt;
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                dataGridMarketData.Refresh();
+
+
+                if (Index >= 0)
+                {
+                    dataGridMarketData.Rows[Index].Selected = true;
+                }
+
+
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
             }
-           else
+            else
             {
                 dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             }
             //worker.DoWork += worker_DoWork;
             //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             //worker.RunWorkerAsync();
+        }
+        int Index = -1;
+        private void dataGridMarketData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Index = e.RowIndex;
         }
 
         //private void worker_DoWork(object Sender, DoWorkEventArgs e)
