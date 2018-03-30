@@ -49,16 +49,83 @@ namespace ELEVEN
                 frmOrders order = new frmOrders();
                 order.MdiParent = this;
                 order.Name = name;
-                TabPage tabPage = new TabPage();
-                tabPage.Text = order.Text;              
-                tabPage.Name = name;
-                this.tabControl1.TabPages.Add(tabPage);
+
+                AddContextMenuTabControlItem(name, order);
+
                 order.Show();
             }
 
         }
+        ContextMenuStrip menuStrip1;
+        private void AddContextMenuTabControlItem(string name, Form frm)
+        {
+            TabPage tabPage = new TabPage();
+            tabPage.Text = frm.Text;
+            tabPage.Name = name;
 
-      
+            menuStrip1 = new ContextMenuStrip();
+
+            ToolStripItem item1 = menuStrip1.Items.Add("Close", ELEVEN.Properties.Resources.close_x);
+            item1.Tag = tabPage;
+            this.menuStrip1.Items.Add(new ToolStripSeparator());
+            ToolStripItem item2 = menuStrip1.Items.Add("Minimize", ELEVEN.Properties.Resources.minimize);
+            item2.Tag = tabPage;
+            ToolStripItem item3 = menuStrip1.Items.Add("Maximize", ELEVEN.Properties.Resources.maximize);
+            item3.Tag = tabPage;
+            ToolStripItem item4 = this.menuStrip1.Items.Add("Restore", ELEVEN.Properties.Resources.red_img);
+            item4.Tag = tabPage;
+            this.menuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(contextMenuStrip1_ItemClicked);
+
+            tabPage.ContextMenuStrip = menuStrip1;
+
+            this.tabControl1.TabPages.Add(tabPage);
+        }
+        void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            // TabPage tabPage = e.ClickedItem.Tag as TabPage;
+            TabPage tabPage = selectedTabPage;
+            string selectedItem = e.ClickedItem.Text;
+            if (tabPage != null)
+            {
+                //this.tabControl1.SelectedTab = page;
+                string Id = tabPage.Name;
+                switch (selectedItem)
+                {
+                    case "Close":
+                        var result = Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault();
+                        if (result != null)
+                        {
+                            result.Close();
+                        }
+                        break; /* optional */
+                    case "Minimize":
+                        var result2 = Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault();
+                        if (result2 != null)
+                        {
+                            result2.WindowState = FormWindowState.Minimized;
+                        }
+                        break; /* optional */
+                    case "Maximize":
+                        var result3 = Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault();
+                        if (result3 != null)
+                        {
+                            result3.WindowState = FormWindowState.Maximized;
+                        }
+                        break; /* optional */
+                    case "Restore":
+                        var result4 = Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault();
+                        if (result4 != null)
+                        {
+                            result4.WindowState = FormWindowState.Normal;
+                        }
+                        break; /* optional */
+                    default:
+                        break;
+                }
+
+            }
+        }
+
 
         private void OpenFile(object sender, EventArgs e)
         {
@@ -96,8 +163,8 @@ namespace ELEVEN
         {
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
             ReteriveWindowLocations();
-           
-                  
+
+
         }
         private void ReteriveWindowLocations()
         {
@@ -134,7 +201,7 @@ namespace ELEVEN
 
                         break;
                 }
-               
+
             }
         }
         private void OpenWindows(Form window, LocationModel item)
@@ -148,11 +215,17 @@ namespace ELEVEN
                 window.WindowState = FormWindowState.Maximized;
             }
             string name = Guid.NewGuid().ToString();
-            tabControl1.TabPages.Add(name,window.Text);
+
+
+            AddContextMenuTabControlItem(name, window);
+
             window.Location = new Point(item.LocationX, item.LocationY);
             window.Size = new Size(item.SizeX, item.SizeY);
             window.Name = name;
             window.MdiParent = this;
+
+
+
             window.Show();
         }
         private void ChartToolStripButton_Click(object sender, EventArgs e)
@@ -167,8 +240,9 @@ namespace ELEVEN
             frmCharts chart = new frmCharts(this);
             chart.MdiParent = this;
             chart.Name = name;
+            AddContextMenuTabControlItem(name, chart);
             chart.Show();
-            tabControl1.TabPages.Add(name,chart.Text);
+
             //}
 
         }
@@ -210,8 +284,11 @@ namespace ELEVEN
             frmMarketWatchWin watch = new frmMarketWatchWin();
             watch.MdiParent = this;
             watch.Name = name;
+
+            AddContextMenuTabControlItem(name, watch);
+
             watch.Show();
-            this.tabControl1.TabPages.Add(name, watch.Text);
+
             //dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
             //m_toolbox.Show(dockPanel);
             //}
@@ -263,7 +340,9 @@ namespace ELEVEN
                 frmPositions positions = new frmPositions();
                 positions.MdiParent = this;
                 positions.Name = name;
-                tabControl1.TabPages.Add(name,positions.Text);
+
+                AddContextMenuTabControlItem(name, positions);
+
                 positions.Show();
             }
         }
@@ -280,14 +359,24 @@ namespace ELEVEN
                 frmClosedPosition positions = new frmClosedPosition();
                 positions.MdiParent = this;
                 positions.Name = name;
-                tabControl1.TabPages.Add(name,positions.Text);
+
+                AddContextMenuTabControlItem(name, positions);
+
                 positions.Show();
             }
         }
-
+        TabPage selectedTabPage;
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
         {
+            var tabControl = sender as TabControl;
+            selectedTabPage = tabControl.SelectedTab;
+            string Id = selectedTabPage.Name;
+            Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault().Activate();
 
+            if (e.Button == MouseButtons.Right)
+            {
+                this.menuStrip1.Show(Cursor.Position);
+            }
         }
     }
 }
