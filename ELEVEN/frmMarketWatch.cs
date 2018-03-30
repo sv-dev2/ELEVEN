@@ -32,6 +32,20 @@ namespace ELEVEN
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
+
+            txtAddRow.Text = "click to add..";
+            txtAddRow.GotFocus += TxtQuantity_GotFocus;
+            txtAddRow.LostFocus += TxtQuantity_LostFocus;
+        }
+        private void TxtQuantity_LostFocus(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtAddRow.Text))
+                txtAddRow.Text = "click to add..";
+        }
+
+        private void TxtQuantity_GotFocus(object sender, EventArgs e)
+        {
+            txtAddRow.Text = string.Empty;
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -72,6 +86,17 @@ namespace ELEVEN
         private void dataGridMarketData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Index = e.RowIndex;
+        }
+
+        private void dataGridMarketData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            var height = 40;
+            foreach (DataGridViewRow dr in dataGridMarketData.Rows)
+            {
+                height += dr.Height;
+            }
+
+            dataGridMarketData.Height = height;
         }
 
         //private void worker_DoWork(object Sender, DoWorkEventArgs e)
