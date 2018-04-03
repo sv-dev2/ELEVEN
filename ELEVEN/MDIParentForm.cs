@@ -206,6 +206,10 @@ namespace ELEVEN
                         frmClosedPosition closedPosition = new frmClosedPosition();
                         OpenWindows(closedPosition, item);
                         break;
+                    case "frmAlertWindow":
+                        frmAlertWindow alertWindow = new frmAlertWindow();
+                        OpenWindows(alertWindow, item);
+                        break;
                     default: /* Optional */
 
                         break;
@@ -260,6 +264,7 @@ namespace ELEVEN
             frmAlertWindow AlertWindow = new frmAlertWindow();
             AlertWindow.MdiParent = this;
             AlertWindow.Name = name;
+            AddContextMenuTabControlItem(name, AlertWindow);
             AlertWindow.Show();
         }
 
