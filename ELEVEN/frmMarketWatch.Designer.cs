@@ -46,7 +46,6 @@
             this.dataGridMarketData.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridMarketData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridMarketData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridMarketData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridMarketData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -86,6 +85,7 @@
             this.dataGridMarketData.Size = new System.Drawing.Size(390, 260);
             this.dataGridMarketData.TabIndex = 0;
             this.dataGridMarketData.Tag = "frmMarketWatch";
+            this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
             this.dataGridMarketData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellContentClick);
             this.dataGridMarketData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridMarketData_DataBindingComplete);
             // 
@@ -110,6 +110,7 @@
             this.Name = "frmMarketWatch";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
             this.Text = "Market Watch";
+            this.Load += new System.EventHandler(this.frmMarketWatch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMarketData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
