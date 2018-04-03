@@ -40,5 +40,11 @@ namespace ELEVEN
             Button button = sender as Button;
             button.ForeColor = SystemColors.Highlight;
         }
+
+        private void frmAlertWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //frmAlertWindow AlertWindow = new frmAlertWindow();
+            //AlertWindow.Hide();
+        }
     }
 }
