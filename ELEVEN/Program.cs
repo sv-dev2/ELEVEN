@@ -17,7 +17,7 @@ namespace ELEVEN
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //DBConnection.SQLiteDBOperation.Choose_Btn_click();Test connection with DB
-            Application.Run(new frmActiveGrid());
+            Application.Run(new MDIParentForm());
         }
     }
 }

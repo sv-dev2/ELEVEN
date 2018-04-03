@@ -177,12 +177,18 @@ namespace ELEVEN
                 switch (item.formName)
                 {
                     case "frmMarketWatch":
-                        frmMarketWatchWin marketWatch = new frmMarketWatchWin();
-                        OpenWindows(marketWatch, item);
+                        this.Invoke((Action)delegate ()
+                        {
+                            frmMarketWatchWin marketWatch = new frmMarketWatchWin();
+                            OpenWindows(marketWatch, item);
+                        });
                         break; /* optional */
                     case "frmMarketWatchWin":
-                        frmMarketWatchWin WatchWindow = new frmMarketWatchWin();
-                        OpenWindows(WatchWindow, item);
+                        this.Invoke((Action)delegate ()
+                        {
+                            frmMarketWatchWin WatchWindow = new frmMarketWatchWin();
+                            OpenWindows(WatchWindow, item);
+                        });
                         break; /* optional */
                     case "frmCharts":
                         frmCharts charts = new frmCharts(this);
@@ -285,16 +291,17 @@ namespace ELEVEN
             //}
             //else
             //{
+            this.Invoke((Action)delegate ()
+            {
+                var name = Guid.NewGuid().ToString();
+                frmMarketWatchWin watch = new frmMarketWatchWin();
+                watch.MdiParent = this;
+                watch.Name = name;
 
-            var name = Guid.NewGuid().ToString();
-            frmMarketWatchWin watch = new frmMarketWatchWin();
-            watch.MdiParent = this;
-            watch.Name = name;
+                AddContextMenuTabControlItem(name, watch);
 
-            AddContextMenuTabControlItem(name, watch);
-
-            watch.Show();
-
+                watch.Show();
+            });
             //dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
             //m_toolbox.Show(dockPanel);
             //}
