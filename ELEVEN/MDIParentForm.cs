@@ -174,11 +174,11 @@ namespace ELEVEN
                 switch (item.formName)
                 {
                     case "frmMarketWatch":
-                        frmMarketWatchWin marketWatch = new frmMarketWatchWin();
+                        frmMarketWatchWin_Back marketWatch = new frmMarketWatchWin_Back();
                         OpenWindows(marketWatch, item);
                         break; /* optional */
                     case "frmMarketWatchWin":
-                        frmMarketWatchWin WatchWindow = new frmMarketWatchWin();
+                        frmMarketWatchWin_Back WatchWindow = new frmMarketWatchWin_Back();
                         OpenWindows(WatchWindow, item);
                         break; /* optional */
                     case "frmCharts":
@@ -281,7 +281,7 @@ namespace ELEVEN
             //else
             //{
             var name = Guid.NewGuid().ToString();
-            frmMarketWatchWin watch = new frmMarketWatchWin();
+            frmMarketWatchWin_Back watch = new frmMarketWatchWin_Back();
             watch.MdiParent = this;
             watch.Name = name;
 

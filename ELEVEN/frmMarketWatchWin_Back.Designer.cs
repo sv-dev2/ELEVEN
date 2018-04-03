@@ -1,6 +1,6 @@
 ﻿namespace ELEVEN
 {
-    partial class frmMarketWatch
+    partial class frmMarketWatchWin_Back
     {
         /// <summary>
         /// Required designer variable.
@@ -32,20 +32,27 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMarketWatch));
             this.dataGridMarketData = new System.Windows.Forms.DataGridView();
-            this.txtAddRow = new System.Windows.Forms.TextBox();
+            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Last = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Spread = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMarketData)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridMarketData
             // 
-            this.dataGridMarketData.AllowUserToAddRows = false;
             this.dataGridMarketData.AllowUserToDeleteRows = false;
             this.dataGridMarketData.AllowUserToOrderColumns = true;
-            this.dataGridMarketData.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridMarketData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridMarketData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridMarketData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridMarketData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridMarketData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -57,6 +64,14 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridMarketData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridMarketData.ColumnHeadersHeight = 35;
+            this.dataGridMarketData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Symbol,
+            this.Bid,
+            this.Ask,
+            this.Last,
+            this.Volume,
+            this.Spread,
+            this.Manage});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 8.25F);
@@ -65,7 +80,6 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridMarketData.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridMarketData.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridMarketData.EnableHeadersVisualStyles = false;
             this.dataGridMarketData.Location = new System.Drawing.Point(0, 0);
             this.dataGridMarketData.MultiSelect = false;
@@ -82,46 +96,79 @@
             this.dataGridMarketData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridMarketData.RowHeadersVisible = false;
             this.dataGridMarketData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridMarketData.Size = new System.Drawing.Size(390, 260);
-            this.dataGridMarketData.TabIndex = 0;
-            this.dataGridMarketData.Tag = "frmMarketWatch";
-            this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
-            this.dataGridMarketData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellContentClick);
-            this.dataGridMarketData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridMarketData_CellFormatting);
-            this.dataGridMarketData.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridMarketData_CellValidating);
-            this.dataGridMarketData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridMarketData_DataBindingComplete);
+            this.dataGridMarketData.Size = new System.Drawing.Size(584, 364);
+            this.dataGridMarketData.TabIndex = 1;
             // 
-            // txtAddRow
+            // Symbol
             // 
-            this.txtAddRow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtAddRow.Location = new System.Drawing.Point(0, 260);
-            this.txtAddRow.Name = "txtAddRow";
-            this.txtAddRow.Size = new System.Drawing.Size(390, 20);
-            this.txtAddRow.TabIndex = 1;
+            this.Symbol.HeaderText = "Symbol";
+            this.Symbol.Name = "Symbol";
+            this.Symbol.ReadOnly = true;
+            this.Symbol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // frmMarketWatch
+            // Bid
+            // 
+            this.Bid.HeaderText = "Bid";
+            this.Bid.Name = "Bid";
+            this.Bid.ReadOnly = true;
+            // 
+            // Ask
+            // 
+            this.Ask.HeaderText = "Ask";
+            this.Ask.Name = "Ask";
+            this.Ask.ReadOnly = true;
+            // 
+            // Last
+            // 
+            this.Last.HeaderText = "Last";
+            this.Last.Name = "Last";
+            this.Last.ReadOnly = true;
+            // 
+            // Volume
+            // 
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.ReadOnly = true;
+            // 
+            // Spread
+            // 
+            this.Spread.HeaderText = "Spread";
+            this.Spread.Name = "Spread";
+            this.Spread.ReadOnly = true;
+            // 
+            // Manage
+            // 
+            this.Manage.HeaderText = "Manage";
+            this.Manage.Name = "Manage";
+            this.Manage.ReadOnly = true;
+            // 
+            // frmMarketWatchWin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 280);
-            this.Controls.Add(this.txtAddRow);
+            this.ClientSize = new System.Drawing.Size(581, 365);
             this.Controls.Add(this.dataGridMarketData);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HideOnClose = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmMarketWatch";
-            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
+            this.Name = "frmMarketWatchWin";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Tag = "frmMarketWatchWin";
             this.Text = "Market Watch";
-            this.Load += new System.EventHandler(this.frmMarketWatch_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMarketWatchWin_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMarketData)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridMarketData;
-        private System.Windows.Forms.TextBox txtAddRow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Symbol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Bid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ask;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Last;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Spread;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Manage;
     }
 }
