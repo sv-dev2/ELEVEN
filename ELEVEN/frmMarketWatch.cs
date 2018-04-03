@@ -27,13 +27,27 @@ namespace ELEVEN
         public frmMarketWatch()
         {
             InitializeComponent();
-
+            AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
 
 
         }
-
+        private void AutoCompletetxtAddRow()
+        {
+            AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
+            var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
+            var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
+            for (int i = 0; i < Smbl.Count(); i++)
+            {
+                SymbolCollection.Add(Smbl[i][0]);
+            }
+            txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtAddRow.AutoCompleteCustomSource = SymbolCollection;
+            txtAddRow.AutoCompleteCustomSource = SymbolCollection;
+            txtAddRow.AutoCompleteCustomSource = SymbolCollection;
+        }
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         private void CreateDataGridColumn()
         {
@@ -146,7 +160,7 @@ namespace ELEVEN
             {
                 // dt.Clear();
                 oldCustomerList = this.bindingSource1.DataSource as BindingList<FinexTicker>;
-                if(oldCustomerList !=null)
+                if (oldCustomerList != null)
                 {
                     OldWatchList = new List<OldData>();
                     foreach (var item in oldCustomerList)
@@ -249,7 +263,7 @@ namespace ELEVEN
                 if (e.Value != null)
                 {
                     var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
-                    if(OldWatchList.Count>0)
+                    if (OldWatchList.Count > 0)
                     {
                         var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
                         string RepVisits = e.Value.ToString();
@@ -262,8 +276,16 @@ namespace ELEVEN
                             this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
                         }
                     }
-                                    
+
                 }
+            }
+        }
+
+        private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                ReadWriteNotepad(txtAddRow.Text);
             }
         }
     }

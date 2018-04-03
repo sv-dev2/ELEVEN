@@ -338,6 +338,7 @@
             // 
             // imgCalender
             // 
+            this.imgCalender.Image = global::ELEVEN.Properties.Resources.Calender;
             this.imgCalender.Location = new System.Drawing.Point(125, 2);
             this.imgCalender.Name = "imgCalender";
             this.imgCalender.Size = new System.Drawing.Size(20, 20);

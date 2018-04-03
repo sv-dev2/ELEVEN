@@ -12,6 +12,7 @@ namespace ELEVEN.Services
     public class PbBitfinexAPI
     {
         public static readonly string baseAddress = "https://api.bitfinex.com/v2/";
+        public static readonly string baseAddressV1 = "https://api.bitfinex.com/v1/";
         /// <summary>
         /// This method recturn comma seperated rsult
         /// </summary>
@@ -21,7 +22,7 @@ namespace ELEVEN.Services
         {
             try
             {
-                url = baseAddress + url;
+                url = baseAddressV1 + url;
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.UserAgent = "Foo";
@@ -34,7 +35,7 @@ namespace ELEVEN.Services
                     return result;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
 

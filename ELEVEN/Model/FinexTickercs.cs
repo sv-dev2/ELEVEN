@@ -196,4 +196,9 @@ namespace ELEVEN.Model
         public int period { get; set; }
         public string volume { get; set; }
     }
+
+    public class Symbols
+    {
+        public string Symbol { get; set; }
+    }
 }

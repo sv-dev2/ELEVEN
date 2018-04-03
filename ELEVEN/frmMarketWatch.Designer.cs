@@ -98,6 +98,7 @@
             this.txtAddRow.Name = "txtAddRow";
             this.txtAddRow.Size = new System.Drawing.Size(390, 20);
             this.txtAddRow.TabIndex = 1;
+            this.txtAddRow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAddRow_KeyDown);
             // 
             // frmMarketWatch
             // 
