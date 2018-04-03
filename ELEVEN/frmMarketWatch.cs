@@ -30,8 +30,6 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-
-
         }
         private void AutoCompletetxtAddRow()
         {
@@ -44,8 +42,6 @@ namespace ELEVEN
             }
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtAddRow.AutoCompleteCustomSource = SymbolCollection;
-            txtAddRow.AutoCompleteCustomSource = SymbolCollection;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
         }
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
@@ -237,7 +233,7 @@ namespace ELEVEN
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(@"Symbols.txt", false))
             {
-                file.WriteLine(symbols);
+                file.Write(symbols);
                 file.Close();
             }
             LoadMarketWatch();
@@ -267,13 +263,15 @@ namespace ELEVEN
                     {
                         var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
                         string RepVisits = e.Value.ToString();
-                        if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
-                        {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                        }
-                        else
-                        {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        if (result !=null) {
+                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            }
                         }
                     }
 
@@ -288,13 +286,16 @@ namespace ELEVEN
                     {
                         var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
                         string RepVisits = e.Value.ToString();
-                        if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
+                        if (result != null)
                         {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                        }
-                        else
-                        {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            }
                         }
                     }
 
@@ -306,8 +307,28 @@ namespace ELEVEN
         {
             if (e.KeyData == Keys.Enter)
             {
-                ReadWriteNotepad(txtAddRow.Text);
+                AddSymbolTxtFile();
             }
+        }
+
+        private void AddSymbolTxtFile()
+        {
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader("Symbols.txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            if (!symbols.Contains("t" + txtAddRow.Text))
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"Symbols.txt", true))
+                {
+                    file.Write(",t" + txtAddRow.Text);
+                    file.Close();
+                }
+            }
+            LoadMarketWatch();
+            CreateDataGridColumn();
         }
     }
 }
