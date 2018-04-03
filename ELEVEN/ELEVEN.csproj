@@ -52,10 +52,13 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AnalysisServices.AdomdClient, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.AnalysisServices.SPClient.Interfaces, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -98,6 +101,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DBConnection\SQLiteDBOperation.cs" />
+    <Compile Include="frmAlertHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlertHistory.Designer.cs">
+      <DependentUpon>frmAlertHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAlertWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlertWindow.Designer.cs">
+      <DependentUpon>frmAlertWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCharts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +183,12 @@
     <EmbeddedResource Include="Customization\Resources.resx" />
     <EmbeddedResource Include="Customization\Strings.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAlertHistory.resx">
+      <DependentUpon>frmAlertHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAlertWindow.resx">
+      <DependentUpon>frmAlertWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCharts.resx">
       <DependentUpon>frmCharts.cs</DependentUpon>
@@ -281,6 +302,9 @@
     <Content Include="Images\TaskListWindow.ico" />
     <Content Include="Images\ToolboxWindow.ico" />
     <Content Include="Images\XmlFile.ico" />
+    <None Include="Resources\Timer1.png" />
+    <None Include="Resources\Timer.png" />
+    <None Include="Resources\Calender.png" />
     <Content Include="Resources\Symbols.txt" />
     <None Include="Resources\01.jpg" />
     <Content Include="Resources\DockPanel.xml" />
