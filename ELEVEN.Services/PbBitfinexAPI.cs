@@ -70,5 +70,33 @@ namespace ELEVEN.Services
 
             return default(T);
         }
+
+        public static async Task<T> GetTiclers<T>(string url)
+        {
+            try
+            {
+                url = baseAddress + url;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.UserAgent = "Foo";
+                httpWebRequest.Accept = "*/*";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = await streamReader.ReadToEndAsync();
+                    var tmp = JsonConvert.DeserializeObject<T>(result);
+                    return tmp;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+
+            return default(T);
+        }
     }
 }

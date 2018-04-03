@@ -174,11 +174,11 @@ namespace ELEVEN
                 switch (item.formName)
                 {
                     case "frmMarketWatch":
-                        frmMarketWatchWin_Back marketWatch = new frmMarketWatchWin_Back();
+                        frmMarketWatchWin marketWatch = new frmMarketWatchWin();
                         OpenWindows(marketWatch, item);
                         break; /* optional */
                     case "frmMarketWatchWin":
-                        frmMarketWatchWin_Back WatchWindow = new frmMarketWatchWin_Back();
+                        frmMarketWatchWin WatchWindow = new frmMarketWatchWin();
                         OpenWindows(WatchWindow, item);
                         break; /* optional */
                     case "frmCharts":
@@ -214,17 +214,15 @@ namespace ELEVEN
             {
                 window.WindowState = FormWindowState.Maximized;
             }
-            string name = Guid.NewGuid().ToString();
+           // string name = Guid.NewGuid().ToString();
 
 
-            AddContextMenuTabControlItem(name, window);
+            AddContextMenuTabControlItem(item.formUniqueName, window);
 
             window.Location = new Point(item.LocationX, item.LocationY);
             window.Size = new Size(item.SizeX, item.SizeY);
-            window.Name = name;
+            window.Name = item.formUniqueName;
             window.MdiParent = this;
-
-
 
             window.Show();
         }
@@ -281,7 +279,7 @@ namespace ELEVEN
             //else
             //{
             var name = Guid.NewGuid().ToString();
-            frmMarketWatchWin_Back watch = new frmMarketWatchWin_Back();
+            frmMarketWatchWin watch = new frmMarketWatchWin();
             watch.MdiParent = this;
             watch.Name = name;
 
@@ -323,6 +321,7 @@ namespace ELEVEN
                 model.SizeX = size.Width;
                 model.SizeY = size.Height;
                 model.WindowState = winState.ToString();
+                model.formUniqueName = childForm.Name;
                 SQLiteDBOperation.AddFormsLocation(model);
             }
         }

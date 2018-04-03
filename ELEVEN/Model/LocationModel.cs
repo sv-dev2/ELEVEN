@@ -15,6 +15,7 @@ namespace ELEVEN.Model
         public int LocationX { get; set; }
         public int LocationY { get; set; }
         public string WindowState { get; set; }
+        public string formUniqueName { get; set; }
 
     }
 }
