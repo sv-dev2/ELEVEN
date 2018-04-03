@@ -118,10 +118,10 @@ namespace ELEVEN
             //      // new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Spread"),new DataColumn("Manage"),
             //       new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Remove")
             //});
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
-            backgroundWorker1.RunWorkerAsync();
+            //this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            //this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            //this.backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            //backgroundWorker1.RunWorkerAsync();
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {

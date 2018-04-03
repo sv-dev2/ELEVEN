@@ -288,6 +288,7 @@ namespace ELEVEN
         }
         private void frmMarketWatchWin_FormClosing(object sender, FormClosingEventArgs e)
         {
+            dispatcherTimer1.Stop();
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
             string name = this.Name;
