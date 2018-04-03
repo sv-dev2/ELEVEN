@@ -184,7 +184,7 @@ namespace ELEVEN
                     customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
                 }
                 this.bindingSource1.DataSource = customerList;
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             }
             else
             {
@@ -267,9 +267,30 @@ namespace ELEVEN
                     {
                         var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
                         string RepVisits = e.Value.ToString();
-                        if (Convert.ToDecimal(RepVisits) > Convert.ToDecimal(result.bid))
+                        if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
                         {
-                            this.dataGridMarketData.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                        }
+                        else
+                        {
+                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        }
+                    }
+
+                }
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["ask"].Index)
+            {
+                if (e.Value != null)
+                {
+                    var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
+                    if (OldWatchList.Count > 0)
+                    {
+                        var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
+                        string RepVisits = e.Value.ToString();
+                        if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
+                        {
+                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
                         }
                         else
                         {
