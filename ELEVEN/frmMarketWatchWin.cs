@@ -37,7 +37,7 @@ namespace ELEVEN
                 using (System.IO.StreamWriter file =
               new System.IO.StreamWriter(fileName, false))
                 {
-                    file.WriteLine(symbols);
+                    file.Write(symbols);
                     file.Close();
                 }
             }
@@ -109,10 +109,26 @@ namespace ELEVEN
         {
             txtAddRow.Text = "click to add..";
             SymbolFileExist();
+            LoadMarketWatch();
+            CreateDataGridColumn();
+            AutoCompletetxtAddRow();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker2.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             backgroundWorker2.RunWorkerAsync();
+        }
+        private void AutoCompletetxtAddRow()
+        {
+            AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
+            var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
+            var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
+            for (int i = 0; i < Smbl.Count(); i++)
+            {
+                SymbolCollection.Add(Smbl[i][0]);
+            }
+            txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtAddRow.AutoCompleteCustomSource = SymbolCollection;
         }
         private async void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -222,7 +238,7 @@ namespace ELEVEN
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(fileName, false))
             {
-                file.WriteLine(symbols);
+                file.Write(symbols);
                 file.Close();
             }
             await LoadMarketWatch();
@@ -252,13 +268,16 @@ namespace ELEVEN
                     {
                         var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
                         string RepVisits = e.Value.ToString();
-                        if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
+                        if (result != null)
                         {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                        }
-                        else
-                        {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            }
                         }
                     }
 
@@ -273,13 +292,16 @@ namespace ELEVEN
                     {
                         var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
                         string RepVisits = e.Value.ToString();
-                        if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
+                        if (result != null)
                         {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                        }
-                        else
-                        {
-                            this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+                            }
                         }
                     }
 
@@ -297,6 +319,33 @@ namespace ELEVEN
             {
                 File.Delete(fileName);
             }
+        }
+
+        private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                AddSymbolTxtFile();
+            }
+        }
+        private void AddSymbolTxtFile()
+        {
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader(this.Name+".txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            if (!symbols.Contains("t" + txtAddRow.Text))
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name+".txt", true))
+                {
+                    file.Write(",t" + txtAddRow.Text);
+                    file.Close();
+                }
+            }
+            LoadMarketWatch();
+            CreateDataGridColumn();
         }
     }
 }

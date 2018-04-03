@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,10 +23,6 @@ namespace ELEVEN
             var windowHeight = Screen.PrimaryScreen.Bounds.Height;
             var windowWidth = Screen.PrimaryScreen.Bounds.Width;
 
-
-            frmMarketWatch m_toolbox = new frmMarketWatch();
-            dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
-            m_toolbox.Show(dockPanel);
 
             frmTransaction transaction = new frmTransaction();
             dockPanelBottom.Width = Screen.PrimaryScreen.Bounds.Width;
@@ -161,6 +158,12 @@ namespace ELEVEN
 
         private void MDIParentForm_Load(object sender, EventArgs e)
         {
+            this.Invoke((Action)delegate ()
+            {
+                frmMarketWatch m_toolbox = new frmMarketWatch();
+                dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
+                m_toolbox.Show(dockPanel);
+            });
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
             ReteriveWindowLocations();
 
@@ -214,7 +217,7 @@ namespace ELEVEN
             {
                 window.WindowState = FormWindowState.Maximized;
             }
-           // string name = Guid.NewGuid().ToString();
+            // string name = Guid.NewGuid().ToString();
 
 
             AddContextMenuTabControlItem(item.formUniqueName, window);
@@ -247,7 +250,11 @@ namespace ELEVEN
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
-
+            string name = Guid.NewGuid().ToString();
+            frmAlertWindow AlertWindow = new frmAlertWindow();
+            AlertWindow.MdiParent = this;
+            AlertWindow.Name = name;
+            AlertWindow.Show();
         }
 
         private void cascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,6 +285,7 @@ namespace ELEVEN
             //}
             //else
             //{
+
             var name = Guid.NewGuid().ToString();
             frmMarketWatchWin watch = new frmMarketWatchWin();
             watch.MdiParent = this;
