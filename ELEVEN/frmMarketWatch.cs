@@ -109,6 +109,8 @@ namespace ELEVEN
         private void frmMarketWatch_Load(object sender, EventArgs e)
         {
             txtAddRow.Text = "click to add..";
+            LoadMarketWatch();
+            CreateDataGridColumn();
             //   dt.Columns.AddRange(
             //    new[]{
             //      // new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Spread"),new DataColumn("Manage"),
