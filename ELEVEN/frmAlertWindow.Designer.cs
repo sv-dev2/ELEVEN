@@ -70,7 +70,7 @@
             this.lblCondition.AutoSize = true;
             this.lblCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCondition.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCondition.Location = new System.Drawing.Point(21, 38);
+            this.lblCondition.Location = new System.Drawing.Point(21, 9);
             this.lblCondition.Name = "lblCondition";
             this.lblCondition.Size = new System.Drawing.Size(76, 20);
             this.lblCondition.TabIndex = 0;
@@ -80,7 +80,7 @@
             // 
             this.ddCondition1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddCondition1.FormattingEnabled = true;
-            this.ddCondition1.Location = new System.Drawing.Point(197, 30);
+            this.ddCondition1.Location = new System.Drawing.Point(196, 7);
             this.ddCondition1.Name = "ddCondition1";
             this.ddCondition1.Size = new System.Drawing.Size(150, 28);
             this.ddCondition1.TabIndex = 1;
@@ -89,7 +89,7 @@
             // 
             this.ddCondition2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddCondition2.FormattingEnabled = true;
-            this.ddCondition2.Location = new System.Drawing.Point(197, 64);
+            this.ddCondition2.Location = new System.Drawing.Point(196, 41);
             this.ddCondition2.Name = "ddCondition2";
             this.ddCondition2.Size = new System.Drawing.Size(297, 28);
             this.ddCondition2.TabIndex = 2;
@@ -98,7 +98,7 @@
             // 
             this.ddCondition3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddCondition3.FormattingEnabled = true;
-            this.ddCondition3.Location = new System.Drawing.Point(197, 103);
+            this.ddCondition3.Location = new System.Drawing.Point(197, 75);
             this.ddCondition3.Name = "ddCondition3";
             this.ddCondition3.Size = new System.Drawing.Size(149, 28);
             this.ddCondition3.TabIndex = 3;
@@ -106,7 +106,7 @@
             // ConditionNumeric
             // 
             this.ConditionNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConditionNumeric.Location = new System.Drawing.Point(363, 103);
+            this.ConditionNumeric.Location = new System.Drawing.Point(363, 77);
             this.ConditionNumeric.Name = "ConditionNumeric";
             this.ConditionNumeric.Size = new System.Drawing.Size(131, 26);
             this.ConditionNumeric.TabIndex = 4;
@@ -115,7 +115,7 @@
             // 
             this.lblOptions.AutoSize = true;
             this.lblOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptions.Location = new System.Drawing.Point(21, 156);
+            this.lblOptions.Location = new System.Drawing.Point(21, 120);
             this.lblOptions.Name = "lblOptions";
             this.lblOptions.Size = new System.Drawing.Size(64, 20);
             this.lblOptions.TabIndex = 5;
@@ -126,7 +126,7 @@
             // 
             this.lblExpirationTime.AutoSize = true;
             this.lblExpirationTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpirationTime.Location = new System.Drawing.Point(21, 239);
+            this.lblExpirationTime.Location = new System.Drawing.Point(19, 195);
             this.lblExpirationTime.Name = "lblExpirationTime";
             this.lblExpirationTime.Size = new System.Drawing.Size(113, 20);
             this.lblExpirationTime.TabIndex = 7;
@@ -156,7 +156,7 @@
             this.chkShowPopup.BackColor = System.Drawing.SystemColors.Control;
             this.chkShowPopup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowPopup.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.chkShowPopup.Location = new System.Drawing.Point(198, 279);
+            this.chkShowPopup.Location = new System.Drawing.Point(195, 228);
             this.chkShowPopup.Name = "chkShowPopup";
             this.chkShowPopup.Size = new System.Drawing.Size(118, 24);
             this.chkShowPopup.TabIndex = 10;
@@ -167,7 +167,7 @@
             // 
             this.lblAlertAction.AutoSize = true;
             this.lblAlertAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlertAction.Location = new System.Drawing.Point(21, 280);
+            this.lblAlertAction.Location = new System.Drawing.Point(19, 232);
             this.lblAlertAction.Name = "lblAlertAction";
             this.lblAlertAction.Size = new System.Drawing.Size(99, 20);
             this.lblAlertAction.TabIndex = 11;
@@ -177,7 +177,7 @@
             // 
             this.chkPlaySound.AutoSize = true;
             this.chkPlaySound.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPlaySound.Location = new System.Drawing.Point(197, 305);
+            this.chkPlaySound.Location = new System.Drawing.Point(195, 253);
             this.chkPlaySound.Name = "chkPlaySound";
             this.chkPlaySound.Size = new System.Drawing.Size(108, 24);
             this.chkPlaySound.TabIndex = 12;
@@ -188,7 +188,7 @@
             // 
             this.ddAlertAction1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddAlertAction1.FormattingEnabled = true;
-            this.ddAlertAction1.Location = new System.Drawing.Point(198, 336);
+            this.ddAlertAction1.Location = new System.Drawing.Point(196, 285);
             this.ddAlertAction1.Name = "ddAlertAction1";
             this.ddAlertAction1.Size = new System.Drawing.Size(183, 28);
             this.ddAlertAction1.TabIndex = 13;
@@ -197,7 +197,7 @@
             // 
             this.ddAlertAction2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddAlertAction2.FormattingEnabled = true;
-            this.ddAlertAction2.Location = new System.Drawing.Point(397, 336);
+            this.ddAlertAction2.Location = new System.Drawing.Point(385, 285);
             this.ddAlertAction2.Name = "ddAlertAction2";
             this.ddAlertAction2.Size = new System.Drawing.Size(97, 28);
             this.ddAlertAction2.TabIndex = 14;
@@ -206,7 +206,7 @@
             // 
             this.chkSendEmail.AutoSize = true;
             this.chkSendEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSendEmail.Location = new System.Drawing.Point(198, 371);
+            this.chkSendEmail.Location = new System.Drawing.Point(196, 320);
             this.chkSendEmail.Name = "chkSendEmail";
             this.chkSendEmail.Size = new System.Drawing.Size(109, 24);
             this.chkSendEmail.TabIndex = 15;
@@ -217,7 +217,7 @@
             // 
             this.chkEmailToSMS.AutoSize = true;
             this.chkEmailToSMS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkEmailToSMS.Location = new System.Drawing.Point(198, 395);
+            this.chkEmailToSMS.Location = new System.Drawing.Point(195, 345);
             this.chkEmailToSMS.Name = "chkEmailToSMS";
             this.chkEmailToSMS.Size = new System.Drawing.Size(168, 24);
             this.chkEmailToSMS.TabIndex = 16;
@@ -228,7 +228,7 @@
             // 
             this.chkSMS.AutoSize = true;
             this.chkSMS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSMS.Location = new System.Drawing.Point(198, 420);
+            this.chkSMS.Location = new System.Drawing.Point(195, 369);
             this.chkSMS.Name = "chkSMS";
             this.chkSMS.Size = new System.Drawing.Size(105, 24);
             this.chkSMS.TabIndex = 17;
@@ -239,7 +239,7 @@
             // 
             this.lblMessage.AutoSize = true;
             this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(21, 457);
+            this.lblMessage.Location = new System.Drawing.Point(19, 401);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(74, 20);
             this.lblMessage.TabIndex = 18;
@@ -247,7 +247,7 @@
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(198, 457);
+            this.txtMessage.Location = new System.Drawing.Point(195, 401);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(297, 78);
@@ -259,7 +259,7 @@
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Location = new System.Drawing.Point(421, 557);
+            this.btnCreate.Location = new System.Drawing.Point(417, 496);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 32);
             this.btnCreate.TabIndex = 20;
@@ -270,7 +270,7 @@
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(338, 558);
+            this.btnCancel.Location = new System.Drawing.Point(321, 497);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 30);
             this.btnCancel.TabIndex = 21;
@@ -281,7 +281,7 @@
             // 
             this.btnOnlyOnce.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnOnlyOnce.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnlyOnce.Location = new System.Drawing.Point(197, 151);
+            this.btnOnlyOnce.Location = new System.Drawing.Point(196, 115);
             this.btnOnlyOnce.Name = "btnOnlyOnce";
             this.btnOnlyOnce.Size = new System.Drawing.Size(149, 32);
             this.btnOnlyOnce.TabIndex = 4;
@@ -293,7 +293,7 @@
             // 
             this.btnOncePerBar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnOncePerBar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOncePerBar.Location = new System.Drawing.Point(346, 151);
+            this.btnOncePerBar.Location = new System.Drawing.Point(345, 115);
             this.btnOncePerBar.Name = "btnOncePerBar";
             this.btnOncePerBar.Size = new System.Drawing.Size(148, 32);
             this.btnOncePerBar.TabIndex = 5;
@@ -305,7 +305,7 @@
             // 
             this.btnOncePerBarClose.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnOncePerBarClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOncePerBarClose.Location = new System.Drawing.Point(197, 183);
+            this.btnOncePerBarClose.Location = new System.Drawing.Point(196, 147);
             this.btnOncePerBarClose.Name = "btnOncePerBarClose";
             this.btnOncePerBarClose.Size = new System.Drawing.Size(149, 34);
             this.btnOncePerBarClose.TabIndex = 6;
@@ -317,7 +317,7 @@
             // 
             this.btnOncePerMinute.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnOncePerMinute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOncePerMinute.Location = new System.Drawing.Point(346, 183);
+            this.btnOncePerMinute.Location = new System.Drawing.Point(345, 147);
             this.btnOncePerMinute.Name = "btnOncePerMinute";
             this.btnOncePerMinute.Size = new System.Drawing.Size(148, 34);
             this.btnOncePerMinute.TabIndex = 7;
@@ -331,14 +331,13 @@
             this.Calenderpanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Calenderpanel.Controls.Add(this.imgCalender);
             this.Calenderpanel.Controls.Add(this.txtCalender);
-            this.Calenderpanel.Location = new System.Drawing.Point(197, 237);
+            this.Calenderpanel.Location = new System.Drawing.Point(195, 193);
             this.Calenderpanel.Name = "Calenderpanel";
             this.Calenderpanel.Size = new System.Drawing.Size(149, 26);
             this.Calenderpanel.TabIndex = 22;
             // 
             // imgCalender
             // 
-            this.imgCalender.Image = global::ELEVEN.Properties.Resources.Calender;
             this.imgCalender.Location = new System.Drawing.Point(125, 2);
             this.imgCalender.Name = "imgCalender";
             this.imgCalender.Size = new System.Drawing.Size(20, 20);
@@ -351,7 +350,7 @@
             this.Timerpanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Timerpanel.Controls.Add(this.imgTimer);
             this.Timerpanel.Controls.Add(this.txtTimer);
-            this.Timerpanel.Location = new System.Drawing.Point(363, 237);
+            this.Timerpanel.Location = new System.Drawing.Point(361, 193);
             this.Timerpanel.Name = "Timerpanel";
             this.Timerpanel.Size = new System.Drawing.Size(131, 26);
             this.Timerpanel.TabIndex = 23;
@@ -367,7 +366,7 @@
             // 
             // frmAlertWindow
             // 
-            this.ClientSize = new System.Drawing.Size(519, 602);
+            this.ClientSize = new System.Drawing.Size(519, 539);
             this.Controls.Add(this.Timerpanel);
             this.Controls.Add(this.Calenderpanel);
             this.Controls.Add(this.btnOncePerMinute);
