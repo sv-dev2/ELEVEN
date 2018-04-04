@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,7 +54,8 @@ namespace ELEVEN.Services
                 httpWebRequest.Method = "GET";
                 httpWebRequest.UserAgent = "Foo";
                 httpWebRequest.Accept = "*/*";
-
+                IWebProxy proxy = WebRequest.GetSystemWebProxy();
+                httpWebRequest.Proxy = proxy;
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -71,7 +73,7 @@ namespace ELEVEN.Services
 
             return default(T);
         }
-
+      
         public static async Task<T> GetTiclers<T>(string url)
         {
             try
@@ -81,7 +83,8 @@ namespace ELEVEN.Services
                 httpWebRequest.Method = "GET";
                 httpWebRequest.UserAgent = "Foo";
                 httpWebRequest.Accept = "*/*";
-
+                IWebProxy proxy = WebRequest.GetSystemWebProxy();
+                httpWebRequest.Proxy = proxy;
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
