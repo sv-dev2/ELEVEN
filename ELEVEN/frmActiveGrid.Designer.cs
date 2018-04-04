@@ -268,6 +268,7 @@
             this.label5.Size = new System.Drawing.Size(27, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "Fast";
+            this.label5.Visible = false;
             // 
             // label4
             // 
@@ -278,6 +279,7 @@
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 15;
             this.label4.Text = "Slow";
+            this.label4.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -459,6 +461,7 @@
             this.btnRandom.TabIndex = 9;
             this.btnRandom.Text = "Random Data Burst";
             this.btnRandom.UseVisualStyleBackColor = true;
+            this.btnRandom.Visible = false;
             this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
             // 
             // btnReset
@@ -469,6 +472,7 @@
             this.btnReset.TabIndex = 8;
             this.btnReset.Text = "Complete Data Burst";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Visible = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // groupBox3
@@ -515,6 +519,7 @@
             this.marketSpeed.Name = "marketSpeed";
             this.marketSpeed.Size = new System.Drawing.Size(252, 45);
             this.marketSpeed.TabIndex = 11;
+            this.marketSpeed.Visible = false;
             this.marketSpeed.ValueChanged += new System.EventHandler(this.marketSpeed_ValueChanged);
             // 
             // timer1

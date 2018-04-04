@@ -39,6 +39,7 @@ namespace ELEVEN
             PopulateRows();
 
             this.marketSpeed.Maximum = MAX_FEEDS;
+
             this.cbUseFlash.Checked = this.lvBalances.AllowFlashing;
             this.cbFadeOut.Checked = this.lvBalances.UseFlashFadeOut;
             this.cbAlternating.Checked = this.lvBalances.UseAlternateRowColors;
@@ -52,6 +53,8 @@ namespace ELEVEN
                 rdf.OnStopped += new RandomDataFeed.OnStoppedHandler(rdf_OnStopped);
                 dataFeeds.Add(rdf);
             }
+            this.dataFeeds[0].Burst(0);
+            this.marketSpeed.Value = 5;
         }
 
         #endregion

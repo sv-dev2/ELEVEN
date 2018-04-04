@@ -15,7 +15,7 @@ namespace ELEVEN.Model
         // This method is called by the Set accessor of each property.
         // The CallerMemberName attribute that is applied to the optional propertyName
         // parameter causes the property name of the caller to be substituted as an argument.
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged(String propertyName)
         {
             if (PropertyChanged != null)
             {
@@ -44,7 +44,7 @@ namespace ELEVEN.Model
                 if (value != this._mid)
                 {
                     this._mid = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("mid");
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace ELEVEN.Model
                 if (value != this._bid)
                 {
                     this._bid = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("bid");
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace ELEVEN.Model
                 if (value != this._ask)
                 {
                     this._ask = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("ask");
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace ELEVEN.Model
                 if (value != this._last_price)
                 {
                     this._last_price = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("last_price");
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace ELEVEN.Model
                 if (value != this._low)
                 {
                     this._low = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("low");
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace ELEVEN.Model
                 if (value != this._high)
                 {
                     this._high = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("high");
                 }
             }
         }
@@ -140,7 +140,7 @@ namespace ELEVEN.Model
                 if (value != this._volume)
                 {
                     this._volume = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("volume");
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace ELEVEN.Model
                 if (value != this._timestamp)
                 {
                     this._timestamp = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("timestamp");
                 }
             }
         }
@@ -172,7 +172,7 @@ namespace ELEVEN.Model
                 if (value != this._pair)
                 {
                     this._pair = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("pair");
                 }
             }
         }
