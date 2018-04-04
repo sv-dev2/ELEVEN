@@ -14,6 +14,8 @@ namespace ELEVEN.Services
     {
         public static readonly string baseAddress = "https://api.bitfinex.com/v2/";
         public static readonly string baseAddressV1 = "https://api.bitfinex.com/v1/";
+        static List<string> ArrayString = new List<string> { "140.82.5.180:8080", "159.65.110.167:3128","216.32.29.46:8008" };
+        static int firstTime = 1;
         /// <summary>
         /// This method recturn comma seperated rsult
         /// </summary>
@@ -44,7 +46,7 @@ namespace ELEVEN.Services
 
             return "";
         }
-
+       // static List<string> ArrayString = new List<string> { "202.137.25.53:3128" };
         public static T Get<T>(string url)
         {
             try
@@ -54,8 +56,20 @@ namespace ELEVEN.Services
                 httpWebRequest.Method = "GET";
                 httpWebRequest.UserAgent = "Foo";
                 httpWebRequest.Accept = "*/*";
-                IWebProxy proxy = WebRequest.GetSystemWebProxy();
-                httpWebRequest.Proxy = proxy;
+                if(firstTime % 3 == 0 || firstTime %5==0 || firstTime % 6 == 0 || firstTime % 8 == 0 || firstTime % 10 == 0)
+                {
+                    int index = new Random().Next(ArrayString.Count);
+                    string name = ArrayString[index];
+                    string MyProxyHostString = name.Split(':')[0]; //"140.82.5.180";
+                    int MyProxyPort = Convert.ToInt32(name.Split(':')[1]);
+                    httpWebRequest.Proxy = new WebProxy(MyProxyHostString, MyProxyPort);
+                    firstTime = firstTime + 1;
+                }
+                else
+                {
+                    firstTime = firstTime + 1;
+                }
+          
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -73,7 +87,7 @@ namespace ELEVEN.Services
 
             return default(T);
         }
-      
+
         public static async Task<T> GetTiclers<T>(string url)
         {
             try
