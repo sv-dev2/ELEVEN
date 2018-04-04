@@ -26,7 +26,6 @@ namespace ELEVEN
         // DataTable dt = new DataTable();
         private BindingSource bindingSource1 = new BindingSource();
         BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
-
         List<OldData> OldWatchList = new List<OldData>();
         public frmMarketWatch()
         {
@@ -167,7 +166,7 @@ namespace ELEVEN
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
             dispatcherTimer.Start();
         }
 
