@@ -273,7 +273,7 @@ namespace ELEVEN
                 file.Write(symbols);
                 file.Close();
             }
-            LoadMarketWatch();
+            IntialLoadMarketWatch();
             CreateDataGridColumn();
         }
        
@@ -289,6 +289,7 @@ namespace ELEVEN
 
         private void AddSymbolTxtFile()
         {
+            dispatcherTimer.Stop();
             string symbols = string.Empty;
             using (var streamReader = new StreamReader("Symbols.txt"))
             {
@@ -303,8 +304,9 @@ namespace ELEVEN
                     file.Close();
                 }
             }
-            LoadMarketWatch();
-            //CreateDataGridColumn();
+            IntialLoadMarketWatch();
+            CreateDataGridColumn();
+            dispatcherTimer.Start();
         }
     }
 }
