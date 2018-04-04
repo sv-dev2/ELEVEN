@@ -97,8 +97,19 @@ namespace ELEVEN
 
         private void TxtQuantity_LostFocus(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtAddRow.Text))
-                txtAddRow.Text = "click to add..";
+            if (txtAddRow.Text != "click to add..")
+            {
+                if (String.IsNullOrWhiteSpace(txtAddRow.Text))
+                {
+                    txtAddRow.Text = "click to add..";
+                }
+                else
+                {
+                    AddSymbolTxtFile();
+                    txtAddRow.Text = "click to add..";
+                }
+
+            }
         }
 
         private void TxtQuantity_GotFocus(object sender, EventArgs e)
@@ -326,7 +337,7 @@ namespace ELEVEN
         {
             if (e.KeyData == Keys.Enter)
             {
-                await AddSymbolTxtFile();
+                //await AddSymbolTxtFile();
             }
         }
         private async Task AddSymbolTxtFile()
@@ -347,6 +358,11 @@ namespace ELEVEN
             }
             await LoadMarketWatch();
             CreateDataGridColumn();
+        }
+
+        private void frmMarketWatchWin_MouseClick(object sender, MouseEventArgs e)
+        {
+            dataGridMarketData.Focus();
         }
     }
 }

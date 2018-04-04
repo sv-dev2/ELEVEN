@@ -46,6 +46,7 @@
             this.dataGridMarketData.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridMarketData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridMarketData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridMarketData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridMarketData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -81,16 +82,16 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridMarketData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridMarketData.RowHeadersVisible = false;
+            this.dataGridMarketData.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridMarketData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridMarketData.Size = new System.Drawing.Size(390, 260);
+            this.dataGridMarketData.Size = new System.Drawing.Size(390, 34);
             this.dataGridMarketData.TabIndex = 0;
             this.dataGridMarketData.Tag = "frmMarketWatch";
             this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
             // 
             // txtAddRow
             // 
-            this.txtAddRow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtAddRow.Location = new System.Drawing.Point(0, 260);
+            this.txtAddRow.Location = new System.Drawing.Point(0, 35);
             this.txtAddRow.Name = "txtAddRow";
             this.txtAddRow.Size = new System.Drawing.Size(390, 20);
             this.txtAddRow.TabIndex = 1;
@@ -100,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 280);
+            this.ClientSize = new System.Drawing.Size(390, 338);
             this.Controls.Add(this.txtAddRow);
             this.Controls.Add(this.dataGridMarketData);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -110,6 +111,7 @@
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
             this.Text = "Market Watch";
             this.Load += new System.EventHandler(this.frmMarketWatch_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frmMarketWatch_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMarketData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
