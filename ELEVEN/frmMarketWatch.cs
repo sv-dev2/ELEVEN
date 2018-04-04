@@ -85,8 +85,11 @@ namespace ELEVEN
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
+         
         }      
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
+        TextAndImageColumn column = new TextAndImageColumn();
+        ImageList imgList = new ImageList();
         private void CreateDataGridColumn()
         {
             dataGridMarketData.DataSource = null;
@@ -94,10 +97,23 @@ namespace ELEVEN
             dataGridMarketData.AutoGenerateColumns = false;
             dataGridMarketData.ColumnCount = 5;
 
-            dataGridMarketData.Columns[0].Name = "Symbol";
-            dataGridMarketData.Columns[0].HeaderText = "Symbol";
-            dataGridMarketData.Columns[0].DataPropertyName = "pair";
-            dataGridMarketData.Columns[0].Width = 60;
+          
+           
+            imgList.Images.Add(Properties.Resources.arrowred);
+            imgList.Images.Add(Properties.Resources.arrowgreen);
+            imgList.ImageSize = new Size(12, 17);
+            imgList.TransparentColor = Color.Transparent;
+            
+            column.Image = imgList.Images[1];
+          
+            column.Name = "Symbol";
+            column.HeaderText = "Symbol";
+            column.DataPropertyName = "pair";
+            column.Width = 60;
+            column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;   
+          
+            dataGridMarketData.Columns.Insert(0, column);
+            
 
             dataGridMarketData.Columns[1].HeaderText = "Bid";
             dataGridMarketData.Columns[1].Name = "Bid";
@@ -137,7 +153,12 @@ namespace ELEVEN
             // dataGridMarketData.DataSource = bindingSource1;
             dataGridMarketData.DataSource = ObjTrading;
         }
-
+        public void ReBindDataSource()
+        {
+            dataGridMarketData.DataSource = null;
+            this.dataGridMarketData.Rows.Clear();
+            dataGridMarketData.DataSource = ObjTrading;
+        }
 
         private void TxtQuantity_LostFocus(object sender, EventArgs e)
         {
@@ -250,6 +271,8 @@ namespace ELEVEN
                         {
                             result.ask = ticker[i][3];
                             result.bid = ticker[i][1];
+                            bool bidBlue = true;
+                            bool askBlue = true;
                             if (Convert.ToDecimal(result.bid) > Convert.ToDecimal(oldResult.bid))
                             {
                                 this.dataGridMarketData.Rows[i].Cells[1].Style.ForeColor = Color.Blue;
@@ -257,6 +280,7 @@ namespace ELEVEN
                             else
                             {
                                 this.dataGridMarketData.Rows[i].Cells[1].Style.ForeColor = Color.Red;
+                                bidBlue = false;
                             }
                             if (Convert.ToDecimal(result.ask) > Convert.ToDecimal(oldResult.ask))
                             {
@@ -265,6 +289,15 @@ namespace ELEVEN
                             else
                             {
                                 this.dataGridMarketData.Rows[i].Cells[2].Style.ForeColor = Color.Red;
+                                askBlue = false;
+                            }
+                            if(!bidBlue || !askBlue)
+                            {
+                                ((TextAndImageCell)dataGridMarketData.Rows[i].Cells[0]).Image = imgList.Images[0];
+                            }
+                            else
+                            {
+                                ((TextAndImageCell)dataGridMarketData.Rows[i].Cells[0]).Image = imgList.Images[1];
                             }
                             result.last_price = ticker[i][7];
                             result.volume = ticker[i][8];
@@ -272,7 +305,7 @@ namespace ELEVEN
                       
                     }
                 }
-               // dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
             }
             else
             {
@@ -309,7 +342,7 @@ namespace ELEVEN
                 file.Close();
             }
             IntialLoadMarketWatch();
-            CreateDataGridColumn();
+            ReBindDataSource();
         }
        
 
@@ -340,7 +373,7 @@ namespace ELEVEN
                 }
             }
             IntialLoadMarketWatch();
-            CreateDataGridColumn();
+            ReBindDataSource();
             dispatcherTimer.Start();
         }
 
