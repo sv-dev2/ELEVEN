@@ -34,7 +34,45 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
+            //textBox1.LostFocus += textBox1_LostFocus;
+            //listBox1.Hide();
         }
+        //private void textBox1_LostFocus(object sender, EventArgs e)
+        //{
+            
+        //}
+
+        //private void textBox1_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (textBox1.Text == "")
+        //    {
+        //        listBox1.DataSource = null;
+        //        listBox1.Hide();
+        //    }
+        //    else
+        //    {
+        //        AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
+        //        var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
+        //        var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
+        //        for (int i = 0; i < Smbl.Count(); i++)
+        //        {
+        //            if (Smbl[i][0].StartsWith(textBox1.Text.ToUpper()))
+        //            {
+        //                SymbolCollection.Add(Smbl[i][0]);
+        //            }
+        //        }
+        //        if (SymbolCollection.Count == 0)
+        //        {
+        //            listBox1.DataSource = null;
+        //            listBox1.Hide();
+        //        }
+        //        else
+        //        {
+        //            listBox1.DataSource = SymbolCollection;
+        //            listBox1.Show();
+        //        }
+        //    }
+        //}
         private void AutoCompletetxtAddRow()
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
@@ -47,12 +85,7 @@ namespace ELEVEN
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
-            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            comboBox1.AutoCompleteCustomSource = SymbolCollection;
-            comboBox1.DropDownWidth = 100;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDown;
-        }
+        }      
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         private void CreateDataGridColumn()
         {
@@ -110,6 +143,8 @@ namespace ELEVEN
         {
             if (String.IsNullOrWhiteSpace(txtAddRow.Text))
                 txtAddRow.Text = "click to add..";
+            else
+                AddSymbolTxtFile();
         }
 
         private void TxtQuantity_GotFocus(object sender, EventArgs e)
@@ -347,7 +382,7 @@ namespace ELEVEN
         {
             if (e.KeyData == Keys.Enter)
             {
-                AddSymbolTxtFile();
+               // AddSymbolTxtFile();
             }
             
         }
@@ -369,7 +404,42 @@ namespace ELEVEN
                 }
             }
             LoadMarketWatch();
-            //CreateDataGridColumn();
+            CreateDataGridColumn();
         }
+
+        //private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if(listBox1.SelectedIndex != -1 && listBox1.SelectedIndex != 0)
+        //    {
+        //        textBox1.Text = listBox1.SelectedValue.ToString();
+        //        listBox1.Hide();
+        //        textBox1.Focus();
+        //    }
+        //}
+
+        //private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    listBox1.Focus();
+        //}
+
+        //private void listBox1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyData == Keys.Enter)
+        //    {
+        //        if (listBox1.SelectedIndex != -1 && listBox1.SelectedIndex != 0)
+        //        {
+        //            textBox1.Text = listBox1.SelectedValue.ToString();
+        //            listBox1.Hide();
+        //            textBox1.Focus();
+        //        }
+        //    }
+        //}
+
+        //private void listBox1_Click(object sender, EventArgs e)
+        //{
+        //    textBox1.Text = listBox1.SelectedValue.ToString();
+        //    listBox1.Hide();
+        //    textBox1.Focus();
+        //}
     }
 }
