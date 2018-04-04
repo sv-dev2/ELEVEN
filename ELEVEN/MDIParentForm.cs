@@ -158,12 +158,12 @@ namespace ELEVEN
 
         private void MDIParentForm_Load(object sender, EventArgs e)
         {
-            this.Invoke((Action)delegate ()
-            {
-                frmMarketWatch m_toolbox = new frmMarketWatch();
-                dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
-                m_toolbox.Show(dockPanel);
-            });
+            //this.Invoke((Action)delegate ()
+            //{
+            //    frmMarketWatch m_toolbox = new frmMarketWatch();
+            //    dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
+            //    m_toolbox.Show(dockPanel);
+            //});
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
             ReteriveWindowLocations();
 
@@ -390,7 +390,11 @@ namespace ELEVEN
             var tabControl = sender as TabControl;
             selectedTabPage = tabControl.SelectedTab;
             string Id = selectedTabPage.Name;
-            Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault().Activate();
+            var result = Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault();
+            if(result!=null)
+            {
+                result.Activate();
+            }
 
             if (e.Button == MouseButtons.Right)
             {

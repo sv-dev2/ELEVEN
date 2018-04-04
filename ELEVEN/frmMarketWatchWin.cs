@@ -281,7 +281,7 @@ namespace ELEVEN
 
                     }
                 }
-                dispatcherTimer1.Interval = new TimeSpan(0, 0, 2);
+                dispatcherTimer1.Interval = new TimeSpan(0, 0, 3);
             }
             else
             {
@@ -324,12 +324,12 @@ namespace ELEVEN
             dispatcherTimer1.Stop();
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name + ".txt");
-            string name = this.Name;
-            string fileName = name + ".txt";
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
+            //string name = this.Name;
+            //string fileName = name + ".txt";
+            //if (File.Exists(fileName))
+            //{
+            //    File.Delete(fileName);
+            //}
         }
 
         private  void txtAddRow_KeyDown(object sender, KeyEventArgs e)

@@ -270,7 +270,7 @@ namespace ELEVEN
 
                     }
                 }
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
             }
             else
             {

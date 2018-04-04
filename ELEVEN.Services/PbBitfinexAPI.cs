@@ -56,23 +56,23 @@ namespace ELEVEN.Services
                 httpWebRequest.Method = "GET";
                 httpWebRequest.UserAgent = "Foo";
                 httpWebRequest.Accept = "*/*";
-                if (firstTime % 3 == 0 || firstTime % 5 == 0 || firstTime % 6 == 0 || firstTime % 8 == 0 || firstTime % 10 == 0)
-                {
-                    int index = new Random().Next(ArrayString.Count);
-                    string name = ArrayString[index];
-                    string MyProxyHostString = name.Split(':')[0]; //"140.82.5.180";
-                    int MyProxyPort = Convert.ToInt32(name.Split(':')[1]);
-                    httpWebRequest.Proxy = new WebProxy(MyProxyHostString, MyProxyPort);
-                    firstTime = firstTime + 1;
-                }
-                else
-                {
-                    firstTime = firstTime + 1;
-                }
-                if (firstTime > 10000000)
-                {
-                    firstTime = 1;
-                }
+                //if (firstTime % 3 == 0 || firstTime % 5 == 0 || firstTime % 6 == 0 || firstTime % 8 == 0 || firstTime % 10 == 0)
+                //{
+                //    int index = new Random().Next(ArrayString.Count);
+                //    string name = ArrayString[index];
+                //    string MyProxyHostString = name.Split(':')[0]; //"140.82.5.180";
+                //    int MyProxyPort = Convert.ToInt32(name.Split(':')[1]);
+                //    httpWebRequest.Proxy = new WebProxy(MyProxyHostString, MyProxyPort);
+                //    firstTime = firstTime + 1;
+                //}
+                //else
+                //{
+                //    firstTime = firstTime + 1;
+                //}
+                //if (firstTime > 10000000)
+                //{
+                //    firstTime = 1;
+                //}
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -102,19 +102,19 @@ namespace ELEVEN.Services
                 httpWebRequest.Accept = "*/*";
                 //IWebProxy proxy = WebRequest.GetSystemWebProxy();
                 //httpWebRequest.Proxy = proxy;
-                if (firstTime % 3 == 0 || firstTime % 5 == 0 || firstTime % 6 == 0 || firstTime % 8 == 0 || firstTime % 10 == 0)
-                {
-                    int index = new Random().Next(ArrayString.Count);
-                    string name = ArrayString[index];
-                    string MyProxyHostString = name.Split(':')[0]; //"140.82.5.180";
-                    int MyProxyPort = Convert.ToInt32(name.Split(':')[1]);
-                    httpWebRequest.Proxy = new WebProxy(MyProxyHostString, MyProxyPort);
-                    firstTime = firstTime + 1;
-                }
-                else
-                {
-                    firstTime = firstTime + 1;
-                }
+                //if (firstTime % 3 == 0 || firstTime % 5 == 0 || firstTime % 6 == 0 || firstTime % 8 == 0 || firstTime % 10 == 0)
+                //{
+                //    int index = new Random().Next(ArrayString.Count);
+                //    string name = ArrayString[index];
+                //    string MyProxyHostString = name.Split(':')[0]; //"140.82.5.180";
+                //    int MyProxyPort = Convert.ToInt32(name.Split(':')[1]);
+                //    httpWebRequest.Proxy = new WebProxy(MyProxyHostString, MyProxyPort);
+                //    firstTime = firstTime + 1;
+                //}
+                //else
+                //{
+                //    firstTime = firstTime + 1;
+                //}
                 if (firstTime > 10000000)
                 {
                     firstTime = 1;
