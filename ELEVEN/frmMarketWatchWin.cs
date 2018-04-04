@@ -129,6 +129,7 @@ namespace ELEVEN
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
+
         }
         private async void dispatcherTimer_Tick(object sender, EventArgs e)
         {

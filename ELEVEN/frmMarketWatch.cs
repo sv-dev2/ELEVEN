@@ -43,6 +43,11 @@ namespace ELEVEN
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;    
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            comboBox1.AutoCompleteCustomSource = SymbolCollection;
+            comboBox1.DropDownWidth = 100;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDown;
         }
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         private void CreateDataGridColumn()
@@ -309,6 +314,7 @@ namespace ELEVEN
             {
                 AddSymbolTxtFile();
             }
+            
         }
 
         private void AddSymbolTxtFile()
