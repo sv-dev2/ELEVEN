@@ -43,8 +43,8 @@ namespace ELEVEN
 
         private void frmAlertWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //frmAlertWindow AlertWindow = new frmAlertWindow();
-            //AlertWindow.Hide();
+            TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
+            tabControl.TabPages.RemoveByKey(this.Name);
         }
     }
 }

@@ -105,11 +105,11 @@ namespace ELEVEN
         {
             txtAddRow.Text = string.Empty;
         }
-        private void frmMarketWatch_Load(object sender, EventArgs e)
+        private async void frmMarketWatch_Load(object sender, EventArgs e)
         {
             txtAddRow.Text = "click to add..";
             SymbolFileExist();
-            LoadMarketWatch();
+           await LoadMarketWatch();
             CreateDataGridColumn();
             AutoCompletetxtAddRow();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
@@ -322,30 +322,30 @@ namespace ELEVEN
             }
         }
 
-        private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
+        private async void txtAddRow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                AddSymbolTxtFile();
+                await AddSymbolTxtFile();
             }
         }
-        private void AddSymbolTxtFile()
+        private async Task AddSymbolTxtFile()
         {
             string symbols = string.Empty;
-            using (var streamReader = new StreamReader(this.Name+".txt"))
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
             {
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
             if (!symbols.Contains("t" + txtAddRow.Text))
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name+".txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name + ".txt", true))
                 {
                     file.Write(",t" + txtAddRow.Text);
                     file.Close();
                 }
             }
-            LoadMarketWatch();
+            await LoadMarketWatch();
             CreateDataGridColumn();
         }
     }

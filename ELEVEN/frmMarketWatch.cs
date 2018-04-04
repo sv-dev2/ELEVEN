@@ -3,11 +3,13 @@ using ELEVEN.Model;
 using ELEVEN.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,11 +20,13 @@ namespace ELEVEN
 {
     public partial class frmMarketWatch : DockContent
     {
+
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // DataTable dt = new DataTable();
         private BindingSource bindingSource1 = new BindingSource();
-        BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
+        BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
+
         List<OldData> OldWatchList = new List<OldData>();
         public frmMarketWatch()
         {
@@ -40,7 +44,7 @@ namespace ELEVEN
             {
                 SymbolCollection.Add(Smbl[i][0]);
             }
-            txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;    
+            txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
             comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -97,7 +101,8 @@ namespace ELEVEN
             //    dataGridMarketData.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4]);
 
             //}
-            dataGridMarketData.DataSource = bindingSource1;
+            // dataGridMarketData.DataSource = bindingSource1;
+            dataGridMarketData.DataSource = ObjTrading;
         }
 
 
@@ -114,11 +119,9 @@ namespace ELEVEN
         private void frmMarketWatch_Load(object sender, EventArgs e)
         {
             txtAddRow.Text = "click to add..";
-            //   dt.Columns.AddRange(
-            //    new[]{
-            //      // new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Spread"),new DataColumn("Manage"),
-            //       new DataColumn("Symbol"),new DataColumn("Bid"),new DataColumn("Ask"),new DataColumn("Last"),new DataColumn("Volume"),new DataColumn("Remove")
-            //});
+            IntialLoadMarketWatch();
+            CreateDataGridColumn();
+
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
@@ -128,11 +131,11 @@ namespace ELEVEN
         {
 
             LoadMarketWatch();
-            CreateDataGridColumn();
-            if (Index >= 0)
-            {
-                dataGridMarketData.Rows[Index].Selected = true;
-            }
+            // CreateDataGridColumn();
+            //if (Index >= 0)
+            //{
+            //    dataGridMarketData.Rows[Index].Selected = true;
+            //}
         }
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -141,10 +144,34 @@ namespace ELEVEN
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
+        }
+
+        private void IntialLoadMarketWatch()
+        {
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader("Symbols.txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+
+            if (ticker != null)
+            {
+
+                BindingList<FinexTicker> customerList = new BindingList<FinexTicker>();
+                for (int i = 0; i < ticker.Length; i++)
+                {
+
+                    customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+                }
+                //this.bindingSource1.DataSource = customerList;
+                ObjTrading = customerList;
+            }
+
         }
         string[][] ticker;
         private void LoadMarketWatch()
@@ -160,11 +187,11 @@ namespace ELEVEN
             if (ticker != null)
             {
                 // dt.Clear();
-                oldCustomerList = this.bindingSource1.DataSource as BindingList<FinexTicker>;
-                if (oldCustomerList != null)
+                var bindingSource = this.dataGridMarketData.DataSource as BindingList<FinexTicker>;
+                if (bindingSource != null)
                 {
                     OldWatchList = new List<OldData>();
-                    foreach (var item in oldCustomerList)
+                    foreach (var item in bindingSource)
                     {
                         OldData oldWatch = new OldData();
                         oldWatch.ask = item.ask;
@@ -175,41 +202,46 @@ namespace ELEVEN
                         OldWatchList.Add(oldWatch);
                     }
                 }
-                bindingSource1.Clear();
+
 
                 BindingList<FinexTicker> customerList = new BindingList<FinexTicker>();
                 for (int i = 0; i < ticker.Length; i++)
                 {
                     //dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");                    
                     //dt.Rows.Add(ticker[i][0].Replace("t", ""), ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "");
-                    customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+                    //customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+                    if (bindingSource != null)
+                    {
+                        var result = bindingSource.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
+                        if (result != null)
+                        {
+                            result.ask = ticker[i][3];
+                            result.bid = ticker[i][1];
+                            result.last_price = ticker[i][7];
+                            result.volume = ticker[i][8];
+                        }
+                    }
                 }
-                this.bindingSource1.DataSource = customerList;
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
             }
             else
             {
                 dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             }
         }
+
         int Index = -1;
         private void dataGridMarketData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Index = e.RowIndex;
+            // FinexTicker obj = (FinexTicker)dataGridMarketData.CurrentRow.DataBoundItem;
+            //obj.ask = "";
         }
         //decimal previousBid = 0.0M;
         // decimal previousAsk = 0.0M;
         private void dataGridMarketData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //var height = 40;
-            foreach (DataGridViewRow dr in dataGridMarketData.Rows)
-            {
-                //  previousBid = dr.;
-                // previousAsk = dr["Ask"];
-
-            }
-
-            //dataGridMarketData.Height = height;
+          
         }
 
 
@@ -242,70 +274,73 @@ namespace ELEVEN
                 file.Close();
             }
             LoadMarketWatch();
-            CreateDataGridColumn();
+            //CreateDataGridColumn();
         }
 
 
 
         private void dataGridMarketData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            var oldValue = dataGridMarketData[e.ColumnIndex, e.RowIndex].Value;
-            var newValue = e.FormattedValue;
-            if (oldValue != newValue)
-            {
-
-            }
+           
         }
 
         private void dataGridMarketData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["bid"].Index)
-            {
-                if (e.Value != null)
-                {
-                    var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
-                    if (OldWatchList.Count > 0)
-                    {
-                        var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
-                        string RepVisits = e.Value.ToString();
-                        if (result !=null) {
-                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                            }
-                            else
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
-                            }
-                        }
-                    }
+            //switch(e.ColumnIndex)
+            //{
+            //    case 1:
 
-                }
-            }
-            if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["ask"].Index)
-            {
-                if (e.Value != null)
-                {
-                    var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
-                    if (OldWatchList.Count > 0)
-                    {
-                        var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
-                        string RepVisits = e.Value.ToString();
-                        if (result != null)
-                        {
-                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                            }
-                            else
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
-                            }
-                        }
-                    }
+            //        break;
+            //}
 
-                }
-            }
+            //if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["bid"].Index)
+            //{
+            //    if (e.Value != null)
+            //    {
+            //        var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
+            //        if (OldWatchList.Count > 0)
+            //        {
+            //            var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
+            //            string RepVisits = e.Value.ToString();
+            //            if (result != null)
+            //            {
+            //                if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
+            //                {
+            //                    this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+            //                }
+            //                else
+            //                {
+            //                    this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+            //                }
+            //            }
+            //        }
+
+            //    }
+            //}
+            //if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["ask"].Index)
+            //{
+            //    if (e.Value != null)
+            //    {
+            //        var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
+            //        if (OldWatchList.Count > 0)
+            //        {
+            //            var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
+            //            string RepVisits = e.Value.ToString();
+            //            if (result != null)
+            //            {
+            //                if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
+            //                {
+            //                    this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
+            //                }
+            //                else
+            //                {
+            //                    this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
+            //                }
+            //            }
+            //        }
+
+            //    }
+            //}
         }
 
         private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
@@ -334,7 +369,7 @@ namespace ELEVEN
                 }
             }
             LoadMarketWatch();
-            CreateDataGridColumn();
+            //CreateDataGridColumn();
         }
     }
 }
