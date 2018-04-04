@@ -88,7 +88,6 @@
             this.dataGridMarketData.TabIndex = 0;
             this.dataGridMarketData.Tag = "frmMarketWatch";
             this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
-            this.dataGridMarketData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridMarketData_CellFormatting);
             // 
             // txtAddRow
             // 

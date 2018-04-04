@@ -92,7 +92,7 @@ namespace ELEVEN.Model
                 if (value != this._last_price)
                 {
                     this._last_price = value;
-                    //NotifyPropertyChanged("last_price");
+                    NotifyPropertyChanged("last_price");
                 }
             }
         }
@@ -140,7 +140,7 @@ namespace ELEVEN.Model
                 if (value != this._volume)
                 {
                     this._volume = value;
-                   // NotifyPropertyChanged("volume");
+                    NotifyPropertyChanged("volume");
                 }
             }
         }
