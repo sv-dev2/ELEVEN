@@ -119,7 +119,7 @@ namespace ELEVEN
             dataGridMarketData.DataSource = ObjTrading;
         }
 
-        private void TxtQuantity_LostFocus(object sender, EventArgs e)
+        private async void TxtQuantity_LostFocus(object sender, EventArgs e)
         {
             if (txtAddRow.Text != "click to add..")
             {
@@ -129,7 +129,7 @@ namespace ELEVEN
                 }
                 else
                 {
-                    AddSymbolTxtFile();
+                   await AddSymbolTxtFile();
                     txtAddRow.Text = "click to add..";
                 }
 
@@ -182,7 +182,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+            ticker =await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {
@@ -214,7 +214,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+            ticker =await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {
@@ -281,29 +281,14 @@ namespace ELEVEN
 
                     }
                 }
-                dispatcherTimer1.Interval = new TimeSpan(0, 0, 3);
+                dispatcherTimer1.Interval = new TimeSpan(0, 0, 2);
             }
             else
             {
                 dispatcherTimer1.Interval = new TimeSpan(0, 1, 0);
             }
         }
-        int Index = -1;
-        private void dataGridMarketData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            Index = e.RowIndex;
-        }
-        private void dataGridMarketData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            //var height = 40;
-            foreach (DataGridViewRow dr in dataGridMarketData.Rows)
-            {
-
-            }
-        }
-
-
-
+                
         private async void dataGridMarketData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return; // header clicked
@@ -347,7 +332,7 @@ namespace ELEVEN
             }
         }
 
-        private async void txtAddRow_KeyDown(object sender, KeyEventArgs e)
+        private  void txtAddRow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
