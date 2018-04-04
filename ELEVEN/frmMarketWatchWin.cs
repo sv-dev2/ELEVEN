@@ -16,9 +16,17 @@ namespace ELEVEN
 {
     public partial class frmMarketWatchWin : Form
     {
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
+        private BindingSource bindingSource2 = new BindingSource();
+        BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
+        BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
+        List<OldData> OldWatchList = new List<OldData>();
         public frmMarketWatchWin()
         {
             InitializeComponent();
+            AutoCompletetxtAddRow();
+           
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
 
@@ -42,25 +50,33 @@ namespace ELEVEN
                 }
             }
         }
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
-        DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
-        private BindingSource bindingSource2 = new BindingSource();
-        BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
-        List<OldData> OldWatchList = new List<OldData>();
+
 
 
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
+        TextAndImageColumn column = new TextAndImageColumn();
+        ImageList imgList = new ImageList();
         private void CreateDataGridColumn()
         {
             dataGridMarketData.DataSource = null;
             this.dataGridMarketData.Rows.Clear();
             dataGridMarketData.AutoGenerateColumns = false;
-            dataGridMarketData.ColumnCount = 5;
+            dataGridMarketData.ColumnCount = 4;
 
-            dataGridMarketData.Columns[0].Name = "Symbol";
-            dataGridMarketData.Columns[0].HeaderText = "Symbol";
-            dataGridMarketData.Columns[0].DataPropertyName = "pair";
-            dataGridMarketData.Columns[0].Width = 60;
+            imgList.Images.Add(Properties.Resources.arrowred);
+            imgList.Images.Add(Properties.Resources.arrowgreen);
+            imgList.ImageSize = new Size(12, 17);
+            imgList.TransparentColor = Color.Transparent;
+
+            column.Image = imgList.Images[1];
+
+            column.Name = "Symbol";
+            column.HeaderText = "Symbol";
+            column.DataPropertyName = "pair";
+            column.Width = 60;
+            column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridMarketData.Columns.Insert(0, column);
 
             dataGridMarketData.Columns[1].HeaderText = "Bid";
             dataGridMarketData.Columns[1].Name = "Bid";
@@ -90,10 +106,18 @@ namespace ELEVEN
             buttonColumn.Image = image;
             buttonColumn.Width = 15;
             dataGridMarketData.Columns.Insert(5, buttonColumn);
-
-            dataGridMarketData.DataSource = bindingSource2;
+            dataGridMarketData.Height = 25 * ObjTrading.Count() + 34;
+            //txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
+            dataGridMarketData.DataSource = ObjTrading;
         }
-
+        public void ReBindDataSource()
+        {
+            dataGridMarketData.DataSource = null;
+            this.dataGridMarketData.Rows.Clear();
+            dataGridMarketData.Height = 25 * ObjTrading.Count() + 34;
+            //txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
+            dataGridMarketData.DataSource = ObjTrading;
+        }
 
         private void TxtQuantity_LostFocus(object sender, EventArgs e)
         {
@@ -120,9 +144,8 @@ namespace ELEVEN
         {
             txtAddRow.Text = "click to add..";
             SymbolFileExist();
-           await LoadMarketWatch();
+            await IntialLoadMarketWatch();    
             CreateDataGridColumn();
-            AutoCompletetxtAddRow();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker2.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
@@ -144,19 +167,37 @@ namespace ELEVEN
         }
         private async void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-
             await LoadMarketWatch();
-            CreateDataGridColumn();
-            if (Index >= 0)
-            {
-                dataGridMarketData.Rows[Index].Selected = true;
-            }
         }
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
         }
+        private async Task IntialLoadMarketWatch()
+        {
+            string symbols = string.Empty;
 
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+
+            if (ticker != null)
+            {
+
+                BindingList<FinexTicker> customerList = new BindingList<FinexTicker>();
+                for (int i = 0; i < ticker.Length; i++)
+                {
+
+                    customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+                }
+                //this.bindingSource1.DataSource = customerList;
+                ObjTrading = customerList;
+            }
+
+        }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
 
@@ -168,21 +209,21 @@ namespace ELEVEN
         private async Task LoadMarketWatch()
         {
             string symbols = string.Empty;
-            using (var streamReader = new StreamReader(fileName))
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
             {
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
+            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {
                 // dt.Clear();
-                oldCustomerList = this.bindingSource2.DataSource as BindingList<FinexTicker>;
-                if (oldCustomerList != null)
+                var bindingSource = this.dataGridMarketData.DataSource as BindingList<FinexTicker>;
+                if (bindingSource != null)
                 {
                     OldWatchList = new List<OldData>();
-                    foreach (var item in oldCustomerList)
+                    foreach (var item in bindingSource)
                     {
                         OldData oldWatch = new OldData();
                         oldWatch.ask = item.ask;
@@ -193,17 +234,54 @@ namespace ELEVEN
                         OldWatchList.Add(oldWatch);
                     }
                 }
-                bindingSource2.Clear();
 
                 BindingList<FinexTicker> customerList = new BindingList<FinexTicker>();
                 for (int i = 0; i < ticker.Length; i++)
                 {
-                    //dt.Rows.Add(ticker[i][0], ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "", "");                    
-                    //dt.Rows.Add(ticker[i][0].Replace("t", ""), ticker[i][1], ticker[i][3], ticker[i][7], ticker[i][8], "");
-                    customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+
+                    if (bindingSource != null)
+                    {
+                        var result = bindingSource.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
+                        var oldResult = OldWatchList.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
+                        if (result != null)
+                        {
+                            result.ask = ticker[i][3];
+                            result.bid = ticker[i][1];
+                            bool bidBlue = true;
+                            bool askBlue = true;
+                            if (Convert.ToDecimal(result.bid) > Convert.ToDecimal(oldResult.bid))
+                            {
+                                this.dataGridMarketData.Rows[i].Cells[1].Style.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Rows[i].Cells[1].Style.ForeColor = Color.Red;
+                                bidBlue = false;
+                            }
+                            if (Convert.ToDecimal(result.ask) > Convert.ToDecimal(oldResult.ask))
+                            {
+                                this.dataGridMarketData.Rows[i].Cells[2].Style.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Rows[i].Cells[2].Style.ForeColor = Color.Red;
+                                askBlue = false;
+                            }
+                            if (!bidBlue || !askBlue)
+                            {
+                                ((TextAndImageCell)dataGridMarketData.Rows[i].Cells[0]).Image = imgList.Images[0];
+                            }
+                            else
+                            {
+                                ((TextAndImageCell)dataGridMarketData.Rows[i].Cells[0]).Image = imgList.Images[1];
+                            }
+                            result.last_price = ticker[i][7];
+                            result.volume = ticker[i][8];
+                        }
+
+                    }
                 }
-                this.bindingSource2.DataSource = customerList;
-                //dispatcherTimer1.Interval = new TimeSpan(0, 0, 3);
+                dispatcherTimer1.Interval = new TimeSpan(0, 0, 3);
             }
             else
             {
@@ -240,7 +318,7 @@ namespace ELEVEN
         private async Task ReadWriteNotepad(string symbol)
         {
             string symbols = string.Empty;
-            using (var streamReader = new StreamReader(fileName))
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
             {
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
@@ -248,83 +326,19 @@ namespace ELEVEN
             symbols = symbols.Replace(",t" + symbol, "");
 
             using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(fileName, false))
+                new System.IO.StreamWriter(this.Name + ".txt", false))
             {
                 file.Write(symbols);
                 file.Close();
             }
-            await LoadMarketWatch();
-            CreateDataGridColumn();
-        }
-
-
-
-        private void dataGridMarketData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            var oldValue = dataGridMarketData[e.ColumnIndex, e.RowIndex].Value;
-            var newValue = e.FormattedValue;
-            if (oldValue != newValue)
-            {
-
-            }
-        }
-
-        private void dataGridMarketData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["bid"].Index)
-            {
-                if (e.Value != null)
-                {
-                    var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
-                    if (OldWatchList.Count > 0)
-                    {
-                        var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
-                        string RepVisits = e.Value.ToString();
-                        if (result != null)
-                        {
-                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.bid))
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                            }
-                            else
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
-                            }
-                        }
-                    }
-
-                }
-            }
-            if (e.RowIndex >= 0 && e.ColumnIndex == this.dataGridMarketData.Columns["ask"].Index)
-            {
-                if (e.Value != null)
-                {
-                    var symbol = this.dataGridMarketData["Symbol", e.RowIndex].Value;
-                    if (OldWatchList.Count > 0)
-                    {
-                        var result = OldWatchList.Where(m => m.pair == symbol.ToString()).FirstOrDefault();
-                        string RepVisits = e.Value.ToString();
-                        if (result != null)
-                        {
-                            if (Convert.ToDecimal(RepVisits) >= Convert.ToDecimal(result.ask))
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Blue;
-                            }
-                            else
-                            {
-                                this.dataGridMarketData.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.Red;
-                            }
-                        }
-                    }
-
-                }
-            }
+            await IntialLoadMarketWatch();
+            ReBindDataSource();
         }
         private void frmMarketWatchWin_FormClosing(object sender, FormClosingEventArgs e)
         {
             dispatcherTimer1.Stop();
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
-            tabControl.TabPages.RemoveByKey(this.Name);
+            tabControl.TabPages.RemoveByKey(this.Name + ".txt");
             string name = this.Name;
             string fileName = name + ".txt";
             if (File.Exists(fileName))
@@ -342,6 +356,7 @@ namespace ELEVEN
         }
         private async Task AddSymbolTxtFile()
         {
+            dispatcherTimer1.Stop();
             string symbols = string.Empty;
             using (var streamReader = new StreamReader(this.Name + ".txt"))
             {
@@ -356,8 +371,9 @@ namespace ELEVEN
                     file.Close();
                 }
             }
-            await LoadMarketWatch();
-            CreateDataGridColumn();
+            await IntialLoadMarketWatch();
+            ReBindDataSource();
+            dispatcherTimer1.Start();
         }
 
         private void frmMarketWatchWin_MouseClick(object sender, MouseEventArgs e)
