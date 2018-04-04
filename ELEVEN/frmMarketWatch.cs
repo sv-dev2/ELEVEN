@@ -34,45 +34,7 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-            //textBox1.LostFocus += textBox1_LostFocus;
-            //listBox1.Hide();
         }
-        //private void textBox1_LostFocus(object sender, EventArgs e)
-        //{
-            
-        //}
-
-        //private void textBox1_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (textBox1.Text == "")
-        //    {
-        //        listBox1.DataSource = null;
-        //        listBox1.Hide();
-        //    }
-        //    else
-        //    {
-        //        AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
-        //        var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
-        //        var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
-        //        for (int i = 0; i < Smbl.Count(); i++)
-        //        {
-        //            if (Smbl[i][0].StartsWith(textBox1.Text.ToUpper()))
-        //            {
-        //                SymbolCollection.Add(Smbl[i][0]);
-        //            }
-        //        }
-        //        if (SymbolCollection.Count == 0)
-        //        {
-        //            listBox1.DataSource = null;
-        //            listBox1.Hide();
-        //        }
-        //        else
-        //        {
-        //            listBox1.DataSource = SymbolCollection;
-        //            listBox1.Show();
-        //        }
-        //    }
-        //}
         private void AutoCompletetxtAddRow()
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
@@ -85,7 +47,6 @@ namespace ELEVEN
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
-         
         }      
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         TextAndImageColumn column = new TextAndImageColumn();
@@ -139,11 +100,9 @@ namespace ELEVEN
             buttonColumn.HeaderText = "";
             buttonColumn.Name = "buttonColumn";
             Image image = ELEVEN.Properties.Resources.Delete;
-
             buttonColumn.Image = image;
             buttonColumn.Width = 15;
             dataGridMarketData.Columns.Insert(5, buttonColumn);
-
             //foreach (DataRow dr in dt.Rows)
             //{
 
@@ -151,6 +110,8 @@ namespace ELEVEN
 
             //}
             // dataGridMarketData.DataSource = bindingSource1;
+            dataGridMarketData.Height = 20* ObjTrading.Count()+34;
+            txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
             dataGridMarketData.DataSource = ObjTrading;
         }
         public void ReBindDataSource()
@@ -162,10 +123,19 @@ namespace ELEVEN
 
         private void TxtQuantity_LostFocus(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtAddRow.Text))
-                txtAddRow.Text = "click to add..";
-            else
-                AddSymbolTxtFile();
+            if (txtAddRow.Text != "click to add..")
+            {
+                if (String.IsNullOrWhiteSpace(txtAddRow.Text))
+                {
+                    txtAddRow.Text = "click to add..";
+                }
+                else
+                {
+                    AddSymbolTxtFile();
+                    txtAddRow.Text = "click to add..";
+                }
+                
+            }
         }
 
         private void TxtQuantity_GotFocus(object sender, EventArgs e)
@@ -262,11 +232,11 @@ namespace ELEVEN
                 BindingList<FinexTicker> customerList = new BindingList<FinexTicker>();
                 for (int i = 0; i < ticker.Length; i++)
                 {
-                  
+
                     if (bindingSource != null)
                     {
                         var result = bindingSource.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
-                        var oldResult= OldWatchList.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
+                        var oldResult = OldWatchList.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
                         if (result != null)
                         {
                             result.ask = ticker[i][3];
@@ -302,7 +272,7 @@ namespace ELEVEN
                             result.last_price = ticker[i][7];
                             result.volume = ticker[i][8];
                         }
-                      
+
                     }
                 }
                 dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
@@ -312,7 +282,7 @@ namespace ELEVEN
                 dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             }
         }
-      
+
 
         private void dataGridMarketData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -344,15 +314,15 @@ namespace ELEVEN
             IntialLoadMarketWatch();
             ReBindDataSource();
         }
-       
+
 
         private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-               // AddSymbolTxtFile();
+                // AddSymbolTxtFile();
             }
-            
+
         }
 
         private void AddSymbolTxtFile()
@@ -377,39 +347,11 @@ namespace ELEVEN
             dispatcherTimer.Start();
         }
 
-        //private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if(listBox1.SelectedIndex != -1 && listBox1.SelectedIndex != 0)
-        //    {
-        //        textBox1.Text = listBox1.SelectedValue.ToString();
-        //        listBox1.Hide();
-        //        textBox1.Focus();
-        //    }
-        //}
+        private void frmMarketWatch_MouseClick(object sender, MouseEventArgs e)
+        {
+            dataGridMarketData.Focus();
+        }
 
-        //private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    listBox1.Focus();
-        //}
 
-        //private void listBox1_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyData == Keys.Enter)
-        //    {
-        //        if (listBox1.SelectedIndex != -1 && listBox1.SelectedIndex != 0)
-        //        {
-        //            textBox1.Text = listBox1.SelectedValue.ToString();
-        //            listBox1.Hide();
-        //            textBox1.Focus();
-        //        }
-        //    }
-        //}
-
-        //private void listBox1_Click(object sender, EventArgs e)
-        //{
-        //    textBox1.Text = listBox1.SelectedValue.ToString();
-        //    listBox1.Hide();
-        //    textBox1.Focus();
-        //}
     }
 }

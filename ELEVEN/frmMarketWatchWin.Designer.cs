@@ -112,6 +112,7 @@
             this.Text = "Market Watch";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMarketWatchWin_FormClosing);
             this.Load += new System.EventHandler(this.frmMarketWatch_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frmMarketWatchWin_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMarketData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
