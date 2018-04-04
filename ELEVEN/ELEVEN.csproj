@@ -101,12 +101,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DBConnection\SQLiteDBOperation.cs" />
-    <Compile Include="frmActiveGrid.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmActiveGrid.Designer.cs">
-      <DependentUpon>frmActiveGrid.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmAlertHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,9 +178,6 @@
     <EmbeddedResource Include="Customization\Resources.resx" />
     <EmbeddedResource Include="Customization\Strings.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmActiveGrid.resx">
-      <DependentUpon>frmActiveGrid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAlertHistory.resx">
       <DependentUpon>frmAlertHistory.cs</DependentUpon>
@@ -311,10 +302,6 @@
     <Content Include="Resources\DockPanel.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveGrid\ActiveGrid.csproj">
-      <Project>{bb59724c-879e-4f87-a39c-2cb3c872b34b}</Project>
-      <Name>ActiveGrid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ELEVEN.Services\ELEVEN.Services.csproj">
       <Project>{af388a6c-e192-410b-8a0d-409241b7f2e7}</Project>
       <Name>ELEVEN.Services</Name>

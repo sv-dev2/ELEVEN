@@ -44,7 +44,7 @@ namespace ELEVEN.Model
                 if (value != this._mid)
                 {
                     this._mid = value;
-                    NotifyPropertyChanged("mid");
+                    //NotifyPropertyChanged("mid");
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace ELEVEN.Model
                 if (value != this._low)
                 {
                     this._low = value;
-                    NotifyPropertyChanged("low");
+                   // NotifyPropertyChanged("low");
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace ELEVEN.Model
                 if (value != this._high)
                 {
                     this._high = value;
-                    NotifyPropertyChanged("high");
+                    //NotifyPropertyChanged("high");
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace ELEVEN.Model
                 if (value != this._timestamp)
                 {
                     this._timestamp = value;
-                    NotifyPropertyChanged("timestamp");
+                   // NotifyPropertyChanged("timestamp");
                 }
             }
         }
@@ -172,7 +172,7 @@ namespace ELEVEN.Model
                 if (value != this._pair)
                 {
                     this._pair = value;
-                    NotifyPropertyChanged("pair");
+                    //NotifyPropertyChanged("pair");
                 }
             }
         }
