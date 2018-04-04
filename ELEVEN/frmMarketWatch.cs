@@ -103,14 +103,8 @@ namespace ELEVEN
             buttonColumn.Image = image;
             buttonColumn.Width = 15;
             dataGridMarketData.Columns.Insert(5, buttonColumn);
-            //foreach (DataRow dr in dt.Rows)
-            //{
-
-            //    dataGridMarketData.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4]);
-
-            //}
-            // dataGridMarketData.DataSource = bindingSource1;
-            dataGridMarketData.Height = 20* ObjTrading.Count()+34;
+            
+            dataGridMarketData.Height = 20 * ObjTrading.Count() + 34;
             txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
             dataGridMarketData.DataSource = ObjTrading;
         }
@@ -118,6 +112,8 @@ namespace ELEVEN
         {
             dataGridMarketData.DataSource = null;
             this.dataGridMarketData.Rows.Clear();
+            dataGridMarketData.Height = 20 * ObjTrading.Count() + 34;
+            txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
             dataGridMarketData.DataSource = ObjTrading;
         }
 
