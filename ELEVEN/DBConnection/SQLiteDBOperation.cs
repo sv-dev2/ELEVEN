@@ -70,7 +70,7 @@ namespace ELEVEN.DBConnection
             sqlite_cmd = sqlite_conn.CreateCommand();
 
             // Lets insert something into our new table:
-            sqlite_cmd.CommandText = $"INSERT INTO tblFormLocation (formName,SizeX,SizeY,LocationX,LocationY,WindowState,formUniqueName,WorkspaceId) VALUES ('{model.formName}',{model.SizeX},{model.SizeY},{model.LocationX},{model.LocationY},'{model.WindowState}','{model.formUniqueName}',{model.WorkspaceId});";
+            sqlite_cmd.CommandText = $"INSERT INTO tblFormLocation (formName,SizeX,SizeY,LocationX,LocationY,WindowState,formUniqueName,WorkspaceId,formTitle) VALUES ('{model.formName}',{model.SizeX},{model.SizeY},{model.LocationX},{model.LocationY},'{model.WindowState}','{model.formUniqueName}',{model.WorkspaceId},'{model.formTitle}');";
             // And execute this again ;D
             sqlite_cmd.ExecuteNonQuery();
             // We are ready, now lets cleanup and close our connection:
@@ -110,6 +110,7 @@ namespace ELEVEN.DBConnection
                 model.LocationY = Convert.ToInt32(sqlite_datareader["LocationY"]);
                 model.WindowState = Convert.ToString(sqlite_datareader["WindowState"]);
                 model.formUniqueName = Convert.ToString(sqlite_datareader["formUniqueName"]);
+                model.formTitle = Convert.ToString(sqlite_datareader["formTitle"]);
                 modelList.Add(model);
             }
             // We are ready, now lets cleanup and close our connection:

@@ -280,15 +280,16 @@ namespace ELEVEN
                 window.WindowState = FormWindowState.Maximized;
             }
             // string name = Guid.NewGuid().ToString();
-
-
+            string formTitle = Convert.ToString(item.formTitle);
+            if(!string.IsNullOrEmpty(formTitle))
+            {
+                window.Text = item.formTitle;
+            }
             AddContextMenuTabControlItem(item.formUniqueName, window);
-
             window.Location = new Point(item.LocationX, item.LocationY);
             window.Size = new Size(item.SizeX, item.SizeY);
-            window.Name = item.formUniqueName;
+            window.Name = item.formUniqueName;           
             window.MdiParent = this;
-
             window.Show();
         }
         private void ChartToolStripButton_Click(object sender, EventArgs e)
@@ -346,27 +347,26 @@ namespace ELEVEN
 
         private void marketWatchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (Application.OpenForms.OfType<frmMarketWatch>().Count() == 1)
-            //{
-            //    Application.OpenForms.OfType<frmMarketWatch>().First().Activate();
-            //}
-            //else
-            //{
-            this.Invoke((Action)delegate ()
+            var frm = new frmPopup();
+            frm.ShowDialog();
+            if (string.IsNullOrEmpty(frm.WorkspaceName))
             {
-                var name = Guid.NewGuid().ToString();
-                frmMarketWatchWin watch = new frmMarketWatchWin();
-                watch.MdiParent = this;
-                watch.Name = name;
-
-                AddContextMenuTabControlItem(name, watch);
-
-                watch.Show();
-            });
-            //dockPanel.Height = Screen.PrimaryScreen.Bounds.Height - 135;
-            //m_toolbox.Show(dockPanel);
-            //}
-            //dockPanel.Width = 330;
+                return;
+            }
+            else
+            {
+                this.Invoke((Action)delegate ()
+                {
+                    var name = Guid.NewGuid().ToString();
+                    frmMarketWatchWin watch = new frmMarketWatchWin();
+                    watch.MdiParent = this;
+                    watch.Name = name;
+                    watch.Text = frm.WorkspaceName;
+                    AddContextMenuTabControlItem(name, watch);
+                    watch.Show();
+                });
+            }
+           
         }
 
         private void MDIParentForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -482,7 +482,7 @@ namespace ELEVEN
                 else
                 {
                     MessageBox.Show(this, "Workspace already exist.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }               
+                }
             }
         }
         /// <summary>
@@ -518,6 +518,7 @@ namespace ELEVEN
                 model.WindowState = winState.ToString();
                 model.formUniqueName = childForm.Name;
                 model.WorkspaceId = workSpaceid;
+                model.formTitle = childForm.Text;
                 SQLiteDBOperation.AddFormsLocation(model);
             }
 
@@ -572,6 +573,7 @@ namespace ELEVEN
                 model.WindowState = winState.ToString();
                 model.formUniqueName = childForm.Name;
                 model.WorkspaceId = currentWorkspaceId;
+                model.formTitle = childForm.Text;
                 SQLiteDBOperation.AddFormsLocation(model);
             }
         }
