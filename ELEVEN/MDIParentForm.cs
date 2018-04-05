@@ -175,6 +175,7 @@ namespace ELEVEN
             var result = SQLiteDBOperation.ReteriveWorkspace();
             var toolStripeMenu = workspaceToolStripMenuItem;
             bool firstTime = true;
+            workspaceToolStripMenuItem.DropDownItems.Clear();
             foreach (var item in result)
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
@@ -187,7 +188,7 @@ namespace ELEVEN
                     menuItem.Checked = true;
                     firstTime = false;
                 }
-                workspaceToolStripMenuItem.DropDownItems.Clear();
+               
                 workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
             }
             if (result.Count > 0)
