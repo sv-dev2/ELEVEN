@@ -39,7 +39,6 @@
             // 
             // txtAddRow
             // 
-            this.txtAddRow.Dock = System.Windows.Forms.DockStyle.Left;
             this.txtAddRow.Location = new System.Drawing.Point(0, 0);
             this.txtAddRow.Name = "txtAddRow";
             this.txtAddRow.Size = new System.Drawing.Size(214, 20);
@@ -74,7 +73,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridMarketData.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridMarketData.EnableHeadersVisualStyles = false;
-            this.dataGridMarketData.Location = new System.Drawing.Point(0, 21);
+            this.dataGridMarketData.Location = new System.Drawing.Point(0, 26);
             this.dataGridMarketData.MultiSelect = false;
             this.dataGridMarketData.Name = "dataGridMarketData";
             this.dataGridMarketData.ReadOnly = true;
@@ -90,7 +89,7 @@
             this.dataGridMarketData.RowHeadersVisible = false;
             this.dataGridMarketData.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridMarketData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridMarketData.Size = new System.Drawing.Size(582, 34);
+            this.dataGridMarketData.Size = new System.Drawing.Size(705, 225);
             this.dataGridMarketData.TabIndex = 3;
             this.dataGridMarketData.Tag = "frmMarketWatch";
             this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
@@ -100,7 +99,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(581, 355);
+            this.ClientSize = new System.Drawing.Size(706, 355);
             this.Controls.Add(this.dataGridMarketData);
             this.Controls.Add(this.txtAddRow);
             this.Name = "frmMarketWatchWin";

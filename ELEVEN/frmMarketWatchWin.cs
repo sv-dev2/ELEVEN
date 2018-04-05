@@ -73,7 +73,7 @@ namespace ELEVEN
             column.Name = "Symbol";
             column.HeaderText = "Symbol";
             column.DataPropertyName = "pair";
-            column.Width = 60;
+            column.Width = 75;
             column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dataGridMarketData.Columns.Insert(0, column);
@@ -81,22 +81,22 @@ namespace ELEVEN
             dataGridMarketData.Columns[1].HeaderText = "Bid";
             dataGridMarketData.Columns[1].Name = "Bid";
             dataGridMarketData.Columns[1].DataPropertyName = "bid";
-            dataGridMarketData.Columns[1].Width = 60;
+            dataGridMarketData.Columns[1].Width = 75;
 
             dataGridMarketData.Columns[2].Name = "Ask";
             dataGridMarketData.Columns[2].HeaderText = "Ask";
             dataGridMarketData.Columns[2].DataPropertyName = "ask";
-            dataGridMarketData.Columns[2].Width = 60;
+           dataGridMarketData.Columns[2].Width = 75;
 
             dataGridMarketData.Columns[3].Name = "Last";
             dataGridMarketData.Columns[3].HeaderText = "Last";
             dataGridMarketData.Columns[3].DataPropertyName = "last_price";
-            dataGridMarketData.Columns[3].Width = 60;
+            dataGridMarketData.Columns[3].Width = 75;
 
             dataGridMarketData.Columns[4].Name = "Volume";
             dataGridMarketData.Columns[4].HeaderText = "Volume";
             dataGridMarketData.Columns[4].DataPropertyName = "volume";
-            dataGridMarketData.Columns[4].Width = 63;
+            //dataGridMarketData.Columns[4].Width = 63;
 
 
             buttonColumn.HeaderText = "";
