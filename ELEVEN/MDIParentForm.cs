@@ -173,31 +173,43 @@ namespace ELEVEN
         {
             var result = SQLiteDBOperation.ReteriveWorkspace();
             var toolStripeMenu = workspaceToolStripMenuItem;
+            bool firstTime = true;
             foreach (var item in result)
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 menuItem.Name = item.Id.ToString();
                 menuItem.Text = item.WorkspaceName;
-                menuItem.CheckOnClick = true;
+
                 menuItem.Click += MenuItem_Click;
+                if(firstTime)
+                {
+                    menuItem.Checked = true;
+                    firstTime = false;
+                }
                 workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
             }
             if (result.Count > 0)
             {
                 ReteriveWindowLocations(result[0].Id);
+              
             }
         }
 
         private void MenuItem_Click(object sender, EventArgs e)
         {
             var menuItem = sender as ToolStripMenuItem;
-           
+
             if (currentWorkspaceId != Convert.ToInt32(menuItem.Name))
             {
+                foreach (ToolStripMenuItem item in workspaceToolStripMenuItem.DropDownItems)
+                {
+                    item.Checked = false;
+                }
                 foreach (Form childForm in MdiChildren)
                 {
                     childForm.Close();
                 }
+                menuItem.Checked = true;
                 ReteriveWindowLocations(Convert.ToInt32(menuItem.Name));
             }
 
@@ -421,6 +433,13 @@ namespace ELEVEN
                 {
                     int workSpaceid = SQLiteDBOperation.AddWorkspace(frm.Name);
                     AddWorkspaceForm(workSpaceid);
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                    menuItem.Name = workSpaceid.ToString();
+                    menuItem.Text = frm.Name;
+
+                    menuItem.Click += MenuItem_Click;
+                    workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+                    currentWorkspaceId = workSpaceid;
                 }
                 else
                 {
@@ -460,10 +479,17 @@ namespace ELEVEN
                 model.WorkspaceId = workSpaceid;
                 SQLiteDBOperation.AddFormsLocation(model);
             }
+           
         }
         private void toolStripRemoveWorkspace_Click(object sender, EventArgs e)
         {
-            SQLiteDBOperation.TruncatePreviousLocation(currentWorkspaceId);
+            SQLiteDBOperation.RemoveWorkspace(currentWorkspaceId);
+            foreach (Form childForm in MdiChildren)
+            {
+                childForm.Close();
+            }
+            workspaceToolStripMenuItem.DropDownItems.RemoveByKey(currentWorkspaceId.ToString());
+            ReteriveWorkSpace();
         }
 
         private void toolStripUpdateWorkspace_Click(object sender, EventArgs e)

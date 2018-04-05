@@ -26,7 +26,7 @@ namespace ELEVEN
         {
             InitializeComponent();
             AutoCompletetxtAddRow();
-           
+
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
 
@@ -129,7 +129,7 @@ namespace ELEVEN
                 }
                 else
                 {
-                   await AddSymbolTxtFile();
+                    await AddSymbolTxtFile();
                     txtAddRow.Text = "click to add..";
                 }
 
@@ -144,7 +144,7 @@ namespace ELEVEN
         {
             txtAddRow.Text = "click to add..";
             SymbolFileExist();
-            await IntialLoadMarketWatch();    
+            await IntialLoadMarketWatch();
             CreateDataGridColumn();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
@@ -182,7 +182,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker =await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
+            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {
@@ -214,7 +214,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker =await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
+            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {
@@ -278,6 +278,10 @@ namespace ELEVEN
                             result.last_price = ticker[i][7];
                             result.volume = ticker[i][8];
                         }
+                        else
+                        {
+                            ReBindDataSource();
+                        }
 
                     }
                 }
@@ -288,7 +292,7 @@ namespace ELEVEN
                 dispatcherTimer1.Interval = new TimeSpan(0, 1, 0);
             }
         }
-                
+
         private async void dataGridMarketData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return; // header clicked
@@ -332,7 +336,7 @@ namespace ELEVEN
             //}
         }
 
-        private  void txtAddRow_KeyDown(object sender, KeyEventArgs e)
+        private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {

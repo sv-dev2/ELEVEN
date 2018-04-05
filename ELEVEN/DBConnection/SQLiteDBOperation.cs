@@ -10,6 +10,29 @@ namespace ELEVEN.DBConnection
 {
     public class SQLiteDBOperation
     {
+        public static void RemoveWorkspace(int workSpaceid)
+        {
+            // We use these three SQLite objects:
+
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            // create a new database connection:
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            // Let the SQLiteCommand object know our SQL-Query:
+            sqlite_cmd.CommandText = $"DELETE FROM tblWorkspace where Id={workSpaceid}";
+            // Now lets execute the SQL ;D
+            sqlite_cmd.ExecuteNonQuery();
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+            TruncatePreviousLocation(workSpaceid);
+        }
         public static void TruncatePreviousLocation(int workSpaceid)
         {
             // We use these three SQLite objects:
