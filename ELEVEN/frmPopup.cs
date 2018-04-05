@@ -17,7 +17,7 @@ namespace ELEVEN
             InitializeComponent();
         }
         private string _name;
-        public string Name
+        public string WorkspaceName
         {
             get { return _name; }
             set { _name = value; }
@@ -26,7 +26,7 @@ namespace ELEVEN
         {
             if (textName.Text.Trim() != string.Empty)
             {
-                Name = textName.Text;
+                WorkspaceName = textName.Text;
                 this.Close();
             }
         }

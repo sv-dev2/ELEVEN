@@ -165,10 +165,11 @@ namespace ELEVEN
             //    m_toolbox.Show(dockPanel);
             //});
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
-            //ReteriveWindowLocations();
-
             ReteriveWorkSpace();
         }
+        /// <summary>
+        /// Reterive first workspace that exist in the DB.
+        /// </summary>
         private void ReteriveWorkSpace()
         {
             var result = SQLiteDBOperation.ReteriveWorkspace();
@@ -181,7 +182,7 @@ namespace ELEVEN
                 menuItem.Text = item.WorkspaceName;
 
                 menuItem.Click += MenuItem_Click;
-                if(firstTime)
+                if (firstTime)
                 {
                     menuItem.Checked = true;
                     firstTime = false;
@@ -191,10 +192,14 @@ namespace ELEVEN
             if (result.Count > 0)
             {
                 ReteriveWindowLocations(result[0].Id);
-              
+
             }
         }
-
+        /// <summary>
+        /// Event the handle workspace click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, EventArgs e)
         {
             var menuItem = sender as ToolStripMenuItem;
@@ -214,7 +219,7 @@ namespace ELEVEN
             }
 
         }
-        private int currentWorkspaceId = 0;
+        private int currentWorkspaceId = 0;//Mantain record of selected workspace
         private void ReteriveWindowLocations(int workSpaceId)
         {
             currentWorkspaceId = workSpaceId;
@@ -304,7 +309,11 @@ namespace ELEVEN
             //}
 
         }
-
+        /// <summary>
+        /// Event to call Alert window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
             string name = Guid.NewGuid().ToString();
@@ -365,27 +374,35 @@ namespace ELEVEN
 
 
         }
-
+        /// <summary>
+        /// Open OpenPosition forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void positionToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (Application.OpenForms.OfType<frmPositions>().Count() == 1)
-            {
-                Application.OpenForms.OfType<frmPositions>().First().Activate();
-            }
-            else
-            {
-                var name = Guid.NewGuid().ToString();
-                frmPositions positions = new frmPositions();
-                positions.MdiParent = this;
-                positions.Name = name;
+            //if (Application.OpenForms.OfType<frmPositions>().Count() == 1)
+            //{
+            //    Application.OpenForms.OfType<frmPositions>().First().Activate();
+            //}
+            //else
+            //{
+            var name = Guid.NewGuid().ToString();
+            frmPositions positions = new frmPositions();
+            positions.MdiParent = this;
+            positions.Name = name;
 
-                AddContextMenuTabControlItem(name, positions);
+            AddContextMenuTabControlItem(name, positions);
 
-                positions.Show();
-            }
+            positions.Show();
+            //}
         }
-
+        /// <summary>
+        /// Open closed position form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closedPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Application.OpenForms.OfType<frmClosedPosition>().Count() == 1)
@@ -404,6 +421,9 @@ namespace ELEVEN
                 positions.Show();
             }
         }
+        /// <summary>
+        /// Tabcontrol event to activate the form that is binded with the tab
+        /// </summary>
         TabPage selectedTabPage;
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -421,33 +441,54 @@ namespace ELEVEN
                 this.menuStrip1.Show(Cursor.Position);
             }
         }
-
+        /// <summary>
+        /// Event to save new workspace
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveWorkspace_Click(object sender, EventArgs e)
         {
+            var childCount = MdiChildren.Count();
+            if (childCount < 1)
+            {
+                MessageBox.Show(this, "Please add element to your workspace", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             var frm = new frmPopup();
             frm.ShowDialog();
-            if (frm.Name != string.Empty)
+            if (frm.WorkspaceName.Trim() != string.Empty)
             {
-                var childCount = MdiChildren.Count();
-                if (childCount > 0)
+
+                if (SQLiteDBOperation.DuplicateWorkspace(frm.WorkspaceName.Trim().ToLower()))
                 {
-                    int workSpaceid = SQLiteDBOperation.AddWorkspace(frm.Name);
+                    //Add new workspace
+                    int workSpaceid = SQLiteDBOperation.AddWorkspace(frm.WorkspaceName);
+                    //Add forms for the respective workspace
                     AddWorkspaceForm(workSpaceid);
+                    //uncheck all menu items
+                    foreach (ToolStripMenuItem item in workspaceToolStripMenuItem.DropDownItems)
+                    {
+                        item.Checked = false;
+                    }
+                    //Add new menu strip and mark it as active/checked
                     ToolStripMenuItem menuItem = new ToolStripMenuItem();
                     menuItem.Name = workSpaceid.ToString();
-                    menuItem.Text = frm.Name;
-
+                    menuItem.Text = frm.WorkspaceName;
+                    menuItem.Checked = true;
                     menuItem.Click += MenuItem_Click;
                     workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
                     currentWorkspaceId = workSpaceid;
                 }
                 else
                 {
-                    MessageBox.Show(this, "Please add element to your workspace", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
+                    MessageBox.Show(this, "Workspace already exist.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }               
             }
         }
+        /// <summary>
+        /// Method to add form for the workspace
+        /// </summary>
+        /// <param name="workSpaceid"></param>
         private void AddWorkspaceForm(int workSpaceid)
         {
             foreach (Form childForm in MdiChildren)
@@ -479,8 +520,13 @@ namespace ELEVEN
                 model.WorkspaceId = workSpaceid;
                 SQLiteDBOperation.AddFormsLocation(model);
             }
-           
+
         }
+        /// <summary>
+        /// Remove active workspace and it forms from DB also
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripRemoveWorkspace_Click(object sender, EventArgs e)
         {
             SQLiteDBOperation.RemoveWorkspace(currentWorkspaceId);
@@ -491,7 +537,11 @@ namespace ELEVEN
             workspaceToolStripMenuItem.DropDownItems.RemoveByKey(currentWorkspaceId.ToString());
             ReteriveWorkSpace();
         }
-
+        /// <summary>
+        /// Update existing workspace
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripUpdateWorkspace_Click(object sender, EventArgs e)
         {
             SQLiteDBOperation.TruncatePreviousLocation(currentWorkspaceId);

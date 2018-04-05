@@ -17,6 +17,7 @@ namespace ELEVEN.Model
         public string WindowState { get; set; }
         public string formUniqueName { get; set; }
         public int WorkspaceId { get; set; }
+        public string formTitle { get; set; }
 
     }
 
