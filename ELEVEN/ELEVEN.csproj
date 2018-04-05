@@ -143,6 +143,12 @@
     <Compile Include="frmOrders.Designer.cs">
       <DependentUpon>frmOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPopup.Designer.cs">
+      <DependentUpon>frmPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPositions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOrders.resx">
       <DependentUpon>frmOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPopup.resx">
+      <DependentUpon>frmPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPositions.resx">
       <DependentUpon>frmPositions.cs</DependentUpon>

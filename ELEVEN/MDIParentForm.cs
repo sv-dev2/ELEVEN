@@ -165,13 +165,48 @@ namespace ELEVEN
             //    m_toolbox.Show(dockPanel);
             //});
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
-            ReteriveWindowLocations();
+            //ReteriveWindowLocations();
 
+            ReteriveWorkSpace();
+        }
+        private void ReteriveWorkSpace()
+        {
+            var result = SQLiteDBOperation.ReteriveWorkspace();
+            var toolStripeMenu = workspaceToolStripMenuItem;
+            foreach (var item in result)
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                menuItem.Name = item.Id.ToString();
+                menuItem.Text = item.WorkspaceName;
+                menuItem.CheckOnClick = true;
+                menuItem.Click += MenuItem_Click;
+                workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+            }
+            if (result.Count > 0)
+            {
+                ReteriveWindowLocations(result[0].Id);
+            }
+        }
+
+        private void MenuItem_Click(object sender, EventArgs e)
+        {
+            var menuItem = sender as ToolStripMenuItem;
+           
+            if (currentWorkspaceId != Convert.ToInt32(menuItem.Name))
+            {
+                foreach (Form childForm in MdiChildren)
+                {
+                    childForm.Close();
+                }
+                ReteriveWindowLocations(Convert.ToInt32(menuItem.Name));
+            }
 
         }
-        private void ReteriveWindowLocations()
+        private int currentWorkspaceId = 0;
+        private void ReteriveWindowLocations(int workSpaceId)
         {
-            var result = SQLiteDBOperation.ReteriveFormLocation();
+            currentWorkspaceId = workSpaceId;
+            var result = SQLiteDBOperation.ReteriveFormLocation(workSpaceId);
             foreach (var item in result)
             {
                 switch (item.formName)
@@ -315,35 +350,8 @@ namespace ELEVEN
 
         private void MDIParentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SQLiteDBOperation.TruncatePreviousLocation();
-            foreach (Form childForm in MdiChildren)
-            {
-                //childForm.Close();
-                var winState = childForm.WindowState;
-                Point location;
-                Size size;
-                if (childForm.WindowState == FormWindowState.Normal)
-                {
-                    // save location and size if the state is normal
-                    location = childForm.Location;
-                    size = childForm.Size;
-                }
-                else
-                {
-                    // save the RestoreBounds if the form is minimized or maximized!
-                    location = childForm.RestoreBounds.Location;
-                    size = childForm.RestoreBounds.Size;
-                }
-                LocationModel model = new LocationModel();
-                model.formName = childForm.Tag.ToString();
-                model.LocationX = location.X;
-                model.LocationY = location.Y;
-                model.SizeX = size.Width;
-                model.SizeY = size.Height;
-                model.WindowState = winState.ToString();
-                model.formUniqueName = childForm.Name;
-                SQLiteDBOperation.AddFormsLocation(model);
-            }
+
+
         }
 
         private void positionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -391,7 +399,7 @@ namespace ELEVEN
             selectedTabPage = tabControl.SelectedTab;
             string Id = selectedTabPage.Name;
             var result = Application.OpenForms.OfType<Form>().Where(m => m.Name == Id).FirstOrDefault();
-            if(result!=null)
+            if (result != null)
             {
                 result.Activate();
             }
@@ -399,6 +407,96 @@ namespace ELEVEN
             if (e.Button == MouseButtons.Right)
             {
                 this.menuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void btnSaveWorkspace_Click(object sender, EventArgs e)
+        {
+            var frm = new frmPopup();
+            frm.ShowDialog();
+            if (frm.Name != string.Empty)
+            {
+                var childCount = MdiChildren.Count();
+                if (childCount > 0)
+                {
+                    int workSpaceid = SQLiteDBOperation.AddWorkspace(frm.Name);
+                    AddWorkspaceForm(workSpaceid);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Please add element to your workspace", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+        }
+        private void AddWorkspaceForm(int workSpaceid)
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                //childForm.Close();
+                var winState = childForm.WindowState;
+                Point location;
+                Size size;
+                if (childForm.WindowState == FormWindowState.Normal)
+                {
+                    // save location and size if the state is normal
+                    location = childForm.Location;
+                    size = childForm.Size;
+                }
+                else
+                {
+                    // save the RestoreBounds if the form is minimized or maximized!
+                    location = childForm.RestoreBounds.Location;
+                    size = childForm.RestoreBounds.Size;
+                }
+                LocationModel model = new LocationModel();
+                model.formName = childForm.Tag.ToString();
+                model.LocationX = location.X;
+                model.LocationY = location.Y;
+                model.SizeX = size.Width;
+                model.SizeY = size.Height;
+                model.WindowState = winState.ToString();
+                model.formUniqueName = childForm.Name;
+                model.WorkspaceId = workSpaceid;
+                SQLiteDBOperation.AddFormsLocation(model);
+            }
+        }
+        private void toolStripRemoveWorkspace_Click(object sender, EventArgs e)
+        {
+            SQLiteDBOperation.TruncatePreviousLocation(currentWorkspaceId);
+        }
+
+        private void toolStripUpdateWorkspace_Click(object sender, EventArgs e)
+        {
+            SQLiteDBOperation.TruncatePreviousLocation(currentWorkspaceId);
+            foreach (Form childForm in MdiChildren)
+            {
+                //childForm.Close();
+                var winState = childForm.WindowState;
+                Point location;
+                Size size;
+                if (childForm.WindowState == FormWindowState.Normal)
+                {
+                    // save location and size if the state is normal
+                    location = childForm.Location;
+                    size = childForm.Size;
+                }
+                else
+                {
+                    // save the RestoreBounds if the form is minimized or maximized!
+                    location = childForm.RestoreBounds.Location;
+                    size = childForm.RestoreBounds.Size;
+                }
+                LocationModel model = new LocationModel();
+                model.formName = childForm.Tag.ToString();
+                model.LocationX = location.X;
+                model.LocationY = location.Y;
+                model.SizeX = size.Width;
+                model.SizeY = size.Height;
+                model.WindowState = winState.ToString();
+                model.formUniqueName = childForm.Name;
+                model.WorkspaceId = currentWorkspaceId;
+                SQLiteDBOperation.AddFormsLocation(model);
             }
         }
     }

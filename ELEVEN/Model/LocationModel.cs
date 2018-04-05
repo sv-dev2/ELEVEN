@@ -16,6 +16,13 @@ namespace ELEVEN.Model
         public int LocationY { get; set; }
         public string WindowState { get; set; }
         public string formUniqueName { get; set; }
+        public int WorkspaceId { get; set; }
 
+    }
+
+    public class WorkspaceModel
+    {
+        public int Id { get; set; }
+        public string WorkspaceName { get; set; }
     }
 }
