@@ -188,7 +188,7 @@ namespace ELEVEN
                     menuItem.Checked = true;
                     firstTime = false;
                 }
-               
+
                 workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
             }
             if (result.Count > 0)
@@ -284,14 +284,14 @@ namespace ELEVEN
             }
             // string name = Guid.NewGuid().ToString();
             string formTitle = Convert.ToString(item.formTitle);
-            if(!string.IsNullOrEmpty(formTitle))
+            if (!string.IsNullOrEmpty(formTitle))
             {
                 window.Text = item.formTitle;
             }
             AddContextMenuTabControlItem(item.formUniqueName, window);
             window.Location = new Point(item.LocationX, item.LocationY);
             window.Size = new Size(item.SizeX, item.SizeY);
-            window.Name = item.formUniqueName;           
+            window.Name = item.formUniqueName;
             window.MdiParent = this;
             window.Show();
         }
@@ -369,7 +369,7 @@ namespace ELEVEN
                     watch.Show();
                 });
             }
-           
+
         }
 
         private void MDIParentForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -578,6 +578,15 @@ namespace ELEVEN
                 model.WorkspaceId = currentWorkspaceId;
                 model.formTitle = childForm.Text;
                 SQLiteDBOperation.AddFormsLocation(model);
+            }
+        }
+
+        private void workspaceToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            currentWorkspaceId = 0;
+            foreach (Form childForm in MdiChildren)
+            {
+                childForm.Close();
             }
         }
     }
