@@ -323,7 +323,7 @@ namespace ELEVEN
         {
             dispatcherTimer1.Stop();
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
-            tabControl.TabPages.RemoveByKey(this.Name + ".txt");
+            tabControl.TabPages.RemoveByKey(this.Name);
             //string name = this.Name;
             //string fileName = name + ".txt";
             //if (File.Exists(fileName))
