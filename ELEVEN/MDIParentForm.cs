@@ -187,10 +187,12 @@ namespace ELEVEN
                     menuItem.Checked = true;
                     firstTime = false;
                 }
+                workspaceToolStripMenuItem.DropDownItems.Clear();
                 workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
             }
             if (result.Count > 0)
             {
+                currentWorkspaceId = result[0].Id;
                 ReteriveWindowLocations(result[0].Id);
 
             }
