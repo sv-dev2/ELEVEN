@@ -25,12 +25,12 @@ namespace ELEVEN
             var windowWidth = Screen.PrimaryScreen.Bounds.Width;
 
 
-            frmTransaction transaction = new frmTransaction();
-            dockPanelBottom.Width = Screen.PrimaryScreen.Bounds.Width;
-            dockPanelBottom.Height = 225;
-            dockPanelBottom.Location = new Point(0, windowHeight - 310);
+            //frmTransaction transaction = new frmTransaction();
+            //dockPanelBottom.Width = Screen.PrimaryScreen.Bounds.Width;
+            //dockPanelBottom.Height = 225;
+            //dockPanelBottom.Location = new Point(0, windowHeight - 310);
 
-            transaction.Show(dockPanelBottom);
+            //transaction.Show(dockPanelBottom);
 
         }
 
@@ -212,7 +212,7 @@ namespace ELEVEN
 
             menuItem = new ToolStripMenuItem();
             menuItem.Name = "menuUpdateWorkspace";
-            menuItem.Text = "Update";
+            menuItem.Text = "Save";
             menuItem.Click += toolStripUpdateWorkspace_Click;
             workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
 
@@ -303,6 +303,10 @@ namespace ELEVEN
                     case "frmAlertWindow":
                         frmAlertWindow alertWindow = new frmAlertWindow();
                         OpenWindows(alertWindow, item);
+                        break;
+                    case "frmTransaction":
+                        frmTransaction transaction = new frmTransaction();
+                        OpenWindows(transaction, item);
                         break;
                     default: /* Optional */
 
@@ -677,6 +681,16 @@ namespace ELEVEN
 
             }
 
+        }
+
+        private void transactionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string name = Guid.NewGuid().ToString();
+            frmTransaction transaction = new frmTransaction();
+            transaction.MdiParent = this;
+            transaction.Name = name;
+            AddContextMenuTabControlItem(name, transaction);
+            transaction.Show();
         }
     }
 }
