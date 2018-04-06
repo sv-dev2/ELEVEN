@@ -68,39 +68,39 @@
             // lblCondition
             // 
             this.lblCondition.AutoSize = true;
-            this.lblCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCondition.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCondition.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.lblCondition.Location = new System.Drawing.Point(21, 9);
             this.lblCondition.Name = "lblCondition";
-            this.lblCondition.Size = new System.Drawing.Size(76, 20);
+            this.lblCondition.Size = new System.Drawing.Size(77, 19);
             this.lblCondition.TabIndex = 0;
             this.lblCondition.Text = "Condition";
             // 
             // ddCondition1
             // 
-            this.ddCondition1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddCondition1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddCondition1.FormattingEnabled = true;
             this.ddCondition1.Location = new System.Drawing.Point(196, 7);
             this.ddCondition1.Name = "ddCondition1";
-            this.ddCondition1.Size = new System.Drawing.Size(150, 28);
+            this.ddCondition1.Size = new System.Drawing.Size(150, 27);
             this.ddCondition1.TabIndex = 1;
             // 
             // ddCondition2
             // 
-            this.ddCondition2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddCondition2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddCondition2.FormattingEnabled = true;
             this.ddCondition2.Location = new System.Drawing.Point(196, 41);
             this.ddCondition2.Name = "ddCondition2";
-            this.ddCondition2.Size = new System.Drawing.Size(297, 28);
+            this.ddCondition2.Size = new System.Drawing.Size(297, 27);
             this.ddCondition2.TabIndex = 2;
             // 
             // ddCondition3
             // 
-            this.ddCondition3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddCondition3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddCondition3.FormattingEnabled = true;
             this.ddCondition3.Location = new System.Drawing.Point(197, 75);
             this.ddCondition3.Name = "ddCondition3";
-            this.ddCondition3.Size = new System.Drawing.Size(149, 28);
+            this.ddCondition3.Size = new System.Drawing.Size(149, 27);
             this.ddCondition3.TabIndex = 3;
             // 
             // ConditionNumeric
@@ -114,10 +114,10 @@
             // lblOptions
             // 
             this.lblOptions.AutoSize = true;
-            this.lblOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOptions.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOptions.Location = new System.Drawing.Point(21, 120);
             this.lblOptions.Name = "lblOptions";
-            this.lblOptions.Size = new System.Drawing.Size(64, 20);
+            this.lblOptions.Size = new System.Drawing.Size(64, 19);
             this.lblOptions.TabIndex = 5;
             this.lblOptions.Text = "Options";
             this.lblOptions.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -125,40 +125,40 @@
             // lblExpirationTime
             // 
             this.lblExpirationTime.AutoSize = true;
-            this.lblExpirationTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpirationTime.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExpirationTime.Location = new System.Drawing.Point(19, 195);
             this.lblExpirationTime.Name = "lblExpirationTime";
-            this.lblExpirationTime.Size = new System.Drawing.Size(113, 20);
+            this.lblExpirationTime.Size = new System.Drawing.Size(116, 19);
             this.lblExpirationTime.TabIndex = 7;
             this.lblExpirationTime.Text = "Expiration time";
             // 
             // txtCalender
             // 
             this.txtCalender.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCalender.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCalender.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCalender.Location = new System.Drawing.Point(0, 2);
             this.txtCalender.Name = "txtCalender";
-            this.txtCalender.Size = new System.Drawing.Size(126, 19);
+            this.txtCalender.Size = new System.Drawing.Size(126, 20);
             this.txtCalender.TabIndex = 8;
             // 
             // txtTimer
             // 
             this.txtTimer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTimer.Location = new System.Drawing.Point(2, 2);
             this.txtTimer.Name = "txtTimer";
-            this.txtTimer.Size = new System.Drawing.Size(101, 19);
+            this.txtTimer.Size = new System.Drawing.Size(101, 20);
             this.txtTimer.TabIndex = 9;
             // 
             // chkShowPopup
             // 
             this.chkShowPopup.AutoSize = true;
             this.chkShowPopup.BackColor = System.Drawing.SystemColors.Control;
-            this.chkShowPopup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowPopup.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowPopup.ForeColor = System.Drawing.SystemColors.GrayText;
             this.chkShowPopup.Location = new System.Drawing.Point(195, 228);
             this.chkShowPopup.Name = "chkShowPopup";
-            this.chkShowPopup.Size = new System.Drawing.Size(118, 24);
+            this.chkShowPopup.Size = new System.Drawing.Size(117, 23);
             this.chkShowPopup.TabIndex = 10;
             this.chkShowPopup.Text = "Show Popup";
             this.chkShowPopup.UseVisualStyleBackColor = false;
@@ -166,49 +166,49 @@
             // lblAlertAction
             // 
             this.lblAlertAction.AutoSize = true;
-            this.lblAlertAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAlertAction.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlertAction.Location = new System.Drawing.Point(19, 232);
             this.lblAlertAction.Name = "lblAlertAction";
-            this.lblAlertAction.Size = new System.Drawing.Size(99, 20);
+            this.lblAlertAction.Size = new System.Drawing.Size(100, 19);
             this.lblAlertAction.TabIndex = 11;
             this.lblAlertAction.Text = "Alert Actions";
             // 
             // chkPlaySound
             // 
             this.chkPlaySound.AutoSize = true;
-            this.chkPlaySound.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPlaySound.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPlaySound.Location = new System.Drawing.Point(195, 253);
             this.chkPlaySound.Name = "chkPlaySound";
-            this.chkPlaySound.Size = new System.Drawing.Size(108, 24);
+            this.chkPlaySound.Size = new System.Drawing.Size(107, 23);
             this.chkPlaySound.TabIndex = 12;
             this.chkPlaySound.Text = "Play Sound";
             this.chkPlaySound.UseVisualStyleBackColor = true;
             // 
             // ddAlertAction1
             // 
-            this.ddAlertAction1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddAlertAction1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddAlertAction1.FormattingEnabled = true;
             this.ddAlertAction1.Location = new System.Drawing.Point(196, 285);
             this.ddAlertAction1.Name = "ddAlertAction1";
-            this.ddAlertAction1.Size = new System.Drawing.Size(183, 28);
+            this.ddAlertAction1.Size = new System.Drawing.Size(183, 27);
             this.ddAlertAction1.TabIndex = 13;
             // 
             // ddAlertAction2
             // 
-            this.ddAlertAction2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddAlertAction2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddAlertAction2.FormattingEnabled = true;
             this.ddAlertAction2.Location = new System.Drawing.Point(385, 285);
             this.ddAlertAction2.Name = "ddAlertAction2";
-            this.ddAlertAction2.Size = new System.Drawing.Size(97, 28);
+            this.ddAlertAction2.Size = new System.Drawing.Size(97, 27);
             this.ddAlertAction2.TabIndex = 14;
             // 
             // chkSendEmail
             // 
             this.chkSendEmail.AutoSize = true;
-            this.chkSendEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSendEmail.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSendEmail.Location = new System.Drawing.Point(196, 320);
             this.chkSendEmail.Name = "chkSendEmail";
-            this.chkSendEmail.Size = new System.Drawing.Size(109, 24);
+            this.chkSendEmail.Size = new System.Drawing.Size(107, 23);
             this.chkSendEmail.TabIndex = 15;
             this.chkSendEmail.Text = "Send Email";
             this.chkSendEmail.UseVisualStyleBackColor = true;
@@ -216,10 +216,10 @@
             // chkEmailToSMS
             // 
             this.chkEmailToSMS.AutoSize = true;
-            this.chkEmailToSMS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkEmailToSMS.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEmailToSMS.Location = new System.Drawing.Point(195, 345);
             this.chkEmailToSMS.Name = "chkEmailToSMS";
-            this.chkEmailToSMS.Size = new System.Drawing.Size(168, 24);
+            this.chkEmailToSMS.Size = new System.Drawing.Size(163, 23);
             this.chkEmailToSMS.TabIndex = 16;
             this.chkEmailToSMS.Text = "Send Email-to-SMS";
             this.chkEmailToSMS.UseVisualStyleBackColor = true;
@@ -227,10 +227,10 @@
             // chkSMS
             // 
             this.chkSMS.AutoSize = true;
-            this.chkSMS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSMS.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSMS.Location = new System.Drawing.Point(195, 369);
             this.chkSMS.Name = "chkSMS";
-            this.chkSMS.Size = new System.Drawing.Size(105, 24);
+            this.chkSMS.Size = new System.Drawing.Size(98, 23);
             this.chkSMS.TabIndex = 17;
             this.chkSMS.Text = "Send SMS";
             this.chkSMS.UseVisualStyleBackColor = true;
@@ -238,10 +238,10 @@
             // lblMessage
             // 
             this.lblMessage.AutoSize = true;
-            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.Location = new System.Drawing.Point(19, 401);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(74, 20);
+            this.lblMessage.Size = new System.Drawing.Size(68, 19);
             this.lblMessage.TabIndex = 18;
             this.lblMessage.Text = "Message";
             // 
@@ -257,7 +257,7 @@
             // 
             this.btnCreate.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Location = new System.Drawing.Point(417, 496);
             this.btnCreate.Name = "btnCreate";
@@ -269,7 +269,7 @@
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(321, 497);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 30);
@@ -393,7 +393,7 @@
             this.Controls.Add(this.ddCondition2);
             this.Controls.Add(this.ddCondition1);
             this.Controls.Add(this.lblCondition);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.GrayText;
             this.Name = "frmAlertWindow";
             this.ShowIcon = false;
