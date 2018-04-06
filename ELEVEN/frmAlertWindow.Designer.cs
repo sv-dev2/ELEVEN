@@ -29,24 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAlertWindow));
-            this.lblCondition = new System.Windows.Forms.Label();
             this.ddCondition1 = new System.Windows.Forms.ComboBox();
             this.ddCondition2 = new System.Windows.Forms.ComboBox();
             this.ddCondition3 = new System.Windows.Forms.ComboBox();
             this.ConditionNumeric = new System.Windows.Forms.NumericUpDown();
-            this.lblOptions = new System.Windows.Forms.Label();
-            this.lblExpirationTime = new System.Windows.Forms.Label();
             this.txtCalender = new System.Windows.Forms.TextBox();
             this.txtTimer = new System.Windows.Forms.TextBox();
             this.chkShowPopup = new System.Windows.Forms.CheckBox();
-            this.lblAlertAction = new System.Windows.Forms.Label();
             this.chkPlaySound = new System.Windows.Forms.CheckBox();
             this.ddAlertAction1 = new System.Windows.Forms.ComboBox();
             this.ddAlertAction2 = new System.Windows.Forms.ComboBox();
             this.chkSendEmail = new System.Windows.Forms.CheckBox();
             this.chkEmailToSMS = new System.Windows.Forms.CheckBox();
             this.chkSMS = new System.Windows.Forms.CheckBox();
-            this.lblMessage = new System.Windows.Forms.Label();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -58,23 +53,17 @@
             this.imgCalender = new System.Windows.Forms.PictureBox();
             this.Timerpanel = new System.Windows.Forms.Panel();
             this.imgTimer = new System.Windows.Forms.PictureBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ConditionNumeric)).BeginInit();
             this.Calenderpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCalender)).BeginInit();
             this.Timerpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgTimer)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblCondition
-            // 
-            this.lblCondition.AutoSize = true;
-            this.lblCondition.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCondition.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblCondition.Location = new System.Drawing.Point(21, 9);
-            this.lblCondition.Name = "lblCondition";
-            this.lblCondition.Size = new System.Drawing.Size(77, 19);
-            this.lblCondition.TabIndex = 0;
-            this.lblCondition.Text = "Condition";
             // 
             // ddCondition1
             // 
@@ -111,27 +100,6 @@
             this.ConditionNumeric.Size = new System.Drawing.Size(131, 26);
             this.ConditionNumeric.TabIndex = 4;
             // 
-            // lblOptions
-            // 
-            this.lblOptions.AutoSize = true;
-            this.lblOptions.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptions.Location = new System.Drawing.Point(21, 120);
-            this.lblOptions.Name = "lblOptions";
-            this.lblOptions.Size = new System.Drawing.Size(64, 19);
-            this.lblOptions.TabIndex = 5;
-            this.lblOptions.Text = "Options";
-            this.lblOptions.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lblExpirationTime
-            // 
-            this.lblExpirationTime.AutoSize = true;
-            this.lblExpirationTime.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpirationTime.Location = new System.Drawing.Point(19, 195);
-            this.lblExpirationTime.Name = "lblExpirationTime";
-            this.lblExpirationTime.Size = new System.Drawing.Size(116, 19);
-            this.lblExpirationTime.TabIndex = 7;
-            this.lblExpirationTime.Text = "Expiration time";
-            // 
             // txtCalender
             // 
             this.txtCalender.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -153,7 +121,7 @@
             // chkShowPopup
             // 
             this.chkShowPopup.AutoSize = true;
-            this.chkShowPopup.BackColor = System.Drawing.SystemColors.Control;
+            this.chkShowPopup.BackColor = System.Drawing.Color.Transparent;
             this.chkShowPopup.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowPopup.ForeColor = System.Drawing.SystemColors.GrayText;
             this.chkShowPopup.Location = new System.Drawing.Point(195, 228);
@@ -162,16 +130,6 @@
             this.chkShowPopup.TabIndex = 10;
             this.chkShowPopup.Text = "Show Popup";
             this.chkShowPopup.UseVisualStyleBackColor = false;
-            // 
-            // lblAlertAction
-            // 
-            this.lblAlertAction.AutoSize = true;
-            this.lblAlertAction.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlertAction.Location = new System.Drawing.Point(19, 232);
-            this.lblAlertAction.Name = "lblAlertAction";
-            this.lblAlertAction.Size = new System.Drawing.Size(100, 19);
-            this.lblAlertAction.TabIndex = 11;
-            this.lblAlertAction.Text = "Alert Actions";
             // 
             // chkPlaySound
             // 
@@ -234,16 +192,6 @@
             this.chkSMS.TabIndex = 17;
             this.chkSMS.Text = "Send SMS";
             this.chkSMS.UseVisualStyleBackColor = true;
-            // 
-            // lblMessage
-            // 
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(19, 401);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(68, 19);
-            this.lblMessage.TabIndex = 18;
-            this.lblMessage.Text = "Message";
             // 
             // txtMessage
             // 
@@ -365,9 +313,70 @@
             this.imgTimer.TabIndex = 10;
             this.imgTimer.TabStop = false;
             // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(23, 12);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(80, 24);
+            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.kryptonLabel1.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel1.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.kryptonLabel1.TabIndex = 24;
+            this.kryptonLabel1.Values.Text = "Condition";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(23, 123);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(67, 24);
+            this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.kryptonLabel2.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel2.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.kryptonLabel2.TabIndex = 25;
+            this.kryptonLabel2.Values.Text = "Options";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(23, 193);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(125, 24);
+            this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.kryptonLabel3.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel3.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.kryptonLabel3.TabIndex = 26;
+            this.kryptonLabel3.Values.Text = "Expiration Time";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(23, 228);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(103, 24);
+            this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.kryptonLabel4.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel4.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.kryptonLabel4.TabIndex = 27;
+            this.kryptonLabel4.Values.Text = "Alert Actions";
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(23, 401);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(74, 24);
+            this.kryptonLabel5.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.kryptonLabel5.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel5.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.kryptonLabel5.TabIndex = 28;
+            this.kryptonLabel5.Values.Text = "Message";
+            // 
             // frmAlertWindow
             // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(519, 539);
+            this.Controls.Add(this.kryptonLabel5);
+            this.Controls.Add(this.kryptonLabel4);
+            this.Controls.Add(this.kryptonLabel3);
+            this.Controls.Add(this.kryptonLabel2);
+            this.Controls.Add(this.kryptonLabel1);
             this.Controls.Add(this.Timerpanel);
             this.Controls.Add(this.Calenderpanel);
             this.Controls.Add(this.btnOncePerMinute);
@@ -377,22 +386,17 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.txtMessage);
-            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.chkSMS);
             this.Controls.Add(this.chkEmailToSMS);
             this.Controls.Add(this.chkSendEmail);
             this.Controls.Add(this.ddAlertAction2);
             this.Controls.Add(this.ddAlertAction1);
             this.Controls.Add(this.chkPlaySound);
-            this.Controls.Add(this.lblAlertAction);
             this.Controls.Add(this.chkShowPopup);
-            this.Controls.Add(this.lblExpirationTime);
-            this.Controls.Add(this.lblOptions);
             this.Controls.Add(this.ConditionNumeric);
             this.Controls.Add(this.ddCondition3);
             this.Controls.Add(this.ddCondition2);
             this.Controls.Add(this.ddCondition1);
-            this.Controls.Add(this.lblCondition);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.GrayText;
             this.Name = "frmAlertWindow";
@@ -414,25 +418,19 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblCondition;
         private System.Windows.Forms.ComboBox ddCondition1;
         private System.Windows.Forms.ComboBox ddCondition2;
         private System.Windows.Forms.ComboBox ddCondition3;
         private System.Windows.Forms.NumericUpDown ConditionNumeric;
-        private System.Windows.Forms.Label lblOptions;
-        private System.Windows.Forms.Label lblExpirationTime;
         private System.Windows.Forms.TextBox txtCalender;
         private System.Windows.Forms.TextBox txtTimer;
         private System.Windows.Forms.CheckBox chkShowPopup;
-        private System.Windows.Forms.Label lblAlertAction;
         private System.Windows.Forms.CheckBox chkPlaySound;
         private System.Windows.Forms.ComboBox ddAlertAction1;
         private System.Windows.Forms.ComboBox ddAlertAction2;
         private System.Windows.Forms.CheckBox chkSendEmail;
         private System.Windows.Forms.CheckBox chkEmailToSMS;
         private System.Windows.Forms.CheckBox chkSMS;
-        private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnCancel;
@@ -444,5 +442,10 @@
         private System.Windows.Forms.PictureBox imgCalender;
         private System.Windows.Forms.Panel Timerpanel;
         private System.Windows.Forms.PictureBox imgTimer;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
     }
 }
