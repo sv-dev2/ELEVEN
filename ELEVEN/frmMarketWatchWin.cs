@@ -167,7 +167,16 @@ namespace ELEVEN
         }
         private async void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            await LoadMarketWatch();
+            try
+            {
+                await LoadMarketWatch();
+            }
+            catch
+            {
+
+               
+            }
+           
         }
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
