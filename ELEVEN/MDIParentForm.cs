@@ -196,7 +196,7 @@ namespace ELEVEN
             {
                 currentWorkspaceId = result[0].Id;
                 ReteriveWindowLocations(result[0].Id);
-
+                lblShowActiveWorkspace.Text = result[0].WorkspaceName;
             }
         }
         private void AddFixedWorkspace()
@@ -254,6 +254,7 @@ namespace ELEVEN
                     childForm.Close();
                 }
                 menuItem.Checked = true;
+                lblShowActiveWorkspace.Text = menuItem.Text;
                 ReteriveWindowLocations(Convert.ToInt32(menuItem.Name));
             }
 
