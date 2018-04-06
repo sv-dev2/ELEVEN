@@ -202,12 +202,12 @@ namespace ELEVEN
         }
         private void AddFixedWorkspace()
         {
-            //Save workspace menu
+            ////Save workspace menu
             ToolStripMenuItem menuItem = new ToolStripMenuItem();
-            menuItem.Name = "menuSaveWorkspace";
-            menuItem.Text = "Save";
-            menuItem.Click += btnSaveWorkspace_Click;
-            workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+            //menuItem.Name = "menuSaveWorkspace";
+            //menuItem.Text = "Save";
+            //menuItem.Click += btnSaveWorkspace_Click;
+            //workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
 
             menuItem = new ToolStripMenuItem();
             menuItem.Name = "menuUpdateWorkspace";
@@ -242,12 +242,12 @@ namespace ELEVEN
                         ToolStripMenuItem stripmenu = item as ToolStripMenuItem;
                         stripmenu.Checked = false;
                     }
-                    catch 
+                    catch
                     {
 
                         continue;
                     }
-                   
+
                 }
 
                 foreach (Form childForm in MdiChildren)
@@ -497,7 +497,7 @@ namespace ELEVEN
             }
             var frm = new frmPopup();
             frm.ShowDialog();
-            if (frm.WorkspaceName!=null && frm.WorkspaceName.Trim() != string.Empty)
+            if (frm.WorkspaceName != null && frm.WorkspaceName.Trim() != string.Empty)
             {
 
                 if (SQLiteDBOperation.DuplicateWorkspace(frm.WorkspaceName.Trim().ToLower()))
@@ -519,7 +519,7 @@ namespace ELEVEN
                             ToolStripMenuItem stripmenu = item as ToolStripMenuItem;
                             stripmenu.Checked = false;
                         }
-                        catch{continue;}
+                        catch { continue; }
                     }
                     //Add new menu strip and mark it as active/checked
                     ToolStripMenuItem menuItem = new ToolStripMenuItem();
@@ -596,7 +596,7 @@ namespace ELEVEN
         /// <param name="e"></param>
         private void toolStripUpdateWorkspace_Click(object sender, EventArgs e)
         {
-            if(currentWorkspaceId<1)
+            if (currentWorkspaceId < 1)
             {
                 MessageBox.Show(this, "Workspace does not exist.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -636,11 +636,46 @@ namespace ELEVEN
 
         private void workspaceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            currentWorkspaceId = 0;
-            foreach (Form childForm in MdiChildren)
+            var form = new frmPopup();
+            form.ShowDialog();
+            if (form.WorkspaceName != null && form.WorkspaceName.Trim() != string.Empty)
             {
-                childForm.Close();
+                if (SQLiteDBOperation.DuplicateWorkspace(form.WorkspaceName.Trim().ToLower()))
+                {
+                    currentWorkspaceId = 0;
+                    foreach (Form childForm in MdiChildren)
+                    {
+                        childForm.Close();
+                    }
+                    int workSpaceid = SQLiteDBOperation.AddWorkspace(form.WorkspaceName);
+                    //uncheck all menu items                    
+                    foreach (var item in workspaceToolStripMenuItem.DropDownItems)
+                    {
+                        try
+                        {
+                            // Seperator is throwing exception
+                            ToolStripMenuItem stripmenu = item as ToolStripMenuItem;
+                            stripmenu.Checked = false;
+                        }
+                        catch { continue; }
+                    }
+                    //Add new menu strip and mark it as active/checked
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                    menuItem.Name = workSpaceid.ToString();
+                    menuItem.Text = form.WorkspaceName;
+                    menuItem.Checked = true;
+                    menuItem.Click += MenuItem_Click;
+                    workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+                    currentWorkspaceId = workSpaceid;
+                }
+                else
+                {
+                    MessageBox.Show(this, "Workspace already exist.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+
             }
+
         }
     }
 }
