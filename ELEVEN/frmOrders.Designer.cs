@@ -60,16 +60,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 16);
+            this.label1.Size = new System.Drawing.Size(69, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Order (5)";
             // 
             // txtSecurity
             // 
-            this.txtSecurity.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtSecurity.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSecurity.Location = new System.Drawing.Point(12, 44);
             this.txtSecurity.Name = "txtSecurity";
             this.txtSecurity.Size = new System.Drawing.Size(115, 23);
@@ -77,7 +77,7 @@
             // 
             // comboBuySell
             // 
-            this.comboBuySell.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.comboBuySell.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBuySell.FormattingEnabled = true;
             this.comboBuySell.Items.AddRange(new object[] {
             "BUY",
@@ -90,7 +90,7 @@
             // 
             // comboBoxMarket
             // 
-            this.comboBoxMarket.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.comboBoxMarket.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxMarket.FormattingEnabled = true;
             this.comboBoxMarket.Items.AddRange(new object[] {
             "MARKET",
@@ -104,7 +104,7 @@
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtQuantity.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQuantity.Location = new System.Drawing.Point(375, 44);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(115, 23);
@@ -112,7 +112,7 @@
             // 
             // comboBoxStocks
             // 
-            this.comboBoxStocks.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.comboBoxStocks.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxStocks.FormattingEnabled = true;
             this.comboBoxStocks.Items.AddRange(new object[] {
             "STOCKS\t",
@@ -126,7 +126,7 @@
             // 
             // comboBoxNumber
             // 
-            this.comboBoxNumber.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.comboBoxNumber.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxNumber.FormattingEnabled = true;
             this.comboBoxNumber.Items.AddRange(new object[] {
             "XZY123"});
@@ -253,7 +253,7 @@
             this.btnDetails.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
             this.btnDetails.FlatAppearance.BorderSize = 2;
             this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetails.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetails.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.White;
             this.btnDetails.Location = new System.Drawing.Point(12, 71);
             this.btnDetails.Name = "btnDetails";
@@ -268,7 +268,7 @@
             this.btnSubmit.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.btnSubmit.FlatAppearance.BorderSize = 2;
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubmit.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
             this.btnSubmit.Location = new System.Drawing.Point(129, 71);
             this.btnSubmit.Name = "btnSubmit";
@@ -283,7 +283,7 @@
             this.btnCancelAll.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnCancelAll.FlatAppearance.BorderSize = 2;
             this.btnCancelAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelAll.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelAll.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelAll.ForeColor = System.Drawing.Color.White;
             this.btnCancelAll.Location = new System.Drawing.Point(591, 3);
             this.btnCancelAll.Name = "btnCancelAll";
