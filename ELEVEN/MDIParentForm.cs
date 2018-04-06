@@ -165,6 +165,7 @@ namespace ELEVEN
             //    m_toolbox.Show(dockPanel);
             //});
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
+            toolStrip.Renderer = new MainFormToolStripRenderer();
             ReteriveWorkSpace();
         }
         /// <summary>
