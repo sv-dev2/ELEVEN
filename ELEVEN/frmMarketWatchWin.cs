@@ -81,17 +81,17 @@ namespace ELEVEN
             dataGridMarketData.Columns[1].HeaderText = "Bid";
             dataGridMarketData.Columns[1].Name = "Bid";
             dataGridMarketData.Columns[1].DataPropertyName = "bid";
-            dataGridMarketData.Columns[1].Width = 75;
+            //dataGridMarketData.Columns[1].Width = 75;
 
             dataGridMarketData.Columns[2].Name = "Ask";
             dataGridMarketData.Columns[2].HeaderText = "Ask";
             dataGridMarketData.Columns[2].DataPropertyName = "ask";
-           dataGridMarketData.Columns[2].Width = 75;
+           //dataGridMarketData.Columns[2].Width = 75;
 
             dataGridMarketData.Columns[3].Name = "Last";
             dataGridMarketData.Columns[3].HeaderText = "Last";
             dataGridMarketData.Columns[3].DataPropertyName = "last_price";
-            dataGridMarketData.Columns[3].Width = 75;
+            //dataGridMarketData.Columns[3].Width = 75;
 
             dataGridMarketData.Columns[4].Name = "Volume";
             dataGridMarketData.Columns[4].HeaderText = "Volume";

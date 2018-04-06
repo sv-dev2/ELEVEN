@@ -176,6 +176,7 @@ namespace ELEVEN
             var toolStripeMenu = workspaceToolStripMenuItem;
             bool firstTime = true;
             workspaceToolStripMenuItem.DropDownItems.Clear();
+            AddFixedWorkspace();
             foreach (var item in result)
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
@@ -198,6 +199,28 @@ namespace ELEVEN
 
             }
         }
+        private void AddFixedWorkspace()
+        {
+            //Save workspace menu
+            ToolStripMenuItem menuItem = new ToolStripMenuItem();
+            menuItem.Name = "menuSaveWorkspace";
+            menuItem.Text = "Save";
+            menuItem.Click += btnSaveWorkspace_Click;
+            workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+
+            menuItem = new ToolStripMenuItem();
+            menuItem.Name = "menuUpdateWorkspace";
+            menuItem.Text = "Update";
+            menuItem.Click += toolStripUpdateWorkspace_Click;
+            workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+
+            menuItem = new ToolStripMenuItem();
+            menuItem.Name = "menuRemoveWorkspace";
+            menuItem.Text = "Remove";
+            menuItem.Click += toolStripRemoveWorkspace_Click;
+            workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
+            workspaceToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+        }
         /// <summary>
         /// Event the handle workspace click
         /// </summary>
@@ -209,10 +232,23 @@ namespace ELEVEN
 
             if (currentWorkspaceId != Convert.ToInt32(menuItem.Name))
             {
-                foreach (ToolStripMenuItem item in workspaceToolStripMenuItem.DropDownItems)
+
+                foreach (var item in workspaceToolStripMenuItem.DropDownItems)
                 {
-                    item.Checked = false;
+                    try
+                    {
+                        // Seperator is throwing exception
+                        ToolStripMenuItem stripmenu = item as ToolStripMenuItem;
+                        stripmenu.Checked = false;
+                    }
+                    catch 
+                    {
+
+                        continue;
+                    }
+                   
                 }
+
                 foreach (Form childForm in MdiChildren)
                 {
                     childForm.Close();
@@ -459,7 +495,7 @@ namespace ELEVEN
             }
             var frm = new frmPopup();
             frm.ShowDialog();
-            if (frm.WorkspaceName.Trim() != string.Empty)
+            if (frm.WorkspaceName!=null && frm.WorkspaceName.Trim() != string.Empty)
             {
 
                 if (SQLiteDBOperation.DuplicateWorkspace(frm.WorkspaceName.Trim().ToLower()))
@@ -469,9 +505,19 @@ namespace ELEVEN
                     //Add forms for the respective workspace
                     AddWorkspaceForm(workSpaceid);
                     //uncheck all menu items
-                    foreach (ToolStripMenuItem item in workspaceToolStripMenuItem.DropDownItems)
+                    //foreach (ToolStripMenuItem item in workspaceToolStripMenuItem.DropDownItems)
+                    //{
+                    //    item.Checked = false;
+                    //}
+                    foreach (var item in workspaceToolStripMenuItem.DropDownItems)
                     {
-                        item.Checked = false;
+                        try
+                        {
+                            // Seperator is throwing exception
+                            ToolStripMenuItem stripmenu = item as ToolStripMenuItem;
+                            stripmenu.Checked = false;
+                        }
+                        catch{continue;}
                     }
                     //Add new menu strip and mark it as active/checked
                     ToolStripMenuItem menuItem = new ToolStripMenuItem();
@@ -548,6 +594,11 @@ namespace ELEVEN
         /// <param name="e"></param>
         private void toolStripUpdateWorkspace_Click(object sender, EventArgs e)
         {
+            if(currentWorkspaceId<1)
+            {
+                MessageBox.Show(this, "Workspace does not exist.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             SQLiteDBOperation.TruncatePreviousLocation(currentWorkspaceId);
             foreach (Form childForm in MdiChildren)
             {

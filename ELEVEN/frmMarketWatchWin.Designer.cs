@@ -39,9 +39,10 @@
             // 
             // txtAddRow
             // 
+            this.txtAddRow.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtAddRow.Location = new System.Drawing.Point(0, 0);
             this.txtAddRow.Name = "txtAddRow";
-            this.txtAddRow.Size = new System.Drawing.Size(214, 20);
+            this.txtAddRow.Size = new System.Drawing.Size(706, 20);
             this.txtAddRow.TabIndex = 2;
             this.txtAddRow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAddRow_KeyDown);
             // 
@@ -53,6 +54,7 @@
             this.dataGridMarketData.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridMarketData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridMarketData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridMarketData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridMarketData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -72,8 +74,9 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridMarketData.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridMarketData.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridMarketData.EnableHeadersVisualStyles = false;
-            this.dataGridMarketData.Location = new System.Drawing.Point(0, 26);
+            this.dataGridMarketData.Location = new System.Drawing.Point(0, 20);
             this.dataGridMarketData.MultiSelect = false;
             this.dataGridMarketData.Name = "dataGridMarketData";
             this.dataGridMarketData.ReadOnly = true;
@@ -89,7 +92,7 @@
             this.dataGridMarketData.RowHeadersVisible = false;
             this.dataGridMarketData.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridMarketData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridMarketData.Size = new System.Drawing.Size(705, 225);
+            this.dataGridMarketData.Size = new System.Drawing.Size(706, 225);
             this.dataGridMarketData.TabIndex = 3;
             this.dataGridMarketData.Tag = "frmMarketWatch";
             this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
