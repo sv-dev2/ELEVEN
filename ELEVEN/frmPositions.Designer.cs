@@ -31,6 +31,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MarketPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MarketValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnrealizedPL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblPosition = new System.Windows.Forms.Label();
             this.btnCloseAll = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,14 +50,6 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSettings = new RoundButton();
-            this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MarketPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MarketValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnrealizedPL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(119)))), ((int)(((byte)(183)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
@@ -96,13 +96,61 @@
             this.dataGridView1.Size = new System.Drawing.Size(797, 247);
             this.dataGridView1.TabIndex = 23;
             // 
+            // StrategyName
+            // 
+            this.StrategyName.HeaderText = "Strategy Name";
+            this.StrategyName.Name = "StrategyName";
+            this.StrategyName.ReadOnly = true;
+            // 
+            // Symbol
+            // 
+            this.Symbol.HeaderText = "Symbol";
+            this.Symbol.Name = "Symbol";
+            this.Symbol.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            // 
+            // MarketPrice
+            // 
+            this.MarketPrice.HeaderText = "Market Price";
+            this.MarketPrice.Name = "MarketPrice";
+            this.MarketPrice.ReadOnly = true;
+            // 
+            // MarketValue
+            // 
+            this.MarketValue.HeaderText = "Market Value";
+            this.MarketValue.Name = "MarketValue";
+            this.MarketValue.ReadOnly = true;
+            // 
+            // Cost
+            // 
+            this.Cost.HeaderText = "Cost";
+            this.Cost.Name = "Cost";
+            this.Cost.ReadOnly = true;
+            // 
+            // UnrealizedPL
+            // 
+            this.UnrealizedPL.HeaderText = "Unrealized PL";
+            this.UnrealizedPL.Name = "UnrealizedPL";
+            this.UnrealizedPL.ReadOnly = true;
+            // 
+            // Manage
+            // 
+            this.Manage.HeaderText = "Manage";
+            this.Manage.Name = "Manage";
+            this.Manage.ReadOnly = true;
+            // 
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
-            this.lblPosition.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblPosition.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPosition.Location = new System.Drawing.Point(13, 7);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(93, 16);
+            this.lblPosition.Size = new System.Drawing.Size(83, 16);
             this.lblPosition.TabIndex = 12;
             this.lblPosition.Text = "Position (5)";
             // 
@@ -112,7 +160,7 @@
             this.btnCloseAll.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.btnCloseAll.FlatAppearance.BorderSize = 2;
             this.btnCloseAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseAll.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseAll.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseAll.ForeColor = System.Drawing.Color.White;
             this.btnCloseAll.Location = new System.Drawing.Point(461, 2);
             this.btnCloseAll.Name = "btnCloseAll";
@@ -191,54 +239,6 @@
             this.btnSettings.TabIndex = 25;
             this.btnSettings.UseVisualStyleBackColor = false;
             // 
-            // StrategyName
-            // 
-            this.StrategyName.HeaderText = "Strategy Name";
-            this.StrategyName.Name = "StrategyName";
-            this.StrategyName.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            this.Symbol.HeaderText = "Symbol";
-            this.Symbol.Name = "Symbol";
-            this.Symbol.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            // 
-            // MarketPrice
-            // 
-            this.MarketPrice.HeaderText = "Market Price";
-            this.MarketPrice.Name = "MarketPrice";
-            this.MarketPrice.ReadOnly = true;
-            // 
-            // MarketValue
-            // 
-            this.MarketValue.HeaderText = "Market Value";
-            this.MarketValue.Name = "MarketValue";
-            this.MarketValue.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.HeaderText = "Cost";
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
-            // 
-            // UnrealizedPL
-            // 
-            this.UnrealizedPL.HeaderText = "Unrealized PL";
-            this.UnrealizedPL.Name = "UnrealizedPL";
-            this.UnrealizedPL.ReadOnly = true;
-            // 
-            // Manage
-            // 
-            this.Manage.HeaderText = "Manage";
-            this.Manage.Name = "Manage";
-            this.Manage.ReadOnly = true;
-            // 
             // frmPositions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,6 +248,7 @@
             this.Controls.Add(this.btnCloseAll);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblPosition);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPositions";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
