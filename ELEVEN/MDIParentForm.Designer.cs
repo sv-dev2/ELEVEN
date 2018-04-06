@@ -576,6 +576,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MDIParentForm";
+            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-LEVEN";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

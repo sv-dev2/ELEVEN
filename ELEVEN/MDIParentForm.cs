@@ -24,14 +24,6 @@ namespace ELEVEN
             var windowHeight = Screen.PrimaryScreen.Bounds.Height;
             var windowWidth = Screen.PrimaryScreen.Bounds.Width;
 
-
-            //frmTransaction transaction = new frmTransaction();
-            //dockPanelBottom.Width = Screen.PrimaryScreen.Bounds.Width;
-            //dockPanelBottom.Height = 225;
-            //dockPanelBottom.Location = new Point(0, windowHeight - 310);
-
-            //transaction.Show(dockPanelBottom);
-
         }
 
 
