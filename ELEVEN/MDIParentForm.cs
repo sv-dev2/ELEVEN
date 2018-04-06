@@ -1,4 +1,5 @@
-﻿using ELEVEN.DBConnection;
+﻿using ComponentFactory.Krypton.Toolkit;
+using ELEVEN.DBConnection;
 using ELEVEN.Model;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ELEVEN
 {
-    public partial class MDIParentForm : Form
+    public partial class MDIParentForm : KryptonForm
     {
 
 

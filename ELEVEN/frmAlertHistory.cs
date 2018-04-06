@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ELEVEN
 {
-    public partial class frmAlertHistory : Form
+    public partial class frmAlertHistory : KryptonForm
     {
         public frmAlertHistory()
         {

@@ -1,4 +1,5 @@
-﻿using ELEVEN.Model;
+﻿using ComponentFactory.Krypton.Toolkit;
+using ELEVEN.Model;
 using ELEVEN.Services;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Windows.Threading;
 
 namespace ELEVEN
 {
-    public partial class frmMarketWatchWin : Form
+    public partial class frmMarketWatchWin : KryptonForm
     {
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         DispatcherTimer dispatcherTimer1 = new DispatcherTimer();

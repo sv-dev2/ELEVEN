@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using ComponentFactory.Krypton.Toolkit;
+using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ELEVEN
 {
-    public partial class frmCharts : Form
+    public partial class frmCharts : KryptonForm
     {
         private MDIParentForm parentForm;
         public frmCharts(MDIParentForm parentForm)
