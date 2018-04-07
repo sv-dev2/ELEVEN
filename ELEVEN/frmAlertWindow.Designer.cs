@@ -71,7 +71,7 @@
             this.ddCondition1.FormattingEnabled = true;
             this.ddCondition1.Location = new System.Drawing.Point(196, 7);
             this.ddCondition1.Name = "ddCondition1";
-            this.ddCondition1.Size = new System.Drawing.Size(150, 27);
+            this.ddCondition1.Size = new System.Drawing.Size(296, 27);
             this.ddCondition1.TabIndex = 1;
             // 
             // ddCondition2
@@ -319,8 +319,6 @@
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(80, 24);
             this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.kryptonLabel1.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel1.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.TabIndex = 24;
             this.kryptonLabel1.Values.Text = "Condition";
             // 
@@ -330,8 +328,6 @@
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(67, 24);
             this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.kryptonLabel2.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel2.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.TabIndex = 25;
             this.kryptonLabel2.Values.Text = "Options";
             // 
@@ -341,8 +337,6 @@
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(125, 24);
             this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.kryptonLabel3.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel3.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.TabIndex = 26;
             this.kryptonLabel3.Values.Text = "Expiration Time";
             // 
@@ -352,8 +346,6 @@
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(103, 24);
             this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.kryptonLabel4.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel4.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.TabIndex = 27;
             this.kryptonLabel4.Values.Text = "Alert Actions";
             // 
@@ -363,8 +355,6 @@
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(74, 24);
             this.kryptonLabel5.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.kryptonLabel5.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel5.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.TabIndex = 28;
             this.kryptonLabel5.Values.Text = "Message";
             // 
