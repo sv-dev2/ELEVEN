@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.textName = new System.Windows.Forms.TextBox();
-            this.btnSubmit = new System.Windows.Forms.Button();
+            this.BtnSubmit = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.SuspendLayout();
             // 
             // textName
@@ -40,25 +40,25 @@
             this.textName.Size = new System.Drawing.Size(259, 23);
             this.textName.TabIndex = 0;
             // 
-            // btnSubmit
+            // BtnSubmit
             // 
-            this.btnSubmit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(79, 69);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(118, 48);
-            this.btnSubmit.TabIndex = 1;
-            this.btnSubmit.Text = "Submit";
-            this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            this.BtnSubmit.Location = new System.Drawing.Point(72, 73);
+            this.BtnSubmit.Name = "BtnSubmit";
+            this.BtnSubmit.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.BtnSubmit.Size = new System.Drawing.Size(121, 52);
+            this.BtnSubmit.TabIndex = 2;
+            this.BtnSubmit.Values.Text = "Submit";
+            this.BtnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // frmPopup
             // 
+            this.AcceptButton = this.BtnSubmit;
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.btnSubmit);
+            this.Controls.Add(this.BtnSubmit);
             this.Controls.Add(this.textName);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -78,6 +78,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textName;
-        private System.Windows.Forms.Button btnSubmit;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnSubmit;
     }
 }
