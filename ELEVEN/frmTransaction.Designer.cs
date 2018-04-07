@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnSettings = new RoundButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonDataGridViewTransaction = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Side = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSettings = new RoundButton();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -64,6 +64,16 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(759, 45);
             this.kryptonPanel1.TabIndex = 3;
             // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonButton1.Location = new System.Drawing.Point(629, 0);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.kryptonButton1.Size = new System.Drawing.Size(90, 45);
+            this.kryptonButton1.TabIndex = 31;
+            this.kryptonButton1.Values.Text = "ADD";
+            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(3, 14);
@@ -71,6 +81,24 @@
             this.kryptonLabel1.Size = new System.Drawing.Size(91, 20);
             this.kryptonLabel1.TabIndex = 30;
             this.kryptonLabel1.Values.Text = "Transaction (5)";
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
+            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.FlatAppearance.BorderSize = 2;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSettings.Location = new System.Drawing.Point(719, 0);
+            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(40, 45);
+            this.btnSettings.TabIndex = 29;
+            this.btnSettings.UseVisualStyleBackColor = false;
             // 
             // kryptonPanel2
             // 
@@ -86,7 +114,9 @@
             this.kryptonDataGridViewTransaction.AllowUserToAddRows = false;
             this.kryptonDataGridViewTransaction.AllowUserToDeleteRows = false;
             this.kryptonDataGridViewTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.kryptonDataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kryptonDataGridViewTransaction.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.kryptonDataGridViewTransaction.ColumnHeadersHeight = 40;
+            this.kryptonDataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.kryptonDataGridViewTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Time,
             this.StrategyName,
@@ -107,14 +137,41 @@
             this.kryptonDataGridViewTransaction.StandardTab = true;
             this.kryptonDataGridViewTransaction.TabIndex = 31;
             // 
-            // kryptonButton1
+            // Time
             // 
-            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonButton1.Location = new System.Drawing.Point(629, 0);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(90, 45);
-            this.kryptonButton1.TabIndex = 31;
-            this.kryptonButton1.Values.Text = "ADD";
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // StrategyName
+            // 
+            this.StrategyName.HeaderText = "Strategy Name";
+            this.StrategyName.Name = "StrategyName";
+            this.StrategyName.ReadOnly = true;
+            // 
+            // Symbol
+            // 
+            this.Symbol.HeaderText = "Symbol";
+            this.Symbol.Name = "Symbol";
+            this.Symbol.ReadOnly = true;
+            // 
+            // Side
+            // 
+            this.Side.HeaderText = "Side";
+            this.Side.Name = "Side";
+            this.Side.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -157,60 +214,6 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             this.dataGridViewTextBoxColumn6.Width = 125;
-            // 
-            // Time
-            // 
-            this.Time.HeaderText = "Time";
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            // 
-            // StrategyName
-            // 
-            this.StrategyName.HeaderText = "Strategy Name";
-            this.StrategyName.Name = "StrategyName";
-            this.StrategyName.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            this.Symbol.HeaderText = "Symbol";
-            this.Symbol.Name = "Symbol";
-            this.Symbol.ReadOnly = true;
-            // 
-            // Side
-            // 
-            this.Side.HeaderText = "Side";
-            this.Side.Name = "Side";
-            this.Side.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
-            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.FlatAppearance.BorderSize = 2;
-            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSettings.Location = new System.Drawing.Point(719, 0);
-            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(40, 45);
-            this.btnSettings.TabIndex = 29;
-            this.btnSettings.UseVisualStyleBackColor = false;
             // 
             // frmTransaction
             // 

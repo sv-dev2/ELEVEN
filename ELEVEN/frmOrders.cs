@@ -56,5 +56,10 @@ namespace ELEVEN
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
         }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

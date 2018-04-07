@@ -48,6 +48,7 @@
             this.positionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closedPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workspaceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tradingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +86,6 @@
             this.toolStripStatusLabel16 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -105,7 +105,8 @@
             this.workspaceToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1336, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1354, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -249,6 +250,13 @@
             this.workspaceToolStripMenuItem1.Text = "Workspace";
             this.workspaceToolStripMenuItem1.Click += new System.EventHandler(this.workspaceToolStripMenuItem1_Click);
             // 
+            // transactionToolStripMenuItem
+            // 
+            this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
+            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.transactionToolStripMenuItem.Text = "Transaction";
+            this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
+            // 
             // sToolStripMenuItem
             // 
             this.sToolStripMenuItem.Name = "sToolStripMenuItem";
@@ -264,7 +272,7 @@
             // tradingToolStripMenuItem
             // 
             this.tradingToolStripMenuItem.Name = "tradingToolStripMenuItem";
-            this.tradingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.tradingToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.tradingToolStripMenuItem.Text = "Trading";
             // 
             // monitorningToolStripMenuItem
@@ -334,7 +342,7 @@
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip.Size = new System.Drawing.Size(1336, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1354, 25);
             this.toolStrip.Stretch = true;
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
@@ -418,8 +426,9 @@
             this.toolStripStatusLabel16});
             this.statusStrip.Location = new System.Drawing.Point(0, 685);
             this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip.Size = new System.Drawing.Size(1336, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1354, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -551,32 +560,24 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 49);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1336, 26);
+            this.tabControl1.Size = new System.Drawing.Size(1354, 26);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
-            // transactionToolStripMenuItem
-            // 
-            this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.transactionToolStripMenuItem.Text = "Transaction";
-            this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
-            // 
             // MDIParentForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1336, 707);
+            this.ClientSize = new System.Drawing.Size(1354, 707);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
-            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MDIParentForm";
-            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-LEVEN";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

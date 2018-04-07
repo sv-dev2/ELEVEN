@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrders));
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtSecurity = new System.Windows.Forms.TextBox();
             this.comboBuySell = new System.Windows.Forms.ComboBox();
             this.comboBoxMarket = new System.Windows.Forms.ComboBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.comboBoxStocks = new System.Windows.Forms.ComboBox();
             this.comboBoxNumber = new System.Windows.Forms.ComboBox();
-            this.dataGridViewOrder = new System.Windows.Forms.DataGridView();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.btnSettings = new RoundButton();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txtSecurity = new System.Windows.Forms.TextBox();
+            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonDataGridViewTransaction = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,30 +54,14 @@
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilledQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDetails = new System.Windows.Forms.Button();
-            this.btnSubmit = new System.Windows.Forms.Button();
-            this.btnCancelAll = new System.Windows.Forms.Button();
-            this.btnSettings = new RoundButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
+            this.kryptonPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridViewTransaction)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Order (5)";
-            // 
-            // txtSecurity
-            // 
-            this.txtSecurity.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecurity.Location = new System.Drawing.Point(12, 44);
-            this.txtSecurity.Name = "txtSecurity";
-            this.txtSecurity.Size = new System.Drawing.Size(115, 23);
-            this.txtSecurity.TabIndex = 1;
             // 
             // comboBuySell
             // 
@@ -83,7 +71,7 @@
             "BUY",
             "SELL",
             "SELL_SHORT"});
-            this.comboBuySell.Location = new System.Drawing.Point(129, 44);
+            this.comboBuySell.Location = new System.Drawing.Point(117, 0);
             this.comboBuySell.Name = "comboBuySell";
             this.comboBuySell.Size = new System.Drawing.Size(121, 24);
             this.comboBuySell.TabIndex = 2;
@@ -97,7 +85,7 @@
             "LIMIT",
             "STOP",
             "STOP_LIMIT"});
-            this.comboBoxMarket.Location = new System.Drawing.Point(252, 44);
+            this.comboBoxMarket.Location = new System.Drawing.Point(240, 0);
             this.comboBoxMarket.Name = "comboBoxMarket";
             this.comboBoxMarket.Size = new System.Drawing.Size(121, 24);
             this.comboBoxMarket.TabIndex = 3;
@@ -105,7 +93,7 @@
             // txtQuantity
             // 
             this.txtQuantity.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuantity.Location = new System.Drawing.Point(375, 44);
+            this.txtQuantity.Location = new System.Drawing.Point(363, 1);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(115, 23);
             this.txtQuantity.TabIndex = 4;
@@ -119,7 +107,7 @@
             "FOREX",
             "FUTURES",
             "CRYPTOS"});
-            this.comboBoxStocks.Location = new System.Drawing.Point(492, 44);
+            this.comboBoxStocks.Location = new System.Drawing.Point(480, 0);
             this.comboBoxStocks.Name = "comboBoxStocks";
             this.comboBoxStocks.Size = new System.Drawing.Size(121, 24);
             this.comboBoxStocks.TabIndex = 5;
@@ -130,34 +118,129 @@
             this.comboBoxNumber.FormattingEnabled = true;
             this.comboBoxNumber.Items.AddRange(new object[] {
             "XZY123"});
-            this.comboBoxNumber.Location = new System.Drawing.Point(615, 44);
+            this.comboBoxNumber.Location = new System.Drawing.Point(603, 0);
             this.comboBoxNumber.Name = "comboBoxNumber";
             this.comboBoxNumber.Size = new System.Drawing.Size(121, 24);
             this.comboBoxNumber.TabIndex = 6;
             // 
-            // dataGridViewOrder
+            // btnDetails
             // 
-            this.dataGridViewOrder.AllowUserToDeleteRows = false;
-            this.dataGridViewOrder.AllowUserToOrderColumns = true;
-            this.dataGridViewOrder.AllowUserToResizeColumns = false;
-            this.dataGridViewOrder.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridViewOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewOrder.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(119)))), ((int)(((byte)(183)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewOrder.ColumnHeadersHeight = 35;
-            this.dataGridViewOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.btnDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(119)))), ((int)(((byte)(183)))));
+            this.btnDetails.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
+            this.btnDetails.FlatAppearance.BorderSize = 2;
+            this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetails.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetails.ForeColor = System.Drawing.Color.White;
+            this.btnDetails.Location = new System.Drawing.Point(-1, 24);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(111, 35);
+            this.btnDetails.TabIndex = 12;
+            this.btnDetails.Text = "Details";
+            this.btnDetails.UseVisualStyleBackColor = false;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnSubmit.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
+            this.btnSubmit.FlatAppearance.BorderSize = 2;
+            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubmit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.ForeColor = System.Drawing.Color.White;
+            this.btnSubmit.Location = new System.Drawing.Point(120, 25);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(111, 35);
+            this.btnSubmit.TabIndex = 13;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonButton1.Location = new System.Drawing.Point(657, 0);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.kryptonButton1.Size = new System.Drawing.Size(103, 45);
+            this.kryptonButton1.TabIndex = 31;
+            this.kryptonButton1.Values.Text = "CANCEL ALL";
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(2, 14);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(65, 20);
+            this.kryptonLabel1.TabIndex = 30;
+            this.kryptonLabel1.Values.Text = "Orders (5)";
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
+            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.FlatAppearance.BorderSize = 2;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSettings.Location = new System.Drawing.Point(760, 0);
+            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(40, 45);
+            this.btnSettings.TabIndex = 29;
+            this.btnSettings.UseVisualStyleBackColor = false;
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.btnSettings);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(800, 45);
+            this.kryptonPanel1.TabIndex = 14;
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.Controls.Add(this.comboBoxStocks);
+            this.kryptonPanel2.Controls.Add(this.txtSecurity);
+            this.kryptonPanel2.Controls.Add(this.btnSubmit);
+            this.kryptonPanel2.Controls.Add(this.btnDetails);
+            this.kryptonPanel2.Controls.Add(this.comboBuySell);
+            this.kryptonPanel2.Controls.Add(this.comboBoxMarket);
+            this.kryptonPanel2.Controls.Add(this.txtQuantity);
+            this.kryptonPanel2.Controls.Add(this.comboBoxNumber);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel2.Location = new System.Drawing.Point(0, 45);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.Size = new System.Drawing.Size(800, 63);
+            this.kryptonPanel2.TabIndex = 15;
+            // 
+            // txtSecurity
+            // 
+            this.txtSecurity.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSecurity.Location = new System.Drawing.Point(0, 0);
+            this.txtSecurity.Name = "txtSecurity";
+            this.txtSecurity.Size = new System.Drawing.Size(115, 23);
+            this.txtSecurity.TabIndex = 1;
+            // 
+            // kryptonPanel3
+            // 
+            this.kryptonPanel3.Controls.Add(this.kryptonDataGridViewTransaction);
+            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel3.Location = new System.Drawing.Point(0, 108);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.Size = new System.Drawing.Size(800, 183);
+            this.kryptonPanel3.TabIndex = 16;
+            // 
+            // kryptonDataGridViewTransaction
+            // 
+            this.kryptonDataGridViewTransaction.AllowUserToAddRows = false;
+            this.kryptonDataGridViewTransaction.AllowUserToDeleteRows = false;
+            this.kryptonDataGridViewTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.kryptonDataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kryptonDataGridViewTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.StrategyName,
             this.OrderId,
             this.Symbol,
@@ -168,24 +251,18 @@
             this.State,
             this.FilledQty,
             this.Manage});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewOrder.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewOrder.EnableHeadersVisualStyles = false;
-            this.dataGridViewOrder.Location = new System.Drawing.Point(-1, 112);
-            this.dataGridViewOrder.MultiSelect = false;
-            this.dataGridViewOrder.Name = "dataGridViewOrder";
-            this.dataGridViewOrder.ReadOnly = true;
-            this.dataGridViewOrder.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridViewOrder.RowHeadersVisible = false;
-            this.dataGridViewOrder.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOrder.Size = new System.Drawing.Size(801, 179);
-            this.dataGridViewOrder.TabIndex = 11;
+            this.kryptonDataGridViewTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonDataGridViewTransaction.HideOuterBorders = true;
+            this.kryptonDataGridViewTransaction.Location = new System.Drawing.Point(0, 0);
+            this.kryptonDataGridViewTransaction.MultiSelect = false;
+            this.kryptonDataGridViewTransaction.Name = "kryptonDataGridViewTransaction";
+            this.kryptonDataGridViewTransaction.ReadOnly = true;
+            this.kryptonDataGridViewTransaction.RowHeadersVisible = false;
+            this.kryptonDataGridViewTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.kryptonDataGridViewTransaction.ShowEditingIcon = false;
+            this.kryptonDataGridViewTransaction.Size = new System.Drawing.Size(800, 183);
+            this.kryptonDataGridViewTransaction.StandardTab = true;
+            this.kryptonDataGridViewTransaction.TabIndex = 32;
             // 
             // StrategyName
             // 
@@ -195,7 +272,7 @@
             // 
             // OrderId
             // 
-            this.OrderId.HeaderText = "Order Id";
+            this.OrderId.HeaderText = "Order ID";
             this.OrderId.Name = "OrderId";
             this.OrderId.ReadOnly = true;
             // 
@@ -247,84 +324,14 @@
             this.Manage.Name = "Manage";
             this.Manage.ReadOnly = true;
             // 
-            // btnDetails
-            // 
-            this.btnDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(119)))), ((int)(((byte)(183)))));
-            this.btnDetails.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
-            this.btnDetails.FlatAppearance.BorderSize = 2;
-            this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDetails.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDetails.ForeColor = System.Drawing.Color.White;
-            this.btnDetails.Location = new System.Drawing.Point(12, 71);
-            this.btnDetails.Name = "btnDetails";
-            this.btnDetails.Size = new System.Drawing.Size(111, 35);
-            this.btnDetails.TabIndex = 12;
-            this.btnDetails.Text = "Details";
-            this.btnDetails.UseVisualStyleBackColor = false;
-            // 
-            // btnSubmit
-            // 
-            this.btnSubmit.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnSubmit.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
-            this.btnSubmit.FlatAppearance.BorderSize = 2;
-            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubmit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(129, 71);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(111, 35);
-            this.btnSubmit.TabIndex = 13;
-            this.btnSubmit.Text = "Submit";
-            this.btnSubmit.UseVisualStyleBackColor = false;
-            // 
-            // btnCancelAll
-            // 
-            this.btnCancelAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(79)))), ((int)(((byte)(104)))));
-            this.btnCancelAll.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
-            this.btnCancelAll.FlatAppearance.BorderSize = 2;
-            this.btnCancelAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelAll.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelAll.ForeColor = System.Drawing.Color.White;
-            this.btnCancelAll.Location = new System.Drawing.Point(591, 3);
-            this.btnCancelAll.Name = "btnCancelAll";
-            this.btnCancelAll.Size = new System.Drawing.Size(111, 35);
-            this.btnCancelAll.TabIndex = 14;
-            this.btnCancelAll.Text = "Cancel All";
-            this.btnCancelAll.UseVisualStyleBackColor = false;
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
-            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.FlatAppearance.BorderSize = 2;
-            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Location = new System.Drawing.Point(704, 4);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(40, 35);
-            this.btnSettings.TabIndex = 17;
-            this.btnSettings.UseVisualStyleBackColor = false;
-            // 
             // frmOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 291);
-            this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.btnCancelAll);
-            this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.btnDetails);
-            this.Controls.Add(this.dataGridViewOrder);
-            this.Controls.Add(this.comboBoxNumber);
-            this.Controls.Add(this.comboBoxStocks);
-            this.Controls.Add(this.txtQuantity);
-            this.Controls.Add(this.comboBoxMarket);
-            this.Controls.Add(this.comboBuySell);
-            this.Controls.Add(this.txtSecurity);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.kryptonPanel3);
+            this.Controls.Add(this.kryptonPanel2);
+            this.Controls.Add(this.kryptonPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -338,22 +345,35 @@
             this.Text = "Orders";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmOrders_FormClosing);
             this.Load += new System.EventHandler(this.frmOrders_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
+            this.kryptonPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
+            this.kryptonPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridViewTransaction)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtSecurity;
         private System.Windows.Forms.ComboBox comboBuySell;
         private System.Windows.Forms.ComboBox comboBoxMarket;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.ComboBox comboBoxStocks;
         private System.Windows.Forms.ComboBox comboBoxNumber;
-        private System.Windows.Forms.DataGridView dataGridViewOrder;
+        private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Button btnSubmit;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private RoundButton btnSettings;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private System.Windows.Forms.TextBox txtSecurity;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridViewTransaction;
         private System.Windows.Forms.DataGridViewTextBoxColumn StrategyName;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Symbol;
@@ -364,9 +384,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.DataGridViewTextBoxColumn FilledQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Manage;
-        private System.Windows.Forms.Button btnDetails;
-        private System.Windows.Forms.Button btnSubmit;
-        private System.Windows.Forms.Button btnCancelAll;
-        private RoundButton btnSettings;
     }
 }
