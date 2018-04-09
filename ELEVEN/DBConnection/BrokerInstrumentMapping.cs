@@ -55,16 +55,23 @@ namespace ELEVEN.DBConnection
             // The SQLiteDataReader allows us to run through the result lines:
             while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
             {
+                DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
                 return false;
             }
 
             // We are ready, now lets cleanup and close our connection:
+
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
+
+            return true;
+        }
+        private void DisposeConnection(SQLiteConnection sqlite_conn,SQLiteCommand sqlite_cmd,SQLiteDataReader sqlite_datareader)
+        {
+            sqlite_datareader.Close();
             sqlite_conn.Close();
             sqlite_conn.Dispose();
             sqlite_cmd.Dispose();
-            return true;
         }
-
         public List<clsBroker> GetBrokers()
         {
             var listBroker = new List<clsBroker>();
@@ -95,9 +102,8 @@ namespace ELEVEN.DBConnection
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
+
             return listBroker;
         }
         public clsBroker GetBroker(int id)
@@ -126,13 +132,13 @@ namespace ELEVEN.DBConnection
                 broker.BrokerCode = Convert.ToString(sqlite_datareader["BrokerCode"]);
                 broker.BrokerDescription = Convert.ToString(sqlite_datareader["BrokerDescription"]);
                 broker.Id = Convert.ToInt32(sqlite_datareader["Id"]);
+                DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
                 return broker;
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
+
             return broker;
         }
         #endregion
@@ -181,13 +187,12 @@ namespace ELEVEN.DBConnection
             // The SQLiteDataReader allows us to run through the result lines:
             while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
             {
+                DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
                 return false;
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
             return true;
         }
         public List<clsInstrument> GetInstruments()
@@ -220,9 +225,7 @@ namespace ELEVEN.DBConnection
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
             return listInstrument;
         }
 
@@ -252,13 +255,12 @@ namespace ELEVEN.DBConnection
                 instrument.InstrumentCode = Convert.ToString(sqlite_datareader["InstrumentCode"]);
                 instrument.InstrumentDescription = Convert.ToString(sqlite_datareader["InstrumentDescription"]);
                 instrument.Id = Convert.ToInt32(sqlite_datareader["Id"]);
+                DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
                 return instrument;
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
             return instrument;
         }
         #endregion
@@ -308,13 +310,12 @@ namespace ELEVEN.DBConnection
             // The SQLiteDataReader allows us to run through the result lines:
             while (sqlite_datareader.Read()) // Read() returns false if there is still a result line to read
             {
+                DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
                 return false;
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
             return true;
         }
 
@@ -358,9 +359,8 @@ namespace ELEVEN.DBConnection
             }
 
             // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-            sqlite_conn.Dispose();
-            sqlite_cmd.Dispose();
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
+
         }
         #endregion
     }
