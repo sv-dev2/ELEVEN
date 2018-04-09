@@ -696,5 +696,11 @@ namespace ELEVEN
             frmInstrument instrument = new frmInstrument();
             instrument.ShowDialog();
         }
+
+        private void linkInstrumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBrokerInstrumentMapping instrumentMapping = new frmBrokerInstrumentMapping();
+            instrumentMapping.ShowDialog();
+        }
     }
 }

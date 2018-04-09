@@ -361,6 +361,7 @@
             this.linkInstrumentToolStripMenuItem.Name = "linkInstrumentToolStripMenuItem";
             this.linkInstrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.linkInstrumentToolStripMenuItem.Text = "Link Instrument";
+            this.linkInstrumentToolStripMenuItem.Click += new System.EventHandler(this.linkInstrumentToolStripMenuItem_Click);
             // 
             // toolStrip
             // 
