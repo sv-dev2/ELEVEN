@@ -205,7 +205,7 @@
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(307, 491);
+            this.btnCancel.Location = new System.Drawing.Point(307, 487);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 47);
             this.btnCancel.TabIndex = 21;
@@ -357,7 +357,7 @@
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(400, 491);
+            this.kryptonButton1.Location = new System.Drawing.Point(400, 487);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
             this.kryptonButton1.Size = new System.Drawing.Size(90, 47);
