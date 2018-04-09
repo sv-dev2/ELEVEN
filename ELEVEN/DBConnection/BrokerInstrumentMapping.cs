@@ -100,6 +100,41 @@ namespace ELEVEN.DBConnection
             sqlite_cmd.Dispose();
             return listBroker;
         }
+        public clsBroker GetBroker(int id)
+        {
+            var broker = new clsBroker();
+            // We use these three SQLite objects:           
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+           
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"SELECT * FROM tblBroker where Id={id}";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // The SQLiteDataReader allows us to run through the result lines:
+            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            {
+              
+                broker.BrokerCode = Convert.ToString(sqlite_datareader["BrokerCode"]);
+                broker.BrokerDescription = Convert.ToString(sqlite_datareader["BrokerDescription"]);
+                broker.Id = Convert.ToInt32(sqlite_datareader["Id"]);
+                return broker;
+            }
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+            return broker;
+        }
         #endregion
         #region "Instrument table CRUD"
         public void AddInstrument(clsInstrument model)
@@ -190,6 +225,42 @@ namespace ELEVEN.DBConnection
             sqlite_cmd.Dispose();
             return listInstrument;
         }
+
+        public clsInstrument GetInstrument(int id)
+        {
+            var instrument = new clsInstrument();
+            // We use these three SQLite objects:           
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"SELECT * FROM tblInstrument where id={id}";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // The SQLiteDataReader allows us to run through the result lines:
+            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            {
+              
+                instrument.InstrumentCode = Convert.ToString(sqlite_datareader["InstrumentCode"]);
+                instrument.InstrumentDescription = Convert.ToString(sqlite_datareader["InstrumentDescription"]);
+                instrument.Id = Convert.ToInt32(sqlite_datareader["Id"]);
+                return instrument;
+            }
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+            return instrument;
+        }
         #endregion
         #region "Broker Instrument Mapping Table CRUD"
 
@@ -245,6 +316,51 @@ namespace ELEVEN.DBConnection
             sqlite_conn.Dispose();
             sqlite_cmd.Dispose();
             return true;
+        }
+
+        public void SearchBrokerInstrumentCode()
+        {
+            List<clsBrokerInstrumentDetail> listDetail = new List<clsBrokerInstrumentDetail>();
+            // We use these three SQLite objects:           
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"SELECT * FROM tblBrokerInstrumentMapping where FeedPrices=True and FeedTrades=True";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // The SQLiteDataReader allows us to run through the result lines:
+            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            {
+                clsBrokerInstrumentDetail model = new clsBrokerInstrumentDetail();
+                model.Id = Convert.ToInt32(sqlite_datareader["Id"]);
+                model.InstrumentId = Convert.ToInt32(sqlite_datareader["InstrumentId"]);
+                model.BrokerId = Convert.ToInt32(sqlite_datareader["BrokerId"]);
+                model.BrokerInstrumentCode = Convert.ToString(sqlite_datareader["BrokerInstrumentCode"]);
+
+                var broker = GetBroker(model.BrokerId);
+                model.BrokerCode = broker.BrokerCode;
+                model.BrokerDescription = broker.BrokerDescription;
+
+                var instrument = GetInstrument(model.InstrumentId);
+                model.InstrumentCode = instrument.InstrumentCode;
+                model.InstrumentDescription = instrument.InstrumentDescription;
+
+                listDetail.Add(model);
+            }
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
         }
         #endregion
     }

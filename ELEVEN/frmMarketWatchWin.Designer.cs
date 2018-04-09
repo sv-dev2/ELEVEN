@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txtAddRow = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dataGridMarketData = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.txtAddRow = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -47,6 +47,14 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(706, 31);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // txtAddRow
+            // 
+            this.txtAddRow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAddRow.Location = new System.Drawing.Point(0, 0);
+            this.txtAddRow.Name = "txtAddRow";
+            this.txtAddRow.Size = new System.Drawing.Size(706, 20);
+            this.txtAddRow.TabIndex = 0;
             // 
             // kryptonPanel2
             // 
@@ -75,14 +83,6 @@
             this.dataGridMarketData.Size = new System.Drawing.Size(706, 324);
             this.dataGridMarketData.StandardTab = true;
             this.dataGridMarketData.TabIndex = 32;
-            // 
-            // txtAddRow
-            // 
-            this.txtAddRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAddRow.Location = new System.Drawing.Point(0, 0);
-            this.txtAddRow.Name = "txtAddRow";
-            this.txtAddRow.Size = new System.Drawing.Size(706, 23);
-            this.txtAddRow.TabIndex = 0;
             // 
             // frmMarketWatchWin
             // 
