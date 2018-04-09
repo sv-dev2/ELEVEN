@@ -684,5 +684,11 @@ namespace ELEVEN
             AddContextMenuTabControlItem(name, transaction);
             transaction.Show();
         }
+
+        private void brokerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBroker broker = new frmBroker();           
+            broker.ShowDialog();
+        }
     }
 }

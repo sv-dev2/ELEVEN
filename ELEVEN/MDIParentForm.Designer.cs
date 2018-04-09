@@ -86,6 +86,10 @@
             this.toolStripStatusLabel16 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brokerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.instrumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkInstrumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -102,7 +106,8 @@
             this.tradingToolStripMenuItem,
             this.monitorningToolStripMenuItem,
             this.windowToolStripMenuItem,
-            this.workspaceToolStripMenuItem});
+            this.workspaceToolStripMenuItem,
+            this.addToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -272,7 +277,7 @@
             // tradingToolStripMenuItem
             // 
             this.tradingToolStripMenuItem.Name = "tradingToolStripMenuItem";
-            this.tradingToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.tradingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.tradingToolStripMenuItem.Text = "Trading";
             // 
             // monitorningToolStripMenuItem
@@ -564,6 +569,35 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.brokerToolStripMenuItem,
+            this.instrumentToolStripMenuItem,
+            this.linkInstrumentToolStripMenuItem});
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.addToolStripMenuItem.Text = "Add";
+            // 
+            // brokerToolStripMenuItem
+            // 
+            this.brokerToolStripMenuItem.Name = "brokerToolStripMenuItem";
+            this.brokerToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.brokerToolStripMenuItem.Text = "Broker";
+            this.brokerToolStripMenuItem.Click += new System.EventHandler(this.brokerToolStripMenuItem_Click);
+            // 
+            // instrumentToolStripMenuItem
+            // 
+            this.instrumentToolStripMenuItem.Name = "instrumentToolStripMenuItem";
+            this.instrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.instrumentToolStripMenuItem.Text = "Instrument";
+            // 
+            // linkInstrumentToolStripMenuItem
+            // 
+            this.linkInstrumentToolStripMenuItem.Name = "linkInstrumentToolStripMenuItem";
+            this.linkInstrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.linkInstrumentToolStripMenuItem.Text = "Link Instrument";
+            // 
             // MDIParentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -652,6 +686,10 @@
         private System.Windows.Forms.ToolStripMenuItem workspaceToolStripMenuItem1;
         private System.Windows.Forms.ToolStripLabel lblShowActiveWorkspace;
         private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brokerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem instrumentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem linkInstrumentToolStripMenuItem;
     }
 }
 
