@@ -83,6 +83,7 @@
             this.dataGridMarketData.Size = new System.Drawing.Size(706, 324);
             this.dataGridMarketData.StandardTab = true;
             this.dataGridMarketData.TabIndex = 32;
+            this.dataGridMarketData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMarketData_CellClick);
             // 
             // frmMarketWatchWin
             // 

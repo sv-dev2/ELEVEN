@@ -39,12 +39,18 @@
             this.tabPageBroker = new System.Windows.Forms.TabPage();
             this.dataGridBrokers = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.tabPageUpdateBroker = new System.Windows.Forms.TabPage();
+            this.btnUpdate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txtUpdateDescription = new System.Windows.Forms.TextBox();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.txtUpdateBroker = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageAddBroker.SuspendLayout();
             this.tabPageBroker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBrokers)).BeginInit();
+            this.tabPageUpdateBroker.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -156,15 +162,64 @@
             this.dataGridBrokers.Size = new System.Drawing.Size(470, 273);
             this.dataGridBrokers.StandardTab = true;
             this.dataGridBrokers.TabIndex = 33;
+            this.dataGridBrokers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBrokers_CellClick);
             // 
             // tabPageUpdateBroker
             // 
+            this.tabPageUpdateBroker.Controls.Add(this.btnUpdate);
+            this.tabPageUpdateBroker.Controls.Add(this.kryptonLabel3);
+            this.tabPageUpdateBroker.Controls.Add(this.txtUpdateDescription);
+            this.tabPageUpdateBroker.Controls.Add(this.kryptonLabel4);
+            this.tabPageUpdateBroker.Controls.Add(this.txtUpdateBroker);
             this.tabPageUpdateBroker.Location = new System.Drawing.Point(4, 22);
             this.tabPageUpdateBroker.Name = "tabPageUpdateBroker";
             this.tabPageUpdateBroker.Size = new System.Drawing.Size(476, 279);
             this.tabPageUpdateBroker.TabIndex = 2;
             this.tabPageUpdateBroker.Text = "Update";
             this.tabPageUpdateBroker.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(201, 158);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.btnUpdate.Size = new System.Drawing.Size(100, 50);
+            this.btnUpdate.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.btnUpdate.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
+            this.btnUpdate.TabIndex = 9;
+            this.btnUpdate.Values.Text = "Update";
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(75, 75);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(78, 20);
+            this.kryptonLabel3.TabIndex = 5;
+            this.kryptonLabel3.Values.Text = "Broker Code";
+            // 
+            // txtUpdateDescription
+            // 
+            this.txtUpdateDescription.Location = new System.Drawing.Point(201, 116);
+            this.txtUpdateDescription.Name = "txtUpdateDescription";
+            this.txtUpdateDescription.Size = new System.Drawing.Size(200, 21);
+            this.txtUpdateDescription.TabIndex = 8;
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(75, 117);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(111, 20);
+            this.kryptonLabel4.TabIndex = 6;
+            this.kryptonLabel4.Values.Text = "Broker Description";
+            // 
+            // txtUpdateBroker
+            // 
+            this.txtUpdateBroker.Location = new System.Drawing.Point(201, 71);
+            this.txtUpdateBroker.Name = "txtUpdateBroker";
+            this.txtUpdateBroker.Size = new System.Drawing.Size(200, 21);
+            this.txtUpdateBroker.TabIndex = 7;
             // 
             // frmBroker
             // 
@@ -191,6 +246,8 @@
             this.tabPageAddBroker.PerformLayout();
             this.tabPageBroker.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBrokers)).EndInit();
+            this.tabPageUpdateBroker.ResumeLayout(false);
+            this.tabPageUpdateBroker.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -208,5 +265,10 @@
         private System.Windows.Forms.TabPage tabPageBroker;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridBrokers;
         private System.Windows.Forms.TabPage tabPageUpdateBroker;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdate;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private System.Windows.Forms.TextBox txtUpdateDescription;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
+        private System.Windows.Forms.TextBox txtUpdateBroker;
     }
 }

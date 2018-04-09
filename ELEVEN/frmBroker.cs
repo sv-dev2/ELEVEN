@@ -19,14 +19,13 @@ namespace ELEVEN
         clsBroker broker = null;
         BrokerInstrumentMapping instrumentMapping = null;
         TabPage updateTab = null;
+        clsBroker result = null;
         public frmBroker()
         {
             InitializeComponent();
             broker = new clsBroker();
             instrumentMapping = new BrokerInstrumentMapping();
-            updateTab = tabPageUpdateBroker;
-
-            tabControl1.TabPages.Remove(tabPageUpdateBroker);
+            result = new clsBroker();
         }
 
         private void BtnCreateBroker_Click(object sender, EventArgs e)
@@ -52,11 +51,17 @@ namespace ELEVEN
         private void frmBroker_Load(object sender, EventArgs e)
         {
             BindProperties();
+            updateTab = tabPageUpdateBroker;
+            tabControl1.TabPages.Remove(tabPageUpdateBroker);
         }
         private void BindProperties()
         {
             txtBrokerCode.DataBindings.Add("Text", broker, "BrokerCode", true, DataSourceUpdateMode.OnPropertyChanged);
             txtBrokerDescription.DataBindings.Add("Text", broker, "BrokerDescription", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            txtUpdateBroker.DataBindings.Add("Text", result, "BrokerCode", true, DataSourceUpdateMode.OnPropertyChanged);
+            txtUpdateDescription.DataBindings.Add("Text", result, "BrokerDescription", true, DataSourceUpdateMode.OnPropertyChanged);
+
         }
 
 
@@ -95,9 +100,9 @@ namespace ELEVEN
             Image imageEdit = ELEVEN.Properties.Resources.app_edit;
             buttonColumnEdit.Image = imageEdit;
             buttonColumnEdit.Width = 15;
-           
+
             dataGridBrokers.Columns.AddRange(buttonColumn, buttonColumnEdit);
-            dataGridBrokers.Columns[3].Width = 20;           
+            dataGridBrokers.Columns[3].Width = 20;
             dataGridBrokers.Columns[4].Width = 30;
             var dataSource = instrumentMapping.GetBrokers();
             dataGridBrokers.DataSource = dataSource;
@@ -119,6 +124,55 @@ namespace ELEVEN
                 tabControl1.TabPages.Remove(tabPageUpdateBroker);
             }
 
+        }
+
+        private void dataGridBrokers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return; // header clicked
+
+            if (e.ColumnIndex == dataGridBrokers.Columns["buttonColumn"].Index)
+            {
+                // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
+                int Id = Convert.ToInt32(dataGridBrokers["Id", e.RowIndex].Value);
+                instrumentMapping.DeleteBroker(Id);
+                var dataSource = instrumentMapping.GetBrokers();
+                dataGridBrokers.DataSource = dataSource;
+                MessageBox.Show(this, "Broker deleted successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (e.ColumnIndex == dataGridBrokers.Columns["buttonColumnEdit"].Index)
+            {
+                // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
+                int Id = Convert.ToInt32(dataGridBrokers["Id", e.RowIndex].Value);
+                tabControl1.TabPages.Insert(2, updateTab);
+                tabControl1.SelectedTab = updateTab;
+
+                result = instrumentMapping.GetBroker(Id);
+
+                txtUpdateBroker.Text = result.BrokerCode;
+                txtUpdateDescription.Text = result.BrokerDescription;
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (txtUpdateBroker.Text != null && txtUpdateBroker.Text.Trim() != string.Empty)
+            {
+                result.BrokerCode = txtUpdateBroker.Text;
+                result.BrokerDescription = txtUpdateDescription.Text;
+                if (instrumentMapping.CheckDuplicateBroker(result))
+                {
+                    instrumentMapping.UpdateBroker(result);
+                    MessageBox.Show(this, "Broker updated successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Broker code already present.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, "Please enter a valid code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
