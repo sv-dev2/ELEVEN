@@ -146,7 +146,7 @@ namespace ELEVEN.DBConnection
             var broker = new clsBroker();
             // We use these three SQLite objects:           
             SQLiteConnection sqlite_conn;
-            SQLiteCommand sqlite_cmd;           
+            SQLiteCommand sqlite_cmd;
 
             sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
             // open the connection:
@@ -310,6 +310,53 @@ namespace ELEVEN.DBConnection
             // We are ready, now lets cleanup and close our connection:
             DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
             return instrument;
+        }
+
+        public void DeleteInstrument(int id)
+        {
+            // We use these three SQLite objects:           
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"Delete from tblInstrument where Id={id}";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            var result = sqlite_cmd.ExecuteScalar();
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+
+        }
+        public void UpdateInstrument(clsInstrument model)
+        {
+            // We use these three SQLite objects:
+
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // Lets insert something into our new table:
+            sqlite_cmd.CommandText = $"Update tblInstrument set InstrumentCode='{model.InstrumentCode}',InstrumentDescription='{model.InstrumentDescription}' where Id={model.Id};";
+            // And execute this again ;D
+            sqlite_cmd.ExecuteNonQuery();
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
         }
         #endregion
         #region "Broker Instrument Mapping Table CRUD"
