@@ -53,7 +53,60 @@ namespace ELEVEN
             chkPrices.DataBindings.Add("Checked", brokerInstrumentMapping, "FeedPrices", true, DataSourceUpdateMode.OnPropertyChanged);
             chkTrades.DataBindings.Add("Checked", brokerInstrumentMapping, "FeedTrades", true, DataSourceUpdateMode.OnPropertyChanged);
         }
+        System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
+        System.Windows.Forms.DataGridViewImageColumn buttonColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
+        TextAndImageColumn column = new TextAndImageColumn();
 
+        private void CreateDataGridColumn()
+        {
+            dataGridMappings.DataSource = null;
+            this.dataGridMappings.Rows.Clear();
+            dataGridMappings.AutoGenerateColumns = false;
+            dataGridMappings.ColumnCount = 6;
+
+            dataGridMappings.Columns[0].HeaderText = "Id";
+            dataGridMappings.Columns[0].Name = "Id";
+            dataGridMappings.Columns[0].DataPropertyName = "Id";
+            dataGridMappings.Columns[0].Visible = false;
+
+            dataGridMappings.Columns[1].HeaderText = "BIC";
+            dataGridMappings.Columns[1].Name = "BrokerInstrumentCode";
+            dataGridMappings.Columns[1].DataPropertyName = "BrokerInstrumentCode";
+
+            dataGridMappings.Columns[2].Name = "BrokerCode";
+            dataGridMappings.Columns[2].HeaderText = "Broker Code";
+            dataGridMappings.Columns[2].DataPropertyName = "BrokerCode";
+
+            dataGridMappings.Columns[3].Name = "BrokerDescription";
+            dataGridMappings.Columns[3].HeaderText = "Broker Description";
+            dataGridMappings.Columns[3].DataPropertyName = "BrokerDescription";
+
+            dataGridMappings.Columns[4].Name = "InstrumentCode";
+            dataGridMappings.Columns[4].HeaderText = "Instrument Code";
+            dataGridMappings.Columns[4].DataPropertyName = "InstrumentCode";
+
+            dataGridMappings.Columns[5].Name = "InstrumentDescription";
+            dataGridMappings.Columns[5].HeaderText = "Instrument Description";
+            dataGridMappings.Columns[5].DataPropertyName = "InstrumentDescription";
+
+            buttonColumn.HeaderText = "";
+            buttonColumn.Name = "buttonColumn";
+            Image image = ELEVEN.Properties.Resources.Delete;
+            buttonColumn.Image = image;
+            buttonColumn.Width = 15;
+
+            buttonColumnEdit.HeaderText = "";
+            buttonColumnEdit.Name = "buttonColumnEdit";
+            Image imageEdit = ELEVEN.Properties.Resources.app_edit;
+            buttonColumnEdit.Image = imageEdit;
+            buttonColumnEdit.Width = 15;
+
+            dataGridMappings.Columns.AddRange(buttonColumn, buttonColumnEdit);
+            dataGridMappings.Columns[6].Width = 20;
+            dataGridMappings.Columns[7].Width = 30;
+            var dataSource = instrumentMapping.SearchBrokerInstrumentCode();
+            dataGridMappings.DataSource = dataSource;
+        }
         private void btnCreateMap_Click(object sender, EventArgs e)
         {
             if (brokerInstrumentMapping.BrokerId == 0)
@@ -80,6 +133,28 @@ namespace ELEVEN
             {
                 MessageBox.Show(this, "Mapping already present.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            var tabControl = sender as TabControl;
+            var selectedTabPage = tabControl.SelectedTab;
+            var tabName = selectedTabPage.Name;
+            if (tabName == "tabPageMapping")
+            {
+
+                tabControl1.TabPages.Remove(tabPageUpdateMapping);
+                CreateDataGridColumn();
+            }
+            else if (tabName == "tabPageAddMapping")
+            {
+                tabControl1.TabPages.Remove(tabPageUpdateMapping);
             }
         }
     }

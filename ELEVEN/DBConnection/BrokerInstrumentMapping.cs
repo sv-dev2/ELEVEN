@@ -414,7 +414,7 @@ namespace ELEVEN.DBConnection
             return true;
         }
 
-        public void SearchBrokerInstrumentCode()
+        public List<clsBrokerInstrumentDetail> SearchBrokerInstrumentCode()
         {
             List<clsBrokerInstrumentDetail> listDetail = new List<clsBrokerInstrumentDetail>();
             // We use these three SQLite objects:           
@@ -430,7 +430,7 @@ namespace ELEVEN.DBConnection
             sqlite_cmd = sqlite_conn.CreateCommand();
 
             // First lets build a SQL-Query again:
-            sqlite_cmd.CommandText = $"SELECT * FROM tblBrokerInstrumentMapping where FeedPrices=True and FeedTrades=True";
+            sqlite_cmd.CommandText = $"SELECT * FROM tblBrokerInstrumentMapping where FeedPrices='True' and FeedTrades='True'";
             // Now the SQLiteCommand object can give us a DataReader-Object:
             sqlite_datareader = sqlite_cmd.ExecuteReader();
             // The SQLiteDataReader allows us to run through the result lines:
@@ -455,7 +455,56 @@ namespace ELEVEN.DBConnection
 
             // We are ready, now lets cleanup and close our connection:
             DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
+            return listDetail;
+        }
 
+        public clsBroker DeleteMapping(int id)
+        {
+            var broker = new clsBroker();
+            // We use these three SQLite objects:           
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"Delete from tblBrokerInstrumentMapping where Id={id}";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            var result = sqlite_cmd.ExecuteScalar();
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+
+            return broker;
+        }
+        public void UpdateMapping(clsBrokerInstrumentMapping model)
+        {
+            // We use these three SQLite objects:
+
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // Lets insert something into our new table:
+            sqlite_cmd.CommandText = $"Update tblBrokerInstrumentMapping set BrokerId={model.BrokerId},InstrumentId={model.InstrumentId},BrokerInstrumentCode='{model.BrokerInstrumentCode}',FeedPrices='{model.FeedPrices}',FeedTrades='{model.FeedTrades}' where Id={model.Id};";
+            // And execute this again ;D
+            sqlite_cmd.ExecuteNonQuery();
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
         }
         #endregion
     }
