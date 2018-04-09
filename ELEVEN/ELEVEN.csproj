@@ -147,6 +147,12 @@
     <Compile Include="frmClosedPosition.Designer.cs">
       <DependentUpon>frmClosedPosition.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmInstrument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInstrument.Designer.cs">
+      <DependentUpon>frmInstrument.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMarketWatch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmClosedPosition.resx">
       <DependentUpon>frmClosedPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInstrument.resx">
+      <DependentUpon>frmInstrument.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarketWatch.resx">
       <DependentUpon>frmMarketWatch.cs</DependentUpon>

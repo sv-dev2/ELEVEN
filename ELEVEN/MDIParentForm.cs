@@ -690,5 +690,11 @@ namespace ELEVEN
             frmBroker broker = new frmBroker();           
             broker.ShowDialog();
         }
+
+        private void instrumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInstrument instrument = new frmInstrument();
+            instrument.ShowDialog();
+        }
     }
 }

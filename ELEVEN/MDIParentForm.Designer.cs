@@ -59,6 +59,10 @@
             this.tileVerticallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arrangeIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workspaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brokerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.instrumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkInstrumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.newOrderToolStrip = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -86,10 +90,6 @@
             this.toolStripStatusLabel16 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.brokerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.instrumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkInstrumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -332,6 +332,36 @@
             this.workspaceToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.workspaceToolStripMenuItem.Text = "Workspace";
             // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.brokerToolStripMenuItem,
+            this.instrumentToolStripMenuItem,
+            this.linkInstrumentToolStripMenuItem});
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.addToolStripMenuItem.Text = "Add";
+            // 
+            // brokerToolStripMenuItem
+            // 
+            this.brokerToolStripMenuItem.Name = "brokerToolStripMenuItem";
+            this.brokerToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.brokerToolStripMenuItem.Text = "Broker";
+            this.brokerToolStripMenuItem.Click += new System.EventHandler(this.brokerToolStripMenuItem_Click);
+            // 
+            // instrumentToolStripMenuItem
+            // 
+            this.instrumentToolStripMenuItem.Name = "instrumentToolStripMenuItem";
+            this.instrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.instrumentToolStripMenuItem.Text = "Instrument";
+            this.instrumentToolStripMenuItem.Click += new System.EventHandler(this.instrumentToolStripMenuItem_Click);
+            // 
+            // linkInstrumentToolStripMenuItem
+            // 
+            this.linkInstrumentToolStripMenuItem.Name = "linkInstrumentToolStripMenuItem";
+            this.linkInstrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.linkInstrumentToolStripMenuItem.Text = "Link Instrument";
+            // 
             // toolStrip
             // 
             this.toolStrip.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -568,35 +598,6 @@
             this.tabControl1.Size = new System.Drawing.Size(1354, 26);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.brokerToolStripMenuItem,
-            this.instrumentToolStripMenuItem,
-            this.linkInstrumentToolStripMenuItem});
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.addToolStripMenuItem.Text = "Add";
-            // 
-            // brokerToolStripMenuItem
-            // 
-            this.brokerToolStripMenuItem.Name = "brokerToolStripMenuItem";
-            this.brokerToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.brokerToolStripMenuItem.Text = "Broker";
-            this.brokerToolStripMenuItem.Click += new System.EventHandler(this.brokerToolStripMenuItem_Click);
-            // 
-            // instrumentToolStripMenuItem
-            // 
-            this.instrumentToolStripMenuItem.Name = "instrumentToolStripMenuItem";
-            this.instrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.instrumentToolStripMenuItem.Text = "Instrument";
-            // 
-            // linkInstrumentToolStripMenuItem
-            // 
-            this.linkInstrumentToolStripMenuItem.Name = "linkInstrumentToolStripMenuItem";
-            this.linkInstrumentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.linkInstrumentToolStripMenuItem.Text = "Link Instrument";
             // 
             // MDIParentForm
             // 
