@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using ELEVEN.DBConnection;
 using ELEVEN.Model;
 using ELEVEN.Services;
 using System;
@@ -17,20 +18,24 @@ namespace ELEVEN
 {
     public partial class frmMarketWatchWin : KryptonForm
     {
+        #region "Object Declaration"
+        BrokerInstrumentMapping instrumentMapping = null;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
         private BindingSource bindingSource2 = new BindingSource();
         BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
         BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
         List<OldData> OldWatchList = new List<OldData>();
+        #endregion
+
         public frmMarketWatchWin()
         {
             InitializeComponent();
+            instrumentMapping = new BrokerInstrumentMapping();
             AutoCompletetxtAddRow();
-
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-
+           
         }
         string fileName = string.Empty;
         private void SymbolFileExist()
@@ -155,11 +160,16 @@ namespace ELEVEN
         private void AutoCompletetxtAddRow()
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
-            var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
-            var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
-            for (int i = 0; i < Smbl.Count(); i++)
+            var result = instrumentMapping.SearchMapping();
+            //var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
+            //var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
+            //for (int i = 0; i < Smbl.Count(); i++)
+            //{
+            //    SymbolCollection.Add(Smbl[i][0]);
+            //}
+            foreach (var item in result)
             {
-                SymbolCollection.Add(Smbl[i][0]);
+                SymbolCollection.Add(item.BrokerCode+"."+item.InstrumentCode);
             }
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;

@@ -121,7 +121,7 @@ namespace ELEVEN
             dataGridMappings.Columns.AddRange(buttonColumn, buttonColumnEdit);
             dataGridMappings.Columns[6].Width = 20;
             dataGridMappings.Columns[7].Width = 30;
-            var dataSource = instrumentMapping.SearchBrokerInstrumentCode();
+            var dataSource = instrumentMapping.GetBrokerInstrumentMapping();
             dataGridMappings.DataSource = dataSource;
         }
         private void btnCreateMap_Click(object sender, EventArgs e)
@@ -214,7 +214,7 @@ namespace ELEVEN
                 // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
                 int Id = Convert.ToInt32(dataGridMappings["Id", e.RowIndex].Value);
                 instrumentMapping.DeleteMapping(Id);
-                var dataSource = instrumentMapping.SearchBrokerInstrumentCode();
+                var dataSource = instrumentMapping.GetBrokerInstrumentMapping();
                 dataGridMappings.DataSource = dataSource;
                 MessageBox.Show(this, "Mapping deleted successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
