@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ELEVEN.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,9 @@ namespace ELEVEN
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false); 
+            Application.SetCompatibleTextRenderingDefault(false);
+            PbBitfinexAPI pbBitfinexAPI = new PbBitfinexAPI();
+            pbBitfinexAPI.GetAccountInfo();
             Application.Run(new MDIParentForm());
             
         }

@@ -387,6 +387,10 @@
     <Content Include="Resources\DockPanel.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ELEVEN.Models\ELEVEN.Models.csproj">
+      <Project>{f4a3db5d-83c5-4f39-81b5-9a047cb39da8}</Project>
+      <Name>ELEVEN.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ELEVEN.Services\ELEVEN.Services.csproj">
       <Project>{af388a6c-e192-410b-8a0d-409241b7f2e7}</Project>
       <Name>ELEVEN.Services</Name>
