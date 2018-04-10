@@ -71,7 +71,7 @@ namespace ELEVEN
             dataGridMarketData.DataSource = null;
             this.dataGridMarketData.Rows.Clear();
             dataGridMarketData.AutoGenerateColumns = false;
-            dataGridMarketData.ColumnCount = 4;
+            dataGridMarketData.ColumnCount = 5;
 
             imgList.Images.Add(Properties.Resources.arrowred);
             imgList.Images.Add(Properties.Resources.arrowgreen);
@@ -91,22 +91,21 @@ namespace ELEVEN
             dataGridMarketData.Columns[1].HeaderText = "Bid";
             dataGridMarketData.Columns[1].Name = "Bid";
             dataGridMarketData.Columns[1].DataPropertyName = "bid";
-            //dataGridMarketData.Columns[1].Width = 75;
+           
 
             dataGridMarketData.Columns[2].Name = "Ask";
             dataGridMarketData.Columns[2].HeaderText = "Ask";
             dataGridMarketData.Columns[2].DataPropertyName = "ask";
-            //dataGridMarketData.Columns[2].Width = 75;
+           
 
             dataGridMarketData.Columns[3].Name = "Last";
             dataGridMarketData.Columns[3].HeaderText = "Last";
             dataGridMarketData.Columns[3].DataPropertyName = "last_price";
-            //dataGridMarketData.Columns[3].Width = 75;
+          
 
             dataGridMarketData.Columns[4].Name = "Volume";
             dataGridMarketData.Columns[4].HeaderText = "Volume";
-            dataGridMarketData.Columns[4].DataPropertyName = "volume";
-            //dataGridMarketData.Columns[4].Width = 63;
+            dataGridMarketData.Columns[4].DataPropertyName = "volume";           
 
 
             buttonColumn.HeaderText = "";
@@ -116,6 +115,12 @@ namespace ELEVEN
             buttonColumn.Image = image;
             buttonColumn.Width = 15;
             dataGridMarketData.Columns.Insert(5, buttonColumn);
+
+            dataGridMarketData.Columns[6].Name = "broker";
+            dataGridMarketData.Columns[6].HeaderText = "broker";
+            dataGridMarketData.Columns[6].DataPropertyName = "broker";
+            dataGridMarketData.Columns[6].Visible = false;
+
             dataGridMarketData.Height = 25 * ObjTrading.Count() + 34;
             //txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
             dataGridMarketData.DataSource = ObjTrading;
@@ -216,7 +221,7 @@ namespace ELEVEN
                 for (int i = 0; i < ticker.Length; i++)
                 {
 
-                    customerList.Add(new FinexTicker { pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+                    customerList.Add(new FinexTicker {broker= Broker.BitFinex.ToString().ToUpper(), pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
                 }
                 //this.bindingSource1.DataSource = customerList;
                 ObjTrading = customerList;
@@ -232,7 +237,7 @@ namespace ELEVEN
             var allTicklers = symbols.Split(',');
             foreach (string tickler in allTicklers)
             {
-                if (tickler.ToLower().IndexOf("bitfinex") > -1)
+                if (tickler.ToLower().IndexOf(Broker.BitFinex.ToString().ToLower()) > -1)
                 {
                     var instrumentCode = tickler.Split('.');
                     if (sbBitfinex.Length > 1)
@@ -251,7 +256,7 @@ namespace ELEVEN
                     }
                     sbTraders.Append(instrumentCode[1]);
                 }
-                else if (tickler.ToLower().Replace(" ","").IndexOf("igmarket") > -1)
+                else if (tickler.ToLower().Replace(" ","").IndexOf(Broker.IGMarket.ToString().ToLower()) > -1)
                 {
                     var instrumentCode = tickler.Split('.');
                     if (sbIGMarket.Length > 1)
@@ -260,7 +265,7 @@ namespace ELEVEN
                     }
                     sbIGMarket.Append(instrumentCode[1]);
                 }
-                else if (tickler.ToLower().Replace(" ", "").IndexOf("icmarket") > -1)
+                else if (tickler.ToLower().Replace(" ", "").IndexOf(Broker.ICMarket.ToString().ToLower()) > -1)
                 {
                     var instrumentCode = tickler.Split('.');
                     if (sbICMarket.Length > 1)
@@ -305,6 +310,7 @@ namespace ELEVEN
                         oldWatch.last_price = item.last_price;
                         oldWatch.pair = item.pair;
                         oldWatch.volume = item.volume;
+                        oldWatch.broker = item.broker;
                         OldWatchList.Add(oldWatch);
                     }
                 }
@@ -375,6 +381,11 @@ namespace ELEVEN
             {
                 // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
                 string symbol = dataGridMarketData["Symbol", e.RowIndex].Value.ToString();
+                string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
+                if(broker.ToLower()== Broker.BitFinex.ToString().ToLower())
+                {
+                    symbol = broker + "." + symbol;
+                }
                 await ReadWriteNotepad(symbol);
             }
         }
@@ -386,7 +397,16 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            symbols = symbols.Replace("," + symbol, "");
+            //check Index
+            int Index = symbols.IndexOf(symbol);
+            if(Index==0)
+            {
+                symbols = symbols.Replace(symbol + ",", "");
+            }
+            else
+            {
+                symbols = symbols.Replace("," + symbol, "");
+            }           
 
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(this.Name + ".txt", false))

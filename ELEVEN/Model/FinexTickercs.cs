@@ -32,6 +32,7 @@ namespace ELEVEN.Model
         private string _volume;
         private string _timestamp;
         private string _pair;
+        private string _broker;
         public string mid
         {
             get
@@ -176,6 +177,22 @@ namespace ELEVEN.Model
                 }
             }
         }
+        public string broker
+        {
+            get
+            {
+                return _broker;
+            }
+
+            set
+            {
+                if (value != this._broker)
+                {
+                    this._broker = value;
+                    //NotifyPropertyChanged("mid");
+                }
+            }
+        }
     }
     public class OldData
     {
@@ -189,6 +206,7 @@ namespace ELEVEN.Model
         public string volume { get; set; }
         public string timestamp { get; set; }
         public string pair { get; set; }
+        public string broker { get; set; }
     }
 
     public class FinexStats
