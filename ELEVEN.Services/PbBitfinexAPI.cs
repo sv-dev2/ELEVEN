@@ -150,6 +150,21 @@ namespace ELEVEN.Services
             var accountInfo = new BFAccountInfo(accountInfoUrl, Nonce);
             SendRequest(accountInfo, "POST");
         }
+        public NewOrderResponse ExecuteBuyOrderBTC(string symbol, decimal amount, decimal price, OrderExchange exchange, OrderType type)
+        {
+            return ExecuteOrder(symbol, amount, price, exchange, "buy", type);
+        }
+        public NewOrderResponse ExecuteSellOrderBTC(string symbol,decimal amount, decimal price, OrderExchange exchange, OrderType type)
+        {
+            return ExecuteOrder(symbol, amount, price, exchange, "sell", type);
+        }
+        public NewOrderResponse ExecuteOrder(string symbol, decimal amount, decimal price, OrderExchange exchange, string side, OrderType type)
+        {
+            NewOrderRequest req = new NewOrderRequest(Nonce, symbol, amount, price, exchange, side, type);
+            string response = SendRequest(req, "POST");
+            NewOrderResponse resp = NewOrderResponse.FromJSON(response);
+            return resp;
+        }
         private string SendRequest(GenericRequest request, string httpMethod)
         {
             string json = JsonConvert.SerializeObject(request);

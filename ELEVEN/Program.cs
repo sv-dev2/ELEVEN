@@ -19,7 +19,8 @@ namespace ELEVEN
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             PbBitfinexAPI pbBitfinexAPI = new PbBitfinexAPI();
-            pbBitfinexAPI.GetAccountInfo();
+            //pbBitfinexAPI.GetAccountInfo();
+            pbBitfinexAPI.ExecuteBuyOrderBTC("BTCUSD", 0.3M, 1000, Models.OrderExchange.Bitfinex, Models.OrderType.ExchangeMarket);
             Application.Run(new MDIParentForm());
             
         }
