@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>favicon2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentFactory.Krypton.Design">
@@ -345,6 +345,7 @@
     <Content Include="DLL\ComponentFactory.Krypton.Workspace.XML" />
     <Content Include="DLL\gacutil.exe" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon2.ico" />
     <Content Include="Images\app_edit.png" />
     <Content Include="Images\arrow.png" />
     <Content Include="Images\ArrowDown.bmp" />
