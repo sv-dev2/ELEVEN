@@ -26,6 +26,10 @@ namespace ELEVEN
         BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
         BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
         List<OldData> OldWatchList = new List<OldData>();
+        StringBuilder sbBitfinex = new StringBuilder();
+        StringBuilder sbTraders = new StringBuilder();
+        StringBuilder sbIGMarket = new StringBuilder();
+        StringBuilder sbICMarket = new StringBuilder();
         #endregion
 
         public frmMarketWatchWin()
@@ -35,7 +39,7 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-           
+
         }
         string fileName = string.Empty;
         private void SymbolFileExist()
@@ -47,7 +51,7 @@ namespace ELEVEN
                 var streamWriter = File.CreateText(fileName);
                 streamWriter.Close();
                 streamWriter.Dispose();
-                string symbols = "tBTCUSD";
+                string symbols = "BITFINEX.ETHUSD";
                 using (System.IO.StreamWriter file =
               new System.IO.StreamWriter(fileName, false))
                 {
@@ -92,7 +96,7 @@ namespace ELEVEN
             dataGridMarketData.Columns[2].Name = "Ask";
             dataGridMarketData.Columns[2].HeaderText = "Ask";
             dataGridMarketData.Columns[2].DataPropertyName = "ask";
-           //dataGridMarketData.Columns[2].Width = 75;
+            //dataGridMarketData.Columns[2].Width = 75;
 
             dataGridMarketData.Columns[3].Name = "Last";
             dataGridMarketData.Columns[3].HeaderText = "Last";
@@ -169,7 +173,7 @@ namespace ELEVEN
             //}
             foreach (var item in result)
             {
-                SymbolCollection.Add(item.BrokerCode+"."+item.InstrumentCode);
+                SymbolCollection.Add(item.BrokerCode + "." + item.InstrumentCode);
             }
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -185,9 +189,9 @@ namespace ELEVEN
             catch
             {
 
-               
+
             }
-           
+
         }
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -202,7 +206,8 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
+            Seprateticklers(symbols);
+            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + sbBitfinex.ToString());
 
             if (ticker != null)
             {
@@ -217,6 +222,54 @@ namespace ELEVEN
                 ObjTrading = customerList;
             }
 
+        }
+        private void Seprateticklers(string symbols)
+        {
+            sbBitfinex.Clear();
+            sbTraders.Clear();
+            sbIGMarket.Clear();
+            sbICMarket.Clear();
+            var allTicklers = symbols.Split(',');
+            foreach (string tickler in allTicklers)
+            {
+                if (tickler.ToLower().IndexOf("bitfinex") > -1)
+                {
+                    var instrumentCode = tickler.Split('.');
+                    if (sbBitfinex.Length > 1)
+                    {
+                        sbBitfinex.Append(",");
+                    }
+                    sbBitfinex.Append("t" + instrumentCode[1].ToUpper());//t and upper is appended/use only for bitfinex as per bitfinex API documentation
+
+                }
+                else if (tickler.ToLower().IndexOf("trade") > -1)
+                {
+                    var instrumentCode = tickler.Split('.');
+                    if (sbTraders.Length > 1)
+                    {
+                        sbTraders.Append(",");
+                    }
+                    sbTraders.Append(instrumentCode[1]);
+                }
+                else if (tickler.ToLower().Replace(" ","").IndexOf("igmarket") > -1)
+                {
+                    var instrumentCode = tickler.Split('.');
+                    if (sbIGMarket.Length > 1)
+                    {
+                        sbIGMarket.Append(",");
+                    }
+                    sbIGMarket.Append(instrumentCode[1]);
+                }
+                else if (tickler.ToLower().Replace(" ", "").IndexOf("icmarket") > -1)
+                {
+                    var instrumentCode = tickler.Split('.');
+                    if (sbICMarket.Length > 1)
+                    {
+                        sbICMarket.Append(",");
+                    }
+                    sbICMarket.Append(instrumentCode[1]);
+                }
+            }
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -234,7 +287,8 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + symbols);
+            Seprateticklers(symbols);
+            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + sbBitfinex.ToString());
 
             if (ticker != null)
             {
@@ -332,7 +386,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            symbols = symbols.Replace(",t" + symbol, "");
+            symbols = symbols.Replace("," + symbol, "");
 
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(this.Name + ".txt", false))
@@ -372,11 +426,11 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            if (!symbols.Contains("t" + txtAddRow.Text))
+            if (!symbols.Contains(txtAddRow.Text.ToUpper()))
             {
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name + ".txt", true))
                 {
-                    file.Write(",t" + txtAddRow.Text);
+                    file.Write("," + txtAddRow.Text.ToUpper());
                     file.Close();
                 }
             }
