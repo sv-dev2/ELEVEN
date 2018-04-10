@@ -17,6 +17,7 @@ namespace ELEVEN
     {
         BrokerInstrumentMapping instrumentMapping = null;
         clsBrokerInstrumentMapping brokerInstrumentMapping = null;
+        clsBrokerInstrumentMapping brokerUpdateMapping = null;
         List<clsInstrument> InstrumentList = null;
         List<clsBroker> brokerList = null;
         public frmBrokerInstrumentMapping()
@@ -24,12 +25,15 @@ namespace ELEVEN
             InitializeComponent();
             instrumentMapping = new BrokerInstrumentMapping();
             brokerInstrumentMapping = new clsBrokerInstrumentMapping();
+            brokerUpdateMapping = new clsBrokerInstrumentMapping();
         }
-
+        TabPage updateTab = null;
         private void frmBrokerInstrumentMapping_Load(object sender, EventArgs e)
         {
             BindComboBox();
             BindProperties();
+            updateTab = tabPageUpdateMapping;
+            tabControl1.TabPages.Remove(tabPageUpdateMapping);
         }
         private void BindComboBox()
         {
@@ -42,6 +46,19 @@ namespace ELEVEN
             comboInstrument.DataSource = InstrumentList;
             comboInstrument.DisplayMember = "InstrumentCode";
             comboInstrument.ValueMember = "Id";
+
+        }
+        private void BindUpdateComboBox()
+        {
+            InstrumentList = instrumentMapping.GetInstruments();
+            brokerList = instrumentMapping.GetBrokers();
+            comboUpdateBroker.DataSource = brokerList;
+            comboUpdateBroker.DisplayMember = "BrokerCode";
+            comboUpdateBroker.ValueMember = "Id";
+
+            comboUpdateInstrument.DataSource = InstrumentList;
+            comboUpdateInstrument.DisplayMember = "InstrumentCode";
+            comboUpdateInstrument.ValueMember = "Id";
 
         }
         private void BindProperties()
@@ -138,7 +155,37 @@ namespace ELEVEN
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            if (Convert.ToString(comboUpdateBroker.SelectedValue) == "" || Convert.ToInt32(comboUpdateBroker.SelectedValue) == 0)
+            {
+                MessageBox.Show(this, "Please select a broker.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (Convert.ToString(comboUpdateInstrument.SelectedValue) == "" || Convert.ToInt32(comboUpdateInstrument.SelectedValue) == 0)
+            {
+                MessageBox.Show(this, "Please select a instrument.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (txtUpdateBIC.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show(this, "Please fill broker instrument code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            brokerUpdateMapping.BrokerId = Convert.ToInt32(comboUpdateBroker.SelectedValue);
+            brokerUpdateMapping.InstrumentId = Convert.ToInt32(comboUpdateInstrument.SelectedValue);
+            brokerUpdateMapping.BrokerInstrumentCode = txtUpdateBIC.Text;
+            brokerUpdateMapping.FeedPrices = chkUpdatePrices.Checked;
+            brokerUpdateMapping.FeedTrades = chkUpdateTrades.Checked;
+            brokerUpdateMapping.Id = result.Id;
+            if (instrumentMapping.CheckDuplicateMapping(brokerUpdateMapping))
+            {
+                instrumentMapping.UpdateMapping(brokerUpdateMapping);
+                MessageBox.Show(this, "Mapping updated successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(this, "Mapping already present.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
 
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
@@ -155,6 +202,35 @@ namespace ELEVEN
             else if (tabName == "tabPageAddMapping")
             {
                 tabControl1.TabPages.Remove(tabPageUpdateMapping);
+            }
+        }
+        clsBrokerInstrumentDetail result = null;
+        private void dataGridMappings_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return; // header clicked
+
+            if (e.ColumnIndex == dataGridMappings.Columns["buttonColumn"].Index)
+            {
+                // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
+                int Id = Convert.ToInt32(dataGridMappings["Id", e.RowIndex].Value);
+                instrumentMapping.DeleteMapping(Id);
+                var dataSource = instrumentMapping.SearchBrokerInstrumentCode();
+                dataGridMappings.DataSource = dataSource;
+                MessageBox.Show(this, "Mapping deleted successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (e.ColumnIndex == dataGridMappings.Columns["buttonColumnEdit"].Index)
+            {
+                // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
+                int Id = Convert.ToInt32(dataGridMappings["Id", e.RowIndex].Value);
+                tabControl1.TabPages.Insert(2, updateTab);
+                tabControl1.SelectedTab = updateTab;
+                result = instrumentMapping.GetBrokerInstrumentMapping(Id);
+                BindUpdateComboBox();
+                comboUpdateBroker.SelectedValue = result.BrokerId;
+                comboUpdateInstrument.SelectedValue = result.InstrumentId;
+                txtUpdateBIC.Text = result.BrokerInstrumentCode;
+                chkUpdatePrices.Checked = result.FeedPrices;
+                chkUpdateTrades.Checked = result.FeedTrades;
             }
         }
     }

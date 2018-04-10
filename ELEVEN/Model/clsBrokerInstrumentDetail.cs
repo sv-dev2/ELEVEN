@@ -16,5 +16,7 @@ namespace ELEVEN.Model
         public string BrokerDescription { get; set; }
         public string InstrumentDescription { get; set; }
         public string BrokerInstrumentCode { get; set; }
+        public bool FeedPrices { get; set; }
+        public bool FeedTrades { get; set; }
     }
 }

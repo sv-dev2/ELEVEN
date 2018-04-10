@@ -430,7 +430,7 @@ namespace ELEVEN.DBConnection
             sqlite_cmd = sqlite_conn.CreateCommand();
 
             // First lets build a SQL-Query again:
-            sqlite_cmd.CommandText = $"SELECT * FROM tblBrokerInstrumentMapping where FeedPrices='True' and FeedTrades='True'";
+            sqlite_cmd.CommandText = $"SELECT * FROM tblBrokerInstrumentMapping";
             // Now the SQLiteCommand object can give us a DataReader-Object:
             sqlite_datareader = sqlite_cmd.ExecuteReader();
             // The SQLiteDataReader allows us to run through the result lines:
@@ -505,6 +505,48 @@ namespace ELEVEN.DBConnection
             sqlite_conn.Close();
             sqlite_conn.Dispose();
             sqlite_cmd.Dispose();
+        }
+        public clsBrokerInstrumentDetail GetBrokerInstrumentMapping(int id)
+        {
+            clsBrokerInstrumentDetail model = new clsBrokerInstrumentDetail();
+            // We use these three SQLite objects:           
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"SELECT * FROM tblBrokerInstrumentMapping where Id={id}";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // The SQLiteDataReader allows us to run through the result lines:
+            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            {               
+                model.Id = Convert.ToInt32(sqlite_datareader["Id"]);
+                model.InstrumentId = Convert.ToInt32(sqlite_datareader["InstrumentId"]);
+                model.BrokerId = Convert.ToInt32(sqlite_datareader["BrokerId"]);
+                model.BrokerInstrumentCode = Convert.ToString(sqlite_datareader["BrokerInstrumentCode"]);
+                model.FeedPrices = Convert.ToBoolean(sqlite_datareader["FeedPrices"]);
+                model.FeedTrades = Convert.ToBoolean(sqlite_datareader["FeedTrades"]);
+
+                var broker = GetBroker(model.BrokerId);
+                model.BrokerCode = broker.BrokerCode;
+                model.BrokerDescription = broker.BrokerDescription;
+
+                var instrument = GetInstrument(model.InstrumentId);
+                model.InstrumentCode = instrument.InstrumentCode;
+                model.InstrumentDescription = instrument.InstrumentDescription;
+            }
+
+            // We are ready, now lets cleanup and close our connection:
+            DisposeConnection(sqlite_conn, sqlite_cmd, sqlite_datareader);
+            return model;
         }
         #endregion
     }

@@ -29,23 +29,24 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btnCreateMap = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.chkTrades = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.chkPrices = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.txtBIC = new System.Windows.Forms.TextBox();
-            this.comboInstrument = new System.Windows.Forms.ComboBox();
-            this.comboBroker = new System.Windows.Forms.ComboBox();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageAddMapping = new System.Windows.Forms.TabPage();
+            this.btnCreateMap = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.txtBIC = new System.Windows.Forms.TextBox();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.chkTrades = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.chkPrices = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.comboInstrument = new System.Windows.Forms.ComboBox();
+            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.comboBroker = new System.Windows.Forms.ComboBox();
             this.tabPageMapping = new System.Windows.Forms.TabPage();
+            this.dataGridMappings = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.tabPageUpdateMapping = new System.Windows.Forms.TabPage();
             this.btnUpdate = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.ComboUpdateBIC = new System.Windows.Forms.TextBox();
+            this.txtUpdateBIC = new System.Windows.Forms.TextBox();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.chkUpdateTrades = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -55,14 +56,13 @@
             this.comboUpdateInstrument = new System.Windows.Forms.ComboBox();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.comboUpdateBroker = new System.Windows.Forms.ComboBox();
-            this.dataGridMappings = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageAddMapping.SuspendLayout();
             this.tabPageMapping.SuspendLayout();
-            this.tabPageUpdateMapping.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMappings)).BeginInit();
+            this.tabPageUpdateMapping.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPanel1
@@ -73,98 +73,6 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(632, 388);
             this.kryptonPanel1.TabIndex = 0;
-            // 
-            // btnCreateMap
-            // 
-            this.btnCreateMap.Location = new System.Drawing.Point(294, 254);
-            this.btnCreateMap.Name = "btnCreateMap";
-            this.btnCreateMap.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
-            this.btnCreateMap.Size = new System.Drawing.Size(100, 50);
-            this.btnCreateMap.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateMap.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.btnCreateMap.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
-            this.btnCreateMap.TabIndex = 10;
-            this.btnCreateMap.Values.Text = "Create";
-            this.btnCreateMap.Click += new System.EventHandler(this.btnCreateMap_Click);
-            // 
-            // chkTrades
-            // 
-            this.chkTrades.Location = new System.Drawing.Point(294, 224);
-            this.chkTrades.Name = "chkTrades";
-            this.chkTrades.Size = new System.Drawing.Size(19, 13);
-            this.chkTrades.TabIndex = 9;
-            this.chkTrades.Values.Text = "";
-            // 
-            // chkPrices
-            // 
-            this.chkPrices.Location = new System.Drawing.Point(294, 180);
-            this.chkPrices.Name = "chkPrices";
-            this.chkPrices.Size = new System.Drawing.Size(19, 13);
-            this.chkPrices.TabIndex = 8;
-            this.chkPrices.Values.Text = "";
-            // 
-            // txtBIC
-            // 
-            this.txtBIC.Location = new System.Drawing.Point(294, 141);
-            this.txtBIC.Name = "txtBIC";
-            this.txtBIC.Size = new System.Drawing.Size(138, 20);
-            this.txtBIC.TabIndex = 7;
-            // 
-            // comboInstrument
-            // 
-            this.comboInstrument.FormattingEnabled = true;
-            this.comboInstrument.Location = new System.Drawing.Point(294, 101);
-            this.comboInstrument.Name = "comboInstrument";
-            this.comboInstrument.Size = new System.Drawing.Size(138, 21);
-            this.comboInstrument.TabIndex = 6;
-            // 
-            // comboBroker
-            // 
-            this.comboBroker.FormattingEnabled = true;
-            this.comboBroker.Location = new System.Drawing.Point(294, 60);
-            this.comboBroker.Name = "comboBroker";
-            this.comboBroker.Size = new System.Drawing.Size(138, 21);
-            this.comboBroker.TabIndex = 5;
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(118, 224);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(76, 20);
-            this.kryptonLabel5.TabIndex = 4;
-            this.kryptonLabel5.Values.Text = "Feed Trades";
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(118, 180);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(72, 20);
-            this.kryptonLabel4.TabIndex = 3;
-            this.kryptonLabel4.Values.Text = "Feed Prices";
-            // 
-            // kryptonLabel3
-            // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(118, 141);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(141, 20);
-            this.kryptonLabel3.TabIndex = 2;
-            this.kryptonLabel3.Values.Text = "Broker Instrument Code";
-            // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(118, 101);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(70, 20);
-            this.kryptonLabel2.TabIndex = 1;
-            this.kryptonLabel2.Values.Text = "Instrument";
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(118, 62);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(46, 20);
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Broker";
             // 
             // tabControl1
             // 
@@ -200,6 +108,96 @@
             this.tabPageAddMapping.Text = "Add Mapping";
             this.tabPageAddMapping.UseVisualStyleBackColor = true;
             // 
+            // btnCreateMap
+            // 
+            this.btnCreateMap.Location = new System.Drawing.Point(294, 254);
+            this.btnCreateMap.Name = "btnCreateMap";
+            this.btnCreateMap.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.btnCreateMap.Size = new System.Drawing.Size(100, 50);
+            this.btnCreateMap.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateMap.TabIndex = 10;
+            this.btnCreateMap.Values.Text = "Create";
+            this.btnCreateMap.Click += new System.EventHandler(this.btnCreateMap_Click);
+            // 
+            // txtBIC
+            // 
+            this.txtBIC.Location = new System.Drawing.Point(294, 141);
+            this.txtBIC.Name = "txtBIC";
+            this.txtBIC.Size = new System.Drawing.Size(138, 20);
+            this.txtBIC.TabIndex = 7;
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(118, 62);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(46, 20);
+            this.kryptonLabel1.TabIndex = 0;
+            this.kryptonLabel1.Values.Text = "Broker";
+            // 
+            // chkTrades
+            // 
+            this.chkTrades.Location = new System.Drawing.Point(294, 224);
+            this.chkTrades.Name = "chkTrades";
+            this.chkTrades.Size = new System.Drawing.Size(19, 13);
+            this.chkTrades.TabIndex = 9;
+            this.chkTrades.Values.Text = "";
+            // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(118, 101);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(70, 20);
+            this.kryptonLabel2.TabIndex = 1;
+            this.kryptonLabel2.Values.Text = "Instrument";
+            // 
+            // chkPrices
+            // 
+            this.chkPrices.Location = new System.Drawing.Point(294, 180);
+            this.chkPrices.Name = "chkPrices";
+            this.chkPrices.Size = new System.Drawing.Size(19, 13);
+            this.chkPrices.TabIndex = 8;
+            this.chkPrices.Values.Text = "";
+            // 
+            // kryptonLabel3
+            // 
+            this.kryptonLabel3.Location = new System.Drawing.Point(118, 141);
+            this.kryptonLabel3.Name = "kryptonLabel3";
+            this.kryptonLabel3.Size = new System.Drawing.Size(141, 20);
+            this.kryptonLabel3.TabIndex = 2;
+            this.kryptonLabel3.Values.Text = "Broker Instrument Code";
+            // 
+            // kryptonLabel4
+            // 
+            this.kryptonLabel4.Location = new System.Drawing.Point(118, 180);
+            this.kryptonLabel4.Name = "kryptonLabel4";
+            this.kryptonLabel4.Size = new System.Drawing.Size(72, 20);
+            this.kryptonLabel4.TabIndex = 3;
+            this.kryptonLabel4.Values.Text = "Feed Prices";
+            // 
+            // comboInstrument
+            // 
+            this.comboInstrument.FormattingEnabled = true;
+            this.comboInstrument.Location = new System.Drawing.Point(294, 101);
+            this.comboInstrument.Name = "comboInstrument";
+            this.comboInstrument.Size = new System.Drawing.Size(138, 21);
+            this.comboInstrument.TabIndex = 6;
+            // 
+            // kryptonLabel5
+            // 
+            this.kryptonLabel5.Location = new System.Drawing.Point(118, 224);
+            this.kryptonLabel5.Name = "kryptonLabel5";
+            this.kryptonLabel5.Size = new System.Drawing.Size(76, 20);
+            this.kryptonLabel5.TabIndex = 4;
+            this.kryptonLabel5.Values.Text = "Feed Trades";
+            // 
+            // comboBroker
+            // 
+            this.comboBroker.FormattingEnabled = true;
+            this.comboBroker.Location = new System.Drawing.Point(294, 60);
+            this.comboBroker.Name = "comboBroker";
+            this.comboBroker.Size = new System.Drawing.Size(138, 21);
+            this.comboBroker.TabIndex = 5;
+            // 
             // tabPageMapping
             // 
             this.tabPageMapping.Controls.Add(this.dataGridMappings);
@@ -211,10 +209,30 @@
             this.tabPageMapping.Text = "Mapping";
             this.tabPageMapping.UseVisualStyleBackColor = true;
             // 
+            // dataGridMappings
+            // 
+            this.dataGridMappings.AllowUserToAddRows = false;
+            this.dataGridMappings.AllowUserToDeleteRows = false;
+            this.dataGridMappings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridMappings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMappings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridMappings.HideOuterBorders = true;
+            this.dataGridMappings.Location = new System.Drawing.Point(3, 3);
+            this.dataGridMappings.MultiSelect = false;
+            this.dataGridMappings.Name = "dataGridMappings";
+            this.dataGridMappings.ReadOnly = true;
+            this.dataGridMappings.RowHeadersVisible = false;
+            this.dataGridMappings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridMappings.ShowEditingIcon = false;
+            this.dataGridMappings.Size = new System.Drawing.Size(618, 356);
+            this.dataGridMappings.StandardTab = true;
+            this.dataGridMappings.TabIndex = 34;
+            this.dataGridMappings.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMappings_CellClick);
+            // 
             // tabPageUpdateMapping
             // 
             this.tabPageUpdateMapping.Controls.Add(this.btnUpdate);
-            this.tabPageUpdateMapping.Controls.Add(this.ComboUpdateBIC);
+            this.tabPageUpdateMapping.Controls.Add(this.txtUpdateBIC);
             this.tabPageUpdateMapping.Controls.Add(this.kryptonLabel6);
             this.tabPageUpdateMapping.Controls.Add(this.chkUpdateTrades);
             this.tabPageUpdateMapping.Controls.Add(this.kryptonLabel7);
@@ -238,18 +256,16 @@
             this.btnUpdate.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
             this.btnUpdate.Size = new System.Drawing.Size(100, 50);
             this.btnUpdate.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.btnUpdate.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.btnUpdate.TabIndex = 21;
             this.btnUpdate.Values.Text = "Update";
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // ComboUpdateBIC
+            // txtUpdateBIC
             // 
-            this.ComboUpdateBIC.Location = new System.Drawing.Point(314, 140);
-            this.ComboUpdateBIC.Name = "ComboUpdateBIC";
-            this.ComboUpdateBIC.Size = new System.Drawing.Size(138, 20);
-            this.ComboUpdateBIC.TabIndex = 18;
+            this.txtUpdateBIC.Location = new System.Drawing.Point(314, 140);
+            this.txtUpdateBIC.Name = "txtUpdateBIC";
+            this.txtUpdateBIC.Size = new System.Drawing.Size(138, 20);
+            this.txtUpdateBIC.TabIndex = 18;
             // 
             // kryptonLabel6
             // 
@@ -323,25 +339,6 @@
             this.comboUpdateBroker.Size = new System.Drawing.Size(138, 21);
             this.comboUpdateBroker.TabIndex = 16;
             // 
-            // dataGridMappings
-            // 
-            this.dataGridMappings.AllowUserToAddRows = false;
-            this.dataGridMappings.AllowUserToDeleteRows = false;
-            this.dataGridMappings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridMappings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridMappings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridMappings.HideOuterBorders = true;
-            this.dataGridMappings.Location = new System.Drawing.Point(3, 3);
-            this.dataGridMappings.MultiSelect = false;
-            this.dataGridMappings.Name = "dataGridMappings";
-            this.dataGridMappings.ReadOnly = true;
-            this.dataGridMappings.RowHeadersVisible = false;
-            this.dataGridMappings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridMappings.ShowEditingIcon = false;
-            this.dataGridMappings.Size = new System.Drawing.Size(618, 356);
-            this.dataGridMappings.StandardTab = true;
-            this.dataGridMappings.TabIndex = 34;
-            // 
             // frmBrokerInstrumentMapping
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -363,9 +360,9 @@
             this.tabPageAddMapping.ResumeLayout(false);
             this.tabPageAddMapping.PerformLayout();
             this.tabPageMapping.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMappings)).EndInit();
             this.tabPageUpdateMapping.ResumeLayout(false);
             this.tabPageUpdateMapping.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridMappings)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -389,7 +386,7 @@
         private System.Windows.Forms.TabPage tabPageMapping;
         private System.Windows.Forms.TabPage tabPageUpdateMapping;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdate;
-        private System.Windows.Forms.TextBox ComboUpdateBIC;
+        private System.Windows.Forms.TextBox txtUpdateBIC;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkUpdateTrades;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
