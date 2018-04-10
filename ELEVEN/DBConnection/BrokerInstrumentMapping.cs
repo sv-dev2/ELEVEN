@@ -483,7 +483,7 @@ namespace ELEVEN.DBConnection
 
             return broker;
         }
-        public void UpdateMapping(clsBrokerInstrumentMapping model)
+        public void UpdateMapping(clsBrokerInstrumentMapping model,bool duplicate)
         {
             // We use these three SQLite objects:
 
@@ -498,7 +498,15 @@ namespace ELEVEN.DBConnection
             sqlite_cmd = sqlite_conn.CreateCommand();
 
             // Lets insert something into our new table:
-            sqlite_cmd.CommandText = $"Update tblBrokerInstrumentMapping set BrokerId={model.BrokerId},InstrumentId={model.InstrumentId},BrokerInstrumentCode='{model.BrokerInstrumentCode}',FeedPrices='{model.FeedPrices}',FeedTrades='{model.FeedTrades}' where Id={model.Id};";
+            if(duplicate)
+            {
+                sqlite_cmd.CommandText = $"Update tblBrokerInstrumentMapping set BrokerInstrumentCode='{model.BrokerInstrumentCode}',FeedPrices='{model.FeedPrices}',FeedTrades='{model.FeedTrades}' where Id={model.Id};";
+            }
+            else
+            {
+                sqlite_cmd.CommandText = $"Update tblBrokerInstrumentMapping set BrokerId={model.BrokerId},InstrumentId={model.InstrumentId},BrokerInstrumentCode='{model.BrokerInstrumentCode}',FeedPrices='{model.FeedPrices}',FeedTrades='{model.FeedTrades}' where Id={model.Id};";
+            }
+           
             // And execute this again ;D
             sqlite_cmd.ExecuteNonQuery();
             // We are ready, now lets cleanup and close our connection:

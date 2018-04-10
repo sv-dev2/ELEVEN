@@ -166,7 +166,7 @@ namespace ELEVEN
             this.backgroundWorker2.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             backgroundWorker2.RunWorkerAsync();
         }
-        private void AutoCompletetxtAddRow()
+        public void AutoCompletetxtAddRow()
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
             var result = instrumentMapping.SearchMapping();

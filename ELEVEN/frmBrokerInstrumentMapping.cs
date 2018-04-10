@@ -20,12 +20,14 @@ namespace ELEVEN
         clsBrokerInstrumentMapping brokerUpdateMapping = null;
         List<clsInstrument> InstrumentList = null;
         List<clsBroker> brokerList = null;
-        public frmBrokerInstrumentMapping()
+        MDIParentForm parent;
+        public frmBrokerInstrumentMapping(MDIParentForm parent)
         {
             InitializeComponent();
             instrumentMapping = new BrokerInstrumentMapping();
             brokerInstrumentMapping = new clsBrokerInstrumentMapping();
             brokerUpdateMapping = new clsBrokerInstrumentMapping();
+            this.parent = parent;
         }
         TabPage updateTab = null;
         private void frmBrokerInstrumentMapping_Load(object sender, EventArgs e)
@@ -144,6 +146,7 @@ namespace ELEVEN
             if (instrumentMapping.CheckDuplicateMapping(brokerInstrumentMapping))
             {
                 instrumentMapping.AddBrokerInstrumentMapping(brokerInstrumentMapping);
+                parent.RefreshFormData();
                 MessageBox.Show(this, "Mapping created successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -151,6 +154,7 @@ namespace ELEVEN
                 MessageBox.Show(this, "Mapping already present.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -178,14 +182,16 @@ namespace ELEVEN
             brokerUpdateMapping.Id = result.Id;
             if (instrumentMapping.CheckDuplicateMapping(brokerUpdateMapping))
             {
-                instrumentMapping.UpdateMapping(brokerUpdateMapping);
+                instrumentMapping.UpdateMapping(brokerUpdateMapping,false);
                 MessageBox.Show(this, "Mapping updated successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show(this, "Mapping already present.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                instrumentMapping.UpdateMapping(brokerUpdateMapping, true);
+                MessageBox.Show(this, "Record updated successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            parent.RefreshFormData();
         }
 
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)

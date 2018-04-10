@@ -664,6 +664,7 @@ namespace ELEVEN
                     menuItem.Click += MenuItem_Click;
                     workspaceToolStripMenuItem.DropDownItems.Add(menuItem);
                     currentWorkspaceId = workSpaceid;
+                    lblShowActiveWorkspace.Text = form.WorkspaceName;
                 }
                 else
                 {
@@ -687,7 +688,7 @@ namespace ELEVEN
 
         private void brokerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmBroker broker = new frmBroker();           
+            frmBroker broker = new frmBroker();
             broker.ShowDialog();
         }
 
@@ -699,8 +700,22 @@ namespace ELEVEN
 
         private void linkInstrumentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmBrokerInstrumentMapping instrumentMapping = new frmBrokerInstrumentMapping();
+            frmBrokerInstrumentMapping instrumentMapping = new frmBrokerInstrumentMapping(this);
             instrumentMapping.ShowDialog();
         }
+        public void RefreshFormData()
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                switch (childForm.Tag)
+                {
+                    case "frmMarketWatchWin":
+                        var marketWatch = childForm as frmMarketWatchWin;
+                        marketWatch.AutoCompletetxtAddRow();
+                        break;
+                }
+            }
+        }
+
     }
 }
