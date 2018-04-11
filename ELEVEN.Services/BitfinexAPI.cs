@@ -20,26 +20,16 @@ namespace ELEVEN.Services
         public static readonly string baseAddressV1_Back = "https://api.bitfinex.com/v1/";
         private string accountInfoUrl = "/v1/account_infos";
         #endregion
-       
+
         static List<string> ArrayString = new List<string> { "140.82.5.180:8080", "159.65.110.167:3128", "216.32.29.46:8008" };
         static long firstTime = 1;
         public string secret = "BGT95gwA8FTfVH43dRlt0k4HRKJQq9YztrOllPfNShz";
         private DateTime epoch = new DateTime(2017, 12, 12);
 
         private HMACSHA384 hashMaker;
-        private string Key;
-        private int nonce = 0;
+        private string Key;       
         private string Nonce
         {
-            //get
-            //{
-            //    if (nonce == 0)
-            //    {
-            //        nonce = (int)(DateTime.UtcNow - epoch).TotalSeconds + (int)(DateTime.UtcNow - epoch).TotalSeconds + (int)(DateTime.UtcNow - epoch).TotalSeconds;
-            //    }
-            //    return (nonce++).ToString();
-            //    //return DateTime.Now.Second.ToString();
-            //}
             get
             {
                 return "99999999999999" + (DateTime.UtcNow - epoch).TotalSeconds.ToString();
@@ -89,6 +79,29 @@ namespace ELEVEN.Services
             }
 
             return "";
+        }
+        public PubTicker GetTicker(string symbol)
+        {
+            try
+            {
+               string url = "https://api.bitfinex.com/v1/pubticker/"+ symbol;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.UserAgent = "Foo";
+                httpWebRequest.Accept = "*/*";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    return JsonConvert.DeserializeObject<PubTicker>(result);
+                }
+            }
+            catch
+            {
+            }
+
+            return new PubTicker();
         }
         // static List<string> ArrayString = new List<string> { "202.137.25.53:3128" };
         public static T Get<T>(string url)
@@ -197,11 +210,13 @@ namespace ELEVEN.Services
         }
         public NewOrderResponse ExecuteBuyOrderBTC(string symbol, decimal amount, decimal price, OrderExchange exchange, OrderType type)
         {
-            return ExecuteOrder(symbol, amount, price, exchange, "buy", type);
+            var ticker = GetTicker(symbol);
+            return ExecuteOrder(symbol, amount,Convert.ToDecimal(ticker.ask), exchange, "buy", type);
         }
-        public NewOrderResponse ExecuteSellOrderBTC(string symbol,decimal amount, decimal price, OrderExchange exchange, OrderType type)
+        public NewOrderResponse ExecuteSellOrderBTC(string symbol, decimal amount, decimal price, OrderExchange exchange, OrderType type)
         {
-            return ExecuteOrder(symbol, amount, price, exchange, "sell", type);
+            var ticker = GetTicker(symbol);
+            return ExecuteOrder(symbol, amount, Convert.ToDecimal(ticker.bid), exchange, "sell", type);
         }
         public NewOrderResponse ExecuteOrder(string symbol, decimal amount, decimal price, OrderExchange exchange, string side, OrderType type)
         {

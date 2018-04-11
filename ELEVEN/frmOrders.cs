@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using ELEVEN.DBConnection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,14 @@ namespace ELEVEN
 {
     public partial class frmOrders : KryptonForm
     {
+        BrokerInstrumentMapping instrumentMapping = null;
         public frmOrders()
         {
             InitializeComponent();
+            instrumentMapping = new BrokerInstrumentMapping();
             txtSecurity.Text = "Security";
             txtQuantity.Text = "Quantity";
+            AutoCompletetxtAddRow();
         }
 
         private void frmOrders_Load(object sender, EventArgs e)
@@ -56,7 +60,20 @@ namespace ELEVEN
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
         }
+        public void AutoCompletetxtAddRow()
+        {
+            AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
+            var result = instrumentMapping.SearchMapping();
+           
+            foreach (var item in result)
+            {
+                SymbolCollection.Add(item.BrokerCode + "." + item.InstrumentCode);
+            }
+            txtSecurity.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtSecurity.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtSecurity.AutoCompleteCustomSource = SymbolCollection;
 
+        }
         private void btnDetails_Click(object sender, EventArgs e)
         {
 
