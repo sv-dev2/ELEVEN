@@ -86,6 +86,31 @@ namespace ELEVEN
             var type = comboBoxMarket.SelectedValue;
             var amount = txtQuantity.Text;
             var exchange = comboBoxStocks.SelectedValue;
+            if(symbol==string.Empty)
+            {
+                MessageBox.Show(this, "Please fill security", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if(side == null)
+            {
+                MessageBox.Show(this, "Please fill side", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if (type == null)
+            {
+                MessageBox.Show(this, "Please fill type", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if (amount == null)
+            {
+                MessageBox.Show(this, "Please fill quantity", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if (exchange == null)
+            {
+                MessageBox.Show(this, "Please fill exchange", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
     }
 }
