@@ -25,7 +25,7 @@ namespace ELEVEN.Models
             this.side = side;
             this.type = EnumHelper.EnumToStr(type);
             this.nonce = nonce;
-            this.request = "order/new";
+            this.request = "/v1/order/new";
         }
     }
     public class EnumHelper

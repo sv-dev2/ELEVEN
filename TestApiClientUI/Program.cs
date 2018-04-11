@@ -1,12 +1,9 @@
-﻿using ELEVEN.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-namespace ELEVEN
+namespace TestApiClientUI
 {
     static class Program
     {
@@ -18,11 +15,7 @@ namespace ELEVEN
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            PbBitfinexAPI pbBitfinexAPI = new PbBitfinexAPI();
-            pbBitfinexAPI.GetActivePositions();
-           //pbBitfinexAPI.ExecuteBuyOrderBTC("ltcusd", 0.3M, 10, Models.OrderExchange.Bitfinex, Models.OrderType.ExchangeMarket);
-            Application.Run(new MDIParentForm());
-            
+            Application.Run(new Form1());
         }
     }
 }

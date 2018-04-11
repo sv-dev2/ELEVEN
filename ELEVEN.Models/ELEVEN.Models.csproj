@@ -45,9 +45,20 @@
   <ItemGroup>
     <Compile Include="BFAccountInfo.cs" />
     <Compile Include="BitfinexException.cs" />
+    <Compile Include="BitFinix\ActiveOrdersRequest.cs" />
+    <Compile Include="BitFinix\ActiveOrdersResponse.cs" />
+    <Compile Include="BitFinix\ActivePositionsRequest.cs" />
+    <Compile Include="BitFinix\ActivePositionsResponse.cs" />
+    <Compile Include="BitFinix\BalancesRequest.cs" />
+    <Compile Include="BitFinix\BalancesResponse.cs" />
+    <Compile Include="BitFinix\CancelAllOrdersRequest.cs" />
+    <Compile Include="BitFinix\CancelAllOrdersResponse.cs" />
+    <Compile Include="BitFinix\CancelOrderRequest.cs" />
+    <Compile Include="BitFinix\CancelOrderResponse.cs" />
     <Compile Include="BitFinix\Enums.cs" />
     <Compile Include="BitFinix\NewOrderRequest.cs" />
     <Compile Include="BitFinix\NewOrderResponse.cs" />
+    <Compile Include="BitFinix\OrderStatusRequest.cs" />
     <Compile Include="BitFinix\OrderStatusResponse.cs" />
     <Compile Include="GenericRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
