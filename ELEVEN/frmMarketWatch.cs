@@ -37,7 +37,7 @@ namespace ELEVEN
         private void AutoCompletetxtAddRow()
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
-            var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
+            var All_Symbol = BitfinexAPI.GetSymbol($"symbols");
             var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
             for (int i = 0; i < Smbl.Count(); i++)
             {
@@ -178,7 +178,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+            ticker = BitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {
@@ -203,7 +203,7 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            ticker = PbBitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
+            ticker = BitfinexAPI.Get<string[][]>($"tickers?symbols=" + symbols);
 
             if (ticker != null)
             {

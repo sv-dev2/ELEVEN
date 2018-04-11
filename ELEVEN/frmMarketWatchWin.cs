@@ -212,7 +212,7 @@ namespace ELEVEN
                 streamReader.Close();
             }
             Seprateticklers(symbols);
-            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + sbBitfinex.ToString());
+            ticker = await BitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + sbBitfinex.ToString());
 
             if (ticker != null)
             {
@@ -293,7 +293,7 @@ namespace ELEVEN
                 streamReader.Close();
             }
             Seprateticklers(symbols);
-            ticker = await PbBitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + sbBitfinex.ToString());
+            ticker = await BitfinexAPI.GetTiclers<string[][]>($"tickers?symbols=" + sbBitfinex.ToString());
 
             if (ticker != null)
             {

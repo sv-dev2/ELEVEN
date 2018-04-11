@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ELEVEN.Services
 {
-    public class PbBitfinexAPI
+    public class BitfinexAPI
     {
         #region "Bitfinix"
         public static readonly string baseAddress = "https://api.bitfinex.com/v2/";
@@ -46,7 +46,7 @@ namespace ELEVEN.Services
             }
         }
 
-        public PbBitfinexAPI()
+        public BitfinexAPI()
         {
             hashMaker = new HMACSHA384(Encoding.UTF8.GetBytes(secret));
             this.Key = "ANduQQtWW7JiTAETL6tpmWcKfvG5rsZaV2VI0boqgVV";
