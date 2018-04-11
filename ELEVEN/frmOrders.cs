@@ -78,5 +78,14 @@ namespace ELEVEN
         {
 
         }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            var symbol = txtSecurity.Text;
+            var side = comboBuySell.SelectedValue;
+            var type = comboBoxMarket.SelectedValue;
+            var amount = txtQuantity.Text;
+            var exchange = comboBoxStocks.SelectedValue;
+        }
     }
 }
