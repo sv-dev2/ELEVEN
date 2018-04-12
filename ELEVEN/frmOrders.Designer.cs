@@ -30,29 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrders));
             this.comboBuySell = new System.Windows.Forms.ComboBox();
-            this.comboBoxMarket = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrderType = new System.Windows.Forms.ComboBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.comboBoxStocks = new System.Windows.Forms.ComboBox();
+            this.comboBoxExchange = new System.Windows.Forms.ComboBox();
             this.comboBoxNumber = new System.Windows.Forms.ComboBox();
             this.btnDetails = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnSettings = new RoundButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.txtSecurity = new System.Windows.Forms.TextBox();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonDataGridViewTransaction = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +54,16 @@
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilledQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSettings = new RoundButton();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -77,28 +77,19 @@
             // 
             this.comboBuySell.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBuySell.FormattingEnabled = true;
-            this.comboBuySell.Items.AddRange(new object[] {
-            "BUY",
-            "SELL"});
             this.comboBuySell.Location = new System.Drawing.Point(191, 0);
             this.comboBuySell.Name = "comboBuySell";
             this.comboBuySell.Size = new System.Drawing.Size(121, 24);
             this.comboBuySell.TabIndex = 2;
             // 
-            // comboBoxMarket
+            // comboBoxOrderType
             // 
-            this.comboBoxMarket.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxMarket.FormattingEnabled = true;
-            this.comboBoxMarket.Items.AddRange(new object[] {
-            "MARKET",
-            "LIMIT",
-            "STOP",
-            "Trailing-Stop",
-            "Exchange Market"});
-            this.comboBoxMarket.Location = new System.Drawing.Point(314, 0);
-            this.comboBoxMarket.Name = "comboBoxMarket";
-            this.comboBoxMarket.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxMarket.TabIndex = 3;
+            this.comboBoxOrderType.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxOrderType.FormattingEnabled = true;
+            this.comboBoxOrderType.Location = new System.Drawing.Point(314, 0);
+            this.comboBoxOrderType.Name = "comboBoxOrderType";
+            this.comboBoxOrderType.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxOrderType.TabIndex = 3;
             // 
             // txtQuantity
             // 
@@ -108,18 +99,14 @@
             this.txtQuantity.Size = new System.Drawing.Size(115, 23);
             this.txtQuantity.TabIndex = 4;
             // 
-            // comboBoxStocks
+            // comboBoxExchange
             // 
-            this.comboBoxStocks.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxStocks.FormattingEnabled = true;
-            this.comboBoxStocks.Items.AddRange(new object[] {
-            "Bitfinex",
-            "Bitstamp",
-            "All"});
-            this.comboBoxStocks.Location = new System.Drawing.Point(554, 0);
-            this.comboBoxStocks.Name = "comboBoxStocks";
-            this.comboBoxStocks.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxStocks.TabIndex = 5;
+            this.comboBoxExchange.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxExchange.FormattingEnabled = true;
+            this.comboBoxExchange.Location = new System.Drawing.Point(554, 0);
+            this.comboBoxExchange.Name = "comboBoxExchange";
+            this.comboBoxExchange.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxExchange.TabIndex = 5;
             // 
             // comboBoxNumber
             // 
@@ -193,14 +180,32 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(800, 45);
             this.kryptonPanel1.TabIndex = 14;
             // 
+            // btnSettings
+            // 
+            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
+            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.FlatAppearance.BorderSize = 2;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSettings.Location = new System.Drawing.Point(760, 0);
+            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(40, 45);
+            this.btnSettings.TabIndex = 29;
+            this.btnSettings.UseVisualStyleBackColor = false;
+            // 
             // kryptonPanel2
             // 
-            this.kryptonPanel2.Controls.Add(this.comboBoxStocks);
+            this.kryptonPanel2.Controls.Add(this.comboBoxExchange);
             this.kryptonPanel2.Controls.Add(this.txtSecurity);
             this.kryptonPanel2.Controls.Add(this.btnSubmit);
             this.kryptonPanel2.Controls.Add(this.btnDetails);
             this.kryptonPanel2.Controls.Add(this.comboBuySell);
-            this.kryptonPanel2.Controls.Add(this.comboBoxMarket);
+            this.kryptonPanel2.Controls.Add(this.comboBoxOrderType);
             this.kryptonPanel2.Controls.Add(this.txtQuantity);
             this.kryptonPanel2.Controls.Add(this.comboBoxNumber);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -255,6 +260,66 @@
             this.kryptonDataGridViewTransaction.Size = new System.Drawing.Size(800, 183);
             this.kryptonDataGridViewTransaction.StandardTab = true;
             this.kryptonDataGridViewTransaction.TabIndex = 32;
+            // 
+            // StrategyName
+            // 
+            this.StrategyName.HeaderText = "Strategy Name";
+            this.StrategyName.Name = "StrategyName";
+            this.StrategyName.ReadOnly = true;
+            // 
+            // OrderId
+            // 
+            this.OrderId.HeaderText = "Order ID";
+            this.OrderId.Name = "OrderId";
+            this.OrderId.ReadOnly = true;
+            // 
+            // Symbol
+            // 
+            this.Symbol.HeaderText = "Symbol";
+            this.Symbol.Name = "Symbol";
+            this.Symbol.ReadOnly = true;
+            // 
+            // Side
+            // 
+            this.Side.HeaderText = "Side";
+            this.Side.Name = "Side";
+            this.Side.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            // 
+            // OpenTime
+            // 
+            this.OpenTime.HeaderText = "Open Time";
+            this.OpenTime.Name = "OpenTime";
+            this.OpenTime.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // State
+            // 
+            this.State.HeaderText = "State";
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            // 
+            // FilledQty
+            // 
+            this.FilledQty.HeaderText = "FilledQty";
+            this.FilledQty.Name = "FilledQty";
+            this.FilledQty.ReadOnly = true;
+            // 
+            // Manage
+            // 
+            this.Manage.HeaderText = "Manage";
+            this.Manage.Name = "Manage";
+            this.Manage.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -326,84 +391,6 @@
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             this.dataGridViewTextBoxColumn10.Width = 80;
             // 
-            // StrategyName
-            // 
-            this.StrategyName.HeaderText = "Strategy Name";
-            this.StrategyName.Name = "StrategyName";
-            this.StrategyName.ReadOnly = true;
-            // 
-            // OrderId
-            // 
-            this.OrderId.HeaderText = "Order ID";
-            this.OrderId.Name = "OrderId";
-            this.OrderId.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            this.Symbol.HeaderText = "Symbol";
-            this.Symbol.Name = "Symbol";
-            this.Symbol.ReadOnly = true;
-            // 
-            // Side
-            // 
-            this.Side.HeaderText = "Side";
-            this.Side.Name = "Side";
-            this.Side.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            // 
-            // OpenTime
-            // 
-            this.OpenTime.HeaderText = "Open Time";
-            this.OpenTime.Name = "OpenTime";
-            this.OpenTime.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // State
-            // 
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
-            // 
-            // FilledQty
-            // 
-            this.FilledQty.HeaderText = "FilledQty";
-            this.FilledQty.Name = "FilledQty";
-            this.FilledQty.ReadOnly = true;
-            // 
-            // Manage
-            // 
-            this.Manage.HeaderText = "Manage";
-            this.Manage.Name = "Manage";
-            this.Manage.ReadOnly = true;
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
-            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.FlatAppearance.BorderSize = 2;
-            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSettings.Location = new System.Drawing.Point(760, 0);
-            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(40, 45);
-            this.btnSettings.TabIndex = 29;
-            this.btnSettings.UseVisualStyleBackColor = false;
-            // 
             // frmOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,9 +427,9 @@
 
         #endregion
         private System.Windows.Forms.ComboBox comboBuySell;
-        private System.Windows.Forms.ComboBox comboBoxMarket;
+        private System.Windows.Forms.ComboBox comboBoxOrderType;
         private System.Windows.Forms.TextBox txtQuantity;
-        private System.Windows.Forms.ComboBox comboBoxStocks;
+        private System.Windows.Forms.ComboBox comboBoxExchange;
         private System.Windows.Forms.ComboBox comboBoxNumber;
         private System.Windows.Forms.Button btnDetails;
         private System.Windows.Forms.Button btnSubmit;

@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ELEVEN.Services
 {
@@ -208,20 +209,24 @@ namespace ELEVEN.Services
             var accountInfo = new BFAccountInfo(accountInfoUrl, Nonce);
             SendRequest(accountInfo, "POST");
         }
-        public NewOrderResponse ExecuteBuyOrderBTC(string symbol, decimal amount, decimal price, OrderExchange exchange, OrderType type)
+        public NewOrderResponse ExecuteBuyOrderBTC(string symbol, decimal amount, decimal price, string exchange, string type)
         {
             var ticker = GetTicker(symbol);
             return ExecuteOrder(symbol, amount,Convert.ToDecimal(ticker.ask), exchange, "buy", type);
         }
-        public NewOrderResponse ExecuteSellOrderBTC(string symbol, decimal amount, decimal price, OrderExchange exchange, OrderType type)
+        public NewOrderResponse ExecuteSellOrderBTC(string symbol, decimal amount, decimal price, string exchange, string type)
         {
             var ticker = GetTicker(symbol);
             return ExecuteOrder(symbol, amount, Convert.ToDecimal(ticker.bid), exchange, "sell", type);
         }
-        public NewOrderResponse ExecuteOrder(string symbol, decimal amount, decimal price, OrderExchange exchange, string side, OrderType type)
+        public NewOrderResponse ExecuteOrder(string symbol, decimal amount, decimal price, string exchange, string side, string type)
         {
             NewOrderRequest req = new NewOrderRequest(Nonce, symbol, amount, price, exchange, side, type);
             string response = SendRequest(req, "POST");
+            if(response==string.Empty)
+            {
+                return null;
+            }
             NewOrderResponse resp = NewOrderResponse.FromJSON(response);
             return resp;
         }
@@ -252,7 +257,9 @@ namespace ELEVEN.Services
                 StreamReader sr = new StreamReader(ex.Response.GetResponseStream());
                 response = sr.ReadToEnd();
                 sr.Close();
-                throw new BitfinexException(ex, response);
+                //throw new BitfinexException(ex, response);
+                MessageBox.Show(response, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
             }
             return response;
         }

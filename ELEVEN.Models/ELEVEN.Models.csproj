@@ -60,6 +60,7 @@
     <Compile Include="BitFinix\NewOrderResponse.cs" />
     <Compile Include="BitFinix\OrderStatusRequest.cs" />
     <Compile Include="BitFinix\OrderStatusResponse.cs" />
+    <Compile Include="BitFinix\OrderWindow.cs" />
     <Compile Include="BitFinix\PubTicker.cs" />
     <Compile Include="GenericRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

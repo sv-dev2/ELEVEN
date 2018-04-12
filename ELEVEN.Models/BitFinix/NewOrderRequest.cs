@@ -16,14 +16,14 @@ namespace ELEVEN.Models
         public string side;
         public string type;
         //public bool is_hidden=false;
-        public NewOrderRequest(string nonce, string symbol, decimal amount, decimal price, OrderExchange exchange, string side, OrderType type)
+        public NewOrderRequest(string nonce, string symbol, decimal amount, decimal price, string exchange, string side, string type)
         {
             this.symbol = symbol;
             this.amount = amount.ToString(CultureInfo.InvariantCulture);
             this.price = price.ToString(CultureInfo.InvariantCulture);
-            this.exchange = EnumHelper.EnumToStr(exchange);
+            this.exchange = exchange;
             this.side = side;
-            this.type = EnumHelper.EnumToStr(type);
+            this.type = type;
             this.nonce = nonce;
             this.request = "/v1/order/new";
         }
