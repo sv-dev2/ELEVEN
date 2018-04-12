@@ -39,11 +39,11 @@
             this.btnCancelAllOrders = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btnSettings = new RoundButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.txtSecurity = new System.Windows.Forms.TextBox();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dataGridViewOrders = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btnSettings = new RoundButton();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -171,24 +171,6 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(800, 45);
             this.kryptonPanel1.TabIndex = 14;
             // 
-            // btnSettings
-            // 
-            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
-            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.btnSettings.FlatAppearance.BorderSize = 2;
-            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSettings.Location = new System.Drawing.Point(760, 0);
-            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(40, 45);
-            this.btnSettings.TabIndex = 29;
-            this.btnSettings.UseVisualStyleBackColor = false;
-            // 
             // kryptonPanel2
             // 
             this.kryptonPanel2.Controls.Add(this.comboBoxExchange);
@@ -240,6 +222,25 @@
             this.dataGridViewOrders.Size = new System.Drawing.Size(800, 183);
             this.dataGridViewOrders.StandardTab = true;
             this.dataGridViewOrders.TabIndex = 32;
+            this.dataGridViewOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrders_CellClick);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.BackgroundImage = global::ELEVEN.Properties.Resources.settings;
+            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.btnSettings.FlatAppearance.BorderSize = 2;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSettings.Location = new System.Drawing.Point(760, 0);
+            this.btnSettings.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(40, 45);
+            this.btnSettings.TabIndex = 29;
+            this.btnSettings.UseVisualStyleBackColor = false;
             // 
             // dataGridViewTextBoxColumn1
             // 

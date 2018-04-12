@@ -138,11 +138,11 @@ namespace ELEVEN
             dataGridViewOrders.Columns[1].DataPropertyName = "exchange";
 
             dataGridViewOrders.Columns[2].HeaderText = "Symbol";
-            dataGridViewOrders.Columns[2].Name = "symbol";
+            dataGridViewOrders.Columns[2].Name = "Symbol";
             dataGridViewOrders.Columns[2].DataPropertyName = "symbol";
 
             dataGridViewOrders.Columns[3].HeaderText = "Order Id";
-            dataGridViewOrders.Columns[3].Name = "id";
+            dataGridViewOrders.Columns[3].Name = "Id";
             dataGridViewOrders.Columns[3].DataPropertyName = "id";
 
             dataGridViewOrders.Columns[4].Name = "Side";
@@ -241,16 +241,49 @@ namespace ELEVEN
                 }
                 if (response != null)
                 {
-
+                    RefreshDataGrid();
                 }
             }
 
         }
+        private void RefreshDataGrid()
+        {
+            dataGridViewOrders.DataSource = null;
+            this.dataGridViewOrders.Rows.Clear();
+            var dataSource = bitfinexAPI.GetActiveOrders();
 
+            if (dataSource.orders.Count > 0)
+            {
+                orders = dataSource.orders;
+            }
+            else
+            {
+                orders = new List<OrderStatusResponse>();
+            }
+            dataGridViewOrders.DataSource = orders;
+        }
         private void btnCancelAllOrders_Click(object sender, EventArgs e)
         {
             var response = bitfinexAPI.CancelAllOrders();
             MessageBox.Show(this, response.message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void dataGridViewOrders_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return; // header clicked
+
+            if (e.ColumnIndex == dataGridViewOrders.Columns["buttonColumn"].Index)
+            {
+                // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
+                string order_id = dataGridViewOrders["Id", e.RowIndex].Value.ToString();
+                string broker = dataGridViewOrders["broker", e.RowIndex].Value.ToString();
+                if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
+                {
+                    var response = bitfinexAPI.CancelOrder(Convert.ToInt32(order_id));
+                   
+                }
+               
+            }
         }
     }
 }
