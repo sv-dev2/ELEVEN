@@ -36,24 +36,14 @@
             this.comboBoxNumber = new System.Windows.Forms.ComboBox();
             this.btnDetails = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnCancelAllOrders = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btnSettings = new RoundButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.txtSecurity = new System.Windows.Forms.TextBox();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonDataGridViewTransaction = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Side = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OpenTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FilledQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewOrders = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +60,7 @@
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
             this.kryptonPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridViewTransaction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBuySell
@@ -151,15 +141,16 @@
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // kryptonButton1
+            // btnCancelAllOrders
             // 
-            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonButton1.Location = new System.Drawing.Point(657, 0);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
-            this.kryptonButton1.Size = new System.Drawing.Size(103, 45);
-            this.kryptonButton1.TabIndex = 31;
-            this.kryptonButton1.Values.Text = "CANCEL ALL";
+            this.btnCancelAllOrders.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCancelAllOrders.Location = new System.Drawing.Point(657, 0);
+            this.btnCancelAllOrders.Name = "btnCancelAllOrders";
+            this.btnCancelAllOrders.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.btnCancelAllOrders.Size = new System.Drawing.Size(103, 45);
+            this.btnCancelAllOrders.TabIndex = 31;
+            this.btnCancelAllOrders.Values.Text = "CANCEL ALL";
+            this.btnCancelAllOrders.Click += new System.EventHandler(this.btnCancelAllOrders_Click);
             // 
             // kryptonLabel1
             // 
@@ -171,7 +162,7 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
+            this.kryptonPanel1.Controls.Add(this.btnCancelAllOrders);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.btnSettings);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -224,102 +215,31 @@
             // 
             // kryptonPanel3
             // 
-            this.kryptonPanel3.Controls.Add(this.kryptonDataGridViewTransaction);
+            this.kryptonPanel3.Controls.Add(this.dataGridViewOrders);
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel3.Location = new System.Drawing.Point(0, 108);
             this.kryptonPanel3.Name = "kryptonPanel3";
             this.kryptonPanel3.Size = new System.Drawing.Size(800, 183);
             this.kryptonPanel3.TabIndex = 16;
             // 
-            // kryptonDataGridViewTransaction
+            // dataGridViewOrders
             // 
-            this.kryptonDataGridViewTransaction.AllowUserToAddRows = false;
-            this.kryptonDataGridViewTransaction.AllowUserToDeleteRows = false;
-            this.kryptonDataGridViewTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.kryptonDataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kryptonDataGridViewTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.StrategyName,
-            this.OrderId,
-            this.Symbol,
-            this.Side,
-            this.Qty,
-            this.OpenTime,
-            this.Price,
-            this.State,
-            this.FilledQty,
-            this.Manage});
-            this.kryptonDataGridViewTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonDataGridViewTransaction.HideOuterBorders = true;
-            this.kryptonDataGridViewTransaction.Location = new System.Drawing.Point(0, 0);
-            this.kryptonDataGridViewTransaction.MultiSelect = false;
-            this.kryptonDataGridViewTransaction.Name = "kryptonDataGridViewTransaction";
-            this.kryptonDataGridViewTransaction.ReadOnly = true;
-            this.kryptonDataGridViewTransaction.RowHeadersVisible = false;
-            this.kryptonDataGridViewTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.kryptonDataGridViewTransaction.ShowEditingIcon = false;
-            this.kryptonDataGridViewTransaction.Size = new System.Drawing.Size(800, 183);
-            this.kryptonDataGridViewTransaction.StandardTab = true;
-            this.kryptonDataGridViewTransaction.TabIndex = 32;
-            // 
-            // StrategyName
-            // 
-            this.StrategyName.HeaderText = "Strategy Name";
-            this.StrategyName.Name = "StrategyName";
-            this.StrategyName.ReadOnly = true;
-            // 
-            // OrderId
-            // 
-            this.OrderId.HeaderText = "Order ID";
-            this.OrderId.Name = "OrderId";
-            this.OrderId.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            this.Symbol.HeaderText = "Symbol";
-            this.Symbol.Name = "Symbol";
-            this.Symbol.ReadOnly = true;
-            // 
-            // Side
-            // 
-            this.Side.HeaderText = "Side";
-            this.Side.Name = "Side";
-            this.Side.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            // 
-            // OpenTime
-            // 
-            this.OpenTime.HeaderText = "Open Time";
-            this.OpenTime.Name = "OpenTime";
-            this.OpenTime.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // State
-            // 
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
-            // 
-            // FilledQty
-            // 
-            this.FilledQty.HeaderText = "FilledQty";
-            this.FilledQty.Name = "FilledQty";
-            this.FilledQty.ReadOnly = true;
-            // 
-            // Manage
-            // 
-            this.Manage.HeaderText = "Manage";
-            this.Manage.Name = "Manage";
-            this.Manage.ReadOnly = true;
+            this.dataGridViewOrders.AllowUserToAddRows = false;
+            this.dataGridViewOrders.AllowUserToDeleteRows = false;
+            this.dataGridViewOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewOrders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewOrders.HideOuterBorders = true;
+            this.dataGridViewOrders.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewOrders.MultiSelect = false;
+            this.dataGridViewOrders.Name = "dataGridViewOrders";
+            this.dataGridViewOrders.ReadOnly = true;
+            this.dataGridViewOrders.RowHeadersVisible = false;
+            this.dataGridViewOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewOrders.ShowEditingIcon = false;
+            this.dataGridViewOrders.Size = new System.Drawing.Size(800, 183);
+            this.dataGridViewOrders.StandardTab = true;
+            this.dataGridViewOrders.TabIndex = 32;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -420,7 +340,7 @@
             this.kryptonPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
             this.kryptonPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridViewTransaction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -433,24 +353,14 @@
         private System.Windows.Forms.ComboBox comboBoxNumber;
         private System.Windows.Forms.Button btnDetails;
         private System.Windows.Forms.Button btnSubmit;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelAllOrders;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private RoundButton btnSettings;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private System.Windows.Forms.TextBox txtSecurity;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridViewTransaction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StrategyName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Symbol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Side;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OpenTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn State;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FilledQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Manage;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridViewOrders;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

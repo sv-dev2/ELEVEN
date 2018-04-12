@@ -22,7 +22,25 @@ namespace ELEVEN.Models
         public string executed_amount;
         public string remaining_amount;
         public string original_amount;
-
+        public string broker = "bitfinex";
+        public string state
+        {
+            get
+            {
+                if (is_live.ToLower() == "true")
+                {
+                    return "Active";
+                }
+                else if (is_cancelled.ToLower() == "true")
+                {
+                    return "Cancelled";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
         public static OrderStatusResponse FromJSON(string response)
         {
             return JsonConvert.DeserializeObject<OrderStatusResponse>(response);

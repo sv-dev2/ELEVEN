@@ -26,6 +26,7 @@ namespace ELEVEN
             txtSecurity.Text = "Security";
             txtQuantity.Text = "Quantity";
             AutoCompletetxtAddRow();
+            GetActiveOrders();
         }
 
         private void frmOrders_Load(object sender, EventArgs e)
@@ -100,7 +101,92 @@ namespace ELEVEN
         {
 
         }
+        List<OrderStatusResponse> orders;
+        private void GetActiveOrders()
+        {
+            var dataSource = bitfinexAPI.GetActiveOrders();
 
+            if (dataSource.orders.Count > 0)
+            {
+                orders = dataSource.orders;
+            }
+            else
+            {
+                orders = new List<OrderStatusResponse>();
+            }
+            CreateDataGridColumn();
+        }
+        System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
+
+
+        private void CreateDataGridColumn()
+        {
+            dataGridViewOrders.DataSource = null;
+            this.dataGridViewOrders.Rows.Clear();
+            dataGridViewOrders.AutoGenerateColumns = false;
+            dataGridViewOrders.ColumnCount = 10;
+
+
+
+            dataGridViewOrders.Columns[0].HeaderText = "broker";
+            dataGridViewOrders.Columns[0].Name = "broker";
+            dataGridViewOrders.Columns[0].DataPropertyName = "broker";
+            dataGridViewOrders.Columns[0].Visible = false;
+
+            dataGridViewOrders.Columns[1].HeaderText = "Strategy";
+            dataGridViewOrders.Columns[1].Name = "exchange";
+            dataGridViewOrders.Columns[1].DataPropertyName = "exchange";
+
+            dataGridViewOrders.Columns[2].HeaderText = "Symbol";
+            dataGridViewOrders.Columns[2].Name = "symbol";
+            dataGridViewOrders.Columns[2].DataPropertyName = "symbol";
+
+            dataGridViewOrders.Columns[3].HeaderText = "Order Id";
+            dataGridViewOrders.Columns[3].Name = "id";
+            dataGridViewOrders.Columns[3].DataPropertyName = "id";
+
+            dataGridViewOrders.Columns[4].Name = "Side";
+            dataGridViewOrders.Columns[4].HeaderText = "Side";
+            dataGridViewOrders.Columns[4].DataPropertyName = "side";
+
+
+            dataGridViewOrders.Columns[5].Name = "Qty";
+            dataGridViewOrders.Columns[5].HeaderText = "Qty";
+            dataGridViewOrders.Columns[5].DataPropertyName = "original_amount";
+
+
+            dataGridViewOrders.Columns[6].Name = "timestamp";
+            dataGridViewOrders.Columns[6].HeaderText = "Open Time";
+            dataGridViewOrders.Columns[6].DataPropertyName = "timestamp";
+
+
+            dataGridViewOrders.Columns[7].Name = "price";
+            dataGridViewOrders.Columns[7].HeaderText = "Price";
+            dataGridViewOrders.Columns[7].DataPropertyName = "price";
+
+
+            dataGridViewOrders.Columns[8].Name = "state";
+            dataGridViewOrders.Columns[8].HeaderText = "State";
+            dataGridViewOrders.Columns[8].DataPropertyName = "state";
+
+
+            dataGridViewOrders.Columns[9].Name = "executed_amount";
+            dataGridViewOrders.Columns[9].HeaderText = "Filled Qty";
+            dataGridViewOrders.Columns[9].DataPropertyName = "executed_amount";
+
+
+            buttonColumn.HeaderText = "Manage";
+            buttonColumn.Name = "buttonColumn";
+            Image image = ELEVEN.Properties.Resources.Delete;
+
+            buttonColumn.Image = image;
+            buttonColumn.Width = 15;
+            dataGridViewOrders.Columns.Insert(10, buttonColumn);
+
+
+
+            dataGridViewOrders.DataSource = orders;
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             var symbol = txtSecurity.Text;
@@ -144,7 +230,7 @@ namespace ELEVEN
             if (symbol.ToLower().IndexOf(Broker.BitFinex.ToString().ToLower()) > -1)
             {
                 var instrumentCode = symbol.Split('.');
-                 symbol = instrumentCode[1].ToUpper();
+                symbol = instrumentCode[1].ToUpper();
                 if (side.ToString().ToLower() == "buy")
                 {
                     response = bitfinexAPI.ExecuteBuyOrderBTC(symbol.ToLower(), quantity, 10, exchange.ToString().ToLower(), type.ToString().ToLower());
@@ -158,7 +244,13 @@ namespace ELEVEN
 
                 }
             }
-           
+
+        }
+
+        private void btnCancelAllOrders_Click(object sender, EventArgs e)
+        {
+            var response = bitfinexAPI.CancelAllOrders();
+            MessageBox.Show(this, response.message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
