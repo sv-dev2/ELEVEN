@@ -15,6 +15,7 @@ namespace ELEVEN.Models
         public string timestamp;
         public string swap;
         public string pl;
+        public string broker = "bitfinex";
     }
     public class ActivePositionsResponse
     {

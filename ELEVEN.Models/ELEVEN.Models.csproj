@@ -55,6 +55,8 @@
     <Compile Include="BitFinix\CancelAllOrdersResponse.cs" />
     <Compile Include="BitFinix\CancelOrderRequest.cs" />
     <Compile Include="BitFinix\CancelOrderResponse.cs" />
+    <Compile Include="BitFinix\ClosePositionRequest.cs" />
+    <Compile Include="BitFinix\ClosePositionResponse.cs" />
     <Compile Include="BitFinix\Enums.cs" />
     <Compile Include="BitFinix\NewOrderRequest.cs" />
     <Compile Include="BitFinix\NewOrderResponse.cs" />

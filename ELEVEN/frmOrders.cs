@@ -265,6 +265,7 @@ namespace ELEVEN
         private void btnCancelAllOrders_Click(object sender, EventArgs e)
         {
             var response = bitfinexAPI.CancelAllOrders();
+            RefreshDataGrid();
             MessageBox.Show(this, response.message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -280,7 +281,7 @@ namespace ELEVEN
                 if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
                     var response = bitfinexAPI.CancelOrder(Convert.ToInt32(order_id));
-                   
+                    RefreshDataGrid();
                 }
                
             }

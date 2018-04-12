@@ -42,23 +42,15 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonDataGridViewTransaction = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.StrategyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Symbol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MarketPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MarketValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnrealizedPL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Manage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.DataGridViewPositions = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btnCloseAll = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnSettings = new RoundButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridViewTransaction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPositions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -154,98 +146,43 @@
             // 
             // kryptonPanel2
             // 
-            this.kryptonPanel2.Controls.Add(this.kryptonDataGridViewTransaction);
+            this.kryptonPanel2.Controls.Add(this.DataGridViewPositions);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 45);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(800, 246);
             this.kryptonPanel2.TabIndex = 6;
             // 
-            // kryptonDataGridViewTransaction
+            // DataGridViewPositions
             // 
-            this.kryptonDataGridViewTransaction.AllowUserToAddRows = false;
-            this.kryptonDataGridViewTransaction.AllowUserToDeleteRows = false;
-            this.kryptonDataGridViewTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.kryptonDataGridViewTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kryptonDataGridViewTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.StrategyName,
-            this.Symbol,
-            this.Qty,
-            this.Cost,
-            this.MarketPrice,
-            this.MarketValue,
-            this.UnrealizedPL,
-            this.Manage});
-            this.kryptonDataGridViewTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonDataGridViewTransaction.HideOuterBorders = true;
-            this.kryptonDataGridViewTransaction.Location = new System.Drawing.Point(0, 0);
-            this.kryptonDataGridViewTransaction.MultiSelect = false;
-            this.kryptonDataGridViewTransaction.Name = "kryptonDataGridViewTransaction";
-            this.kryptonDataGridViewTransaction.ReadOnly = true;
-            this.kryptonDataGridViewTransaction.RowHeadersVisible = false;
-            this.kryptonDataGridViewTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.kryptonDataGridViewTransaction.ShowEditingIcon = false;
-            this.kryptonDataGridViewTransaction.Size = new System.Drawing.Size(800, 246);
-            this.kryptonDataGridViewTransaction.StandardTab = true;
-            this.kryptonDataGridViewTransaction.TabIndex = 31;
+            this.DataGridViewPositions.AllowUserToAddRows = false;
+            this.DataGridViewPositions.AllowUserToDeleteRows = false;
+            this.DataGridViewPositions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridViewPositions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewPositions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridViewPositions.HideOuterBorders = true;
+            this.DataGridViewPositions.Location = new System.Drawing.Point(0, 0);
+            this.DataGridViewPositions.MultiSelect = false;
+            this.DataGridViewPositions.Name = "DataGridViewPositions";
+            this.DataGridViewPositions.ReadOnly = true;
+            this.DataGridViewPositions.RowHeadersVisible = false;
+            this.DataGridViewPositions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewPositions.ShowEditingIcon = false;
+            this.DataGridViewPositions.Size = new System.Drawing.Size(800, 246);
+            this.DataGridViewPositions.StandardTab = true;
+            this.DataGridViewPositions.TabIndex = 31;
+            this.DataGridViewPositions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewPositions_CellClick);
             // 
-            // StrategyName
+            // btnCloseAll
             // 
-            this.StrategyName.HeaderText = "Strategy Name";
-            this.StrategyName.Name = "StrategyName";
-            this.StrategyName.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            this.Symbol.HeaderText = "Symbol";
-            this.Symbol.Name = "Symbol";
-            this.Symbol.ReadOnly = true;
-            // 
-            // Qty
-            // 
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            // 
-            // Cost
-            // 
-            this.Cost.HeaderText = "Cost";
-            this.Cost.Name = "Cost";
-            this.Cost.ReadOnly = true;
-            // 
-            // MarketPrice
-            // 
-            this.MarketPrice.HeaderText = "Market Price";
-            this.MarketPrice.Name = "MarketPrice";
-            this.MarketPrice.ReadOnly = true;
-            // 
-            // MarketValue
-            // 
-            this.MarketValue.HeaderText = "Market Value";
-            this.MarketValue.Name = "MarketValue";
-            this.MarketValue.ReadOnly = true;
-            // 
-            // UnrealizedPL
-            // 
-            this.UnrealizedPL.HeaderText = "Unrealized PL";
-            this.UnrealizedPL.Name = "UnrealizedPL";
-            this.UnrealizedPL.ReadOnly = true;
-            // 
-            // Manage
-            // 
-            this.Manage.HeaderText = "Manage";
-            this.Manage.Name = "Manage";
-            this.Manage.ReadOnly = true;
-            // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.kryptonButton1.Location = new System.Drawing.Point(657, 0);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
-            this.kryptonButton1.Size = new System.Drawing.Size(103, 45);
-            this.kryptonButton1.TabIndex = 31;
-            this.kryptonButton1.Values.Text = "CLOSE ALL";
+            this.btnCloseAll.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCloseAll.Location = new System.Drawing.Point(657, 0);
+            this.btnCloseAll.Name = "btnCloseAll";
+            this.btnCloseAll.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.btnCloseAll.Size = new System.Drawing.Size(103, 45);
+            this.btnCloseAll.TabIndex = 31;
+            this.btnCloseAll.Values.Text = "CLOSE ALL";
+            this.btnCloseAll.Click += new System.EventHandler(this.btnCloseAll_Click);
             // 
             // kryptonLabel1
             // 
@@ -275,7 +212,7 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
+            this.kryptonPanel1.Controls.Add(this.btnCloseAll);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.btnSettings);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -306,9 +243,10 @@
             this.Tag = "frmPositions";
             this.Text = "Positions";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPositions_FormClosing);
+            this.Load += new System.EventHandler(this.frmPositions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridViewTransaction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPositions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
@@ -331,19 +269,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridViewTransaction;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView DataGridViewPositions;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnCloseAll;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private RoundButton btnSettings;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StrategyName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Symbol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MarketPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MarketValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnrealizedPL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Manage;
     }
 }

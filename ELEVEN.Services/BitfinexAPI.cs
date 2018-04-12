@@ -204,6 +204,12 @@ namespace ELEVEN.Services
             string response = SendRequest(req, "POST");
             return ActivePositionsResponse.FromJSON(response);
         }
+        public ClosePositionResponse ClosePositions(string positionId)
+        {
+            ClosePositionRequest req = new ClosePositionRequest(Nonce, positionId);
+            string response = SendRequest(req, "POST");
+            return ClosePositionResponse.FromJSON(response);
+        }
         public void GetAccountInfo()
         {
             var accountInfo = new BFAccountInfo(accountInfoUrl, Nonce);
