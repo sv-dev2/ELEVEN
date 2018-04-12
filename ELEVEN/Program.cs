@@ -18,8 +18,8 @@ namespace ELEVEN
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //BitfinexAPI pbBitfinexAPI = new BitfinexAPI();
-           //pbBitfinexAPI.GetBalances();
+           // BitfinexAPI pbBitfinexAPI = new BitfinexAPI();
+            //pbBitfinexAPI.GetMarginInformation();
             //pbBitfinexAPI.ExecuteBuyOrderBTC("ltcusd", 0.3M, 10, Models.OrderExchange.Bitfinex, Models.OrderType.ExchangeMarket);
             Application.Run(new MDIParentForm());
             

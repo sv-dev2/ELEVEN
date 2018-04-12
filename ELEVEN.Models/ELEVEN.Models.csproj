@@ -58,6 +58,8 @@
     <Compile Include="BitFinix\ClosePositionRequest.cs" />
     <Compile Include="BitFinix\ClosePositionResponse.cs" />
     <Compile Include="BitFinix\Enums.cs" />
+    <Compile Include="BitFinix\MarginInfoRequest.cs" />
+    <Compile Include="BitFinix\MarginInfoResponse.cs" />
     <Compile Include="BitFinix\NewOrderRequest.cs" />
     <Compile Include="BitFinix\NewOrderResponse.cs" />
     <Compile Include="BitFinix\OrderStatusRequest.cs" />

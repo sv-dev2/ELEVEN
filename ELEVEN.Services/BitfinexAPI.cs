@@ -173,6 +173,14 @@ namespace ELEVEN.Services
 
             return resp;
         }
+        public MarginInfoResponse GetMarginInformation()
+        {
+            MarginInfoRequest req = new MarginInfoRequest(Nonce);
+            string response = SendRequest(req, "GET");
+            MarginInfoResponse resp = MarginInfoResponse.FromJSON(response);
+
+            return resp;
+        }
         public CancelOrderResponse CancelOrder(int order_id)
         {
             CancelOrderRequest req = new CancelOrderRequest(Nonce, order_id);
