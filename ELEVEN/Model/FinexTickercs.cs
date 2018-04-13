@@ -22,7 +22,7 @@ namespace ELEVEN.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
+        public int Id { get; set; }
         private string _mid;
         private string _bid;
         private string _ask;

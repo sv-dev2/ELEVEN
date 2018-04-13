@@ -66,6 +66,7 @@
     <Compile Include="BitFinix\OrderStatusResponse.cs" />
     <Compile Include="BitFinix\OrderWindow.cs" />
     <Compile Include="BitFinix\PubTicker.cs" />
+    <Compile Include="BitFinix\webSocketListner.cs" />
     <Compile Include="GenericRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

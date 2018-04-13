@@ -14,6 +14,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using ELEVEN.Models;
+using MtApi;
+using P23.MetaTrader4.Manager;
+using P23.MetaTrader4.Manager.Contracts;
+using Newtonsoft.Json;
+using System.Globalization;
+
 namespace ELEVEN
 {
     public partial class frmMarketWatchWin : KryptonForm
@@ -30,8 +36,12 @@ namespace ELEVEN
         StringBuilder sbTraders = new StringBuilder();
         StringBuilder sbIGMarket = new StringBuilder();
         StringBuilder sbICMarket = new StringBuilder();
+        const string host = "wss://api.bitfinex.com/ws";
+        WebSocket4Net.WebSocket webSocket;
         #endregion
-
+        #region "MetaTrader Objects"
+        MtApiClient apiClient = null;
+        #endregion
         public frmMarketWatchWin()
         {
             InitializeComponent();
@@ -39,8 +49,18 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-
+            apiClient = new MtApiClient();
+            apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
+            webSocket = new WebSocket4Net.WebSocket(host);
+            // var client = new WebSocket(host);
         }
+
+        private void ApiClient_QuoteUpdated(object sender, string symbol, double bid, double ask)
+        {
+            String quoteSrt = string.Empty;
+            quoteSrt = symbol + ": Bid = " + bid.ToString() + "; Ask = " + ask.ToString();
+        }
+
         string fileName = string.Empty;
         private void SymbolFileExist()
         {
@@ -91,21 +111,21 @@ namespace ELEVEN
             dataGridMarketData.Columns[1].HeaderText = "Bid";
             dataGridMarketData.Columns[1].Name = "Bid";
             dataGridMarketData.Columns[1].DataPropertyName = "bid";
-           
+
 
             dataGridMarketData.Columns[2].Name = "Ask";
             dataGridMarketData.Columns[2].HeaderText = "Ask";
             dataGridMarketData.Columns[2].DataPropertyName = "ask";
-           
+
 
             dataGridMarketData.Columns[3].Name = "Last";
             dataGridMarketData.Columns[3].HeaderText = "Last";
             dataGridMarketData.Columns[3].DataPropertyName = "last_price";
-          
+
 
             dataGridMarketData.Columns[4].Name = "Volume";
             dataGridMarketData.Columns[4].HeaderText = "Volume";
-            dataGridMarketData.Columns[4].DataPropertyName = "volume";           
+            dataGridMarketData.Columns[4].DataPropertyName = "volume";
 
 
             buttonColumn.HeaderText = "";
@@ -159,13 +179,124 @@ namespace ELEVEN
         {
             txtAddRow.Text = "click to add..";
             SymbolFileExist();
-            await IntialLoadMarketWatch();
+             await IntialLoadMarketWatch();
             CreateDataGridColumn();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker2.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
-            backgroundWorker2.RunWorkerAsync();
+            //this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            //this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            //this.backgroundWorker2.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            //backgroundWorker2.RunWorkerAsync();
+            #region "Connect to MetaTrader Server"
+            // apiClient.BeginConnect(8222);
+            webSocket.Open();
+            webSocket.Opened += WebSocket_Opened;
+            webSocket.Closed += WebSocket_Closed;
+            webSocket.Error += WebSocket_Error;
+            webSocket.MessageReceived += WebSocket_MessageReceived;
+            #endregion
         }
+
+        private void WebSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
+        {
+
+        }
+        List<FinexTicker> list = new List<FinexTicker>();
+        private void WebSocket_MessageReceived(object sender, WebSocket4Net.MessageReceivedEventArgs e)
+        {
+            if (e.Message.Contains("subscribed"))
+            {
+                var items = JsonConvert.DeserializeObject<Subscribe>(e.Message);
+                FinexTicker finexTicker = new FinexTicker();
+                finexTicker.Id = items.chanId;
+                finexTicker.ask = "0";
+                finexTicker.bid = "0";
+                finexTicker.pair = items.pair;
+                list.Add(finexTicker);
+                //  var obj = pairs[items.pair];
+                // obj.BitFinex.Id = items.channel;
+                //if (!books.ContainsKey(items.chanId))
+                //{
+                //    books.Add(items.chanId, new Book() { Bid = 0, Ask = 0, Pair = items.pair });
+                //}
+
+            }
+
+            if (e.Message.Contains("hb"))
+            {
+                return;
+            }
+
+
+            if (e.Message.Contains("["))
+            {
+                try
+                {
+                    var data = e.Message.Split('[');
+                    if (data.Count() > 2) //snapshot
+                    {
+                        var bids = data[3].Split(',');
+                        var asks = data[4].Split(',');
+                        var instrument = data[1].Replace(",", string.Empty);
+                        //var p = pairs.Values.Where(r => r.BitFinex.Id == instrument).FirstOrDefault();
+                        //if (p != null)
+                        //{
+                        //    p.BitFinex.Book.Ask = Double.Parse(asks[0], CultureInfo.InvariantCulture);
+                        //    p.BitFinex.Book.Bid = Double.Parse(bids[0], CultureInfo.InvariantCulture);
+                        //}
+                    }
+                    else
+                    {
+                        var items = JsonConvert.DeserializeObject<string[]>(e.Message);
+                        if (items.Count() > 3)
+                        {
+                            var p = list.Where(m => m.Id == Convert.ToInt32(items[0])).FirstOrDefault();
+                            if (p != null)
+                            { 
+                                    p.ask = Convert.ToString((items[3]));
+                                    p.bid = Convert.ToString((items[1]));
+                            }
+                          
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+        }
+
+        private void WebSocket_Closed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WebSocket_Opened(object sender, EventArgs e)
+        {
+            List<webSocketListner> listWebList = new List<webSocketListner>();
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            Seprateticklers(symbols);
+            foreach (var item in sbBitfinex.ToString().Split(','))
+            {
+                var request = new webSocketListner();
+                request.channel = "ticker";
+                request.symbol = item;
+                request._event = "subscribe";
+                //listWebList.Add(request);
+                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                jsonString = jsonString.Replace("_event", "event");
+                webSocket.Send(jsonString);
+            }
+
+
+
+        }
+
         public void AutoCompletetxtAddRow()
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
@@ -221,7 +352,7 @@ namespace ELEVEN
                 for (int i = 0; i < ticker.Length; i++)
                 {
 
-                    customerList.Add(new FinexTicker {broker= Broker.BitFinex.ToString().ToUpper(), pair = ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
+                    customerList.Add(new FinexTicker { broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + ticker[i][0].Replace("t", ""), bid = ticker[i][1], ask = ticker[i][3], last_price = ticker[i][7], volume = ticker[i][8] });
                 }
                 //this.bindingSource1.DataSource = customerList;
                 ObjTrading = customerList;
@@ -256,7 +387,7 @@ namespace ELEVEN
                     }
                     sbTraders.Append(instrumentCode[1]);
                 }
-                else if (tickler.ToLower().Replace(" ","").IndexOf(Broker.IGMarket.ToString().ToLower()) > -1)
+                else if (tickler.ToLower().Replace(" ", "").IndexOf(Broker.IGMarket.ToString().ToLower()) > -1)
                 {
                     var instrumentCode = tickler.Split('.');
                     if (sbIGMarket.Length > 1)
@@ -321,8 +452,8 @@ namespace ELEVEN
 
                     if (bindingSource != null)
                     {
-                        var result = bindingSource.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
-                        var oldResult = OldWatchList.Where(d => d.pair == ticker[i][0].Replace("t", "")).FirstOrDefault();
+                        var result = bindingSource.Where(d => d.pair == Broker.BitFinex.ToString().ToUpper() + ticker[i][0].Replace("t", "")).FirstOrDefault();
+                        var oldResult = OldWatchList.Where(d => d.pair == Broker.BitFinex.ToString().ToUpper() + ticker[i][0].Replace("t", "")).FirstOrDefault();
                         if (result != null)
                         {
                             result.ask = ticker[i][3];
@@ -382,7 +513,7 @@ namespace ELEVEN
                 // Your logic here. You can gain access to any cell value via DataGridViewCellEventArgs
                 string symbol = dataGridMarketData["Symbol", e.RowIndex].Value.ToString();
                 string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
-                if(broker.ToLower()== Broker.BitFinex.ToString().ToLower())
+                if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
                     symbol = broker + "." + symbol;
                 }
@@ -399,14 +530,14 @@ namespace ELEVEN
             }
             //check Index
             int Index = symbols.IndexOf(symbol);
-            if(Index==0)
+            if (Index == 0)
             {
                 symbols = symbols.Replace(symbol + ",", "");
             }
             else
             {
                 symbols = symbols.Replace("," + symbol, "");
-            }           
+            }
 
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(this.Name + ".txt", false))
@@ -422,12 +553,7 @@ namespace ELEVEN
             dispatcherTimer1.Stop();
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
-            //string name = this.Name;
-            //string fileName = name + ".txt";
-            //if (File.Exists(fileName))
-            //{
-            //    File.Delete(fileName);
-            //}
+            apiClient.BeginDisconnect();
         }
 
         private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
@@ -463,5 +589,42 @@ namespace ELEVEN
         {
             dataGridMarketData.Focus();
         }
+        #region "Meta Trader Code"
+
+        private void SymbolListMt4()
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + @"P23.MetaTrader4.Manager.ClrWrapper.dll";
+            using (var mt = new ClrWrapper(new ConnectionParameters { Login = 7169180, Password = "ubhw0oq", Server = "TeleTRADECY-Demo" }))
+            {
+                var symbols = mt.CfgRequestSymbol();
+                mt.SymbolsRefresh();
+                foreach (var symbol in symbols)
+                {
+                    mt.SymbolAdd(symbol.Name);
+                }
+                mt.PumpingSwitchEx(PumpingMode.Default);
+
+                mt.BidAskUpdated += (sender, args) =>
+                {
+                    var total = 0;
+                    do
+                    {
+                        var symbolsInfos = mt.SymbolInfoUpdated();
+                        foreach (var symbolInfo in symbolsInfos)
+                        {
+                            if (!symbolInfo.Symbol.All(char.IsLetter))
+                            {
+                                Console.WriteLine("{0} {1} {2}", DateTime.Now, symbolInfo.Symbol, symbolInfo.Bid);
+                            }
+                        }
+                        total = symbolsInfos.Count;
+                    } while (total > 0);
+                };
+
+                Console.ReadKey();
+            }
+        }
+
+        #endregion
     }
 }
