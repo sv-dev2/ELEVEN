@@ -86,6 +86,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="nquotes, Version=1.14.0.0, Culture=neutral, PublicKeyToken=10a0b99e254e1a7d, processorArchitecture=MSIL">
+      <HintPath>..\packages\nquotes.1.14.0\lib\net45\nquotes.dll</HintPath>
+    </Reference>
     <Reference Include="P23.MetaTrader4.Manager.ClrWrapper, Version=0.4.6464.23597, Culture=neutral, PublicKeyToken=e4252536f12a7833, processorArchitecture=x86">
       <HintPath>..\packages\MetaTrader4.Manager.Wrapper.0.4.6464.23597\lib\P23.MetaTrader4.Manager.ClrWrapper.dll</HintPath>
     </Reference>

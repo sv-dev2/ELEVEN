@@ -45,12 +45,17 @@ namespace ELEVEN
         public frmMarketWatchWin()
         {
             InitializeComponent();
+            #region "Connect to MetaTrader Server"            
+            apiClient = new MtApiClient();
+            apiClient.BeginConnect(8222);
+            apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
+
+            #endregion
             instrumentMapping = new BrokerInstrumentMapping();
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-            apiClient = new MtApiClient();
-            apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
+          
             webSocket = new WebSocket4Net.WebSocket(host);
             // var client = new WebSocket(host);
         }
@@ -66,16 +71,40 @@ namespace ELEVEN
             webSocket.Error += WebSocket_Error;
             webSocket.MessageReceived += WebSocket_MessageReceived;
             #endregion
-
-            #region "Connect to MetaTrader Server"
-             apiClient.BeginConnect(8222);
-
+            #region "Meta Trader"
+            MetaTraderAPI();
             #endregion
+
+        }
+        private void MetaTraderAPI()
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000);//Mt server take time to connect
+                if(apiClient.ConnectionState== MtConnectionState.Connected)
+                {
+                    var dfdsf = apiClient.GetQuotes();
+                }
+                else
+                {
+
+                }
+
+                
+            }
+            catch (Exception)
+            {
+
+               
+            }
+           
         }
         private void ApiClient_QuoteUpdated(object sender, string symbol, double bid, double ask)
         {
             String quoteSrt = string.Empty;
             quoteSrt = symbol + ": Bid = " + bid.ToString() + "; Ask = " + ask.ToString();
+
+
         }
 
         string fileName = string.Empty;
@@ -185,7 +214,7 @@ namespace ELEVEN
         {
             txtAddRow.Text = string.Empty;
         }
-       
+
 
         private void WebSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
         {
