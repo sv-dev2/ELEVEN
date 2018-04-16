@@ -26,12 +26,12 @@ namespace ELEVEN
     {
         #region "Object Declaration"
         BrokerInstrumentMapping instrumentMapping = null;
-      
-       
+
+
         private BindingSource bindingSource2 = new BindingSource();
         BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
         BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
-       
+
         StringBuilder sbBitfinex = new StringBuilder();
         StringBuilder sbTraders = new StringBuilder();
         StringBuilder sbIGMarket = new StringBuilder();
@@ -71,13 +71,13 @@ namespace ELEVEN
                 var streamWriter = File.CreateText(fileName);
                 streamWriter.Close();
                 streamWriter.Dispose();
-                string symbols = "BITFINEX.ETHUSD";
-                using (System.IO.StreamWriter file =
-              new System.IO.StreamWriter(fileName, false))
-                {
-                    file.Write(symbols);
-                    file.Close();
-                }
+                //  string symbols = "BITFINEX.ETHUSD";
+                //  using (System.IO.StreamWriter file =
+                //new System.IO.StreamWriter(fileName, false))
+                //  {
+                //      file.Write(symbols);
+                //      file.Close();
+                //  }
             }
         }
 
@@ -145,7 +145,7 @@ namespace ELEVEN
             //txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
             // dataGridMarketData.DataSource = ObjTrading;
         }
-       
+
 
         private void TxtQuantity_LostFocus(object sender, EventArgs e)
         {
@@ -277,11 +277,19 @@ namespace ELEVEN
                 }
 
             }
+
         }
 
         private void WebSocket_Closed(object sender, EventArgs e)
         {
-
+            webSocket.Dispose();
+            ObjTrading = new BindingList<FinexTicker>();
+            webSocket = new WebSocket4Net.WebSocket(host);
+            webSocket.Open();
+            webSocket.Opened += WebSocket_Opened;
+            webSocket.Closed += WebSocket_Closed;
+            webSocket.Error += WebSocket_Error;
+            webSocket.MessageReceived += WebSocket_MessageReceived;
         }
 
         private void WebSocket_Opened(object sender, EventArgs e)
@@ -293,18 +301,29 @@ namespace ELEVEN
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            Seprateticklers(symbols);
-            foreach (var item in sbBitfinex.ToString().Split(','))
+            if (symbols != null)
             {
-                var request = new webSocketListner();
-                request.channel = "ticker";
-                request.symbol = item;
-                request._event = "subscribe";
-                //listWebList.Add(request);
-                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                jsonString = jsonString.Replace("_event", "event");
-                webSocket.Send(jsonString);
+                Seprateticklers(symbols);
+                foreach (var item in sbBitfinex.ToString().Split(','))
+                {
+                    var request = new webSocketListner();
+                    request.channel = "ticker";
+                    request.symbol = item;
+                    request._event = "subscribe";
+                    var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                    jsonString = jsonString.Replace("_event", "event");
+                    webSocket.Send(jsonString);
+
+                }
             }
+            else
+            {
+                this.Invoke((Action)delegate ()
+                {
+                    dataGridMarketData.DataSource = ObjTrading;
+                });
+            }
+
 
 
 
@@ -314,12 +333,6 @@ namespace ELEVEN
         {
             AutoCompleteStringCollection SymbolCollection = new AutoCompleteStringCollection();
             var result = instrumentMapping.SearchMapping();
-            //var All_Symbol = PbBitfinexAPI.GetSymbol($"symbols");
-            //var Smbl = All_Symbol.Replace("[", "").Replace("]", "").Replace("\"", "").Split(',').Select(d => new[] { d.ToUpper() }).ToArray();
-            //for (int i = 0; i < Smbl.Count(); i++)
-            //{
-            //    SymbolCollection.Add(Smbl[i][0]);
-            //}
             foreach (var item in result)
             {
                 SymbolCollection.Add(item.BrokerCode + "." + item.InstrumentCode);
@@ -329,8 +342,8 @@ namespace ELEVEN
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
 
         }
-       
-       
+
+
 
         private void Seprateticklers(string symbols)
         {
@@ -380,11 +393,7 @@ namespace ELEVEN
                 }
             }
         }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-          
-        }
-      
+
         private void dataGridMarketData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return; // header clicked
@@ -396,9 +405,9 @@ namespace ELEVEN
                 string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
                 if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
-                    symbol = broker + "." + symbol;
+                    ReadWriteNotepad(symbol);
                 }
-                ReadWriteNotepad(symbol);
+
             }
         }
         private void ReadWriteNotepad(string symbol)
@@ -414,6 +423,7 @@ namespace ELEVEN
             if (Index == 0)
             {
                 symbols = symbols.Replace(symbol + ",", "");
+                symbols = symbols.Replace(symbol, "");
             }
             else
             {
@@ -425,11 +435,13 @@ namespace ELEVEN
             {
                 file.Write(symbols);
                 file.Close();
-            }           
+            }
+            webSocket.Close();
+
         }
         private void frmMarketWatchWin_FormClosing(object sender, FormClosingEventArgs e)
         {
-          
+
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
             apiClient.BeginDisconnect();
@@ -444,14 +456,30 @@ namespace ELEVEN
         }
         private void AddSymbolTxtFile()
         {
-           
+
             string symbols = string.Empty;
             using (var streamReader = new StreamReader(this.Name + ".txt"))
             {
                 symbols = streamReader.ReadLine();
                 streamReader.Close();
             }
-            if (!symbols.Contains(txtAddRow.Text.ToUpper()))
+            if (symbols == null)
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name + ".txt", true))
+                {
+                    file.Write(txtAddRow.Text.ToUpper());
+                    file.Close();
+                }
+                var request = new webSocketListner();
+                request.channel = "ticker";
+                request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
+                request._event = "subscribe";
+                //listWebList.Add(request);
+                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                jsonString = jsonString.Replace("_event", "event");
+                webSocket.Send(jsonString);
+            }
+            else if (!symbols.Contains(txtAddRow.Text.ToUpper()))
             {
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name + ".txt", true))
                 {
@@ -467,9 +495,9 @@ namespace ELEVEN
                 jsonString = jsonString.Replace("_event", "event");
                 webSocket.Send(jsonString);
             }
-       
-          
-           
+
+
+
         }
 
         private void frmMarketWatchWin_MouseClick(object sender, MouseEventArgs e)
