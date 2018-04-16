@@ -54,7 +54,24 @@ namespace ELEVEN
             webSocket = new WebSocket4Net.WebSocket(host);
             // var client = new WebSocket(host);
         }
+        private void frmMarketWatch_Load(object sender, EventArgs e)
+        {
+            txtAddRow.Text = "click to add..";
+            SymbolFileExist();
+            CreateDataGridColumn();
+            #region "Bitfinex"
+            webSocket.Open();
+            webSocket.Opened += WebSocket_Opened;
+            webSocket.Closed += WebSocket_Closed;
+            webSocket.Error += WebSocket_Error;
+            webSocket.MessageReceived += WebSocket_MessageReceived;
+            #endregion
 
+            #region "Connect to MetaTrader Server"
+             apiClient.BeginConnect(8222);
+
+            #endregion
+        }
         private void ApiClient_QuoteUpdated(object sender, string symbol, double bid, double ask)
         {
             String quoteSrt = string.Empty;
@@ -168,24 +185,7 @@ namespace ELEVEN
         {
             txtAddRow.Text = string.Empty;
         }
-        private void frmMarketWatch_Load(object sender, EventArgs e)
-        {
-            txtAddRow.Text = "click to add..";
-            SymbolFileExist();
-            CreateDataGridColumn();
-            #region "Bitfinex"
-            webSocket.Open();
-            webSocket.Opened += WebSocket_Opened;
-            webSocket.Closed += WebSocket_Closed;
-            webSocket.Error += WebSocket_Error;
-            webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion
-
-            #region "Connect to MetaTrader Server"
-            // apiClient.BeginConnect(8222);
-
-            #endregion
-        }
+       
 
         private void WebSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
         {
