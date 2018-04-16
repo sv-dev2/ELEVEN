@@ -63,7 +63,7 @@ namespace ELEVEN
                             var candles = item.Split(',');
                             if (candles.Count() > 3)
                             {
-                                candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = Convert.ToInt64(candles[0]) });
+                                candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS =DateTime.Now.AddMilliseconds(Convert.ToInt64(candles[0])) });
                             }
 
                         }
@@ -103,7 +103,7 @@ namespace ELEVEN
             webCandleListner webCandle = new webCandleListner();
             webCandle.channel = "candles";
             webCandle._event = "subscribe";
-            webCandle.key = "trade:1m:tBTCUSD";
+            webCandle.key = "trade:1m:tLTCUSD";
             var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(webCandle);
             jsonString = jsonString.Replace("_event", "event");
             webSocket.Send(jsonString);
@@ -120,7 +120,7 @@ namespace ELEVEN
 
             chart1.Series["Series1"].XValueMember = "MTS";
             chart1.Series["Series1"].YValueMembers = "High,Low,Open,Close";
-            chart1.Series["Series1"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int64;
+            chart1.Series["Series1"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             chart1.Series["Series1"].CustomProperties = "PriceDownColor=Red,PriceUpColor=Blue";           
             chart1.Series["Series1"]["ShowOpenClose"] = "Both";
             chart1.DataManipulator.IsStartFromFirst = true;

@@ -9,7 +9,7 @@ namespace ELEVEN.Models
 {
     public class CancelOrderResponse : OrderStatusResponse
     {
-        public static CancelOrderResponse FromJSON(string response)
+        public static new CancelOrderResponse FromJSON(string response)
         {
             return JsonConvert.DeserializeObject<CancelOrderResponse>(response);
         }

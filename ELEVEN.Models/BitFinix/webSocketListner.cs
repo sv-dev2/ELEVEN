@@ -34,7 +34,7 @@ namespace ELEVEN.Models
     }
     public class CandleData
     {
-        public Int64 MTS { get; set; }
+        public DateTime MTS { get; set; }
         public decimal Open { get; set; }
         public decimal Close { get; set; }
         public decimal High { get; set; }
