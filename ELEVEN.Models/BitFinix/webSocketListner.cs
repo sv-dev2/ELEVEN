@@ -18,6 +18,7 @@ namespace ELEVEN.Models
         public string channel { get; set; }
         public int chanId { get; set; }
         public string pair { get; set; }
+        public string currency { get; set; }
     }
     public class webCandleListner
     {

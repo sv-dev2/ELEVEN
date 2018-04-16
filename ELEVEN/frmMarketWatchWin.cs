@@ -36,7 +36,7 @@ namespace ELEVEN
         StringBuilder sbTraders = new StringBuilder();
         StringBuilder sbIGMarket = new StringBuilder();
         StringBuilder sbICMarket = new StringBuilder();
-        const string host = "wss://api.bitfinex.com/ws";
+        const string host = "wss://api.bitfinex.com/ws/2";
         WebSocket4Net.WebSocket webSocket;
         #endregion
         #region "MetaTrader Objects"
@@ -55,7 +55,7 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-          
+
             webSocket = new WebSocket4Net.WebSocket(host);
             // var client = new WebSocket(host);
         }
@@ -81,7 +81,7 @@ namespace ELEVEN
             try
             {
                 System.Threading.Thread.Sleep(1000);//Mt server take time to connect
-                if(apiClient.ConnectionState== MtConnectionState.Connected)
+                if (apiClient.ConnectionState == MtConnectionState.Connected)
                 {
                     var dfdsf = apiClient.GetQuotes();
                 }
@@ -90,14 +90,14 @@ namespace ELEVEN
 
                 }
 
-                
+
             }
             catch (Exception)
             {
 
-               
+
             }
-           
+
         }
         private void ApiClient_QuoteUpdated(object sender, string symbol, double bid, double ask)
         {
@@ -187,9 +187,7 @@ namespace ELEVEN
             dataGridMarketData.Columns[6].DataPropertyName = "broker";
             dataGridMarketData.Columns[6].Visible = false;
 
-            //dataGridMarketData.Height = 25 * ObjTrading.Count() + 34;
-            //txtAddRow.Location = new Point(0, 20 * ObjTrading.Count() + 36);
-            // dataGridMarketData.DataSource = ObjTrading;
+
         }
 
 
@@ -226,12 +224,25 @@ namespace ELEVEN
             object obj;
             if (e.Message.Contains("subscribed"))
             {
-                var items = JsonConvert.DeserializeObject<Subscribe>(e.Message);
-                obj = this.Invoke((Action)delegate ()
-                 {
-                     ObjTrading.Add(new FinexTicker { Id = items.chanId, broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + items.pair.Replace("t", ""), bid = "0", ask = "0", last_price = "", volume = "" });
-                     dataGridMarketData.DataSource = ObjTrading;
-                 });
+                if (e.Message.Contains("currency"))
+                {
+                    var items = JsonConvert.DeserializeObject<Subscribe>(e.Message);
+                    obj = this.Invoke((Action)delegate ()
+                    {
+                        ObjTrading.Add(new FinexTicker { Id = items.chanId, broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + items.currency.Replace("t", ""), bid = "0", ask = "0", last_price = "", volume = "" });
+                        dataGridMarketData.DataSource = ObjTrading;
+                    });
+                }
+                else
+                {
+                    var items = JsonConvert.DeserializeObject<Subscribe>(e.Message);
+                    obj = this.Invoke((Action)delegate ()
+                    {
+                        ObjTrading.Add(new FinexTicker { Id = items.chanId, broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + items.pair.Replace("t", ""), bid = "0", ask = "0", last_price = "", volume = "" });
+                        dataGridMarketData.DataSource = ObjTrading;
+                    });
+                }
+
             }
 
             if (e.Message.Contains("hb"))
@@ -245,15 +256,48 @@ namespace ELEVEN
                     var data = e.Message.Split('[');
                     if (data.Count() > 2) //snapshot
                     {
-                        var bids = data[3].Split(',');
-                        var asks = data[4].Split(',');
+                        //var bids = data[3].Split(',');
+                        // var asks = data[4].Split(',');
                         var instrument = data[1].Replace(",", string.Empty);
-                        //var p = pairs.Values.Where(r => r.BitFinex.Id == instrument).FirstOrDefault();
-                        //if (p != null)
-                        //{
-                        //    p.BitFinex.Book.Ask = Double.Parse(asks[0], CultureInfo.InvariantCulture);
-                        //    p.BitFinex.Book.Bid = Double.Parse(bids[0], CultureInfo.InvariantCulture);
-                        //}
+                        var p = ObjTrading.Where(m => m.Id == Convert.ToInt32(instrument)).FirstOrDefault();
+                        if (p != null)
+                        {
+                            var items = data[2].Split(',');
+                            bool bidBlue = true;
+                            bool askBlue = true;
+                            int index = ObjTrading.IndexOf(p);
+                            if (Convert.ToDecimal(items[1]) > Convert.ToDecimal(p.bid))
+                            {
+                                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Red;
+                                bidBlue = false;
+                            }
+                            if (Convert.ToDecimal(items[3]) > Convert.ToDecimal(p.ask))
+                            {
+                                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
+                            }
+                            else
+                            {
+                                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Red;
+                                askBlue = false;
+                            }
+                            if (!bidBlue || !askBlue)
+                            {
+                                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[0];
+                            }
+                            else
+                            {
+                                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[1];
+                            }
+                            p.ask = Convert.ToString((items[3]));
+                            p.bid = Convert.ToString((items[1]));
+                            p.last_price = Convert.ToString(items[7]);
+                            p.volume = Convert.ToString(items[8]);
+                        }
+                       
                     }
                     else
                     {
@@ -390,7 +434,15 @@ namespace ELEVEN
                     {
                         sbBitfinex.Append(",");
                     }
-                    sbBitfinex.Append("t" + instrumentCode[1].ToUpper());//t and upper is appended/use only for bitfinex as per bitfinex API documentation
+                    if (instrumentCode[1].Length > 4)
+                    {
+                        sbBitfinex.Append("t" + instrumentCode[1].ToUpper());//t and upper is appended/use only for bitfinex as per bitfinex API documentation
+                    }
+                    else
+                    {
+                        sbBitfinex.Append("f" + instrumentCode[1].ToUpper());//t and upper is appended/use only for bitfinex as per bitfinex API documentation
+                    }
+
 
                 }
                 else if (tickler.ToLower().IndexOf("trade") > -1)
