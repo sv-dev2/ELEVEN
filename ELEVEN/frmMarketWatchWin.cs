@@ -263,41 +263,9 @@ namespace ELEVEN
                         if (p != null)
                         {
                             var items = data[2].Split(',');
-                            bool bidBlue = true;
-                            bool askBlue = true;
-                            int index = ObjTrading.IndexOf(p);
-                            if (Convert.ToDecimal(items[1]) > Convert.ToDecimal(p.bid))
-                            {
-                                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
-                            }
-                            else
-                            {
-                                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Red;
-                                bidBlue = false;
-                            }
-                            if (Convert.ToDecimal(items[3]) > Convert.ToDecimal(p.ask))
-                            {
-                                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
-                            }
-                            else
-                            {
-                                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Red;
-                                askBlue = false;
-                            }
-                            if (!bidBlue || !askBlue)
-                            {
-                                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[0];
-                            }
-                            else
-                            {
-                                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[1];
-                            }
-                            p.ask = Convert.ToString((items[3]));
-                            p.bid = Convert.ToString((items[1]));
-                            p.last_price = Convert.ToString(items[7]);
-                            p.volume = Convert.ToString(items[8]);
+                            GridColumnDataChanges(items, p);
                         }
-                       
+
                     }
                     else
                     {
@@ -307,39 +275,7 @@ namespace ELEVEN
                             var p = ObjTrading.Where(m => m.Id == Convert.ToInt32(items[0])).FirstOrDefault();
                             if (p != null)
                             {
-                                bool bidBlue = true;
-                                bool askBlue = true;
-                                int index = ObjTrading.IndexOf(p);
-                                if (Convert.ToDecimal(items[1]) > Convert.ToDecimal(p.bid))
-                                {
-                                    this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
-                                }
-                                else
-                                {
-                                    this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Red;
-                                    bidBlue = false;
-                                }
-                                if (Convert.ToDecimal(items[3]) > Convert.ToDecimal(p.ask))
-                                {
-                                    this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
-                                }
-                                else
-                                {
-                                    this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Red;
-                                    askBlue = false;
-                                }
-                                if (!bidBlue || !askBlue)
-                                {
-                                    ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[0];
-                                }
-                                else
-                                {
-                                    ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[1];
-                                }
-                                p.ask = Convert.ToString((items[3]));
-                                p.bid = Convert.ToString((items[1]));
-                                p.last_price = Convert.ToString(items[7]);
-                                p.volume = Convert.ToString(items[8]);
+                                GridColumnDataChanges(items, p);
                             }
                         }
                     }
@@ -352,7 +288,42 @@ namespace ELEVEN
             }
 
         }
-
+        private void GridColumnDataChanges(string [] items,FinexTicker p)
+        {
+            bool bidBlue = true;
+            bool askBlue = true;
+            int index = ObjTrading.IndexOf(p);
+            if (Convert.ToDecimal(items[1]) > Convert.ToDecimal(p.bid))
+            {
+                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
+            }
+            else
+            {
+                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Red;
+                bidBlue = false;
+            }
+            if (Convert.ToDecimal(items[3]) > Convert.ToDecimal(p.ask))
+            {
+                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
+            }
+            else
+            {
+                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Red;
+                askBlue = false;
+            }
+            if (!bidBlue || !askBlue)
+            {
+                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[0];
+            }
+            else
+            {
+                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[1];
+            }
+            p.ask = Convert.ToString((items[3]));
+            p.bid = Convert.ToString((items[1]));
+            p.last_price = Convert.ToString(items[7]);
+            p.volume = Convert.ToString(items[8]);
+        }
         private void WebSocket_Closed(object sender, EventArgs e)
         {
             webSocket.Dispose();
