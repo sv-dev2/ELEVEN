@@ -112,14 +112,18 @@ namespace ELEVEN.Services
                     file.Write(txtAddRow.Text.ToUpper());
                     file.Close();
                 }
-                var request = new webSocketListner();
-                request.channel = "ticker";
-                request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
-                request._event = "subscribe";
-                //listWebList.Add(request);
-                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                jsonString = jsonString.Replace("_event", "event");
-                webSocket.Send(jsonString);
+                if(txtAddRow.Text.ToLower().IndexOf("bitfinex")>-1)
+                {
+                    var request = new webSocketListner();
+                    request.channel = "ticker";
+                    request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
+                    request._event = "subscribe";
+                    //listWebList.Add(request);
+                    var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                    jsonString = jsonString.Replace("_event", "event");
+                    webSocket.Send(jsonString);
+                }
+              
             }
             else if (!symbols.Contains(txtAddRow.Text.ToUpper()))
             {
@@ -128,14 +132,17 @@ namespace ELEVEN.Services
                     file.Write("," + txtAddRow.Text.ToUpper());
                     file.Close();
                 }
-                var request = new webSocketListner();
-                request.channel = "ticker";
-                request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
-                request._event = "subscribe";
-                //listWebList.Add(request);
-                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                jsonString = jsonString.Replace("_event", "event");
-                webSocket.Send(jsonString);
+                if (txtAddRow.Text.ToLower().IndexOf("bitfinex") > -1)
+                {
+                    var request = new webSocketListner();
+                    request.channel = "ticker";
+                    request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
+                    request._event = "subscribe";
+                    //listWebList.Add(request);
+                    var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                    jsonString = jsonString.Replace("_event", "event");
+                    webSocket.Send(jsonString);
+                }
             }
 
         }

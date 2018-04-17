@@ -93,13 +93,13 @@ namespace ELEVEN.Services
                 });
             }
         }
-        public BindingList<CandleDataMT> HistoricalCandles()
+        public BindingList<CandleDataMT> HistoricalCandles(string symbol)
         {
 
             System.Threading.Thread.Sleep(1000);//Mt server take time to connect
             if (apiClient.ConnectionState == MtConnectionState.Connected)
             {
-                return RequestHistoricalCandles();
+                return RequestHistoricalCandles(symbol);
             }
             return listCandles;
 

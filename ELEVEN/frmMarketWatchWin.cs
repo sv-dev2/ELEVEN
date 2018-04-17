@@ -344,7 +344,7 @@ namespace ELEVEN
             var result = instrumentMapping.SearchMapping();
             foreach (var item in result)
             {
-                SymbolCollection.Add(item.BrokerCode + "." + item.InstrumentCode);
+                SymbolCollection.Add(item.BrokerCode + "." + item.BrokerInstrumentCode);
             }
             txtAddRow.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtAddRow.AutoCompleteSource = AutoCompleteSource.CustomSource;

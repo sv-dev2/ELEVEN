@@ -28,7 +28,7 @@ namespace ELEVEN
         public string broker { get; set; }
         public string symbol { get; set; }
         private MT4API mT4API { get; set; }
-        public frmCharts(MDIParentForm parentForm, string broker = "BitFine", string symbol = "tBTCUSD")
+        public frmCharts(MDIParentForm parentForm, string broker = "BitFinex", string symbol = "tBTCUSD")
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
@@ -145,7 +145,7 @@ namespace ELEVEN
         }
         public void BindDataSource()
         {
-            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles();  
+            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol);  
             chart1.DataSource = mT4API.listCandles;
             //chart1.DataBind();
         }
