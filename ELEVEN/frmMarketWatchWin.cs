@@ -19,6 +19,7 @@ using P23.MetaTrader4.Manager;
 using P23.MetaTrader4.Manager.Contracts;
 using Newtonsoft.Json;
 using System.Globalization;
+using MtApi.Monitors;
 
 namespace ELEVEN
 {
@@ -41,6 +42,9 @@ namespace ELEVEN
         #endregion
         #region "MetaTrader Objects"
         MtApiClient apiClient = null;
+        public bool IsConnected { get; private set; }
+        private readonly TimeframeTradeMonitor _timeframeTradeMonitor;
+        private readonly TimerTradeMonitor _timerTradeMonitor;
         #endregion
         public frmMarketWatchWin()
         {
@@ -48,32 +52,49 @@ namespace ELEVEN
             #region "Connect to MetaTrader Server"            
             apiClient = new MtApiClient();
             apiClient.BeginConnect(8222);
-            apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
+            // apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
+            apiClient.QuoteUpdate += ApiClient_QuoteUpdate;
+            apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
 
+            _timerTradeMonitor = new TimerTradeMonitor(apiClient) { Interval = 10000 }; // 10 sec
+            _timerTradeMonitor.AvailabilityOrdersChanged += _tradeMonitor_AvailabilityOrdersChanged;
+
+            _timeframeTradeMonitor = new TimeframeTradeMonitor(apiClient);
+            _timeframeTradeMonitor.AvailabilityOrdersChanged += _tradeMonitor_AvailabilityOrdersChanged;
+
+            apiClient.OnLastTimeBar += apiClient_OnLastTimeBar;
             #endregion
+
+
+            #region "Bitfinex"
             instrumentMapping = new BrokerInstrumentMapping();
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-
             webSocket = new WebSocket4Net.WebSocket(host);
-            // var client = new WebSocket(host);
+            #endregion
+
+
         }
-        private void frmMarketWatch_Load(object sender, EventArgs e)
+        #region "MT4 methods"
+        private void ApiClient_ConnectionStateChanged(object sender, MtConnectionEventArgs e)
         {
-            txtAddRow.Text = "click to add..";
-            SymbolFileExist();
-            CreateDataGridColumn();
-            #region "Bitfinex"
-            webSocket.Open();
-            webSocket.Opened += WebSocket_Opened;
-            webSocket.Closed += WebSocket_Closed;
-            webSocket.Error += WebSocket_Error;
-            webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion
-            #region "Meta Trader"
-            MetaTraderAPI();
-            #endregion
+            switch (e.Status)
+            {
+                case MtConnectionState.Connected:
+                    IsConnected = true;
+                    break;
+                case MtConnectionState.Disconnected:
+                case MtConnectionState.Failed:
+                    IsConnected = false;
+                    break;
+            }
+        }
+
+        private void ApiClient_QuoteUpdate(object sender, MtQuoteEventArgs e)
+        {
+
+            Console.WriteLine("Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
 
         }
         private void MetaTraderAPI()
@@ -106,6 +127,42 @@ namespace ELEVEN
 
 
         }
+        private void _tradeMonitor_AvailabilityOrdersChanged(object sender, AvailabilityOrdersEventArgs e)
+        {
+            if (e.Opened != null)
+            {
+
+            }
+
+            if (e.Closed != null)
+            {
+
+            }
+        }
+        private void apiClient_OnLastTimeBar(object sender, TimeBarArgs e)
+        {
+        }
+        #endregion
+
+
+        private void frmMarketWatch_Load(object sender, EventArgs e)
+        {
+            txtAddRow.Text = "click to add..";
+            SymbolFileExist();
+            CreateDataGridColumn();
+            #region "Bitfinex"
+            webSocket.Open();
+            webSocket.Opened += WebSocket_Opened;
+            webSocket.Closed += WebSocket_Closed;
+            webSocket.Error += WebSocket_Error;
+            webSocket.MessageReceived += WebSocket_MessageReceived;
+            #endregion
+            #region "Meta Trader"
+            MetaTraderAPI();
+            #endregion
+
+        }
+
 
         string fileName = string.Empty;
         private void SymbolFileExist()
@@ -288,7 +345,7 @@ namespace ELEVEN
             }
 
         }
-        private void GridColumnDataChanges(string [] items,FinexTicker p)
+        private void GridColumnDataChanges(string[] items, FinexTicker p)
         {
             bool bidBlue = true;
             bool askBlue = true;
@@ -333,6 +390,7 @@ namespace ELEVEN
             webSocket.Opened += WebSocket_Opened;
             webSocket.Closed += WebSocket_Closed;
             webSocket.Error += WebSocket_Error;
+
             webSocket.MessageReceived += WebSocket_MessageReceived;
         }
 
@@ -556,42 +614,6 @@ namespace ELEVEN
         {
             dataGridMarketData.Focus();
         }
-        #region "Meta Trader Code"
 
-        private void SymbolListMt4()
-        {
-            var path = AppDomain.CurrentDomain.BaseDirectory + @"P23.MetaTrader4.Manager.ClrWrapper.dll";
-            using (var mt = new ClrWrapper(new ConnectionParameters { Login = 7169180, Password = "ubhw0oq", Server = "TeleTRADECY-Demo" }))
-            {
-                var symbols = mt.CfgRequestSymbol();
-                mt.SymbolsRefresh();
-                foreach (var symbol in symbols)
-                {
-                    mt.SymbolAdd(symbol.Name);
-                }
-                mt.PumpingSwitchEx(PumpingMode.Default);
-
-                mt.BidAskUpdated += (sender, args) =>
-                {
-                    var total = 0;
-                    do
-                    {
-                        var symbolsInfos = mt.SymbolInfoUpdated();
-                        foreach (var symbolInfo in symbolsInfos)
-                        {
-                            if (!symbolInfo.Symbol.All(char.IsLetter))
-                            {
-                                Console.WriteLine("{0} {1} {2}", DateTime.Now, symbolInfo.Symbol, symbolInfo.Bid);
-                            }
-                        }
-                        total = symbolsInfos.Count;
-                    } while (total > 0);
-                };
-
-                Console.ReadKey();
-            }
-        }
-
-        #endregion
     }
 }
