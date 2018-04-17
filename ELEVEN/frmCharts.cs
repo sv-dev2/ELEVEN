@@ -43,7 +43,7 @@ namespace ELEVEN
                 mT4API = new MT4API(this);
                 candleDataMT = new BindingList<CandleDataMT>();
             }
-               
+
         }
         private void InitBitFinex()
         {
@@ -129,7 +129,7 @@ namespace ELEVEN
             webCandleListner webCandle = new webCandleListner();
             webCandle.channel = "candles";
             webCandle._event = "subscribe";
-            webCandle.key = "trade:1m:"+ symbol;
+            webCandle.key = "trade:1m:" + symbol;
             var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(webCandle);
             jsonString = jsonString.Replace("_event", "event");
             webSocket.Send(jsonString);
@@ -138,15 +138,16 @@ namespace ELEVEN
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
             ChartSettings();
-            if(mT4API!=null)
+            if (mT4API != null)
             {
-                candleDataMT=(BindingList<CandleDataMT>)mT4API.HistoricalCandles();
-                this.Invoke((Action)delegate ()
-                {
-                    chart1.DataSource = mT4API.listCandles;
-                    chart1.DataBind();
-                });
+                BindDataSource();
             }
+        }
+        public void BindDataSource()
+        {
+            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles();  
+            chart1.DataSource = mT4API.listCandles;
+            //chart1.DataBind();
         }
         private void ChartSettings()
         {

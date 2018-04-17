@@ -18,12 +18,14 @@ namespace ELEVEN.Services
         public bool IsConnected { get; private set; }
         private readonly TimeframeTradeMonitor _timeframeTradeMonitor;
         private readonly TimerTradeMonitor _timerTradeMonitor;
+        private dynamic frm;
         #endregion
-        public MT4API(object frm)
+        public MT4API(dynamic frm)
         {
             #region "Connect to MetaTrader Server"            
             apiClient = new MtApiClient();
             listCandles = new BindingList<CandleDataMT>();
+            this.frm = frm;
             // apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
             apiClient.QuoteUpdate += ApiClient_QuoteUpdate;
             apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
@@ -83,6 +85,12 @@ namespace ELEVEN.Services
                     candleData.Volume = rate.RealVolume;
                     listCandles.Add(candleData);
                 }
+                frm.Invoke((Action)delegate ()
+                {
+                    frm.chart1.DataSource = null;
+                    frm.chart1.DataSource = listCandles;
+                   
+                });
             }
         }
         public BindingList<CandleDataMT> HistoricalCandles()

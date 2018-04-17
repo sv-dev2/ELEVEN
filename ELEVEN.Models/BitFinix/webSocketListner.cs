@@ -43,7 +43,17 @@ namespace ELEVEN.Models
         public decimal Low { get; set; }
         public decimal Volume { get; set; }
     }
-    public class CandleDataMT : BaseModel
+    public class CandleDataMT
+    {
+        public DateTime MTS { get; set; }
+        public double Open { get; set; }
+        public double Close { get; set; }
+        public double High { get; set; }
+        public double Low { get; set; }
+        public double Volume { get; set; }
+        public string Symbol { get; set; }
+    }
+    public class CandleDataMT1 : BaseModel
     {
         private DateTime _mts { get; set; }
         private double _open { get; set; }
