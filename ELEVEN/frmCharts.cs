@@ -23,13 +23,23 @@ namespace ELEVEN
         WebSocket4Net.WebSocket webSocket;
         const string host = "wss://api.bitfinex.com/ws/2";
         BindingList<CandleData> candleData;
-        public frmCharts(MDIParentForm parentForm)
+        public string broker { get; set; }
+        public string symbol { get; set; }
+        public frmCharts(MDIParentForm parentForm, string broker = "BitFinex", string symbol = "tBTCUSD")
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
             this.parentForm = parentForm;
-            webSocket = new WebSocket4Net.WebSocket(host);
+            this.broker = broker;
+            this.symbol = symbol;
+            if (broker == "BitFinex")
+                InitBitFinex();
+        }
+        private void InitBitFinex()
+        {
+
             #region "Bitfinex"
+            webSocket = new WebSocket4Net.WebSocket(host);
             webSocket.Open();
             webSocket.Opened += WebSocket_Opened;
             webSocket.Closed += WebSocket_Closed;
@@ -37,7 +47,6 @@ namespace ELEVEN
             webSocket.MessageReceived += WebSocket_MessageReceived;
             #endregion
         }
-
         private void WebSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
             if (e.Message.Contains("subscribed"))
@@ -63,7 +72,7 @@ namespace ELEVEN
                             var candles = item.Split(',');
                             if (candles.Count() > 3)
                             {
-                                candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToInt64(candles[0])).ToLocalTime()});
+                                candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToInt64(candles[0])).ToLocalTime() });
                             }
 
                         }
@@ -86,7 +95,7 @@ namespace ELEVEN
                     }
 
                 }
-                catch(Exception)
+                catch (Exception)
                 {
 
                 }
@@ -110,7 +119,7 @@ namespace ELEVEN
             webCandleListner webCandle = new webCandleListner();
             webCandle.channel = "candles";
             webCandle._event = "subscribe";
-            webCandle.key = "trade:1m:tLTCUSD";
+            webCandle.key = "trade:1m:"+ symbol;
             var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(webCandle);
             jsonString = jsonString.Replace("_event", "event");
             webSocket.Send(jsonString);
@@ -128,7 +137,7 @@ namespace ELEVEN
             chart1.Series["Series1"].XValueMember = "MTS";
             chart1.Series["Series1"].YValueMembers = "High,Low,Open,Close";
             chart1.Series["Series1"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            chart1.Series["Series1"].CustomProperties = "PriceDownColor=Red,PriceUpColor=Blue";           
+            chart1.Series["Series1"].CustomProperties = "PriceDownColor=Red,PriceUpColor=Blue";
             chart1.Series["Series1"]["ShowOpenClose"] = "Both";
             chart1.DataManipulator.IsStartFromFirst = true;
         }
