@@ -1,5 +1,6 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using ELEVEN.Models;
+using ELEVEN.Services;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Newtonsoft.Json;
@@ -23,17 +24,26 @@ namespace ELEVEN
         WebSocket4Net.WebSocket webSocket;
         const string host = "wss://api.bitfinex.com/ws/2";
         BindingList<CandleData> candleData;
+        BindingList<CandleDataMT> candleDataMT;
         public string broker { get; set; }
         public string symbol { get; set; }
-        public frmCharts(MDIParentForm parentForm, string broker = "BitFinex", string symbol = "tBTCUSD")
+        private MT4API mT4API { get; set; }
+        public frmCharts(MDIParentForm parentForm, string broker = "BitFine", string symbol = "tBTCUSD")
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
+
             this.parentForm = parentForm;
             this.broker = broker;
             this.symbol = symbol;
             if (broker == "BitFinex")
                 InitBitFinex();
+            else
+            {
+                mT4API = new MT4API(this);
+                candleDataMT = new BindingList<CandleDataMT>();
+            }
+               
         }
         private void InitBitFinex()
         {
@@ -128,6 +138,15 @@ namespace ELEVEN
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
             ChartSettings();
+            if(mT4API!=null)
+            {
+                candleDataMT=(BindingList<CandleDataMT>)mT4API.HistoricalCandles();
+                this.Invoke((Action)delegate ()
+                {
+                    chart1.DataSource = mT4API.listCandles;
+                    chart1.DataBind();
+                });
+            }
         }
         private void ChartSettings()
         {

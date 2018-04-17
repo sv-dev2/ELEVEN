@@ -270,7 +270,6 @@
     <Compile Include="MDIParentForm.Designer.cs">
       <DependentUpon>MDIParentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\clsBroker.cs" />
     <Compile Include="Model\clsBrokerInstrumentDetail.cs" />
     <Compile Include="Model\FinexTickercs.cs" />

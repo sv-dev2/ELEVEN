@@ -40,32 +40,14 @@ namespace ELEVEN
         const string host = "wss://api.bitfinex.com/ws/2";
         WebSocket4Net.WebSocket webSocket;
         #endregion
-        #region "MetaTrader Objects"
-        MtApiClient apiClient = null;
-        public bool IsConnected { get; private set; }
-        private readonly TimeframeTradeMonitor _timeframeTradeMonitor;
-        private readonly TimerTradeMonitor _timerTradeMonitor;
-        #endregion
+        MT4API mT4API = null;
+        clsComman comman = null;
         public frmMarketWatchWin()
         {
             InitializeComponent();
-            #region "Connect to MetaTrader Server"            
-            apiClient = new MtApiClient();
-            apiClient.BeginConnect(8222);
-            // apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
-            apiClient.QuoteUpdate += ApiClient_QuoteUpdate;
-            apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
 
-            _timerTradeMonitor = new TimerTradeMonitor(apiClient) { Interval = 10000 }; // 10 sec
-            _timerTradeMonitor.AvailabilityOrdersChanged += _tradeMonitor_AvailabilityOrdersChanged;
-
-            _timeframeTradeMonitor = new TimeframeTradeMonitor(apiClient);
-            _timeframeTradeMonitor.AvailabilityOrdersChanged += _tradeMonitor_AvailabilityOrdersChanged;
-
-            apiClient.OnLastTimeBar += apiClient_OnLastTimeBar;
-            #endregion
-
-
+            mT4API = new MT4API(this);
+            comman = new clsComman();
             #region "Bitfinex"
             instrumentMapping = new BrokerInstrumentMapping();
             AutoCompletetxtAddRow();
@@ -76,73 +58,7 @@ namespace ELEVEN
 
 
         }
-        #region "MT4 methods"
-        private void ApiClient_ConnectionStateChanged(object sender, MtConnectionEventArgs e)
-        {
-            switch (e.Status)
-            {
-                case MtConnectionState.Connected:
-                    IsConnected = true;
-                    break;
-                case MtConnectionState.Disconnected:
-                case MtConnectionState.Failed:
-                    IsConnected = false;
-                    break;
-            }
-        }
 
-        private void ApiClient_QuoteUpdate(object sender, MtQuoteEventArgs e)
-        {
-
-            Console.WriteLine("Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
-
-        }
-        private void MetaTraderAPI()
-        {
-            try
-            {
-                System.Threading.Thread.Sleep(1000);//Mt server take time to connect
-                if (apiClient.ConnectionState == MtConnectionState.Connected)
-                {
-                    var dfdsf = apiClient.GetQuotes();
-                }
-                else
-                {
-
-                }
-
-
-            }
-            catch (Exception)
-            {
-
-
-            }
-
-        }
-        private void ApiClient_QuoteUpdated(object sender, string symbol, double bid, double ask)
-        {
-            String quoteSrt = string.Empty;
-            quoteSrt = symbol + ": Bid = " + bid.ToString() + "; Ask = " + ask.ToString();
-
-
-        }
-        private void _tradeMonitor_AvailabilityOrdersChanged(object sender, AvailabilityOrdersEventArgs e)
-        {
-            if (e.Opened != null)
-            {
-
-            }
-
-            if (e.Closed != null)
-            {
-
-            }
-        }
-        private void apiClient_OnLastTimeBar(object sender, TimeBarArgs e)
-        {
-        }
-        #endregion
 
 
         private void frmMarketWatch_Load(object sender, EventArgs e)
@@ -156,10 +72,7 @@ namespace ELEVEN
             webSocket.Closed += WebSocket_Closed;
             webSocket.Error += WebSocket_Error;
             webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion
-            #region "Meta Trader"
-            MetaTraderAPI();
-            #endregion
+            #endregion           
 
         }
 
@@ -174,13 +87,7 @@ namespace ELEVEN
                 var streamWriter = File.CreateText(fileName);
                 streamWriter.Close();
                 streamWriter.Dispose();
-                //  string symbols = "BITFINEX.ETHUSD";
-                //  using (System.IO.StreamWriter file =
-                //new System.IO.StreamWriter(fileName, false))
-                //  {
-                //      file.Write(symbols);
-                //      file.Close();
-                //  }
+
             }
         }
 
@@ -258,7 +165,7 @@ namespace ELEVEN
                 }
                 else
                 {
-                    AddSymbolTxtFile();
+                    comman.AddSymbolTxtFile(this.Name, txtAddRow, webSocket);
                     txtAddRow.Text = "click to add..";
                 }
 
@@ -405,7 +312,7 @@ namespace ELEVEN
             }
             if (symbols != null)
             {
-                Seprateticklers(symbols);
+                comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
                 foreach (var item in sbBitfinex.ToString().Split(','))
                 {
                     var request = new webSocketListner();
@@ -447,62 +354,7 @@ namespace ELEVEN
 
 
 
-        private void Seprateticklers(string symbols)
-        {
-            sbBitfinex.Clear();
-            sbTraders.Clear();
-            sbIGMarket.Clear();
-            sbICMarket.Clear();
-            var allTicklers = symbols.Split(',');
-            foreach (string tickler in allTicklers)
-            {
-                if (tickler.ToLower().IndexOf(Broker.BitFinex.ToString().ToLower()) > -1)
-                {
-                    var instrumentCode = tickler.Split('.');
-                    if (sbBitfinex.Length > 1)
-                    {
-                        sbBitfinex.Append(",");
-                    }
-                    if (instrumentCode[1].Length > 4)
-                    {
-                        sbBitfinex.Append("t" + instrumentCode[1].ToUpper());//t and upper is appended/use only for bitfinex as per bitfinex API documentation
-                    }
-                    else
-                    {
-                        sbBitfinex.Append("f" + instrumentCode[1].ToUpper());//t and upper is appended/use only for bitfinex as per bitfinex API documentation
-                    }
 
-
-                }
-                else if (tickler.ToLower().IndexOf("trade") > -1)
-                {
-                    var instrumentCode = tickler.Split('.');
-                    if (sbTraders.Length > 1)
-                    {
-                        sbTraders.Append(",");
-                    }
-                    sbTraders.Append(instrumentCode[1]);
-                }
-                else if (tickler.ToLower().Replace(" ", "").IndexOf(Broker.IGMarket.ToString().ToLower()) > -1)
-                {
-                    var instrumentCode = tickler.Split('.');
-                    if (sbIGMarket.Length > 1)
-                    {
-                        sbIGMarket.Append(",");
-                    }
-                    sbIGMarket.Append(instrumentCode[1]);
-                }
-                else if (tickler.ToLower().Replace(" ", "").IndexOf(Broker.ICMarket.ToString().ToLower()) > -1)
-                {
-                    var instrumentCode = tickler.Split('.');
-                    if (sbICMarket.Length > 1)
-                    {
-                        sbICMarket.Append(",");
-                    }
-                    sbICMarket.Append(instrumentCode[1]);
-                }
-            }
-        }
 
         private void dataGridMarketData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -515,46 +367,18 @@ namespace ELEVEN
                 string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
                 if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
-                    ReadWriteNotepad(symbol);
+                    comman.ReadWriteNotepad(symbol, this.Name, webSocket);
                 }
 
             }
         }
-        private void ReadWriteNotepad(string symbol)
-        {
-            string symbols = string.Empty;
-            using (var streamReader = new StreamReader(this.Name + ".txt"))
-            {
-                symbols = streamReader.ReadLine();
-                streamReader.Close();
-            }
-            //check Index
-            int Index = symbols.IndexOf(symbol);
-            if (Index == 0)
-            {
-                symbols = symbols.Replace(symbol + ",", "");
-                symbols = symbols.Replace(symbol, "");
-            }
-            else
-            {
-                symbols = symbols.Replace("," + symbol, "");
-            }
 
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(this.Name + ".txt", false))
-            {
-                file.Write(symbols);
-                file.Close();
-            }
-            webSocket.Close();
-
-        }
         private void frmMarketWatchWin_FormClosing(object sender, FormClosingEventArgs e)
         {
 
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
-            apiClient.BeginDisconnect();
+
         }
 
         private void txtAddRow_KeyDown(object sender, KeyEventArgs e)
@@ -564,51 +388,7 @@ namespace ELEVEN
                 //await AddSymbolTxtFile();
             }
         }
-        private void AddSymbolTxtFile()
-        {
 
-            string symbols = string.Empty;
-            using (var streamReader = new StreamReader(this.Name + ".txt"))
-            {
-                symbols = streamReader.ReadLine();
-                streamReader.Close();
-            }
-            if (symbols == null)
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name + ".txt", true))
-                {
-                    file.Write(txtAddRow.Text.ToUpper());
-                    file.Close();
-                }
-                var request = new webSocketListner();
-                request.channel = "ticker";
-                request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
-                request._event = "subscribe";
-                //listWebList.Add(request);
-                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                jsonString = jsonString.Replace("_event", "event");
-                webSocket.Send(jsonString);
-            }
-            else if (!symbols.Contains(txtAddRow.Text.ToUpper()))
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.Name + ".txt", true))
-                {
-                    file.Write("," + txtAddRow.Text.ToUpper());
-                    file.Close();
-                }
-                var request = new webSocketListner();
-                request.channel = "ticker";
-                request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
-                request._event = "subscribe";
-                //listWebList.Add(request);
-                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                jsonString = jsonString.Replace("_event", "event");
-                webSocket.Send(jsonString);
-            }
-
-
-
-        }
 
         private void frmMarketWatchWin_MouseClick(object sender, MouseEventArgs e)
         {
