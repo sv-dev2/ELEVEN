@@ -46,7 +46,7 @@ namespace ELEVEN
         {
             InitializeComponent();
 
-            mT4API = new MT4API(this);
+            mT4API = new MT4API();
             comman = new clsComman();
             #region "Bitfinex"
             instrumentMapping = new BrokerInstrumentMapping();
@@ -56,10 +56,7 @@ namespace ELEVEN
             webSocket = new WebSocket4Net.WebSocket(host);
             #endregion
 
-
         }
-
-
 
         private void frmMarketWatch_Load(object sender, EventArgs e)
         {
@@ -72,8 +69,10 @@ namespace ELEVEN
             webSocket.Closed += WebSocket_Closed;
             webSocket.Error += WebSocket_Error;
             webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion           
-
+            #endregion
+            #region "Meta Trader"
+            GetMetaTraderSymbols();
+            #endregion
         }
 
 
@@ -91,7 +90,28 @@ namespace ELEVEN
             }
         }
 
+        private void GetMetaTraderSymbols()
+        {
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            if (symbols != null)
+            {
+                comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
+                foreach (var item in sbTraders.ToString().Split(','))
+                {
+                    if (item != string.Empty)
+                    {
+                        var response = mT4API.SymbolInfoTick(item);
+                    }
 
+                }
+            }
+
+        }
 
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         TextAndImageColumn column = new TextAndImageColumn();
@@ -315,14 +335,16 @@ namespace ELEVEN
                 comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
                 foreach (var item in sbBitfinex.ToString().Split(','))
                 {
-                    var request = new webSocketListner();
-                    request.channel = "ticker";
-                    request.symbol = item;
-                    request._event = "subscribe";
-                    var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                    jsonString = jsonString.Replace("_event", "event");
-                    webSocket.Send(jsonString);
-
+                    if (item != string.Empty)
+                    {
+                        var request = new webSocketListner();
+                        request.channel = "ticker";
+                        request.symbol = item;
+                        request._event = "subscribe";
+                        var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                        jsonString = jsonString.Replace("_event", "event");
+                        webSocket.Send(jsonString);
+                    }  
                 }
             }
             else
@@ -351,10 +373,6 @@ namespace ELEVEN
             txtAddRow.AutoCompleteCustomSource = SymbolCollection;
 
         }
-
-
-
-
 
         private void dataGridMarketData_CellClick(object sender, DataGridViewCellEventArgs e)
         {

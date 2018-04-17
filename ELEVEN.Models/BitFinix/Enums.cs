@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ELEVEN.Models
 {
-    public enum Broker { BitFinex, IGMarket, ICMarket, ActiveTraders }
+    public enum Broker { BitFinex, IGMarket, ICMarket, MT }
     public enum OrderExchange
     {
         Bitfinex,

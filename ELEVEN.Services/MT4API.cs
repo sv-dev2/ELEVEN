@@ -43,7 +43,14 @@ namespace ELEVEN.Services
             apiClient.BeginConnect(8222);
             #endregion
         }
-
+        public MT4API()
+        {
+            #region "Connect to MetaTrader Server"            
+            apiClient = new MtApiClient();          
+            apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
+            apiClient.BeginConnect(8222);
+            #endregion
+        }
         #region "MT4 methods"
         private void ApiClient_ConnectionStateChanged(object sender, MtConnectionEventArgs e)
         {
@@ -64,7 +71,12 @@ namespace ELEVEN.Services
             Console.WriteLine("Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
             if (listCandles != null && listCandles.Count > 0)
             {
-                CandleAddition(e.Quote.Instrument);
+                var checkCandle = listCandles.Where(m => m.Symbol == e.Quote.Instrument).FirstOrDefault();
+                if(checkCandle!=null)
+                {
+                    CandleAddition(e.Quote.Instrument);
+                }
+              
             }
 
         }
@@ -89,7 +101,7 @@ namespace ELEVEN.Services
                 {
                     frm.chart1.DataSource = null;
                     frm.chart1.DataSource = listCandles;
-                   
+
                 });
             }
         }
@@ -104,7 +116,18 @@ namespace ELEVEN.Services
             return listCandles;
 
         }
+        public MqlTick SymbolInfoTick(string symbol)
+        {
 
+            System.Threading.Thread.Sleep(1000);//Mt server take time to connect
+            if (apiClient.ConnectionState == MtConnectionState.Connected)
+            {
+
+                return apiClient.SymbolInfoTick(symbol);
+            }
+
+            return new MqlTick();
+        }
         private void _tradeMonitor_AvailabilityOrdersChanged(object sender, AvailabilityOrdersEventArgs e)
         {
             if (e.Opened != null)
@@ -119,11 +142,30 @@ namespace ELEVEN.Services
         }
         private void apiClient_OnLastTimeBar(object sender, TimeBarArgs e)
         {
+            var checkCandle = listCandles.Where(m => m.Symbol == e.TimeBar.Symbol).FirstOrDefault();
+            if (checkCandle != null)
+            {
+                CandleDataMT candleData = new CandleDataMT();
+                candleData.Symbol = e.TimeBar.Symbol;
+                candleData.Close = e.TimeBar.Close;
+                candleData.High = e.TimeBar.High;
+                candleData.Low = e.TimeBar.Low;
+                candleData.MTS = e.TimeBar.CloseTime;
+                candleData.Open = e.TimeBar.Open;
+                listCandles.Add(candleData);
 
+                frm.Invoke((Action)delegate ()
+                {
+                    frm.chart1.DataSource = null;
+                    frm.chart1.DataSource = listCandles;
+
+                });
+            }            
         }
+
         private BindingList<CandleDataMT> RequestHistoricalCandles(string symbol = "USDJPY", ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)
         {
-            var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, 0, 100);
+            var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, DateTime.Now.AddMonths(-1), DateTime.Now);
             if (rates != null)
             {
                 foreach (var rate in rates)

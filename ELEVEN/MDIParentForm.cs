@@ -160,6 +160,7 @@ namespace ELEVEN
             this.Text = "Account Configuration | Broker: Activtrades, Account: 123456, Balance: $1000.00";
             toolStrip.Renderer = new MainFormToolStripRenderer();
             ReteriveWorkSpace();
+            BindCurrencies();
         }
         /// <summary>
         /// Reterive first workspace that exist in the DB.
@@ -193,6 +194,55 @@ namespace ELEVEN
                 lblShowActiveWorkspace.Text = result[0].WorkspaceName;
             }
         }
+        private void BindCurrencies()
+        {
+            BrokerInstrumentMapping instrumentMapping = new BrokerInstrumentMapping(); ;
+            var result = instrumentMapping.SearchMapping();
+            foreach (var item in result)
+            {
+                if (item.BrokerCode.ToLower() == "bitfinex")
+                {
+                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                    toolStripMenuItem.Text = item.BrokerInstrumentCode;
+                    toolStripMenuItem.Name = item.BrokerCode + "." + item.BrokerInstrumentCode;
+                    toolStripMenuItem.Click += ToolStripMenuItem_Click;
+                    BitFinexToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+                }
+                else if(item.BrokerCode.ToLower()=="mt")
+                {
+                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                    toolStripMenuItem.Text = item.BrokerInstrumentCode;
+                    toolStripMenuItem.Name = item.BrokerCode + "." + item.BrokerInstrumentCode;
+                    toolStripMenuItem.Click += ToolStripMenuItem_Click;
+                    MetaTraderToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+                }
+            }
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
+            string nameStrip = toolStripMenuItem.Name;
+
+            string name = Guid.NewGuid().ToString();
+            var arrayStrip = nameStrip.Split('.');
+            if(arrayStrip.Count()>1)
+            {
+                string symbol = arrayStrip[1];
+                if (arrayStrip[0].ToLower() == "bitfinex")
+                {
+                    symbol = "t" + symbol;
+                }
+                frmCharts chart = new frmCharts(this, arrayStrip[0], symbol);
+                chart.MdiParent = this;
+                chart.Name = name;
+                AddContextMenuTabControlItem(name, chart);
+                chart.Show();
+            }
+           
+           
+        }
+
         private void AddFixedWorkspace()
         {
             ////Save workspace menu
@@ -338,6 +388,7 @@ namespace ELEVEN
             //}
             //else
             //{
+
             string name = Guid.NewGuid().ToString();
             frmCharts chart = new frmCharts(this);
             chart.MdiParent = this;

@@ -36,14 +36,14 @@ namespace ELEVEN
             this.parentForm = parentForm;
             this.broker = broker;
             this.symbol = symbol;
-            if (broker == "BitFinex")
+            if (broker.ToLower() == "bitfinex")
                 InitBitFinex();
             else
             {
                 mT4API = new MT4API(this);
                 candleDataMT = new BindingList<CandleDataMT>();
             }
-
+            this.Text = broker + "." + symbol.Replace("t", "");
         }
         private void InitBitFinex()
         {

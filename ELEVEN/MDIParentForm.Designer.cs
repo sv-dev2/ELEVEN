@@ -66,7 +66,6 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.newOrderToolStrip = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ChartToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.lblShowActiveWorkspace = new System.Windows.Forms.ToolStripLabel();
@@ -90,6 +89,9 @@
             this.toolStripStatusLabel16 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.BitFinexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MetaTraderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -369,10 +371,10 @@
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newOrderToolStrip,
             this.toolStripSeparator1,
-            this.ChartToolStripButton,
-            this.toolStripSeparator2,
             this.toolStripButton1,
-            this.lblShowActiveWorkspace});
+            this.lblShowActiveWorkspace,
+            this.toolStripSeparator2,
+            this.toolStripSplitButton1});
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
@@ -401,19 +403,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // ChartToolStripButton
-            // 
-            this.ChartToolStripButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(119)))), ((int)(((byte)(183)))));
-            this.ChartToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ChartToolStripButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            this.ChartToolStripButton.ForeColor = System.Drawing.Color.White;
-            this.ChartToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ChartToolStripButton.Image")));
-            this.ChartToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.ChartToolStripButton.Name = "ChartToolStripButton";
-            this.ChartToolStripButton.Size = new System.Drawing.Size(75, 22);
-            this.ChartToolStripButton.Text = "New Chart";
-            this.ChartToolStripButton.Click += new System.EventHandler(this.ChartToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -600,6 +589,35 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
+            this.toolStripSplitButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(119)))), ((int)(((byte)(183)))));
+            this.toolStripSplitButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BitFinexToolStripMenuItem,
+            this.MetaTraderToolStripMenuItem});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(87, 22);
+            this.toolStripSplitButton1.Text = "New Chart";
+            this.toolStripSplitButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.toolStripSplitButton1.ToolTipText = "Create a new chart";
+            // 
+            // BitFinexToolStripMenuItem
+            // 
+            this.BitFinexToolStripMenuItem.Name = "BitFinexToolStripMenuItem";
+            this.BitFinexToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.BitFinexToolStripMenuItem.Text = "BitFinex";
+            // 
+            // MetaTraderToolStripMenuItem
+            // 
+            this.MetaTraderToolStripMenuItem.Name = "MetaTraderToolStripMenuItem";
+            this.MetaTraderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.MetaTraderToolStripMenuItem.Text = "MetaTrader";
+            // 
             // MDIParentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -650,7 +668,6 @@
         private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton newOrderToolStrip;
-        private System.Windows.Forms.ToolStripButton ChartToolStripButton;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem sToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
@@ -692,6 +709,9 @@
         private System.Windows.Forms.ToolStripMenuItem brokerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instrumentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem linkInstrumentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripMenuItem BitFinexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MetaTraderToolStripMenuItem;
     }
 }
 

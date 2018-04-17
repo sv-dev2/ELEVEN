@@ -37,7 +37,7 @@ namespace ELEVEN.Services
 
 
                 }
-                else if (tickler.ToLower().IndexOf("trade") > -1)
+                else if (tickler.IndexOf("MT") > -1)
                 {
                     var instrumentCode = tickler.Split('.');
                     if (sbTraders.Length > 1)
