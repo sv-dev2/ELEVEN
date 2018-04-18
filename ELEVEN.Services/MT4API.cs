@@ -1,9 +1,11 @@
-﻿using ELEVEN.Models;
+﻿using ELEVEN.Model;
+using ELEVEN.Models;
 using MtApi;
 using MtApi.Monitors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +20,14 @@ namespace ELEVEN.Services
         public bool IsConnected { get; private set; }
         private readonly TimeframeTradeMonitor _timeframeTradeMonitor;
         private readonly TimerTradeMonitor _timerTradeMonitor;
-        private dynamic frm;
+        private dynamic frmChart;
         #endregion
-        public MT4API(dynamic frm)
+        public MT4API(dynamic frmChart)
         {
             #region "Connect to MetaTrader Server"            
             apiClient = new MtApiClient();
             listCandles = new BindingList<CandleDataMT>();
-            this.frm = frm;
+            this.frmChart = frmChart;
             // apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
             apiClient.QuoteUpdate += ApiClient_QuoteUpdate;
             apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
@@ -43,14 +45,7 @@ namespace ELEVEN.Services
             apiClient.BeginConnect(8222);
             #endregion
         }
-        public MT4API()
-        {
-            #region "Connect to MetaTrader Server"            
-            apiClient = new MtApiClient();          
-            apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
-            apiClient.BeginConnect(8222);
-            #endregion
-        }
+
         #region "MT4 methods"
         private void ApiClient_ConnectionStateChanged(object sender, MtConnectionEventArgs e)
         {
@@ -68,17 +63,62 @@ namespace ELEVEN.Services
 
         private void ApiClient_QuoteUpdate(object sender, MtQuoteEventArgs e)
         {
-            Console.WriteLine("Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
+            Console.WriteLine("Symbom:" + e.Quote.Instrument + " -Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
+            UpdateWatchList(e.Quote);
             if (listCandles != null && listCandles.Count > 0)
             {
                 var checkCandle = listCandles.Where(m => m.Symbol == e.Quote.Instrument).FirstOrDefault();
-                if(checkCandle!=null)
+                if (checkCandle != null)
                 {
                     CandleAddition(e.Quote.Instrument);
                 }
-              
+
             }
 
+        }
+        private void UpdateWatchList(MtQuote quote)
+        {
+            //check if Form is watchlist
+            string formType = frmChart.Tag;
+            if (formType == "frmMarketWatchWin")
+            {
+                var watchList = frmChart.ObjTrading as BindingList<FinexTicker>;
+                var watch = watchList.Where(m => m.pair == Broker.MT.ToString() + "." + quote.Instrument).FirstOrDefault();
+                if (watch != null)
+                {
+                    bool bidBlue = true;
+                    bool askBlue = true;
+                    int index = watchList.IndexOf(watch);
+                    if (Convert.ToDecimal(quote.Bid) > Convert.ToDecimal(watch.bid))
+                    {
+                        frmChart.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        frmChart.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Red;
+                        bidBlue = false;
+                    }
+                    if (Convert.ToDecimal(quote.Ask) > Convert.ToDecimal(watch.ask))
+                    {
+                        frmChart.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
+                    }
+                    else
+                    {
+                        frmChart.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Red;
+                        askBlue = false;
+                    }
+                    if (!bidBlue || !askBlue)
+                    {
+                        ((TextAndImageCell)frmChart.dataGridMarketData.Rows[index].Cells[0]).Image = frmChart.imgList.Images[0];
+                    }
+                    else
+                    {
+                        ((TextAndImageCell)frmChart.dataGridMarketData.Rows[index].Cells[0]).Image = frmChart.imgList.Images[1];
+                    }
+                    watch.ask = quote.Ask.ToString();
+                    watch.bid = quote.Bid.ToString();
+                }
+            }
         }
         private void CandleAddition(string symbol, ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)
         {
@@ -97,10 +137,10 @@ namespace ELEVEN.Services
                     candleData.Volume = rate.RealVolume;
                     listCandles.Add(candleData);
                 }
-                frm.Invoke((Action)delegate ()
+                frmChart.Invoke((Action)delegate ()
                 {
-                    frm.chart1.DataSource = null;
-                    frm.chart1.DataSource = listCandles;
+                    frmChart.chart1.DataSource = null;
+                    frmChart.chart1.DataSource = listCandles;
 
                 });
             }
@@ -128,6 +168,18 @@ namespace ELEVEN.Services
 
             return new MqlTick();
         }
+        public List<MtQuote> GetQuotes()
+        {
+
+            System.Threading.Thread.Sleep(1000);//Mt server take time to connect
+            if (apiClient.ConnectionState == MtConnectionState.Connected)
+            {
+
+                return apiClient.GetQuotes();
+            }
+
+            return new List<MtQuote>();
+        }
         private void _tradeMonitor_AvailabilityOrdersChanged(object sender, AvailabilityOrdersEventArgs e)
         {
             if (e.Opened != null)
@@ -154,13 +206,13 @@ namespace ELEVEN.Services
                 candleData.Open = e.TimeBar.Open;
                 listCandles.Add(candleData);
 
-                frm.Invoke((Action)delegate ()
+                frmChart.Invoke((Action)delegate ()
                 {
-                    frm.chart1.DataSource = null;
-                    frm.chart1.DataSource = listCandles;
+                    frmChart.chart1.DataSource = null;
+                    frmChart.chart1.DataSource = listCandles;
 
                 });
-            }            
+            }
         }
 
         private BindingList<CandleDataMT> RequestHistoricalCandles(string symbol = "USDJPY", ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)

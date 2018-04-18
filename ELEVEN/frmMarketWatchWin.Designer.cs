@@ -118,6 +118,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtAddRow;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridMarketData;
+        public ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridMarketData;
     }
 }

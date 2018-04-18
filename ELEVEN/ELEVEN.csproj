@@ -272,10 +272,8 @@
     </Compile>
     <Compile Include="Model\clsBroker.cs" />
     <Compile Include="Model\clsBrokerInstrumentDetail.cs" />
-    <Compile Include="Model\FinexTickercs.cs" />
     <Compile Include="Model\LocationModel.cs" />
     <Compile Include="Model\MainFormToolStripRenderer.cs" />
-    <Compile Include="Model\TextAndImageColumn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Theme\RoundedButton.cs">

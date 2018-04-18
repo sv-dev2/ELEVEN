@@ -31,7 +31,7 @@ namespace ELEVEN
 
         private BindingSource bindingSource2 = new BindingSource();
         BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
-        BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
+        public BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
 
         StringBuilder sbBitfinex = new StringBuilder();
         StringBuilder sbTraders = new StringBuilder();
@@ -46,7 +46,7 @@ namespace ELEVEN
         {
             InitializeComponent();
 
-            mT4API = new MT4API();
+            mT4API = new MT4API(this);
             comman = new clsComman();
             #region "Bitfinex"
             instrumentMapping = new BrokerInstrumentMapping();
@@ -90,11 +90,11 @@ namespace ELEVEN
             }
         }
 
-      
+
 
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         TextAndImageColumn column = new TextAndImageColumn();
-        ImageList imgList = new ImageList();
+        public ImageList imgList = new ImageList();
         private void CreateDataGridColumn()
         {
             dataGridMarketData.DataSource = null;
@@ -323,7 +323,7 @@ namespace ELEVEN
                         var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
                         jsonString = jsonString.Replace("_event", "event");
                         webSocket.Send(jsonString);
-                    }  
+                    }
                 }
             }
             else
@@ -366,7 +366,10 @@ namespace ELEVEN
                 {
                     comman.ReadWriteNotepad(symbol, this.Name, webSocket);
                 }
-
+                else if (broker.ToLower() == Broker.MT.ToString().ToLower())
+                {
+                    MessageBox.Show(this, "Meta Trader symbol can not be deleted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -403,17 +406,15 @@ namespace ELEVEN
             if (symbols != null)
             {
                 comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
-                foreach (var item in sbTraders.ToString().Split(','))
+                var quotes = mT4API.GetQuotes();
+                foreach (var item in quotes)
                 {
-                    if (item != string.Empty)
-                    {
-                        var response = mT4API.SymbolInfoTick(item);
-                         this.Invoke((Action)delegate ()
-                        {
-                            ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item, bid = response.Bid.ToString(), ask = response.Ask.ToString(), last_price = response.Last.ToString(), volume = response.Volume.ToString() });
-                           
-                        });
-                    }
+                    this.Invoke((Action)delegate ()
+                   {
+                       ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item.Instrument, bid = item.Bid.ToString(), ask = item.Ask.ToString(), last_price = "0", volume = "0" });
+
+                   });
+
 
                 }
                 dataGridMarketData.DataSource = ObjTrading;
