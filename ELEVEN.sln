@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELEVEN.Models", "ELEVEN.Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApiClientUI", "TestApiClientUI\TestApiClientUI.csproj", "{663CC515-EAAE-47D4-8933-5008C2DA1160}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGWebApiClient", "IGWebApiClient\IGWebApiClient.csproj", "{8D87CD9A-985C-40CC-AB06-FE652CF809A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,14 @@ Global
 		{663CC515-EAAE-47D4-8933-5008C2DA1160}.Release|Any CPU.Build.0 = Release|Any CPU
 		{663CC515-EAAE-47D4-8933-5008C2DA1160}.Release|x86.ActiveCfg = Release|x86
 		{663CC515-EAAE-47D4-8933-5008C2DA1160}.Release|x86.Build.0 = Release|x86
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Debug|x86.Build.0 = Debug|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Release|x86.ActiveCfg = Release|Any CPU
+		{8D87CD9A-985C-40CC-AB06-FE652CF809A8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
