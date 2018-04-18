@@ -64,16 +64,25 @@ namespace ELEVEN.Services
         private void ApiClient_QuoteUpdate(object sender, MtQuoteEventArgs e)
         {
             Console.WriteLine("Symbom:" + e.Quote.Instrument + " -Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
-            UpdateWatchList(e.Quote);
-            if (listCandles != null && listCandles.Count > 0)
+            try
             {
-                var checkCandle = listCandles.Where(m => m.Symbol == e.Quote.Instrument).FirstOrDefault();
-                if (checkCandle != null)
+                UpdateWatchList(e.Quote);
+                if (listCandles != null && listCandles.Count > 0)
                 {
-                    CandleAddition(e.Quote.Instrument);
-                }
+                    var checkCandle = listCandles.Where(m => m.Symbol == e.Quote.Instrument).FirstOrDefault();
+                    if (checkCandle != null)
+                    {
+                        CandleAddition(e.Quote.Instrument);
+                    }
 
+                }
             }
+            catch (Exception)
+            {
+
+               
+            }
+           
 
         }
         private void UpdateWatchList(MtQuote quote)
