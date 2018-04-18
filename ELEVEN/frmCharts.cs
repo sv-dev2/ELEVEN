@@ -86,10 +86,15 @@ namespace ELEVEN
                             }
 
                         }
+                        var max = candleData.Max(m => m.High);
+                        var min = candleData.Min(m => m.Low);
+                       
                         this.Invoke((Action)delegate ()
                         {
+                            chart1.ChartAreas["ChartArea1"].AxisY.Minimum =Convert.ToDouble(min);
+                            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
                             chart1.DataSource = candleData;
-                            chart1.DataBind();
+                          
                         });
                     }
                     else
@@ -99,7 +104,7 @@ namespace ELEVEN
                         this.Invoke((Action)delegate ()
                         {
                             chart1.DataSource = candleData;
-                            chart1.DataBind();
+                           
                         });
 
                     }
@@ -145,7 +150,11 @@ namespace ELEVEN
         }
         public void BindDataSource()
         {
-            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol);  
+            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol);
+            var max = mT4API.listCandles.Max(m => m.High);
+            var min= mT4API.listCandles.Min(m => m.Low);
+            chart1.ChartAreas["ChartArea1"].AxisY.Minimum = min;
+            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = max;
             chart1.DataSource = mT4API.listCandles;
             //chart1.DataBind();
         }
@@ -154,6 +163,7 @@ namespace ELEVEN
             chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineWidth = 0;
             chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineWidth = 0;
 
+           
             chart1.Series["Series1"].XValueMember = "MTS";
             chart1.Series["Series1"].YValueMembers = "High,Low,Open,Close";
             chart1.Series["Series1"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
