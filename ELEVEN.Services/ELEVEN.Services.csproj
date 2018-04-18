@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="BitfinexAPI.cs" />
     <Compile Include="clsComman.cs" />
+    <Compile Include="IGMarketAPI.cs" />
     <Compile Include="MT4API.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
