@@ -1,6 +1,7 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using ELEVEN.DBConnection;
 using ELEVEN.Model;
+using ELEVEN.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -327,7 +328,19 @@ namespace ELEVEN
                         });
                         break; /* optional */
                     case "frmCharts":
-                        frmCharts charts = new frmCharts(this);
+                        string title = item.formTitle;
+                        string broker = string.Empty;
+                        string symbol = string.Empty;
+                        if(!string.IsNullOrEmpty(title))
+                        {
+                            broker = title.Split('.')[0];
+                            symbol= title.Split('.')[1];
+                            if(broker.ToLower()==Broker.BitFinex.ToString().ToLower())
+                            {
+                                symbol = "t" + symbol;
+                            }
+                        }
+                        frmCharts charts = new frmCharts(this, broker,symbol);
                         OpenWindows(charts, item);
                         break;
                     case "frmOrders":
@@ -389,12 +402,12 @@ namespace ELEVEN
             //else
             //{
 
-            string name = Guid.NewGuid().ToString();
-            frmCharts chart = new frmCharts(this);
-            chart.MdiParent = this;
-            chart.Name = name;
-            AddContextMenuTabControlItem(name, chart);
-            chart.Show();
+            //string name = Guid.NewGuid().ToString();
+            //frmCharts chart = new frmCharts(this);
+            //chart.MdiParent = this;
+            //chart.Name = name;
+            //AddContextMenuTabControlItem(name, chart);
+            //chart.Show();
 
             //}
 

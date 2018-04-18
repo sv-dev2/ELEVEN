@@ -28,7 +28,7 @@ namespace ELEVEN
         public string broker { get; set; }
         public string symbol { get; set; }
         private MT4API mT4API { get; set; }
-        public frmCharts(MDIParentForm parentForm, string broker = "BitFinex", string symbol = "tBTCUSD")
+        public frmCharts(MDIParentForm parentForm, string broker,string symbol)
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
