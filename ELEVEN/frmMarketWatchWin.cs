@@ -90,28 +90,7 @@ namespace ELEVEN
             }
         }
 
-        private void GetMetaTraderSymbols()
-        {
-            string symbols = string.Empty;
-            using (var streamReader = new StreamReader(this.Name + ".txt"))
-            {
-                symbols = streamReader.ReadLine();
-                streamReader.Close();
-            }
-            if (symbols != null)
-            {
-                comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
-                foreach (var item in sbTraders.ToString().Split(','))
-                {
-                    if (item != string.Empty)
-                    {
-                        var response = mT4API.SymbolInfoTick(item);
-                    }
-
-                }
-            }
-
-        }
+      
 
         System.Windows.Forms.DataGridViewImageColumn buttonColumn = new System.Windows.Forms.DataGridViewImageColumn();
         TextAndImageColumn column = new TextAndImageColumn();
@@ -412,6 +391,35 @@ namespace ELEVEN
         {
             dataGridMarketData.Focus();
         }
+        #region "Meta Trader"
+        private void GetMetaTraderSymbols()
+        {
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader(this.Name + ".txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            if (symbols != null)
+            {
+                comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
+                foreach (var item in sbTraders.ToString().Split(','))
+                {
+                    if (item != string.Empty)
+                    {
+                        var response = mT4API.SymbolInfoTick(item);
+                         this.Invoke((Action)delegate ()
+                        {
+                            ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item, bid = response.Bid.ToString(), ask = response.Ask.ToString(), last_price = response.Last.ToString(), volume = response.Volume.ToString() });
+                           
+                        });
+                    }
 
+                }
+                dataGridMarketData.DataSource = ObjTrading;
+            }
+
+        }
+        #endregion
     }
 }
