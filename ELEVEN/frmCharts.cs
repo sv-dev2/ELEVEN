@@ -99,10 +99,16 @@ namespace ELEVEN
                     }
                     else
                     {
+
                         var candles = data[2].Split(',');
                         candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToInt64(candles[0])).ToLocalTime() });
+                        var max = candleData.Max(m => m.High);
+                        var min = candleData.Min(m => m.Low);
+
                         this.Invoke((Action)delegate ()
                         {
+                            chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
+                            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
                             chart1.DataSource = candleData;
                            
                         });
@@ -169,6 +175,7 @@ namespace ELEVEN
             chart1.Series["Series1"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             chart1.Series["Series1"].CustomProperties = "PriceDownColor=Red,PriceUpColor=Blue";
             chart1.Series["Series1"]["ShowOpenClose"] = "Both";
+            chart1.Series["Series1"]["OpenCloseStyle"] = "Triangle";
             chart1.DataManipulator.IsStartFromFirst = true;
         }
         private void frmCharts_FormClosing(object sender, FormClosingEventArgs e)
