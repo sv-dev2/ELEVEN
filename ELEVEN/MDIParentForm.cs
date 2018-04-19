@@ -162,6 +162,12 @@ namespace ELEVEN
             toolStrip.Renderer = new MainFormToolStripRenderer();
             ReteriveWorkSpace();
             BindCurrencies();
+            //LoginIGMarket();
+        }
+        private void LoginIGMarket()
+        {
+            var applicationViewModel = new ApplicationViewModel();
+            applicationViewModel.Login();
         }
         /// <summary>
         /// Reterive first workspace that exist in the DB.
@@ -209,7 +215,7 @@ namespace ELEVEN
                     toolStripMenuItem.Click += ToolStripMenuItem_Click;
                     BitFinexToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
                 }
-                else if(item.BrokerCode.ToLower()=="mt")
+                else if (item.BrokerCode.ToLower() == "mt")
                 {
                     ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
                     toolStripMenuItem.Text = item.BrokerInstrumentCode;
@@ -227,7 +233,7 @@ namespace ELEVEN
 
             string name = Guid.NewGuid().ToString();
             var arrayStrip = nameStrip.Split('.');
-            if(arrayStrip.Count()>1)
+            if (arrayStrip.Count() > 1)
             {
                 string symbol = arrayStrip[1];
                 if (arrayStrip[0].ToLower() == "bitfinex")
@@ -240,8 +246,8 @@ namespace ELEVEN
                 AddContextMenuTabControlItem(name, chart);
                 chart.Show();
             }
-           
-           
+
+
         }
 
         private void AddFixedWorkspace()
@@ -331,16 +337,16 @@ namespace ELEVEN
                         string title = item.formTitle;
                         string broker = string.Empty;
                         string symbol = string.Empty;
-                        if(!string.IsNullOrEmpty(title))
+                        if (!string.IsNullOrEmpty(title))
                         {
                             broker = title.Split('.')[0];
-                            symbol= title.Split('.')[1];
-                            if(broker.ToLower()==Broker.BitFinex.ToString().ToLower())
+                            symbol = title.Split('.')[1];
+                            if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                             {
                                 symbol = "t" + symbol;
                             }
                         }
-                        frmCharts charts = new frmCharts(this, broker,symbol);
+                        frmCharts charts = new frmCharts(this, broker, symbol);
                         OpenWindows(charts, item);
                         break;
                     case "frmOrders":

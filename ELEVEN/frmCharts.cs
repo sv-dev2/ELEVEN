@@ -157,10 +157,13 @@ namespace ELEVEN
         public void BindDataSource()
         {
             candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol);
-            var max = mT4API.listCandles.Max(m => m.High);
-            var min= mT4API.listCandles.Min(m => m.Low);
-            chart1.ChartAreas["ChartArea1"].AxisY.Minimum = min;
-            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = max;
+            if(mT4API.listCandles.Count>0)
+            {
+                var max = mT4API.listCandles.Max(m => m.High);
+                var min = mT4API.listCandles.Min(m => m.Low);
+                chart1.ChartAreas["ChartArea1"].AxisY.Minimum = min;
+                chart1.ChartAreas["ChartArea1"].AxisY.Maximum = max;
+            }          
             chart1.DataSource = mT4API.listCandles;
             //chart1.DataBind();
         }

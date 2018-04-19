@@ -250,7 +250,8 @@ namespace ELEVEN.Models
 
             try
             {
-                var response = await igRestApiClient.SecureAuthenticate(ar, apiKey);
+                
+                   var response = await igRestApiClient.SecureAuthenticate(ar, apiKey);
                 if (response && (response.Response != null) && (response.Response.accounts.Count > 0))
                 {
                     Accounts.Clear();
