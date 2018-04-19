@@ -21,14 +21,13 @@ namespace ELEVEN
     public partial class frmCharts : KryptonForm
     {
         private MDIParentForm parentForm;
-        WebSocket4Net.WebSocket webSocket;
-        const string host = "wss://api.bitfinex.com/ws/2";
-        BindingList<CandleData> candleData;
+
+        public BindingList<CandleData> candleData;
         BindingList<CandleDataMT> candleDataMT;
         public string broker { get; set; }
         public string symbol { get; set; }
         private MT4API mT4API { get; set; }
-        public frmCharts(MDIParentForm parentForm, string broker,string symbol)
+        public frmCharts(MDIParentForm parentForm, string broker, string symbol)
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
@@ -47,104 +46,10 @@ namespace ELEVEN
         }
         private void InitBitFinex()
         {
-
-            #region "Bitfinex"
-            webSocket = new WebSocket4Net.WebSocket(host);
-            webSocket.Open();
-            webSocket.Opened += WebSocket_Opened;
-            webSocket.Closed += WebSocket_Closed;
-            webSocket.Error += WebSocket_Error;
-            webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion
-        }
-        private void WebSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
-        {
-            if (e.Message.Contains("subscribed"))
-            {
-                var items = JsonConvert.DeserializeObject<webCandleResponse>(e.Message);
-
-            }
-
-            if (e.Message.Contains("hb"))
-            {
-                return;
-            }
-
-            if (e.Message.Contains("["))
-            {
-                try
-                {
-                    var data = e.Message.Split('[');
-                    if (data.Count() > 3)
-                    {
-                        foreach (var item in data)
-                        {
-                            var candles = item.Split(',');
-                            if (candles.Count() > 3)
-                            {
-                                candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToInt64(candles[0])).ToLocalTime() });
-                            }
-
-                        }
-                        var max = candleData.Max(m => m.High);
-                        var min = candleData.Min(m => m.Low);
-                       
-                        this.Invoke((Action)delegate ()
-                        {
-                            chart1.ChartAreas["ChartArea1"].AxisY.Minimum =Convert.ToDouble(min);
-                            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
-                            chart1.DataSource = candleData;
-                          
-                        });
-                    }
-                    else
-                    {
-
-                        var candles = data[2].Split(',');
-                        candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToInt64(candles[0])).ToLocalTime() });
-                        var max = candleData.Max(m => m.High);
-                        var min = candleData.Min(m => m.Low);
-
-                        this.Invoke((Action)delegate ()
-                        {
-                            chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
-                            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
-                            chart1.DataSource = candleData;
-                           
-                        });
-
-                    }
-
-                }
-                catch (Exception)
-                {
-
-                }
-
-            }
-
+            BitfinexSocket.Instance.Init(symbol, this);
+           
         }
 
-        private void WebSocket_Error(object sender, ErrorEventArgs e)
-        {
-
-        }
-
-        private void WebSocket_Closed(object sender, EventArgs e)
-        {
-
-        }
-
-        private void WebSocket_Opened(object sender, EventArgs e)
-        {
-            webCandleListner webCandle = new webCandleListner();
-            webCandle.channel = "candles";
-            webCandle._event = "subscribe";
-            webCandle.key = "trade:1m:" + symbol;
-            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(webCandle);
-            jsonString = jsonString.Replace("_event", "event");
-            webSocket.Send(jsonString);
-        }
 
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
@@ -157,13 +62,13 @@ namespace ELEVEN
         public void BindDataSource()
         {
             candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol);
-            if(mT4API.listCandles.Count>0)
+            if (mT4API.listCandles.Count > 0)
             {
                 var max = mT4API.listCandles.Max(m => m.High);
                 var min = mT4API.listCandles.Min(m => m.Low);
                 chart1.ChartAreas["ChartArea1"].AxisY.Minimum = min;
                 chart1.ChartAreas["ChartArea1"].AxisY.Maximum = max;
-            }          
+            }
             chart1.DataSource = mT4API.listCandles;
             //chart1.DataBind();
         }
