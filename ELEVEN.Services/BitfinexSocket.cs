@@ -26,14 +26,14 @@ namespace ELEVEN.Services
         // private constructor. 
         private BitfinexSocket()
         {
-            #region "Bitfinex"
+           
             webSocket = new WebSocket4Net.WebSocket(host);
             webSocket.Open();
             webSocket.Opened += WebSocket_Opened;
             webSocket.Closed += WebSocket_Closed;
             webSocket.Error += WebSocket_Error;
             webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion
+           
         }
 
         private dynamic form { get; set; }
