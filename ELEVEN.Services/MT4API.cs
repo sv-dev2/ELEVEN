@@ -226,7 +226,7 @@ namespace ELEVEN.Services
 
         private BindingList<CandleDataMT> RequestHistoricalCandles(string symbol = "USDJPY", ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)
         {
-            var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, DateTime.Now.AddMonths(-1), DateTime.Now);
+            var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, DateTime.Now.AddDays(-15), DateTime.Now);
             if (rates != null)
             {
                 foreach (var rate in rates)
