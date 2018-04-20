@@ -27,18 +27,14 @@ namespace ELEVEN
     {
         #region "Object Declaration"
         BrokerInstrumentMapping instrumentMapping = null;
-
-
-        private BindingSource bindingSource2 = new BindingSource();
-        BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
-        public BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
-
         StringBuilder sbBitfinex = new StringBuilder();
         StringBuilder sbTraders = new StringBuilder();
         StringBuilder sbIGMarket = new StringBuilder();
         StringBuilder sbICMarket = new StringBuilder();
-        const string host = "wss://api.bitfinex.com/ws/2";
-        WebSocket4Net.WebSocket webSocket;
+
+        private BindingSource bindingSource2 = new BindingSource();
+        BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
+        public BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
         #endregion
         MT4API mT4API = null;
         clsComman comman = null;
@@ -53,7 +49,7 @@ namespace ELEVEN
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-            webSocket = new WebSocket4Net.WebSocket(host);
+           
             #endregion
 
         }
@@ -63,13 +59,7 @@ namespace ELEVEN
             txtAddRow.Text = "click to add..";
             SymbolFileExist();
             CreateDataGridColumn();
-            #region "Bitfinex"
-            webSocket.Open();
-            webSocket.Opened += WebSocket_Opened;
-            webSocket.Closed += WebSocket_Closed;
-            webSocket.Error += WebSocket_Error;
-            webSocket.MessageReceived += WebSocket_MessageReceived;
-            #endregion
+            BitfinexWatchlistSocket.Instance.Init(this);
             #region "Meta Trader"
             GetMetaTraderSymbols();
             #endregion
@@ -164,7 +154,7 @@ namespace ELEVEN
                 }
                 else
                 {
-                    comman.AddSymbolTxtFile(this.Name, txtAddRow, webSocket);
+                    BitfinexWatchlistSocket.Instance.AddSymbolTxtFile(this, txtAddRow);
                     txtAddRow.Text = "click to add..";
                 }
 
@@ -177,167 +167,11 @@ namespace ELEVEN
         }
 
 
-        private void WebSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
-        {
-
-        }
+      
         BindingList<FinexTicker> list = new BindingList<FinexTicker>();
-        private void WebSocket_MessageReceived(object sender, WebSocket4Net.MessageReceivedEventArgs e)
-        {
-            object obj;
-            if (e.Message.Contains("subscribed"))
-            {
-                if (e.Message.Contains("currency"))
-                {
-                    var items = JsonConvert.DeserializeObject<Subscribe>(e.Message);
-                    obj = this.Invoke((Action)delegate ()
-                    {
-                        ObjTrading.Add(new FinexTicker { Id = items.chanId, broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + items.currency.Replace("t", ""), bid = "0", ask = "0", last_price = "", volume = "" });
-                        dataGridMarketData.DataSource = ObjTrading;
-                    });
-                }
-                else
-                {
-                    var items = JsonConvert.DeserializeObject<Subscribe>(e.Message);
-                    obj = this.Invoke((Action)delegate ()
-                    {
-                        ObjTrading.Add(new FinexTicker { Id = items.chanId, broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + items.pair.Replace("t", ""), bid = "0", ask = "0", last_price = "", volume = "" });
-                        dataGridMarketData.DataSource = ObjTrading;
-                    });
-                }
-
-            }
-
-            if (e.Message.Contains("hb"))
-            {
-                return;
-            }
-            if (e.Message.Contains("["))
-            {
-                try
-                {
-                    var data = e.Message.Split('[');
-                    if (data.Count() > 2) //snapshot
-                    {
-                        //var bids = data[3].Split(',');
-                        // var asks = data[4].Split(',');
-                        var instrument = data[1].Replace(",", string.Empty);
-                        var p = ObjTrading.Where(m => m.Id == Convert.ToInt32(instrument)).FirstOrDefault();
-                        if (p != null)
-                        {
-                            var items = data[2].Split(',');
-                            GridColumnDataChanges(items, p);
-                        }
-
-                    }
-                    else
-                    {
-                        var items = JsonConvert.DeserializeObject<string[]>(e.Message);
-                        if (items.Count() > 3)
-                        {
-                            var p = ObjTrading.Where(m => m.Id == Convert.ToInt32(items[0])).FirstOrDefault();
-                            if (p != null)
-                            {
-                                GridColumnDataChanges(items, p);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
-
-            }
-
-        }
-        private void GridColumnDataChanges(string[] items, FinexTicker p)
-        {
-            bool bidBlue = true;
-            bool askBlue = true;
-            int index = ObjTrading.IndexOf(p);
-            if (Convert.ToDecimal(items[1]) > Convert.ToDecimal(p.bid))
-            {
-                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
-            }
-            else
-            {
-                this.dataGridMarketData.Rows[index].Cells[1].Style.ForeColor = Color.Red;
-                bidBlue = false;
-            }
-            if (Convert.ToDecimal(items[3]) > Convert.ToDecimal(p.ask))
-            {
-                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
-            }
-            else
-            {
-                this.dataGridMarketData.Rows[index].Cells[2].Style.ForeColor = Color.Red;
-                askBlue = false;
-            }
-            if (!bidBlue || !askBlue)
-            {
-                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[0];
-            }
-            else
-            {
-                ((TextAndImageCell)dataGridMarketData.Rows[index].Cells[0]).Image = imgList.Images[1];
-            }
-            p.ask = Convert.ToString((items[3]));
-            p.bid = Convert.ToString((items[1]));
-            p.last_price = Convert.ToString(items[7]);
-            p.volume = Convert.ToString(items[8]);
-        }
-        private void WebSocket_Closed(object sender, EventArgs e)
-        {
-            webSocket.Dispose();
-            ObjTrading = new BindingList<FinexTicker>();
-            webSocket = new WebSocket4Net.WebSocket(host);
-            webSocket.Open();
-            webSocket.Opened += WebSocket_Opened;
-            webSocket.Closed += WebSocket_Closed;
-            webSocket.Error += WebSocket_Error;
-
-            webSocket.MessageReceived += WebSocket_MessageReceived;
-        }
-
-        private void WebSocket_Opened(object sender, EventArgs e)
-        {
-            List<webSocketListner> listWebList = new List<webSocketListner>();
-            string symbols = string.Empty;
-            using (var streamReader = new StreamReader(this.Name + ".txt"))
-            {
-                symbols = streamReader.ReadLine();
-                streamReader.Close();
-            }
-            if (symbols != null)
-            {
-                comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
-                foreach (var item in sbBitfinex.ToString().Split(','))
-                {
-                    if (item != string.Empty)
-                    {
-                        var request = new webSocketListner();
-                        request.channel = "ticker";
-                        request.symbol = item;
-                        request._event = "subscribe";
-                        var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                        jsonString = jsonString.Replace("_event", "event");
-                        webSocket.Send(jsonString);
-                    }
-                }
-            }
-            else
-            {
-                this.Invoke((Action)delegate ()
-                {
-                    dataGridMarketData.DataSource = ObjTrading;
-                });
-            }
-
-
-
-
-        }
+       
+      
+     
 
         public void AutoCompletetxtAddRow()
         {
@@ -364,7 +198,7 @@ namespace ELEVEN
                 string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
                 if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
-                    comman.ReadWriteNotepad(symbol, this.Name, webSocket);
+                    // comman.ReadWriteNotepad(symbol, this.Name, webSocket);//TODO
                 }
                 else if (broker.ToLower() == Broker.MT.ToString().ToLower())
                 {
@@ -378,7 +212,11 @@ namespace ELEVEN
 
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
-
+            var formObj = BitfinexWatchlistSocket.Instance.listForms.Where(m => m.form == this).FirstOrDefault();
+            if(formObj != null)
+            {
+                BitfinexWatchlistSocket.Instance.listForms.Remove(formObj);
+            }
         }
 
         private void txtAddRow_KeyDown(object sender, KeyEventArgs e)

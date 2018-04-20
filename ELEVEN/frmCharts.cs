@@ -90,6 +90,11 @@ namespace ELEVEN
 
             TabControl tabControl = parentForm.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
+            var formObj = BitfinexSocket.Instance.listForms.Where(m => m.form == this).FirstOrDefault();
+            if (formObj != null)
+            {
+                BitfinexSocket.Instance.listForms.Remove(formObj);
+            }
         }
     }
 }

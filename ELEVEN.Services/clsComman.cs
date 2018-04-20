@@ -96,55 +96,6 @@ namespace ELEVEN.Services
             webSocket.Close();
 
         }
-        public void AddSymbolTxtFile(string name, ComponentFactory.Krypton.Toolkit.KryptonTextBox txtAddRow, WebSocket4Net.WebSocket webSocket)
-        {
-
-            string symbols = string.Empty;
-            using (var streamReader = new StreamReader(name + ".txt"))
-            {
-                symbols = streamReader.ReadLine();
-                streamReader.Close();
-            }
-            if (symbols == null)
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(name + ".txt", true))
-                {
-                    file.Write(txtAddRow.Text.ToUpper());
-                    file.Close();
-                }
-                if(txtAddRow.Text.ToLower().IndexOf("bitfinex")>-1)
-                {
-                    var request = new webSocketListner();
-                    request.channel = "ticker";
-                    request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
-                    request._event = "subscribe";
-                    //listWebList.Add(request);
-                    var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                    jsonString = jsonString.Replace("_event", "event");
-                    webSocket.Send(jsonString);
-                }
-              
-            }
-            else if (!symbols.Contains(txtAddRow.Text.ToUpper()))
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(name + ".txt", true))
-                {
-                    file.Write("," + txtAddRow.Text.ToUpper());
-                    file.Close();
-                }
-                if (txtAddRow.Text.ToLower().IndexOf("bitfinex") > -1)
-                {
-                    var request = new webSocketListner();
-                    request.channel = "ticker";
-                    request.symbol = txtAddRow.Text.Split('.')[1].ToUpper();
-                    request._event = "subscribe";
-                    //listWebList.Add(request);
-                    var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(request);
-                    jsonString = jsonString.Replace("_event", "event");
-                    webSocket.Send(jsonString);
-                }
-            }
-
-        }
+        
     }
 }
