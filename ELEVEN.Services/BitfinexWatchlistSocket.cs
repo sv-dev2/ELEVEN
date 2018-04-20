@@ -48,9 +48,6 @@ namespace ELEVEN.Services
         public void Init(dynamic form)
         {
 
-            // this.form = form;
-
-
             while (!IsSocketOpened)
             {
             }
@@ -116,7 +113,7 @@ namespace ELEVEN.Services
         private void WebSocket_Closed(object sender, EventArgs e)
         {
             webSocket.Dispose();
-            // ObjTrading = new BindingList<FinexTicker>();//TODO
+            //form.ObjTrading = new BindingList<FinexTicker>();
             webSocket = new WebSocket4Net.WebSocket(host);
             webSocket.Open();
             webSocket.Opened += WebSocket_Opened;
@@ -124,8 +121,19 @@ namespace ELEVEN.Services
             webSocket.Error += WebSocket_Error;
 
             webSocket.MessageReceived += WebSocket_MessageReceived;
+            ReInitallizeForm();
         }
-
+        private void ReInitallizeForm()
+        {
+            list = new List<MapSymbolChannel>();
+            var backUp = listForms;
+            listForms = new List<WatchListForm>();
+            foreach (var item in backUp)
+            {
+                item.form.ObjTrading = new BindingList<FinexTicker>();
+                Init(item.form);
+            }
+        }
         private void WebSocket_Opened(object sender, EventArgs e)
         {
 
@@ -396,6 +404,37 @@ namespace ELEVEN.Services
         {
             webSocket.Close();
             listForms = new List<WatchListForm>();
+        }
+
+        public void ReadWriteNotepad(string symbol, string name, dynamic form)
+        {
+            this.form = form;
+            string symbols = string.Empty;
+            using (var streamReader = new StreamReader(name + ".txt"))
+            {
+                symbols = streamReader.ReadLine();
+                streamReader.Close();
+            }
+            //check Index
+            int Index = symbols.IndexOf(symbol);
+            if (Index == 0)
+            {
+                symbols = symbols.Replace(symbol + ",", "");
+                symbols = symbols.Replace(symbol, "");
+            }
+            else
+            {
+                symbols = symbols.Replace("," + symbol, "");
+            }
+
+            using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(name + ".txt", false))
+            {
+                file.Write(symbols);
+                file.Close();
+            }
+            webSocket.Close();
+
         }
     }
 

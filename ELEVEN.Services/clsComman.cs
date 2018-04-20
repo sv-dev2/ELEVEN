@@ -67,35 +67,7 @@ namespace ELEVEN.Services
             }
         }
 
-        public void ReadWriteNotepad(string symbol, string name, WebSocket4Net.WebSocket webSocket)
-        {
-            string symbols = string.Empty;
-            using (var streamReader = new StreamReader(name + ".txt"))
-            {
-                symbols = streamReader.ReadLine();
-                streamReader.Close();
-            }
-            //check Index
-            int Index = symbols.IndexOf(symbol);
-            if (Index == 0)
-            {
-                symbols = symbols.Replace(symbol + ",", "");
-                symbols = symbols.Replace(symbol, "");
-            }
-            else
-            {
-                symbols = symbols.Replace("," + symbol, "");
-            }
-
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(name + ".txt", false))
-            {
-                file.Write(symbols);
-                file.Close();
-            }
-            webSocket.Close();
-
-        }
+        
         
     }
 }

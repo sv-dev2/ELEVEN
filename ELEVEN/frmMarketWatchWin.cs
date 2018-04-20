@@ -198,7 +198,7 @@ namespace ELEVEN
                 string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
                 if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
-                    // comman.ReadWriteNotepad(symbol, this.Name, webSocket);//TODO
+                     BitfinexWatchlistSocket.Instance.ReadWriteNotepad(symbol, this.Name,this);
                 }
                 else if (broker.ToLower() == Broker.MT.ToString().ToLower())
                 {
