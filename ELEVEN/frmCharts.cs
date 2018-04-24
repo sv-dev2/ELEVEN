@@ -74,8 +74,8 @@ namespace ELEVEN
         }
         private void ChartSettings()
         {
-            chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineWidth = 0;
-            chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineWidth = 0;
+            //chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineWidth = 0;
+            //chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineWidth = 0;
 
             chart1.Series["Series1"].XValueMember = "MTS";
             chart1.Series["Series1"].YValueMembers = "High,Low,Open,Close";
