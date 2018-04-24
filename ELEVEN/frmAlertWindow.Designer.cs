@@ -53,51 +53,51 @@
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonPanel6 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel8 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel7 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.kryptonPanel6 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.ConditionNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
-            this.kryptonPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
-            this.kryptonPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).BeginInit();
-            this.kryptonPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).BeginInit();
-            this.kryptonPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel8)).BeginInit();
+            this.kryptonPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel7)).BeginInit();
+            this.kryptonPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel7)).BeginInit();
-            this.kryptonPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel8)).BeginInit();
-            this.kryptonPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).BeginInit();
+            this.kryptonPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).BeginInit();
+            this.kryptonPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
+            this.kryptonPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
+            this.kryptonPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // ddCondition1
@@ -330,13 +330,21 @@
             this.kryptonLabel1.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel1.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel1.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel1.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel1.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel1.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel1.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel1.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel1.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.TabIndex = 24;
             this.kryptonLabel1.Values.Text = "Condition";
             // 
@@ -348,13 +356,21 @@
             this.kryptonLabel2.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel2.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel2.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel2.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel2.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel2.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel2.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel2.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel2.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.TabIndex = 25;
             this.kryptonLabel2.Values.Text = "Options";
             // 
@@ -366,13 +382,21 @@
             this.kryptonLabel3.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel3.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel3.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel3.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel3.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel3.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel3.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel3.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel3.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.TabIndex = 26;
             this.kryptonLabel3.Values.Text = "Expiration Time";
             // 
@@ -384,13 +408,21 @@
             this.kryptonLabel4.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel4.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel4.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel4.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel4.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel4.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel4.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel4.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel4.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.TabIndex = 27;
             this.kryptonLabel4.Values.Text = "Alert Actions";
             // 
@@ -402,13 +434,21 @@
             this.kryptonLabel5.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel5.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel5.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel5.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel5.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel5.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel5.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
+            this.kryptonLabel5.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonLabel5.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.TabIndex = 28;
             this.kryptonLabel5.Values.Text = "Message";
             // 
@@ -419,6 +459,8 @@
             this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
             this.kryptonButton1.Size = new System.Drawing.Size(90, 47);
             this.kryptonButton1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.kryptonButton1.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonButton1.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonButton1.TabIndex = 29;
             this.kryptonButton1.Values.Text = "Create";
             // 
@@ -435,10 +477,13 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(134, 424);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel1.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel1.StateDisabled.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateDisabled.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel1.StateDisabled.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel1.StateNormal.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateNormal.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel1.StateNormal.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel1.TabIndex = 30;
             // 
             // kryptonPanel2
@@ -461,68 +506,94 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(585, 424);
             this.kryptonPanel2.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel2.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel2.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel2.TabIndex = 31;
             // 
-            // kryptonPanel3
+            // kryptonPanel8
             // 
-            this.kryptonPanel3.Controls.Add(this.ddCondition1);
-            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel3.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Size = new System.Drawing.Size(585, 30);
-            this.kryptonPanel3.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel3.StateNormal.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel3.StateNormal.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel3.TabIndex = 30;
+            this.kryptonPanel8.Controls.Add(this.txtMessage);
+            this.kryptonPanel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel8.Location = new System.Drawing.Point(0, 270);
+            this.kryptonPanel8.Name = "kryptonPanel8";
+            this.kryptonPanel8.Size = new System.Drawing.Size(585, 100);
+            this.kryptonPanel8.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel8.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel8.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel8.TabIndex = 40;
             // 
-            // kryptonPanel4
+            // kryptonPanel7
             // 
-            this.kryptonPanel4.Controls.Add(this.ddCondition2);
-            this.kryptonPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel4.Location = new System.Drawing.Point(0, 30);
-            this.kryptonPanel4.Name = "kryptonPanel4";
-            this.kryptonPanel4.Size = new System.Drawing.Size(585, 30);
-            this.kryptonPanel4.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel4.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel4.TabIndex = 31;
+            this.kryptonPanel7.Controls.Add(this.chkSendEmail);
+            this.kryptonPanel7.Controls.Add(this.chkEmailToSMS);
+            this.kryptonPanel7.Controls.Add(this.chkSMS);
+            this.kryptonPanel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel7.Location = new System.Drawing.Point(0, 240);
+            this.kryptonPanel7.Name = "kryptonPanel7";
+            this.kryptonPanel7.Size = new System.Drawing.Size(585, 30);
+            this.kryptonPanel7.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel7.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel7.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel7.TabIndex = 39;
             // 
-            // splitContainer1
+            // splitContainer4
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 60);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 210);
+            this.splitContainer4.Name = "splitContainer4";
             // 
-            // splitContainer1.Panel1
+            // splitContainer4.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.ddCondition3);
+            this.splitContainer4.Panel1.Controls.Add(this.ddAlertAction1);
             // 
-            // splitContainer1.Panel2
+            // splitContainer4.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.ConditionNumeric);
-            this.splitContainer1.Size = new System.Drawing.Size(585, 30);
-            this.splitContainer1.SplitterDistance = 292;
-            this.splitContainer1.SplitterWidth = 1;
-            this.splitContainer1.TabIndex = 32;
+            this.splitContainer4.Panel2.Controls.Add(this.ddAlertAction2);
+            this.splitContainer4.Size = new System.Drawing.Size(585, 30);
+            this.splitContainer4.SplitterDistance = 325;
+            this.splitContainer4.SplitterWidth = 1;
+            this.splitContainer4.TabIndex = 38;
             // 
-            // splitContainer2
+            // kryptonPanel6
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitContainer2.ForeColor = System.Drawing.Color.Black;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 90);
-            this.splitContainer2.Name = "splitContainer2";
+            this.kryptonPanel6.Controls.Add(this.chkShowPopup);
+            this.kryptonPanel6.Controls.Add(this.chkPlaySound);
+            this.kryptonPanel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel6.Location = new System.Drawing.Point(0, 180);
+            this.kryptonPanel6.Name = "kryptonPanel6";
+            this.kryptonPanel6.Size = new System.Drawing.Size(585, 30);
+            this.kryptonPanel6.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel6.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel6.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel6.TabIndex = 37;
             // 
-            // splitContainer2.Panel1
+            // kryptonPanel5
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.btnOnlyOnce);
+            this.kryptonPanel5.Controls.Add(this.dateTimePicker2);
+            this.kryptonPanel5.Controls.Add(this.dateTimePicker1);
+            this.kryptonPanel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel5.Location = new System.Drawing.Point(0, 150);
+            this.kryptonPanel5.Name = "kryptonPanel5";
+            this.kryptonPanel5.Size = new System.Drawing.Size(585, 30);
+            this.kryptonPanel5.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel5.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel5.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel5.TabIndex = 36;
             // 
-            // splitContainer2.Panel2
+            // dateTimePicker2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.btnOncePerBar);
-            this.splitContainer2.Size = new System.Drawing.Size(585, 30);
-            this.splitContainer2.SplitterDistance = 292;
-            this.splitContainer2.SplitterWidth = 1;
-            this.splitContainer2.TabIndex = 33;
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker2.Location = new System.Drawing.Point(204, 5);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(198, 21);
+            this.dateTimePicker2.TabIndex = 1;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(0, 5);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(198, 21);
+            this.dateTimePicker1.TabIndex = 0;
             // 
             // splitContainer3
             // 
@@ -543,87 +614,69 @@
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 34;
             // 
-            // kryptonPanel5
+            // splitContainer2
             // 
-            this.kryptonPanel5.Controls.Add(this.dateTimePicker2);
-            this.kryptonPanel5.Controls.Add(this.dateTimePicker1);
-            this.kryptonPanel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel5.Location = new System.Drawing.Point(0, 150);
-            this.kryptonPanel5.Name = "kryptonPanel5";
-            this.kryptonPanel5.Size = new System.Drawing.Size(585, 30);
-            this.kryptonPanel5.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel5.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel5.TabIndex = 36;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitContainer2.ForeColor = System.Drawing.Color.Black;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 90);
+            this.splitContainer2.Name = "splitContainer2";
             // 
-            // kryptonPanel6
+            // splitContainer2.Panel1
             // 
-            this.kryptonPanel6.Controls.Add(this.chkShowPopup);
-            this.kryptonPanel6.Controls.Add(this.chkPlaySound);
-            this.kryptonPanel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel6.Location = new System.Drawing.Point(0, 180);
-            this.kryptonPanel6.Name = "kryptonPanel6";
-            this.kryptonPanel6.Size = new System.Drawing.Size(585, 30);
-            this.kryptonPanel6.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel6.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel6.TabIndex = 37;
+            this.splitContainer2.Panel1.Controls.Add(this.btnOnlyOnce);
             // 
-            // dateTimePicker1
+            // splitContainer2.Panel2
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(0, 5);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(198, 21);
-            this.dateTimePicker1.TabIndex = 0;
+            this.splitContainer2.Panel2.Controls.Add(this.btnOncePerBar);
+            this.splitContainer2.Size = new System.Drawing.Size(585, 30);
+            this.splitContainer2.SplitterDistance = 292;
+            this.splitContainer2.SplitterWidth = 1;
+            this.splitContainer2.TabIndex = 33;
             // 
-            // splitContainer4
+            // splitContainer1
             // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 210);
-            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 60);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // splitContainer4.Panel1
+            // splitContainer1.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.ddAlertAction1);
+            this.splitContainer1.Panel1.Controls.Add(this.ddCondition3);
             // 
-            // splitContainer4.Panel2
+            // splitContainer1.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.ddAlertAction2);
-            this.splitContainer4.Size = new System.Drawing.Size(585, 30);
-            this.splitContainer4.SplitterDistance = 325;
-            this.splitContainer4.SplitterWidth = 1;
-            this.splitContainer4.TabIndex = 38;
+            this.splitContainer1.Panel2.Controls.Add(this.ConditionNumeric);
+            this.splitContainer1.Size = new System.Drawing.Size(585, 30);
+            this.splitContainer1.SplitterDistance = 292;
+            this.splitContainer1.SplitterWidth = 1;
+            this.splitContainer1.TabIndex = 32;
             // 
-            // dateTimePicker2
+            // kryptonPanel4
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(204, 5);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(198, 21);
-            this.dateTimePicker2.TabIndex = 1;
+            this.kryptonPanel4.Controls.Add(this.ddCondition2);
+            this.kryptonPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel4.Location = new System.Drawing.Point(0, 30);
+            this.kryptonPanel4.Name = "kryptonPanel4";
+            this.kryptonPanel4.Size = new System.Drawing.Size(585, 30);
+            this.kryptonPanel4.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel4.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel4.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel4.TabIndex = 31;
             // 
-            // kryptonPanel7
+            // kryptonPanel3
             // 
-            this.kryptonPanel7.Controls.Add(this.chkSendEmail);
-            this.kryptonPanel7.Controls.Add(this.chkEmailToSMS);
-            this.kryptonPanel7.Controls.Add(this.chkSMS);
-            this.kryptonPanel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel7.Location = new System.Drawing.Point(0, 240);
-            this.kryptonPanel7.Name = "kryptonPanel7";
-            this.kryptonPanel7.Size = new System.Drawing.Size(585, 30);
-            this.kryptonPanel7.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel7.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel7.TabIndex = 39;
-            // 
-            // kryptonPanel8
-            // 
-            this.kryptonPanel8.Controls.Add(this.txtMessage);
-            this.kryptonPanel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel8.Location = new System.Drawing.Point(0, 270);
-            this.kryptonPanel8.Name = "kryptonPanel8";
-            this.kryptonPanel8.Size = new System.Drawing.Size(585, 100);
-            this.kryptonPanel8.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel8.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel8.TabIndex = 40;
+            this.kryptonPanel3.Controls.Add(this.ddCondition1);
+            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel3.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.Size = new System.Drawing.Size(585, 30);
+            this.kryptonPanel3.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel3.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel3.StateNormal.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel3.StateNormal.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel3.StateNormal.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
+            this.kryptonPanel3.TabIndex = 30;
             // 
             // frmAlertWindow
             // 
@@ -646,37 +699,37 @@
             this.kryptonPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
-            this.kryptonPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).EndInit();
-            this.kryptonPanel4.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).EndInit();
-            this.kryptonPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).EndInit();
-            this.kryptonPanel6.ResumeLayout(false);
-            this.kryptonPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel8)).EndInit();
+            this.kryptonPanel8.ResumeLayout(false);
+            this.kryptonPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel7)).EndInit();
+            this.kryptonPanel7.ResumeLayout(false);
+            this.kryptonPanel7.PerformLayout();
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel7)).EndInit();
-            this.kryptonPanel7.ResumeLayout(false);
-            this.kryptonPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel8)).EndInit();
-            this.kryptonPanel8.ResumeLayout(false);
-            this.kryptonPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel6)).EndInit();
+            this.kryptonPanel6.ResumeLayout(false);
+            this.kryptonPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).EndInit();
+            this.kryptonPanel5.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).EndInit();
+            this.kryptonPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
+            this.kryptonPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

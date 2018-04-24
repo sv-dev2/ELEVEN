@@ -77,11 +77,11 @@ namespace ELEVEN.Services
             //MT4 Gateway
             if (gatewayType == ConstEnum.GatewayType.MT4Lib)
             {
-                newGateway = new MT4API(this, gatewayParam)
-                {
-                    Name = gatewayName,
-                    GatewayType = gatewayType
-                };
+                //newGateway = new MT4API(this, gatewayParam)
+                //{
+                //    Name = gatewayName,
+                //    GatewayType = gatewayType
+                //};
 
                 //gateways.TryAdd(gatewayName, newGateway);
                 //priceGateways.TryAdd(gatewayName, (IPriceGateway)newGateway);

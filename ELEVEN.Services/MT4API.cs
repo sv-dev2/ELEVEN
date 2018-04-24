@@ -73,6 +73,15 @@ namespace ELEVEN.Services
         {
             Gateway = gateway;
             GatewayParameters = gatewayParameters;           
+           
+
+        }
+        public MT4API(dynamic frmChart)
+        {
+            #region "Connect to MetaTrader Server"            
+
+           
+            this.frmChart = frmChart;
             apiClient = new MtApiClient();
             listCandles = new BindingList<CandleDataMT>();
             // apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
@@ -90,15 +99,6 @@ namespace ELEVEN.Services
             _timerTradeMonitor.Start();
             _timeframeTradeMonitor.Start();
             apiClient.BeginConnect(8222);
-
-        }
-        public MT4API(dynamic frmChart)
-        {
-            #region "Connect to MetaTrader Server"            
-
-           
-            this.frmChart = frmChart;
-          
             #endregion
         }
 
