@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ELEVEN.Services
 {
-    public class MT4API : IDisposable
+    public class MT4API : IDisposable, IToggleGateway
     {
         #region "MetaTrader Objects"
         MtApiClient apiClient = null;
@@ -22,12 +22,59 @@ namespace ELEVEN.Services
         private readonly TimerTradeMonitor _timerTradeMonitor;
         private dynamic frmChart;
         #endregion
-        public MT4API(dynamic frmChart)
+        #region "Properties"
+        /// <summary>
+        /// Gets or sets the gateway parameters.
+        /// </summary>
+        /// <value>
+        /// The gateway parameters.
+        /// </value>
+        public Gateway Gateway
         {
-            #region "Connect to MetaTrader Server"            
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets or sets the gateway parameters.
+        /// </summary>
+        /// <value>
+        /// The gateway parameters.
+        /// </value>
+        public GatewayParameters GatewayParameters
+        {
+            get;
+            private set;
+        }
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// Gets or sets the type of the gateway.
+        /// </summary>
+        /// <value>
+        /// The type of the gateway.
+        /// </value>
+        public ConstEnum.GatewayType GatewayType
+        {
+            get;
+            set;
+        }
+        #endregion
+        public MT4API(Gateway gateway, GatewayParameters gatewayParameters)
+        {
+            Gateway = gateway;
+            GatewayParameters = gatewayParameters;           
             apiClient = new MtApiClient();
             listCandles = new BindingList<CandleDataMT>();
-            this.frmChart = frmChart;
             // apiClient.QuoteUpdated += ApiClient_QuoteUpdated;
             apiClient.QuoteUpdate += ApiClient_QuoteUpdate;
             apiClient.ConnectionStateChanged += ApiClient_ConnectionStateChanged;
@@ -43,6 +90,15 @@ namespace ELEVEN.Services
             _timerTradeMonitor.Start();
             _timeframeTradeMonitor.Start();
             apiClient.BeginConnect(8222);
+
+        }
+        public MT4API(dynamic frmChart)
+        {
+            #region "Connect to MetaTrader Server"            
+
+           
+            this.frmChart = frmChart;
+          
             #endregion
         }
 
@@ -80,9 +136,9 @@ namespace ELEVEN.Services
             catch (Exception)
             {
 
-               
+
             }
-           
+
 
         }
         private void UpdateWatchList(MtQuote quote)
@@ -249,6 +305,16 @@ namespace ELEVEN.Services
         {
             _timerTradeMonitor.Stop();
             _timeframeTradeMonitor.Stop();
+            apiClient.BeginDisconnect();
+        }
+
+        public void StartGateway()
+        {
+         
+        }
+
+        public void StopGateway()
+        {
             apiClient.BeginDisconnect();
         }
         #endregion
