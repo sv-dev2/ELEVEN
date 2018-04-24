@@ -47,5 +47,11 @@ namespace ELEVEN
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
         }
+
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
