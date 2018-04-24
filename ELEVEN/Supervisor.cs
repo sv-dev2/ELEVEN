@@ -32,7 +32,7 @@ namespace ELEVEN
         private PreciseDatetime preciseDateTime = new PreciseDatetime();
         private string securityKey = "E-LEVEN";
         private TaskPerformer taskPerformer;
-        public const string telegramBotToken = "362046684:AAE5QyhwEOpMuycOavhBjw2okH432bTVq1s";
+        public const string telegramBotToken = "";
 
 
         #endregion Private Members
