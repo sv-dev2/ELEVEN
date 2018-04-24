@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ElevenSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Exchanges>
+    <Exchange Name ="Alvexo" GatewayMode ="Both" Enabled="true" GatewayType ="MT4Lib" Ip="localhost" Port ="8222"/>
+    <Exchange Name ="BitFinex" GatewayMode ="Both" Enabled="true" GatewayType ="BitFinex" Url="wss://api.bitfinex.com/ws"/>
+  </Exchanges>
+  <Securities>
+    <!--Alvexo-->
+    <Security Name ="BTCUSD" ExchangeCode ="BTCUSD" Exchange ="Alvexo" Enabled="true" Timeframe="M1"/>
+    <Security Name ="BTCUSD" ExchangeCode ="BTCUSD" Exchange ="Alvexo" Enabled="true" Timeframe="M15"/>
+    <Security Name ="BCHBTC" ExchangeCode ="BCHBTC" Exchange ="Alvexo" Enabled="true" Timeframe="M1"/>
+    <!--BitFinex-->
+    <Security Name ="BTCUSD" ExchangeCode ="BTCUSD" Exchange ="BitFinex" Enabled="true" Timeframe="M1"/>
+    <!--TradingView--><!--
+    --><!--UBQ--><!--
+    <Security GroupName ="UBQ" Name ="UBQ_H1" ExchangeCode ="BITTREX:UBQBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="UBQ" Name ="UBQ_D1" ExchangeCode ="BITTREX:UBQBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="UBQ" Name ="UBQ_H1" ExchangeCode ="BITTREX:UBQUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="UBQ" Name ="UBQ_D1" ExchangeCode ="BITTREX:UBQUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--NAV--><!--
+    <Security GroupName ="NAV" Name ="NAV_H1" ExchangeCode ="BITTREX:NAVBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="NAV" Name ="NAV_D1" ExchangeCode ="BITTREX:NAVBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="NAV" Name ="NAV_H1" ExchangeCode ="BITTREX:NAVUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="NAV" Name ="NAV_D1" ExchangeCode ="BITTREX:NAVUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--MCO--><!--
+    <Security GroupName ="MCO" Name ="MCO_H1" ExchangeCode ="BITTREX:MCOBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="MCO" Name ="MCO_D1" ExchangeCode ="BITTREX:MCOBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="MCO" Name ="MCO_H1" ExchangeCode ="BITTREX:MCOUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="MCO" Name ="MCO_D1" ExchangeCode ="BITTREX:MCOUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--TRIG--><!--
+    <Security GroupName ="TRIG" Name ="TRIG_H1" ExchangeCode ="BITTREX:TRIGBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="TRIG" Name ="TRIG_D1" ExchangeCode ="BITTREX:TRIGBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="TRIG" Name ="TRIG_H1" ExchangeCode ="BITTREX:TRIGUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="TRIG" Name ="TRIG_D1" ExchangeCode ="BITTREX:TRIGUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--MTL--><!--
+    <Security GroupName ="MTL" Name ="MTL_H1" ExchangeCode ="BITTREX:MTLBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="MTL" Name ="MTL_D1" ExchangeCode ="BITTREX:MTLBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="MTL" Name ="MTL_H1" ExchangeCode ="BITTREX:MTLUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="MTL" Name ="MTL_D1" ExchangeCode ="BITTREX:MTLUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--CVC--><!--
+    <Security GroupName ="CVC" Name ="CVC_H1" ExchangeCode ="BITTREX:CVCBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="CVC" Name ="CVC_D1" ExchangeCode ="BITTREX:CVCBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="CVC" Name ="CVC_H1" ExchangeCode ="BITTREX:CVCUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="CVC" Name ="CVC_D1" ExchangeCode ="BITTREX:CVCUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--STEEM--><!--
+    <Security GroupName ="STEEM" Name ="STEEM_H1" ExchangeCode ="BITTREX:STEEMBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="STEEM" Name ="STEEM_D1" ExchangeCode ="BITTREX:STEEMBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="STEEM" Name ="STEEM_H1" ExchangeCode ="BITTREX:STEEMUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="STEEM" Name ="STEEM_D1" ExchangeCode ="BITTREX:STEEMUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--SBD--><!--
+    <Security GroupName ="SBD" Name ="SBD_H1" ExchangeCode ="BITTREX:SBDBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="SBD" Name ="SBD_D1" ExchangeCode ="BITTREX:SBDBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="SBD" Name ="SBD_H1" ExchangeCode ="BITTREX:SBDUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="SBD" Name ="SBD_D1" ExchangeCode ="BITTREX:SBDUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--GRS--><!--
+    <Security GroupName ="GRS" Name ="GRS_H1" ExchangeCode ="BITTREX:GRSBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="GRS" Name ="GRS_D1" ExchangeCode ="BITTREX:GRSBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="GRS" Name ="GRS_H1" ExchangeCode ="BITTREX:GRSUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="GRS" Name ="GRS_D1" ExchangeCode ="BITTREX:GRSUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--VTC--><!--
+    <Security GroupName ="VTC" Name ="VTC_H1" ExchangeCode ="BITTREX:VTCBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="VTC" Name ="VTC_D1" ExchangeCode ="BITTREX:VTCBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="VTC" Name ="VTC_H1" ExchangeCode ="BITTREX:VTCUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="VTC" Name ="VTC_D1" ExchangeCode ="BITTREX:VTCUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    --><!--OK--><!--
+    <Security GroupName ="OK" Name ="OK_H1" ExchangeCode ="BITTREX:OKBTC" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="OK" Name ="OK_D1" ExchangeCode ="BITTREX:OKBTC" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>
+    <Security GroupName ="OK" Name ="OK_H1" ExchangeCode ="BITTREX:OKUSD" Exchange ="TradingView" Enabled="true" Timeframe="H1"/>
+    <Security GroupName ="OK" Name ="OK_D1" ExchangeCode ="BITTREX:OKUSD" Exchange ="TradingView" Enabled="true" Timeframe="D1"/>-->
+
+  </Securities>
+  
+  <FolderSettings>
+    <Logs></Logs>
+  </FolderSettings>
+
+</ElevenSettings>

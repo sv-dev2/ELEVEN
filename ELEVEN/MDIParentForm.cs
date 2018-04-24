@@ -18,15 +18,54 @@ namespace ELEVEN
     public partial class MDIParentForm : KryptonForm
     {
 
-
+        /// <summary>
+        /// Gets or sets the supervisor.
+        /// </summary>
+        /// <value>
+        /// The supervisor.
+        /// </value>
+        public Supervisor Supervisor
+        {
+            get; set;
+        }
         public MDIParentForm()
         {
             InitializeComponent();
             var windowHeight = Screen.PrimaryScreen.Bounds.Height;
             var windowWidth = Screen.PrimaryScreen.Bounds.Width;
 
-        }
+            try
+            {
+                Supervisor = new Supervisor(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Exit(true);
+            }
 
+        }
+        /// <summary>
+        /// Exits the specified force exit.
+        /// </summary>
+        /// <param name="forceExit">if set to <c>true</c> [force exit].</param>
+        /// <returns></returns>
+        private bool Exit(bool forceExit)
+        {
+            if (forceExit)
+            {
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                return true;
+            }
+
+            if (MessageBox.Show("Do you want to exit ?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                return true;
+            }
+
+            return false;
+        }
 
         private void ShowNewForm(object sender, EventArgs e)
         {

@@ -76,7 +76,10 @@
     <Compile Include="BitFinix\OrderWindow.cs" />
     <Compile Include="BitFinix\PubTicker.cs" />
     <Compile Include="BitFinix\webSocketListner.cs" />
+    <Compile Include="ConstEnum\ConstEnum.cs" />
     <Compile Include="FinexTickercs.cs" />
+    <Compile Include="Gateway\GatewayParameters.cs" />
+    <Compile Include="Gateway\IToggleGateway.cs" />
     <Compile Include="GenericRequest.cs" />
     <Compile Include="IGMarket\ApplicationViewModel.cs" />
     <Compile Include="IGMarket\IgPublicApiData.cs" />
@@ -84,8 +87,12 @@
     <Compile Include="IGMarket\SmartDispatcher.cs" />
     <Compile Include="IGMarket\ViewModelBase.cs" />
     <Compile Include="IGMarket\WatchlistsViewModel.cs" />
+    <Compile Include="Logs\LogDateTime.cs" />
+    <Compile Include="Logs\LogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextAndImageColumn.cs" />
+    <Compile Include="Utility\Misc.cs" />
+    <Compile Include="Utility\PreciseDatetime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,5 +103,6 @@
       <Name>IGWebApiClient</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
