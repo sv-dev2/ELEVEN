@@ -33,9 +33,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCharts));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnPan = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -98,6 +99,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.BtnPan);
             this.kryptonPanel1.Controls.Add(this.BtnZoomOut);
             this.kryptonPanel1.Controls.Add(this.BtnToggleZoom);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -109,6 +111,34 @@
             this.kryptonPanel1.StateNormal.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateNormal.Color2 = System.Drawing.Color.White;
             this.kryptonPanel1.TabIndex = 1;
+            // 
+            // BtnPan
+            // 
+            this.BtnPan.Location = new System.Drawing.Point(2, 72);
+            this.BtnPan.Name = "BtnPan";
+            this.BtnPan.Size = new System.Drawing.Size(37, 29);
+            this.BtnPan.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnPan.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnPan.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.pointer;
+            this.BtnPan.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnPan.TabIndex = 2;
+            this.BtnPan.TabStop = false;
+            this.BtnPan.Values.Text = "";
+            this.BtnPan.Click += new System.EventHandler(this.BtnPan_Click);
+            // 
+            // BtnZoomOut
+            // 
+            this.BtnZoomOut.Location = new System.Drawing.Point(2, 42);
+            this.BtnZoomOut.Name = "BtnZoomOut";
+            this.BtnZoomOut.Size = new System.Drawing.Size(37, 29);
+            this.BtnZoomOut.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnZoomOut.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnZoomOut.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.zoom_out;
+            this.BtnZoomOut.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnZoomOut.TabIndex = 1;
+            this.BtnZoomOut.TabStop = false;
+            this.BtnZoomOut.Values.Text = "";
+            this.BtnZoomOut.Click += new System.EventHandler(this.BtnZoomOut_Click);
             // 
             // BtnToggleZoom
             // 
@@ -132,20 +162,6 @@
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(645, 383);
             this.kryptonPanel2.TabIndex = 2;
-            // 
-            // BtnZoomOut
-            // 
-            this.BtnZoomOut.Location = new System.Drawing.Point(2, 42);
-            this.BtnZoomOut.Name = "BtnZoomOut";
-            this.BtnZoomOut.Size = new System.Drawing.Size(37, 29);
-            this.BtnZoomOut.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.BtnZoomOut.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.BtnZoomOut.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.zoom_out;
-            this.BtnZoomOut.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
-            this.BtnZoomOut.TabIndex = 1;
-            this.BtnZoomOut.TabStop = false;
-            this.BtnZoomOut.Values.Text = "";
-            this.BtnZoomOut.Click += new System.EventHandler(this.BtnZoomOut_Click);
             // 
             // frmCharts
             // 
@@ -182,5 +198,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnToggleZoom;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnZoomOut;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnPan;
     }
 }

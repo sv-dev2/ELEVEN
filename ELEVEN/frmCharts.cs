@@ -85,13 +85,40 @@ namespace ELEVEN
             chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
             //chart1.MouseWheel += Chart1_MouseWheel;
             chart1.MouseDown += Chart1_MouseDown;
+            chart1.MouseMove += chart1_MouseMove;
         }
-
+        double mDown = double.NaN;
         private void Chart1_MouseDown(object sender, MouseEventArgs e)
         {
-          
+            if(zoomList.Count<=0 || !isPan)
+            {
+                return;
+            }
+            Axis ax = chart1.ChartAreas[0].AxisX;
+            mDown = ax.PixelPositionToValue(e.Location.X);
         }
+        private void chart1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (zoomList.Count <= 0 || !isPan)
+            {
+                return;
+            }
+            try
+            {
+                if (!e.Button.HasFlag(MouseButtons.Left)) return;
+                Axis ax = chart1.ChartAreas[0].AxisX;
+                double range = ax.Maximum - ax.Minimum;
+                double xv = ax.PixelPositionToValue(e.Location.X);
+                double oldPos = ax.ScaleView.Position;
+                ax.ScaleView.Position -= (xv - mDown);
+            }
+            catch 
+            {
 
+             
+            }
+           
+        }
         private void Chart1_MouseWheel(object sender, MouseEventArgs e)
         {
 
@@ -169,6 +196,8 @@ namespace ELEVEN
         private void BtnToggleZoom_Click(object sender, EventArgs e)
         {
             ZoomIn = sender as KryptonButton;
+            chart1.Cursor = System.Windows.Forms.Cursors.Default;
+            isPan = false;
             firstVisit = true;
             if (zoomList.Count < 5)
             {
@@ -199,13 +228,12 @@ namespace ELEVEN
 
 
 
-        private void chart1_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
+      
 
         private void BtnZoomOut_Click(object sender, EventArgs e)
         {
+            chart1.Cursor = System.Windows.Forms.Cursors.Default;
+            isPan = false;
             ZoomOut = sender as KryptonButton;
             if (zoomList.Count > 0)
             {
@@ -216,9 +244,19 @@ namespace ELEVEN
                     firstVisit = false;
                 }
                 var points = zoomList.OrderByDescending(m => m.Index).FirstOrDefault();
-                chart1.ChartAreas[0].AxisX.ScaleView.Zoom(points.PosXStart, points.PosXFinish);
-                chart1.ChartAreas[0].AxisY.ScaleView.Zoom(points.PosYStart, points.PosYFinish);
-                zoomList.Remove(points);
+                if(points!=null)
+                {
+                    chart1.ChartAreas[0].AxisX.ScaleView.Zoom(points.PosXStart, points.PosXFinish);
+                    chart1.ChartAreas[0].AxisY.ScaleView.Zoom(points.PosYStart, points.PosYFinish);
+                    zoomList.Remove(points);
+                }
+                else
+                {
+                    chart1.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                    chart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);
+                    ZoomOut.Enabled = false;
+                }
+              
                 if (ZoomIn != null)
                 {
                     ZoomIn.Enabled = true;
@@ -230,6 +268,12 @@ namespace ELEVEN
                 chart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);
                 ZoomOut.Enabled = false;
             }
+        }
+        bool isPan = false;
+        private void BtnPan_Click(object sender, EventArgs e)
+        {
+            isPan = true;
+            chart1.Cursor = System.Windows.Forms.Cursors.Hand;
         }
     }
 }
