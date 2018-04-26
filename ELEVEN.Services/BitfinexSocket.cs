@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using WebSocket4Net;
 using SuperSocket.ClientEngine;
 using System.ComponentModel;
+using System.Windows.Forms;
+using DevExpress.XtraCharts;
 
 namespace ELEVEN.Services
 {
@@ -47,16 +49,16 @@ namespace ELEVEN.Services
 
             // this.form = form;
             var hasSymbol = list.Where(m => m.Symbol == symbol).FirstOrDefault();
-            if(hasSymbol!=null)
+            if (hasSymbol != null)
             {
                 form.candleData = hasSymbol.candleData;
-                listForms.Add(new AllForms { form = form, symbol = symbol,channelId=hasSymbol.ChannelId });
+                listForms.Add(new AllForms { form = form, symbol = symbol, channelId = hasSymbol.ChannelId });
             }
             else
             {
                 listForms.Add(new AllForms { form = form, symbol = symbol });
             }
-           
+
 
             while (!IsSocketOpened)
             {
@@ -121,10 +123,11 @@ namespace ELEVEN.Services
 
                         form.Invoke((Action)delegate ()
                         {
+                           
                             form.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
                             form.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
                             form.chart1.DataSource = candleData;
-
+                           // BindCharts(form, candleData);
                         });
                     }
                     else
@@ -140,6 +143,7 @@ namespace ELEVEN.Services
                         var min = candleData.Min(m => m.Low);
                         var formObj = list.Where(m => m.ChannelId == Convert.ToInt32(channelId)).FirstOrDefault();
                         formObj.candleData = candleData;
+
                         form.Invoke((Action)delegate ()
                         {
                             form.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
@@ -151,7 +155,7 @@ namespace ELEVEN.Services
                     }
 
                 }
-                catch (Exception )
+                catch (Exception)
                 {
 
                 }
@@ -179,6 +183,58 @@ namespace ELEVEN.Services
         {
             webSocket.Close();
         }
+
+        private void BindCharts(dynamic form, BindingList<CandleData> bindingList)
+        {
+            // Create a new chart.
+
+            var max = bindingList.Max(m => m.High);
+            var min = bindingList.Min(m => m.Low);
+            // Create a candlestick series.
+            Series series1 = new Series("Stock Prices", ViewType.CandleStick);
+
+            // Specify the date-time argument scale type for the series,
+            // as it is qualitative, by default.
+            series1.ArgumentScaleType = ScaleType.DateTime;
+          
+            series1.ArgumentDataMember = "MTS";
+            series1.ValueDataMembers.AddRange(new string[] { "Low", "High", "Open", "Close" });
+
+            // Add the series to the chart.
+            form.chart1.Series.Add(series1);
+            form.chart1.Series["Stock Prices"].DataSource = bindingList;
+            // Access the view-type-specific options of the series.
+            CandleStickSeriesView myView = (CandleStickSeriesView)series1.View;
+
+            myView.LineThickness = 2;
+            myView.LevelLineLength = 0.25;
+
+            // Specify the series reduction options.
+            myView.ReductionOptions.ColorMode = ReductionColorMode.OpenToCloseValue;
+            myView.ReductionOptions.FillMode = CandleStickFillMode.FilledOnReduction;
+            myView.ReductionOptions.Level = StockLevel.Open;
+            myView.ReductionOptions.Visible = true;
+
+            // Access the chart's diagram.
+            XYDiagram diagram = ((XYDiagram)form.chart1.Diagram);
+
+            // Access the type-specific options of the diagram.
+            diagram.AxisY.WholeRange.MinValue = min;
+            diagram.AxisY.WholeRange.MaxValue = max;
+            diagram.AxisY.WholeRange.SideMarginsValue = 0.5;
+
+      
+            // Exclude weekends from the X-axis range,
+            // to avoid gaps in the chart's data.
+            diagram.AxisX.DateTimeScaleOptions.WorkdaysOnly = true;
+           
+
+
+
+
+
+        }
+
     }
     public class AllForms
     {

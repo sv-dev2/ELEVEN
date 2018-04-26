@@ -32,7 +32,15 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCharts));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
@@ -71,6 +79,7 @@
             chartArea1.Position.Height = 100F;
             chartArea1.Position.Width = 100F;
             this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Cursor = System.Windows.Forms.Cursors.Default;
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Margin = new System.Windows.Forms.Padding(0);
@@ -83,17 +92,69 @@
             series1.Name = "Series1";
             series1.YValuesPerPoint = 4;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(608, 383);
+            this.chart1.Size = new System.Drawing.Size(645, 383);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.BtnZoomOut);
+            this.kryptonPanel1.Controls.Add(this.BtnToggleZoom);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(39, 383);
+            this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel1.StateNormal.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel1.StateNormal.Color2 = System.Drawing.Color.White;
+            this.kryptonPanel1.TabIndex = 1;
+            // 
+            // BtnToggleZoom
+            // 
+            this.BtnToggleZoom.Location = new System.Drawing.Point(2, 12);
+            this.BtnToggleZoom.Name = "BtnToggleZoom";
+            this.BtnToggleZoom.Size = new System.Drawing.Size(37, 29);
+            this.BtnToggleZoom.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnToggleZoom.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnToggleZoom.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.zoom_in;
+            this.BtnToggleZoom.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnToggleZoom.TabIndex = 0;
+            this.BtnToggleZoom.TabStop = false;
+            this.BtnToggleZoom.Values.Text = "";
+            this.BtnToggleZoom.Click += new System.EventHandler(this.BtnToggleZoom_Click);
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.Controls.Add(this.chart1);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel2.Location = new System.Drawing.Point(39, 0);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.Size = new System.Drawing.Size(645, 383);
+            this.kryptonPanel2.TabIndex = 2;
+            // 
+            // BtnZoomOut
+            // 
+            this.BtnZoomOut.Location = new System.Drawing.Point(2, 42);
+            this.BtnZoomOut.Name = "BtnZoomOut";
+            this.BtnZoomOut.Size = new System.Drawing.Size(37, 29);
+            this.BtnZoomOut.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnZoomOut.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnZoomOut.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.zoom_out;
+            this.BtnZoomOut.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnZoomOut.TabIndex = 1;
+            this.BtnZoomOut.TabStop = false;
+            this.BtnZoomOut.Values.Text = "";
+            this.BtnZoomOut.Click += new System.EventHandler(this.BtnZoomOut_Click);
             // 
             // frmCharts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(608, 383);
-            this.Controls.Add(this.chart1);
+            this.ClientSize = new System.Drawing.Size(684, 383);
+            this.Controls.Add(this.kryptonPanel2);
+            this.Controls.Add(this.kryptonPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCharts";
@@ -104,7 +165,12 @@
             this.Text = "Chart";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCharts_FormClosing);
             this.Load += new System.EventHandler(this.CustomizedLineSeries_Load);
+            this.Shown += new System.EventHandler(this.frmCharts_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -112,5 +178,9 @@
         #endregion
 
         public System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnToggleZoom;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnZoomOut;
     }
 }

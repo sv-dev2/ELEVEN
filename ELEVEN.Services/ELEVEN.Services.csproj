@@ -39,6 +39,7 @@
     <Reference Include="ComponentFactory.Krypton.Toolkit">
       <HintPath>..\ELEVEN\DLL\ComponentFactory.Krypton.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.XtraCharts.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="IGWebApiClient">
       <HintPath>..\IGWebApiClient\bin\Debug\IGWebApiClient.dll</HintPath>
     </Reference>

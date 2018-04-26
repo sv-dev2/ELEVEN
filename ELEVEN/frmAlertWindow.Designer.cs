@@ -330,21 +330,13 @@
             this.kryptonLabel1.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel1.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel1.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel1.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel1.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel1.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel1.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel1.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel1.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel1.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel1.TabIndex = 24;
             this.kryptonLabel1.Values.Text = "Condition";
             // 
@@ -356,21 +348,13 @@
             this.kryptonLabel2.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel2.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel2.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel2.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel2.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel2.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel2.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel2.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel2.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel2.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel2.TabIndex = 25;
             this.kryptonLabel2.Values.Text = "Options";
             // 
@@ -382,21 +366,13 @@
             this.kryptonLabel3.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel3.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel3.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel3.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel3.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel3.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel3.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel3.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel3.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel3.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel3.TabIndex = 26;
             this.kryptonLabel3.Values.Text = "Expiration Time";
             // 
@@ -408,21 +384,13 @@
             this.kryptonLabel4.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel4.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel4.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel4.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel4.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel4.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel4.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel4.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel4.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel4.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel4.TabIndex = 27;
             this.kryptonLabel4.Values.Text = "Alert Actions";
             // 
@@ -434,21 +402,13 @@
             this.kryptonLabel5.StateCommon.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.LongText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.LongText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel5.StateCommon.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel5.StateCommon.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateCommon.ShortText.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel5.StateCommon.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel5.StateCommon.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.StateNormal.LongText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateNormal.LongText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel5.StateNormal.LongText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel5.StateNormal.LongText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.StateNormal.ShortText.Color1 = System.Drawing.Color.Black;
             this.kryptonLabel5.StateNormal.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel5.StateNormal.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonLabel5.StateNormal.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonLabel5.TabIndex = 28;
             this.kryptonLabel5.Values.Text = "Message";
             // 
@@ -459,8 +419,6 @@
             this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
             this.kryptonButton1.Size = new System.Drawing.Size(90, 47);
             this.kryptonButton1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.kryptonButton1.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
-            this.kryptonButton1.StateCommon.Content.ShortText.Trim = ComponentFactory.Krypton.Toolkit.PaletteTextTrim.Inherit;
             this.kryptonButton1.TabIndex = 29;
             this.kryptonButton1.Values.Text = "Create";
             // 
@@ -477,13 +435,10 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(134, 424);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel1.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel1.StateDisabled.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateDisabled.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel1.StateDisabled.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel1.StateNormal.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.StateNormal.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel1.StateNormal.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel1.TabIndex = 30;
             // 
             // kryptonPanel2
@@ -506,7 +461,6 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(585, 424);
             this.kryptonPanel2.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel2.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel2.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel2.TabIndex = 31;
             // 
             // kryptonPanel8
@@ -518,7 +472,6 @@
             this.kryptonPanel8.Size = new System.Drawing.Size(585, 100);
             this.kryptonPanel8.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel8.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel8.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel8.TabIndex = 40;
             // 
             // kryptonPanel7
@@ -532,7 +485,6 @@
             this.kryptonPanel7.Size = new System.Drawing.Size(585, 30);
             this.kryptonPanel7.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel7.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel7.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel7.TabIndex = 39;
             // 
             // splitContainer4
@@ -563,7 +515,6 @@
             this.kryptonPanel6.Size = new System.Drawing.Size(585, 30);
             this.kryptonPanel6.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel6.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel6.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel6.TabIndex = 37;
             // 
             // kryptonPanel5
@@ -576,7 +527,6 @@
             this.kryptonPanel5.Size = new System.Drawing.Size(585, 30);
             this.kryptonPanel5.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel5.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel5.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel5.TabIndex = 36;
             // 
             // dateTimePicker2
@@ -660,7 +610,6 @@
             this.kryptonPanel4.Size = new System.Drawing.Size(585, 30);
             this.kryptonPanel4.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel4.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel4.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel4.TabIndex = 31;
             // 
             // kryptonPanel3
@@ -672,10 +621,8 @@
             this.kryptonPanel3.Name = "kryptonPanel3";
             this.kryptonPanel3.Size = new System.Drawing.Size(585, 30);
             this.kryptonPanel3.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel3.StateCommon.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel3.StateNormal.Color1 = System.Drawing.Color.White;
             this.kryptonPanel3.StateNormal.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel3.StateNormal.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.kryptonPanel3.TabIndex = 30;
             // 
             // frmAlertWindow

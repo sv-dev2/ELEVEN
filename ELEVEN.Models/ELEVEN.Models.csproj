@@ -76,6 +76,7 @@
     <Compile Include="BitFinix\OrderWindow.cs" />
     <Compile Include="BitFinix\PubTicker.cs" />
     <Compile Include="BitFinix\webSocketListner.cs" />
+    <Compile Include="ChartZoomOut.cs" />
     <Compile Include="ConstEnum\ConstEnum.cs" />
     <Compile Include="FinexTickercs.cs" />
     <Compile Include="Gateway\GatewayParameters.cs" />
