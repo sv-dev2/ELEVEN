@@ -275,5 +275,10 @@ namespace ELEVEN
             isPan = true;
             chart1.Cursor = System.Windows.Forms.Cursors.Hand;
         }
+
+        private void BtnAddText_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

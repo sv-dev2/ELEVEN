@@ -37,6 +37,7 @@
             this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnAddText = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
@@ -99,6 +100,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.BtnAddText);
             this.kryptonPanel1.Controls.Add(this.BtnPan);
             this.kryptonPanel1.Controls.Add(this.BtnZoomOut);
             this.kryptonPanel1.Controls.Add(this.BtnToggleZoom);
@@ -163,6 +165,20 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(645, 383);
             this.kryptonPanel2.TabIndex = 2;
             // 
+            // BtnAddText
+            // 
+            this.BtnAddText.Location = new System.Drawing.Point(2, 102);
+            this.BtnAddText.Name = "BtnAddText";
+            this.BtnAddText.Size = new System.Drawing.Size(37, 29);
+            this.BtnAddText.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnAddText.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnAddText.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.Texticon;
+            this.BtnAddText.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnAddText.TabIndex = 3;
+            this.BtnAddText.TabStop = false;
+            this.BtnAddText.Values.Text = "";
+            this.BtnAddText.Click += new System.EventHandler(this.BtnAddText_Click);
+            // 
             // frmCharts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,5 +215,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnZoomOut;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnPan;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnAddText;
     }
 }
