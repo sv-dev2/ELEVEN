@@ -21,10 +21,11 @@ namespace ELEVEN
 
         public BindingList<CandleData> candleData;
         BindingList<CandleDataMT> candleDataMT;
-        List<ChartZoomOut> zoomList { get; set; }
+        public List<ChartZoomOut> zoomList { get; set; }
         public string broker { get; set; }
         public string symbol { get; set; }
         private MT4API mT4API { get; set; }
+        public List<string> annotationList = new List<string>();
         public frmCharts(MDIParentForm parentForm, string broker, string symbol)
         {
             InitializeComponent();
@@ -290,7 +291,7 @@ namespace ELEVEN
 
             var annotation = new frmAnnotation();
             var result = annotation.ShowDialog();
-            if(result==DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 // this one is not anchored on a point:
                 TextAnnotation TA = new TextAnnotation();
@@ -299,8 +300,9 @@ namespace ELEVEN
                 TA.AnchorX = 50;  // 50% of chart width
                 TA.AnchorY = 20;  // 20% of chart height, from top!
                 chart1.Annotations.Add(TA);
+                annotationList.Add(annotation.Text);
             }
-           
+
         }
     }
 

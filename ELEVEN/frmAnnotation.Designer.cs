@@ -52,7 +52,6 @@
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.Transparent;
             this.kryptonPanel1.TabIndex = 0;
-            this.kryptonPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonPanel1_Paint);
             // 
             // txtAnnotation
             // 
