@@ -746,18 +746,20 @@ namespace ELEVEN
         private void SaveChartParamters(frmCharts chart)
         {
             var zoomList = chart.zoomList;
-            if(zoomList!=null && zoomList.Count>0)
+            SQLiteDBOperation.DeleteZoomList(chart.Name);
+            if (zoomList!=null && zoomList.Count>0)
             {
-                SQLiteDBOperation.DeleteZoomList(chart.Name);
+               
                 foreach (var item in zoomList)
                 {
                     SQLiteDBOperation.SaveZoomList(item, chart.Name);
                 }
             }
             var annotations = chart.annotationList;
-            if(annotations!=null && annotations.Count>0)
+            SQLiteDBOperation.DeleteAnnotation(chart.Name);
+            if (annotations!=null && annotations.Count>0)
             {
-                SQLiteDBOperation.DeleteAnnotation(chart.Name);
+            
                 foreach (var item in chart.annotationList)
                 {
                     SQLiteDBOperation.SaveAnnotation(item, chart.Name);

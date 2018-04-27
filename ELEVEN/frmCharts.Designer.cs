@@ -32,15 +32,17 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCharts));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.panelTools = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnAddText = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnPan = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.BtnAddText = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.BtnLockUnLock = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.BtnShowHide = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelTools)).BeginInit();
+            this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -98,25 +100,41 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // kryptonPanel1
+            // panelTools
             // 
-            this.kryptonPanel1.Controls.Add(this.BtnAddText);
-            this.kryptonPanel1.Controls.Add(this.BtnPan);
-            this.kryptonPanel1.Controls.Add(this.BtnZoomOut);
-            this.kryptonPanel1.Controls.Add(this.BtnToggleZoom);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(39, 383);
-            this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel1.StateNormal.Color1 = System.Drawing.Color.White;
-            this.kryptonPanel1.StateNormal.Color2 = System.Drawing.Color.White;
-            this.kryptonPanel1.TabIndex = 1;
+            this.panelTools.Controls.Add(this.BtnShowHide);
+            this.panelTools.Controls.Add(this.BtnLockUnLock);
+            this.panelTools.Controls.Add(this.BtnAddText);
+            this.panelTools.Controls.Add(this.BtnPan);
+            this.panelTools.Controls.Add(this.BtnZoomOut);
+            this.panelTools.Controls.Add(this.BtnToggleZoom);
+            this.panelTools.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelTools.Location = new System.Drawing.Point(0, 0);
+            this.panelTools.Name = "panelTools";
+            this.panelTools.Size = new System.Drawing.Size(39, 383);
+            this.panelTools.StateCommon.Color1 = System.Drawing.Color.White;
+            this.panelTools.StateCommon.Color2 = System.Drawing.Color.White;
+            this.panelTools.StateNormal.Color1 = System.Drawing.Color.White;
+            this.panelTools.StateNormal.Color2 = System.Drawing.Color.White;
+            this.panelTools.TabIndex = 1;
+            // 
+            // BtnAddText
+            // 
+            this.BtnAddText.Location = new System.Drawing.Point(2, 90);
+            this.BtnAddText.Name = "BtnAddText";
+            this.BtnAddText.Size = new System.Drawing.Size(37, 29);
+            this.BtnAddText.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnAddText.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnAddText.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.Texticon;
+            this.BtnAddText.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnAddText.TabIndex = 3;
+            this.BtnAddText.TabStop = false;
+            this.BtnAddText.Values.Text = "";
+            this.BtnAddText.Click += new System.EventHandler(this.BtnAddText_Click);
             // 
             // BtnPan
             // 
-            this.BtnPan.Location = new System.Drawing.Point(2, 72);
+            this.BtnPan.Location = new System.Drawing.Point(2, 60);
             this.BtnPan.Name = "BtnPan";
             this.BtnPan.Size = new System.Drawing.Size(37, 29);
             this.BtnPan.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -130,7 +148,7 @@
             // 
             // BtnZoomOut
             // 
-            this.BtnZoomOut.Location = new System.Drawing.Point(2, 42);
+            this.BtnZoomOut.Location = new System.Drawing.Point(2, 30);
             this.BtnZoomOut.Name = "BtnZoomOut";
             this.BtnZoomOut.Size = new System.Drawing.Size(37, 29);
             this.BtnZoomOut.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -144,7 +162,7 @@
             // 
             // BtnToggleZoom
             // 
-            this.BtnToggleZoom.Location = new System.Drawing.Point(2, 12);
+            this.BtnToggleZoom.Location = new System.Drawing.Point(2, 0);
             this.BtnToggleZoom.Name = "BtnToggleZoom";
             this.BtnToggleZoom.Size = new System.Drawing.Size(37, 29);
             this.BtnToggleZoom.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -165,19 +183,33 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(645, 383);
             this.kryptonPanel2.TabIndex = 2;
             // 
-            // BtnAddText
+            // BtnLockUnLock
             // 
-            this.BtnAddText.Location = new System.Drawing.Point(2, 102);
-            this.BtnAddText.Name = "BtnAddText";
-            this.BtnAddText.Size = new System.Drawing.Size(37, 29);
-            this.BtnAddText.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.BtnAddText.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.BtnAddText.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.Texticon;
-            this.BtnAddText.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
-            this.BtnAddText.TabIndex = 3;
-            this.BtnAddText.TabStop = false;
-            this.BtnAddText.Values.Text = "";
-            this.BtnAddText.Click += new System.EventHandler(this.BtnAddText_Click);
+            this.BtnLockUnLock.Location = new System.Drawing.Point(2, 120);
+            this.BtnLockUnLock.Name = "BtnLockUnLock";
+            this.BtnLockUnLock.Size = new System.Drawing.Size(37, 29);
+            this.BtnLockUnLock.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnLockUnLock.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnLockUnLock.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.open_lock;
+            this.BtnLockUnLock.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnLockUnLock.TabIndex = 4;
+            this.BtnLockUnLock.TabStop = false;
+            this.BtnLockUnLock.Values.Text = "";
+            this.BtnLockUnLock.Click += new System.EventHandler(this.BtnLockUnLock_Click);
+            // 
+            // BtnShowHide
+            // 
+            this.BtnShowHide.Location = new System.Drawing.Point(1, 150);
+            this.BtnShowHide.Name = "BtnShowHide";
+            this.BtnShowHide.Size = new System.Drawing.Size(37, 29);
+            this.BtnShowHide.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnShowHide.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnShowHide.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.show_hide;
+            this.BtnShowHide.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnShowHide.TabIndex = 5;
+            this.BtnShowHide.TabStop = false;
+            this.BtnShowHide.Values.Text = "";
+            this.BtnShowHide.Click += new System.EventHandler(this.BtnShowHide_Click);
             // 
             // frmCharts
             // 
@@ -186,7 +218,7 @@
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(684, 383);
             this.Controls.Add(this.kryptonPanel2);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.panelTools);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCharts";
@@ -199,8 +231,8 @@
             this.Load += new System.EventHandler(this.CustomizedLineSeries_Load);
             this.Shown += new System.EventHandler(this.frmCharts_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelTools)).EndInit();
+            this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -210,11 +242,13 @@
         #endregion
 
         public System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel panelTools;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnToggleZoom;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnZoomOut;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnPan;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnAddText;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnShowHide;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnLockUnLock;
     }
 }

@@ -439,6 +439,9 @@
     <Content Include="Images\CSFile.ico" />
     <Content Include="Images\CSProject.ico" />
     <Content Include="Images\Delete.png" />
+    <Content Include="Images\lock-icon.png" />
+    <Content Include="Images\open-lock.png" />
+    <Content Include="Images\show_hide.png" />
     <Content Include="Images\Texticon.png" />
     <Content Include="Images\File.ico" />
     <Content Include="Images\Form.ico" />

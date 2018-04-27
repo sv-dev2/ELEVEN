@@ -27,6 +27,7 @@ namespace ELEVEN
         public string symbol { get; set; }
         private MT4API mT4API { get; set; }
         public List<string> annotationList = new List<string>();
+        public ImageList imgList = new ImageList();
         public frmCharts(MDIParentForm parentForm, string broker, string symbol)
         {
             InitializeComponent();
@@ -61,6 +62,10 @@ namespace ELEVEN
             }
             LoadAnnotations();
             LoadZoomPoints();
+            imgList.Images.Add(Properties.Resources.lock_icon);
+            imgList.Images.Add(Properties.Resources.open_lock);
+            imgList.TransparentColor = Color.Transparent;
+            BtnLockUnLock.StateNormal.Back.Image = imgList.Images[1];
         }
         private void LoadAnnotations()
         {
@@ -80,7 +85,7 @@ namespace ELEVEN
         private void LoadZoomPoints()
         {
             zoomList = SQLiteDBOperation.ReteriveChartZoomList(this.Name);
-            if(zoomList!=null && zoomList.Count>0)
+            if (zoomList != null && zoomList.Count > 0)
             {
                 var points = zoomList.OrderByDescending(m => m.Index).FirstOrDefault();
                 if (points != null)
@@ -89,7 +94,7 @@ namespace ELEVEN
                     chart1.ChartAreas[0].AxisY.ScaleView.Zoom(points.PosYStart, points.PosYFinish);
                 }
             }
-          
+
         }
         public void BindDataSource()
         {
@@ -335,6 +340,41 @@ namespace ELEVEN
                 annotationList.Add(annotation.AnnotationText);
             }
 
+        }
+
+        private void BtnShowHide_Click(object sender, EventArgs e)
+        {
+            panelTools.Visible = false;
+        }
+        bool isLocked = false;
+        private void BtnLockUnLock_Click(object sender, EventArgs e)
+        {
+            if (isLocked)
+            {
+                foreach (var item in panelTools.Controls)
+                {
+                    var button = item as KryptonButton;
+                    if (button != null)
+                    {
+                        button.Enabled = true;
+                    }
+                }
+                isLocked = false;
+                BtnLockUnLock.StateCommon.Back.Image = imgList.Images[1];
+            }
+            else
+            {
+                foreach (var item in panelTools.Controls)
+                {
+                    var button = item as KryptonButton;
+                    if (button != null && button.Name!= "BtnLockUnLock")
+                    {
+                        button.Enabled = false;
+                    }
+                }
+                isLocked = true;
+                BtnLockUnLock.StateCommon.Back.Image = imgList.Images[0];
+            }
         }
     }
 

@@ -163,6 +163,16 @@ namespace ELEVEN.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lock_icon {
+            get {
+                object obj = ResourceManager.GetObject("lock_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap maximize {
             get {
                 object obj = ResourceManager.GetObject("maximize", resourceCulture);
@@ -176,6 +186,16 @@ namespace ELEVEN.Properties {
         internal static System.Drawing.Bitmap minimize {
             get {
                 object obj = ResourceManager.GetObject("minimize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap open_lock {
+            get {
+                object obj = ResourceManager.GetObject("open_lock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,6 +226,16 @@ namespace ELEVEN.Properties {
         internal static System.Drawing.Bitmap settings {
             get {
                 object obj = ResourceManager.GetObject("settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap show_hide {
+            get {
+                object obj = ResourceManager.GetObject("show_hide", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
