@@ -211,7 +211,7 @@ namespace ELEVEN.DBConnection
             sqlite_cmd.Dispose();
             return true;
         }
-        public static void SaveZoomList(ChartZoomOut model,string formName)
+        public static void SaveZoomList(ChartZoomOut model, string formName)
         {
             // We use these three SQLite objects:
 
@@ -287,7 +287,7 @@ namespace ELEVEN.DBConnection
                 model.PosXStart = Convert.ToDouble(sqlite_datareader["PosXStart"]);
                 model.PosYFinish = Convert.ToDouble(sqlite_datareader["PosYFinish"]);
                 model.PosYStart = Convert.ToDouble(sqlite_datareader["PosYStart"]);
-              
+
                 modelList.Add(model);
             }
             // We are ready, now lets cleanup and close our connection:
@@ -365,6 +365,86 @@ namespace ELEVEN.DBConnection
             sqlite_cmd = sqlite_conn.CreateCommand();
             // Let the SQLiteCommand object know our SQL-Query:
             sqlite_cmd.CommandText = $"DELETE FROM tblAnnotation where formUniqueName='{formName}'";
+            // Now lets execute the SQL ;D
+            sqlite_cmd.ExecuteNonQuery();
+
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+        }
+        public static FormState ReteriveFormToolState(string formName)
+        {
+            // We use these three SQLite objects:
+            FormState model = null;
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // First lets build a SQL-Query again:
+            sqlite_cmd.CommandText = $"SELECT * FROM tblFormState where formUniqueName='{formName}'";
+            // Now the SQLiteCommand object can give us a DataReader-Object:
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // The SQLiteDataReader allows us to run through the result lines:
+            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            {
+                model = new FormState();
+                model.FormUniqueName = Convert.ToString(sqlite_datareader["FormUniqueName"]);
+                model.LockState = Convert.ToInt32(sqlite_datareader["LockState"]);
+                model.VisibleState = Convert.ToInt32(sqlite_datareader["VisibleState"]);
+            }
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+            return model;
+        }
+
+        public static void SaveFormToolState(FormState model)
+        {
+            // We use these three SQLite objects:
+
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            // create a new database connection:
+
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+            // Lets insert something into our new table:
+            sqlite_cmd.CommandText = $"INSERT INTO tblFormState (FormUniqueName,LockState,VisibleState) VALUES ('{model.FormUniqueName}',{model.LockState},{model.VisibleState});";
+            // And execute this again ;D
+            sqlite_cmd.ExecuteNonQuery();
+            // We are ready, now lets cleanup and close our connection:
+            sqlite_conn.Close();
+            sqlite_conn.Dispose();
+            sqlite_cmd.Dispose();
+        }
+
+        public void DeleteFormToolState(string formName)
+        {
+            // We use these three SQLite objects:
+
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            // create a new database connection:
+            sqlite_conn = new SQLiteConnection("Data Source=database.db;Version=3;New=True;Compress=True;");
+            // open the connection:
+            sqlite_conn.Open();
+            // create a new SQL command:
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            // Let the SQLiteCommand object know our SQL-Query:
+            sqlite_cmd.CommandText = $"DELETE FROM tblFormState where formUniqueName='{formName}'";
             // Now lets execute the SQL ;D
             sqlite_cmd.ExecuteNonQuery();
 

@@ -60,12 +60,14 @@ namespace ELEVEN
             {
                 BindDataSource();
             }
-            LoadAnnotations();
-            LoadZoomPoints();
+          
             imgList.Images.Add(Properties.Resources.lock_icon);
             imgList.Images.Add(Properties.Resources.open_lock);
             imgList.TransparentColor = Color.Transparent;
             BtnLockUnLock.StateNormal.Back.Image = imgList.Images[1];
+            LoadAnnotations();
+            LoadZoomPoints();
+            LoadFormToolState();
         }
         private void LoadAnnotations()
         {
@@ -95,6 +97,30 @@ namespace ELEVEN
                 }
             }
 
+        }
+        private void LoadFormToolState()
+        {
+            var toolState = SQLiteDBOperation.ReteriveFormToolState(this.Name);
+            if (toolState != null)
+            {
+                panelVisible = Convert.ToBoolean(toolState.VisibleState == 1 ? true : false);
+                if (!panelVisible)
+                {
+                    panelTools.Visible = false;
+                }
+                isLocked = Convert.ToBoolean(toolState.LockState == 1 ? true : false);
+                if (isLocked)
+                {
+                    foreach (var item in panelTools.Controls)
+                    {
+                        var button = item as KryptonButton;
+                        if (button != null && button.Name != "BtnLockUnLock")
+                        {
+                            button.Enabled = false;
+                        }
+                    }
+                }
+            }
         }
         public void BindDataSource()
         {
@@ -345,8 +371,10 @@ namespace ELEVEN
         private void BtnShowHide_Click(object sender, EventArgs e)
         {
             panelTools.Visible = false;
+            panelVisible = false;
         }
-        bool isLocked = false;
+        public bool isLocked = false;
+        public bool panelVisible = true;
         private void BtnLockUnLock_Click(object sender, EventArgs e)
         {
             if (isLocked)
@@ -367,7 +395,7 @@ namespace ELEVEN
                 foreach (var item in panelTools.Controls)
                 {
                     var button = item as KryptonButton;
-                    if (button != null && button.Name!= "BtnLockUnLock")
+                    if (button != null && button.Name != "BtnLockUnLock")
                     {
                         button.Enabled = false;
                     }
