@@ -728,7 +728,7 @@ namespace ELEVEN
                 }
                 LocationModel model = new LocationModel();
                 model.formName = childForm.Tag.ToString();
-                if(model.formName== "frmCharts")
+                if (model.formName == "frmCharts")
                 {
                     SaveChartParamters(childForm as frmCharts);
                 }
@@ -747,9 +747,9 @@ namespace ELEVEN
         {
             var zoomList = chart.zoomList;
             SQLiteDBOperation.DeleteZoomList(chart.Name);
-            if (zoomList!=null && zoomList.Count>0)
+            if (zoomList != null && zoomList.Count > 0)
             {
-               
+
                 foreach (var item in zoomList)
                 {
                     SQLiteDBOperation.SaveZoomList(item, chart.Name);
@@ -757,9 +757,9 @@ namespace ELEVEN
             }
             var annotations = chart.annotationList;
             SQLiteDBOperation.DeleteAnnotation(chart.Name);
-            if (annotations!=null && annotations.Count>0)
+            if (annotations != null && annotations.Count > 0)
             {
-            
+
                 foreach (var item in chart.annotationList)
                 {
                     SQLiteDBOperation.SaveAnnotation(item, chart.Name);
@@ -852,5 +852,14 @@ namespace ELEVEN
             }
         }
 
+        private void ShowChartToolMenuStrip_Click(object sender, EventArgs e)
+        {
+            var result = this.ActiveMdiChild;
+            if (result != null && result.Tag.ToString()=="frmCharts")
+            {
+                var charts = result as frmCharts;
+                charts.panelTools.Visible = true;
+            }
+        }
     }
 }

@@ -242,7 +242,6 @@
         #endregion
 
         public System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel panelTools;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnToggleZoom;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnZoomOut;
@@ -250,5 +249,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnAddText;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnShowHide;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnLockUnLock;
+        public ComponentFactory.Krypton.Toolkit.KryptonPanel panelTools;
     }
 }
