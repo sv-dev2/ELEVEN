@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using ELEVEN.DBConnection;
 using ELEVEN.Models;
 using ELEVEN.Services;
 using System;
@@ -58,6 +59,37 @@ namespace ELEVEN
             {
                 BindDataSource();
             }
+            LoadAnnotations();
+            LoadZoomPoints();
+        }
+        private void LoadAnnotations()
+        {
+            var annotations = SQLiteDBOperation.ReteriveChartAnnotations(this.Name);
+            foreach (var item in annotations)
+            {
+                // this one is not anchored on a point:
+                TextAnnotation TA = new TextAnnotation();
+                TA.Text = item;
+                TA.ForeColor = Color.White;
+                TA.AnchorX = 50;  // 50% of chart width
+                TA.AnchorY = 20;  // 20% of chart height, from top!
+                chart1.Annotations.Add(TA);
+                annotationList.Add(item);
+            }
+        }
+        private void LoadZoomPoints()
+        {
+            zoomList = SQLiteDBOperation.ReteriveChartZoomList(this.Name);
+            if(zoomList!=null && zoomList.Count>0)
+            {
+                var points = zoomList.OrderByDescending(m => m.Index).FirstOrDefault();
+                if (points != null)
+                {
+                    chart1.ChartAreas[0].AxisX.ScaleView.Zoom(points.PosXStart, points.PosXFinish);
+                    chart1.ChartAreas[0].AxisY.ScaleView.Zoom(points.PosYStart, points.PosYFinish);
+                }
+            }
+          
         }
         public void BindDataSource()
         {
@@ -300,7 +332,7 @@ namespace ELEVEN
                 TA.AnchorX = 50;  // 50% of chart width
                 TA.AnchorY = 20;  // 20% of chart height, from top!
                 chart1.Annotations.Add(TA);
-                annotationList.Add(annotation.Text);
+                annotationList.Add(annotation.AnnotationText);
             }
 
         }

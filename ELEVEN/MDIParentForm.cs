@@ -728,6 +728,10 @@ namespace ELEVEN
                 }
                 LocationModel model = new LocationModel();
                 model.formName = childForm.Tag.ToString();
+                if(model.formName== "frmCharts")
+                {
+                    SaveChartParamters(childForm as frmCharts);
+                }
                 model.LocationX = location.X;
                 model.LocationY = location.Y;
                 model.SizeX = size.Width;
@@ -739,7 +743,27 @@ namespace ELEVEN
                 SQLiteDBOperation.AddFormsLocation(model);
             }
         }
-
+        private void SaveChartParamters(frmCharts chart)
+        {
+            var zoomList = chart.zoomList;
+            if(zoomList!=null && zoomList.Count>0)
+            {
+                SQLiteDBOperation.DeleteZoomList(chart.Name);
+                foreach (var item in zoomList)
+                {
+                    SQLiteDBOperation.SaveZoomList(item, chart.Name);
+                }
+            }
+            var annotations = chart.annotationList;
+            if(annotations!=null && annotations.Count>0)
+            {
+                SQLiteDBOperation.DeleteAnnotation(chart.Name);
+                foreach (var item in chart.annotationList)
+                {
+                    SQLiteDBOperation.SaveAnnotation(item, chart.Name);
+                }
+            }
+        }
         private void workspaceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var form = new frmPopup();
