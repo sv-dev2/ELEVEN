@@ -90,7 +90,7 @@ namespace ELEVEN
         double mDown = double.NaN;
         private void Chart1_MouseDown(object sender, MouseEventArgs e)
         {
-            if(zoomList.Count<=0 || !isPan)
+            if (zoomList.Count <= 0 || !isPan)
             {
                 return;
             }
@@ -112,12 +112,12 @@ namespace ELEVEN
                 double oldPos = ax.ScaleView.Position;
                 ax.ScaleView.Position -= (xv - mDown);
             }
-            catch 
+            catch
             {
 
-             
+
             }
-           
+
         }
         private void Chart1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -228,7 +228,7 @@ namespace ELEVEN
 
 
 
-      
+
 
         private void BtnZoomOut_Click(object sender, EventArgs e)
         {
@@ -237,14 +237,14 @@ namespace ELEVEN
             ZoomOut = sender as KryptonButton;
             if (zoomList.Count > 0)
             {
-                if(firstVisit)
+                if (firstVisit)
                 {
                     var firstPoint = zoomList.OrderByDescending(m => m.Index).FirstOrDefault();
                     zoomList.Remove(firstPoint);
                     firstVisit = false;
                 }
                 var points = zoomList.OrderByDescending(m => m.Index).FirstOrDefault();
-                if(points!=null)
+                if (points != null)
                 {
                     chart1.ChartAreas[0].AxisX.ScaleView.Zoom(points.PosXStart, points.PosXFinish);
                     chart1.ChartAreas[0].AxisY.ScaleView.Zoom(points.PosYStart, points.PosYFinish);
@@ -256,7 +256,7 @@ namespace ELEVEN
                     chart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);
                     ZoomOut.Enabled = false;
                 }
-              
+
                 if (ZoomIn != null)
                 {
                     ZoomIn.Enabled = true;
@@ -278,7 +278,31 @@ namespace ELEVEN
 
         private void BtnAddText_Click(object sender, EventArgs e)
         {
+            isPan = false;
+            //CalloutAnnotation a = new CalloutAnnotation();
+            //a.Text = "My Annotation";
+            //a.ToolTip = "Annotation tool tip";
+            //a.ForeColor = Color.Green;          
+            //a.AnchorDataPoint = chart1.Series[0].Points[0];
+            //a.Visible = true;
+            //a.LineWidth = 2;
+            //chart1.Annotations.Add(a);
 
+            var annotation = new frmAnnotation();
+            var result = annotation.ShowDialog();
+            if(result==DialogResult.OK)
+            {
+                // this one is not anchored on a point:
+                TextAnnotation TA = new TextAnnotation();
+                TA.Text = annotation.AnnotationText;
+                TA.ForeColor = Color.White;
+                TA.AnchorX = 50;  // 50% of chart width
+                TA.AnchorY = 20;  // 20% of chart height, from top!
+                chart1.Annotations.Add(TA);
+            }
+           
         }
     }
+
+
 }

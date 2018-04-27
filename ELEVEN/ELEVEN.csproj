@@ -83,11 +83,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\MtApi.dll</HintPath>
     </Reference>
-    <Reference Include="Nevron.Chart, Version=18.4.4.12, Culture=neutral, PublicKeyToken=2961c51bb98125d2" />
-    <Reference Include="Nevron.Chart.WinForm, Version=18.4.4.12, Culture=neutral, PublicKeyToken=c9bd8998e981e4ee" />
-    <Reference Include="Nevron.GraphicsGL, Version=18.4.4.12, Culture=neutral, PublicKeyToken=2f17c6a71f852d32" />
-    <Reference Include="Nevron.Presentation, Version=18.4.4.12, Culture=neutral, PublicKeyToken=6656c5d1103e75cc" />
-    <Reference Include="Nevron.System, Version=18.4.4.12, Culture=neutral, PublicKeyToken=6a987feae5e496fd" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -201,6 +196,12 @@
     <Compile Include="frmAlertWindow.Designer.cs">
       <DependentUpon>frmAlertWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAnnotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnnotation.Designer.cs">
+      <DependentUpon>frmAnnotation.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBroker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,12 +219,6 @@
     </Compile>
     <Compile Include="frmCharts.Designer.cs">
       <DependentUpon>frmCharts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmChartsTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmChartsTest.Designer.cs">
-      <DependentUpon>frmChartsTest.cs</DependentUpon>
     </Compile>
     <Compile Include="frmClosedPosition.cs">
       <SubType>Form</SubType>
@@ -310,6 +305,9 @@
     <EmbeddedResource Include="frmAlertWindow.resx">
       <DependentUpon>frmAlertWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAnnotation.resx">
+      <DependentUpon>frmAnnotation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBroker.resx">
       <DependentUpon>frmBroker.cs</DependentUpon>
     </EmbeddedResource>
@@ -318,9 +316,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCharts.resx">
       <DependentUpon>frmCharts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmChartsTest.resx">
-      <DependentUpon>frmChartsTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmClosedPosition.resx">
       <DependentUpon>frmClosedPosition.cs</DependentUpon>
