@@ -431,7 +431,7 @@ namespace ELEVEN.DBConnection
             sqlite_cmd.Dispose();
         }
 
-        public void DeleteFormToolState(string formName)
+        public static void DeleteFormToolState(string formName)
         {
             // We use these three SQLite objects:
 

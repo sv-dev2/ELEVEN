@@ -64,7 +64,7 @@ namespace ELEVEN
             imgList.Images.Add(Properties.Resources.lock_icon);
             imgList.Images.Add(Properties.Resources.open_lock);
             imgList.TransparentColor = Color.Transparent;
-            BtnLockUnLock.StateNormal.Back.Image = imgList.Images[1];
+            BtnLockUnLock.StateCommon.Back.Image = imgList.Images[1];
             LoadAnnotations();
             LoadZoomPoints();
             LoadFormToolState();

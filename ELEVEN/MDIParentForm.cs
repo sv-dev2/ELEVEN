@@ -765,6 +765,13 @@ namespace ELEVEN
                     SQLiteDBOperation.SaveAnnotation(item, chart.Name);
                 }
             }
+            SQLiteDBOperation.DeleteFormToolState(chart.Name);
+            var toolState = new FormState();
+            toolState.FormUniqueName = chart.Name;
+            toolState.LockState = chart.isLocked == true ? 1 : 0;
+            toolState.VisibleState = chart.panelVisible == true ? 1 : 0;
+            SQLiteDBOperation.SaveFormToolState(toolState);
+
         }
         private void workspaceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -859,6 +866,7 @@ namespace ELEVEN
             {
                 var charts = result as frmCharts;
                 charts.panelTools.Visible = true;
+                charts.panelVisible = true;
             }
         }
     }
