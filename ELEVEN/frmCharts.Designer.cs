@@ -234,7 +234,6 @@
             this.comboTimeFrame.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
             this.comboTimeFrame.Size = new System.Drawing.Size(76, 21);
             this.comboTimeFrame.TabIndex = 0;
-            this.comboTimeFrame.SelectedIndexChanged += new System.EventHandler(this.comboTimeFrame_SelectedIndexChanged);
             // 
             // frmCharts
             // 

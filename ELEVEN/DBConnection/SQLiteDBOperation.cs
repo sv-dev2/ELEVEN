@@ -399,6 +399,7 @@ namespace ELEVEN.DBConnection
                 model.FormUniqueName = Convert.ToString(sqlite_datareader["FormUniqueName"]);
                 model.LockState = Convert.ToInt32(sqlite_datareader["LockState"]);
                 model.VisibleState = Convert.ToInt32(sqlite_datareader["VisibleState"]);
+                model.TimeFrame = Convert.ToString(sqlite_datareader["timeFrame"]);
             }
             // We are ready, now lets cleanup and close our connection:
             sqlite_conn.Close();
@@ -422,7 +423,7 @@ namespace ELEVEN.DBConnection
             sqlite_cmd = sqlite_conn.CreateCommand();
 
             // Lets insert something into our new table:
-            sqlite_cmd.CommandText = $"INSERT INTO tblFormState (FormUniqueName,LockState,VisibleState) VALUES ('{model.FormUniqueName}',{model.LockState},{model.VisibleState});";
+            sqlite_cmd.CommandText = $"INSERT INTO tblFormState (FormUniqueName,LockState,VisibleState,timeFrame) VALUES ('{model.FormUniqueName}',{model.LockState},{model.VisibleState},'{model.TimeFrame}');";
             // And execute this again ;D
             sqlite_cmd.ExecuteNonQuery();
             // We are ready, now lets cleanup and close our connection:

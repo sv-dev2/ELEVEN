@@ -770,6 +770,7 @@ namespace ELEVEN
             toolState.FormUniqueName = chart.Name;
             toolState.LockState = chart.isLocked == true ? 1 : 0;
             toolState.VisibleState = chart.panelVisible == true ? 1 : 0;
+            toolState.TimeFrame = chart.candleTimeFrame;
             SQLiteDBOperation.SaveFormToolState(toolState);
 
         }

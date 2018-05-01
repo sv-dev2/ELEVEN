@@ -33,18 +33,11 @@ namespace ELEVEN
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
-
+           
             this.parentForm = parentForm;
             this.broker = broker;
             this.symbol = symbol;
-            if (broker.ToLower() == "bitfinex")
-                InitBitFinex();
-            else
-            {
-                mT4API = new MT4API(this);
-                candleDataMT = new BindingList<CandleDataMT>();
-            }
-            this.Text = broker + "." + symbol.Replace("t", "");
+           
             zoomList = new List<ChartZoomOut>();
         }
         private void InitBitFinex()
@@ -55,11 +48,12 @@ namespace ELEVEN
         private void BindCombobox()
         {
             var timeFrame = clsComman.GetBitTimeFrame();
-            comboTimeFrame.SelectedValue = candleTimeFrame;
+           
             comboTimeFrame.DataSource = timeFrame;
             comboTimeFrame.ValueMember = "Value";
             comboTimeFrame.DisplayMember = "Text";
-
+            comboTimeFrame.SelectedValue = candleTimeFrame;
+            //comboTimeFrame.SelectedIndex = comboTimeFrame.FindStringExact(candleTimeFrame);
         }
 
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
@@ -77,7 +71,36 @@ namespace ELEVEN
             LoadAnnotations();
             LoadZoomPoints();
             LoadFormToolState();
+
+            if (broker.ToLower() == "bitfinex")
+                InitBitFinex();
+            else
+            {
+                mT4API = new MT4API(this);
+                candleDataMT = new BindingList<CandleDataMT>();
+            }
+            this.Text = broker + "." + symbol.Replace("t", "");
+
+            comboTimeFrame.SelectedIndexChanged += ComboTimeFrame_SelectedIndexChanged;
         }
+
+        private void ComboTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combo = sender as KryptonComboBox;
+            string bitTimeframe = Convert.ToString(combo.SelectedValue);
+            var isExist = clsComman.GetBitTimeFrame().Where(m => m.Value == bitTimeframe).FirstOrDefault();
+            if (bitTimeframe != null && isExist != null && bitTimeframe != candleTimeFrame)
+            {
+                candleTimeFrame = bitTimeframe;
+                if (broker.ToLower() == "bitfinex")
+                {
+                    BitfinexSocket.Instance.webSocket.Close();
+                    BitfinexSocket.Instance.ReConnect(this.symbol, this, bitTimeframe);
+                }
+
+            }
+        }
+
         private void LoadAnnotations()
         {
             var annotations = SQLiteDBOperation.ReteriveChartAnnotations(this.Name);
@@ -110,6 +133,7 @@ namespace ELEVEN
         private void LoadFormToolState()
         {
             var toolState = SQLiteDBOperation.ReteriveFormToolState(this.Name);
+            candleTimeFrame = toolState?.TimeFrame?? "1m";
             if (toolState != null)
             {
                 panelVisible = Convert.ToBoolean(toolState.VisibleState == 1 ? true : false);
@@ -414,25 +438,7 @@ namespace ELEVEN
             }
         }
 
-        private void comboTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var combo = sender as KryptonComboBox;
-            string bitTimeframe = Convert.ToString(combo.SelectedValue);
-            var isExist = clsComman.GetBitTimeFrame().Where(m => m.Value == bitTimeframe).FirstOrDefault();
-            if (bitTimeframe != null && isExist != null && bitTimeframe != candleTimeFrame)
-            {
-                candleTimeFrame = bitTimeframe;
-                if (broker.ToLower() == "bitfinex")
-                {
-                    BitfinexSocket.Instance.webSocket.Close();
-                    BitfinexSocket.Instance.ReConnect(this.symbol, this, bitTimeframe);
-                }
-
-            }
-
-
-
-        }
+       
 
 
     }

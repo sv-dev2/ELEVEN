@@ -20,5 +20,6 @@ namespace ELEVEN.Models
         public string FormUniqueName { get; set; }
         public int LockState { get; set; }
         public int VisibleState { get; set; }
+        public string TimeFrame { get; set; }
     }
 }
