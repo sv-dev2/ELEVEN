@@ -43,27 +43,21 @@ namespace ELEVEN
         private void InitBitFinex()
         {
             BitfinexSocket.Instance.Init(symbol, this, candleTimeFrame);
-            BindCombobox();
-        }
-        private void BindCombobox()
-        {
             var timeFrame = clsComman.GetBitTimeFrame();
-           
+            BindCombobox(timeFrame);
+        }
+        private void BindCombobox(List<ClsTimeframe> timeFrame)
+        {
             comboTimeFrame.DataSource = timeFrame;
             comboTimeFrame.ValueMember = "Value";
             comboTimeFrame.DisplayMember = "Text";
             comboTimeFrame.SelectedValue = candleTimeFrame;
-            //comboTimeFrame.SelectedIndex = comboTimeFrame.FindStringExact(candleTimeFrame);
+           
         }
 
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
-            ChartSettings();
-            if (mT4API != null)
-            {
-                BindDataSource();
-            }
-
+          
             imgList.Images.Add(Properties.Resources.lock_icon);
             imgList.Images.Add(Properties.Resources.open_lock);
             imgList.TransparentColor = Color.Transparent;
@@ -77,10 +71,17 @@ namespace ELEVEN
             else
             {
                 mT4API = new MT4API(this);
+                candleTimeFrame = "0";
                 candleDataMT = new BindingList<CandleDataMT>();
+                var timeFrame = clsComman.GetMTTimeFrame();
+                BindCombobox(timeFrame);
             }
             this.Text = broker + "." + symbol.Replace("t", "");
-
+            ChartSettings();
+            if (mT4API != null)
+            {
+                BindDataSource();
+            }
             comboTimeFrame.SelectedIndexChanged += ComboTimeFrame_SelectedIndexChanged;
         }
 
