@@ -52,11 +52,11 @@ namespace ELEVEN.Services
             if (hasSymbol != null)
             {
                 form.candleData = hasSymbol.candleData;
-                listForms.Add(new AllForms { form = form, symbol = symbol, channelId = hasSymbol.ChannelId });
+                listForms.Add(new AllForms { form = form, symbol = symbol, channelId = hasSymbol.ChannelId,timeFrame=timeFrame });
             }
             else
             {
-                listForms.Add(new AllForms { form = form, symbol = symbol });
+                listForms.Add(new AllForms { form = form, symbol = symbol, timeFrame = timeFrame });
             }
 
 
@@ -68,7 +68,7 @@ namespace ELEVEN.Services
                 SendSymbol(symbol, timeFrame);
             }
         }
-        private void SendSymbol(string symbol, string timeFrame="1m")
+        private void SendSymbol(string symbol, string timeFrame = "1m")
         {
             webCandleListner webCandle = new webCandleListner();
             webCandle.channel = "candles";
@@ -77,6 +77,35 @@ namespace ELEVEN.Services
             var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(webCandle);
             jsonString = jsonString.Replace("_event", "event");
             webSocket.Send(jsonString);
+        }
+        public void ReConnect(string symbol, dynamic form, string timeFrame)
+        {
+            IsSocketOpened = false;
+            list = new List<MapSymbolChart>();
+            webSocket = new WebSocket4Net.WebSocket(host);
+            webSocket.Open();
+            webSocket.Opened += WebSocket_Opened;
+            webSocket.Closed += WebSocket_Closed;
+            webSocket.Error += WebSocket_Error;
+            webSocket.MessageReceived += WebSocket_MessageReceived;
+
+            while (!IsSocketOpened)
+            {
+            }
+            foreach (var item in listForms)
+            {
+                form.candleData = new BindingList<CandleData>();
+                if (item.form==form)
+                {
+                    SendSymbol(symbol, timeFrame);
+                    item.timeFrame = timeFrame;
+                    item.symbol = symbol;
+                }
+                else
+                {
+                    SendSymbol(item.symbol, item.timeFrame);
+                }
+            }
         }
         private void WebSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
@@ -232,6 +261,7 @@ namespace ELEVEN.Services
         public dynamic form { get; set; }
         public int channelId { get; set; }
         public string symbol { get; set; }
+        public string timeFrame { get; set; }
     }
     public class MapSymbolChart
     {

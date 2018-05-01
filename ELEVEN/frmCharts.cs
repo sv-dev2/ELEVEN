@@ -422,7 +422,8 @@ namespace ELEVEN
             if(bitTimeframe!=null && isExist!=null && bitTimeframe != candleTimeFrame)
             {
                 candleTimeFrame = bitTimeframe;
-               
+                BitfinexSocket.Instance.webSocket.Close();
+                BitfinexSocket.Instance.ReConnect(this.symbol, this, bitTimeframe);
             }
            
 
