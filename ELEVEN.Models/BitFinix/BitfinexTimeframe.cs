@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ELEVEN.Models
 {
-    public class BitTimeframe
+    public class ClsTimeframe
     {
         public string Text { get; set; }
         public string Value { get; set; }
