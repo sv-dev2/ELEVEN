@@ -59,7 +59,7 @@ namespace ELEVEN
             comboTimeFrame.DataSource = timeFrame;
             comboTimeFrame.ValueMember = "Value";
             comboTimeFrame.DisplayMember = "Text";
-           
+
         }
 
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace ELEVEN
             {
                 BindDataSource();
             }
-          
+
             imgList.Images.Add(Properties.Resources.lock_icon);
             imgList.Images.Add(Properties.Resources.open_lock);
             imgList.TransparentColor = Color.Transparent;
@@ -413,24 +413,28 @@ namespace ELEVEN
                 BtnLockUnLock.StateCommon.Back.Image = imgList.Images[0];
             }
         }
-       
+
         private void comboTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
         {
             var combo = sender as KryptonComboBox;
-            string bitTimeframe =Convert.ToString(combo.SelectedValue);
+            string bitTimeframe = Convert.ToString(combo.SelectedValue);
             var isExist = clsComman.GetBitTimeFrame().Where(m => m.Value == bitTimeframe).FirstOrDefault();
-            if(bitTimeframe!=null && isExist!=null && bitTimeframe != candleTimeFrame)
+            if (bitTimeframe != null && isExist != null && bitTimeframe != candleTimeFrame)
             {
                 candleTimeFrame = bitTimeframe;
-                BitfinexSocket.Instance.webSocket.Close();
-                BitfinexSocket.Instance.ReConnect(this.symbol, this, bitTimeframe);
+                if (broker.ToLower() == "bitfinex")
+                {
+                    BitfinexSocket.Instance.webSocket.Close();
+                    BitfinexSocket.Instance.ReConnect(this.symbol, this, bitTimeframe);
+                }
+
             }
-           
+
 
 
         }
 
-       
+
     }
 
 
