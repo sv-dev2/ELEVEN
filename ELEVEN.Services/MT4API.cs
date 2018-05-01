@@ -210,29 +210,18 @@ namespace ELEVEN.Services
                 });
             }
         }
-        public BindingList<CandleDataMT> HistoricalCandles(string symbol)
+        public BindingList<CandleDataMT> HistoricalCandles(string symbol,string candleTimeFrame)
         {
 
             System.Threading.Thread.Sleep(1000);//Mt server take time to connect
             if (apiClient.ConnectionState == MtConnectionState.Connected)
             {
-                return RequestHistoricalCandles(symbol);
+                return RequestHistoricalCandles(symbol, GetENUM_TIMEFRAMES(candleTimeFrame));
             }
             return listCandles;
 
         }
-        public MqlTick SymbolInfoTick(string symbol)
-        {
-
-            System.Threading.Thread.Sleep(1000);//Mt server take time to connect
-            if (apiClient.ConnectionState == MtConnectionState.Connected)
-            {
-
-                return apiClient.SymbolInfoTick(symbol);
-            }
-
-            return new MqlTick();
-        }
+      
         public List<MtQuote> GetQuotes()
         {
 
@@ -280,7 +269,7 @@ namespace ELEVEN.Services
             }
         }
 
-        private BindingList<CandleDataMT> RequestHistoricalCandles(string symbol = "USDJPY", ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)
+        private BindingList<CandleDataMT> RequestHistoricalCandles(string symbol, ENUM_TIMEFRAMES pERIOD_CURRENT)
         {
             var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, DateTime.Now.AddDays(-15), DateTime.Now);
             if (rates != null)
@@ -300,17 +289,48 @@ namespace ELEVEN.Services
             }
             return listCandles;
         }
-
+        public ENUM_TIMEFRAMES GetENUM_TIMEFRAMES(string candleTimeFrame)
+        {
+            switch(candleTimeFrame)
+            {
+                case "1":
+                    return ENUM_TIMEFRAMES.PERIOD_M1;
+                case "2":
+                    return ENUM_TIMEFRAMES.PERIOD_M2;
+                case "3":
+                    return ENUM_TIMEFRAMES.PERIOD_M3;
+                case "4":
+                    return ENUM_TIMEFRAMES.PERIOD_M4;
+                case "5":
+                    return ENUM_TIMEFRAMES.PERIOD_M5;
+                case "15":
+                    return ENUM_TIMEFRAMES.PERIOD_M15;
+                case "30":
+                    return ENUM_TIMEFRAMES.PERIOD_M30;
+                case "60":
+                    return ENUM_TIMEFRAMES.PERIOD_H1;
+                case "240":
+                    return ENUM_TIMEFRAMES.PERIOD_H4;
+                case "1440":
+                    return ENUM_TIMEFRAMES.PERIOD_D1;
+                case "10080":
+                    return ENUM_TIMEFRAMES.PERIOD_W1;
+                case "43200":
+                    return ENUM_TIMEFRAMES.PERIOD_MN1;
+                default:
+                    return ENUM_TIMEFRAMES.PERIOD_CURRENT;
+            }
+        }
         public void Dispose()
         {
-            _timerTradeMonitor.Stop();
-            _timeframeTradeMonitor.Stop();
+            //_timerTradeMonitor.Stop();
+            //_timeframeTradeMonitor.Stop();
             apiClient.BeginDisconnect();
         }
 
         public void StartGateway()
         {
-         
+            apiClient.BeginConnect(8222);
         }
 
         public void StopGateway()

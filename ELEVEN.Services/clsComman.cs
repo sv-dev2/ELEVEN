@@ -90,10 +90,7 @@ namespace ELEVEN.Services
         {
             var timeFrame = new List<ClsTimeframe>() {
                         new ClsTimeframe {Text="CURRENT ",Value="0" },
-                        new ClsTimeframe {Text="M1",Value="1" },
-                        new ClsTimeframe {Text="M2",Value="2" },
-                        new ClsTimeframe {Text="M3",Value="3" },
-                        new ClsTimeframe {Text="M4",Value="4" },
+                        new ClsTimeframe {Text="M1",Value="1" },                      
                         new ClsTimeframe {Text="M5",Value="5" },
                         new ClsTimeframe {Text="M15",Value="15" },
                         new ClsTimeframe {Text="M30",Value="30" },

@@ -33,11 +33,11 @@ namespace ELEVEN
         {
             InitializeComponent();
             candleData = new BindingList<CandleData>();
-           
+
             this.parentForm = parentForm;
             this.broker = broker;
             this.symbol = symbol;
-           
+
             zoomList = new List<ChartZoomOut>();
         }
         private void InitBitFinex()
@@ -52,12 +52,12 @@ namespace ELEVEN
             comboTimeFrame.ValueMember = "Value";
             comboTimeFrame.DisplayMember = "Text";
             comboTimeFrame.SelectedValue = candleTimeFrame;
-           
+
         }
 
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
-          
+
             imgList.Images.Add(Properties.Resources.lock_icon);
             imgList.Images.Add(Properties.Resources.open_lock);
             imgList.TransparentColor = Color.Transparent;
@@ -71,7 +71,11 @@ namespace ELEVEN
             else
             {
                 mT4API = new MT4API(this);
-                candleTimeFrame = "0";
+                if (candleTimeFrame == null || candleTimeFrame=="1m")
+                {
+                    candleTimeFrame = "0";
+                }
+
                 candleDataMT = new BindingList<CandleDataMT>();
                 var timeFrame = clsComman.GetMTTimeFrame();
                 BindCombobox(timeFrame);
@@ -88,15 +92,22 @@ namespace ELEVEN
         private void ComboTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
         {
             var combo = sender as KryptonComboBox;
-            string bitTimeframe = Convert.ToString(combo.SelectedValue);
-            var isExist = clsComman.GetBitTimeFrame().Where(m => m.Value == bitTimeframe).FirstOrDefault();
-            if (bitTimeframe != null && isExist != null && bitTimeframe != candleTimeFrame)
+            string timeframe = Convert.ToString(combo.SelectedValue);
+            //var isExist = clsComman.GetBitTimeFrame().Where(m => m.Value == bitTimeframe).FirstOrDefault();
+            if (timeframe != null && timeframe != candleTimeFrame)
             {
-                candleTimeFrame = bitTimeframe;
-                if (broker.ToLower() == "bitfinex")
+                candleTimeFrame = timeframe;
+                if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
                     BitfinexSocket.Instance.webSocket.Close();
-                    BitfinexSocket.Instance.ReConnect(this.symbol, this, bitTimeframe);
+                    BitfinexSocket.Instance.ReConnect(this.symbol, this, timeframe);
+                }
+                else if (broker.ToLower() == Broker.MT.ToString().ToLower())
+                {
+                    mT4API.Dispose();
+                    mT4API.StartGateway();
+                    mT4API.listCandles = new BindingList<CandleDataMT>();
+                    BindDataSource();
                 }
 
             }
@@ -134,7 +145,7 @@ namespace ELEVEN
         private void LoadFormToolState()
         {
             var toolState = SQLiteDBOperation.ReteriveFormToolState(this.Name);
-            candleTimeFrame = toolState?.TimeFrame?? "1m";
+            candleTimeFrame = toolState?.TimeFrame ?? "1m";
             if (toolState != null)
             {
                 panelVisible = Convert.ToBoolean(toolState.VisibleState == 1 ? true : false);
@@ -158,7 +169,7 @@ namespace ELEVEN
         }
         public void BindDataSource()
         {
-            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol);
+            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol, candleTimeFrame);
             if (mT4API.listCandles.Count > 0)
             {
                 var max = mT4API.listCandles.Max(m => m.High);
@@ -439,7 +450,7 @@ namespace ELEVEN
             }
         }
 
-       
+
 
 
     }
