@@ -60,6 +60,7 @@
     <Compile Include="BitFinix\ActivePositionsResponse.cs" />
     <Compile Include="BitFinix\BalancesRequest.cs" />
     <Compile Include="BitFinix\BalancesResponse.cs" />
+    <Compile Include="BitFinix\BitfinexTimeframe.cs" />
     <Compile Include="BitFinix\CancelAllOrdersRequest.cs" />
     <Compile Include="BitFinix\CancelAllOrdersResponse.cs" />
     <Compile Include="BitFinix\CancelOrderRequest.cs" />

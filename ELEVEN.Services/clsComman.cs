@@ -67,7 +67,24 @@ namespace ELEVEN.Services
             }
         }
 
-        
-        
+
+        public static List<BitTimeframe> GetBitTimeFrame()
+        {
+            var timeFrame = new List<BitTimeframe>() {
+                                new BitTimeframe {Text="one minute",Value="1m" },
+                                new BitTimeframe {Text="five minutes",Value="5m" },
+                                new BitTimeframe {Text="15 minutes",Value="15m" },
+                                new BitTimeframe {Text="30 minutes",Value="30m" },
+                                new BitTimeframe {Text="one hour",Value="1h" },
+                                new BitTimeframe {Text="3 hours",Value="3h" },
+                                new BitTimeframe {Text="6 hours",Value="6h" },
+                                new BitTimeframe {Text="12 hours",Value="12h" },
+                                new BitTimeframe {Text="one day",Value="1D" },
+                                new BitTimeframe {Text="one week",Value="7D" },
+                                new BitTimeframe {Text="two weeks",Value="14D" },
+                                new BitTimeframe {Text="one month",Value="1M" }
+            };
+            return timeFrame;
+        }
     }
 }

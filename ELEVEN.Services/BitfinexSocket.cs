@@ -16,7 +16,7 @@ namespace ELEVEN.Services
 {
     public class BitfinexSocket : IDisposable
     {
-        WebSocket4Net.WebSocket webSocket;
+        public WebSocket4Net.WebSocket webSocket;
         const string host = "wss://api.bitfinex.com/ws/2";
         // the one and only Singleton instance. 
         private static BitfinexSocket instance = new BitfinexSocket();
@@ -44,7 +44,7 @@ namespace ELEVEN.Services
         private bool IsSocketOpened { get; set; } = false;
         public List<AllForms> listForms = new List<AllForms>();
         List<MapSymbolChart> list = new List<MapSymbolChart>();
-        public void Init(string symbol, dynamic form)
+        public void Init(string symbol, dynamic form, string timeFrame)
         {
 
             // this.form = form;
@@ -65,15 +65,15 @@ namespace ELEVEN.Services
             }
             if (IsSocketOpened)
             {
-                SendSymbol(symbol);
+                SendSymbol(symbol, timeFrame);
             }
         }
-        private void SendSymbol(string symbol)
+        private void SendSymbol(string symbol, string timeFrame="1m")
         {
             webCandleListner webCandle = new webCandleListner();
             webCandle.channel = "candles";
             webCandle._event = "subscribe";
-            webCandle.key = "trade:1m:" + symbol;
+            webCandle.key = "trade:" + timeFrame + ":" + symbol;
             var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(webCandle);
             jsonString = jsonString.Replace("_event", "event");
             webSocket.Send(jsonString);
@@ -85,7 +85,6 @@ namespace ELEVEN.Services
                 var items = JsonConvert.DeserializeObject<webCandleResponse>(e.Message);
                 var objForm = listForms.Where(m => m.symbol == items.key.Split(':')[2]).FirstOrDefault();
                 objForm.channelId = items.chanId;
-
                 MapSymbolChart mapSymbol = new MapSymbolChart();
                 mapSymbol.ChannelId = items.chanId;
                 mapSymbol.Symbol = items.key.Split(':')[2];
@@ -105,6 +104,7 @@ namespace ELEVEN.Services
                     if (data.Count() > 3)
                     {
                         var channelId = data[1].Split(',')[0];
+                        Console.WriteLine(channelId);
                         form = listForms.Where(m => m.channelId == Convert.ToInt32(channelId)).FirstOrDefault().form;
                         BindingList<CandleData> candleData = form.candleData as BindingList<CandleData>;
                         foreach (var item in data)
@@ -123,11 +123,11 @@ namespace ELEVEN.Services
 
                         form.Invoke((Action)delegate ()
                         {
-                           
+
                             form.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
                             form.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
                             form.chart1.DataSource = candleData;
-                           // BindCharts(form, candleData);
+                            // BindCharts(form, candleData);
                         });
                     }
                     else
@@ -135,7 +135,7 @@ namespace ELEVEN.Services
                         var channelId = data[1].Split(',')[0];
                         form = listForms.Where(m => m.channelId == Convert.ToInt32(channelId)).FirstOrDefault().form;
                         BindingList<CandleData> candleData = form.candleData as BindingList<CandleData>;
-
+                        Console.WriteLine(channelId);
 
                         var candles = data[2].Split(',');
                         candleData.Add(new CandleData { Close = Convert.ToDecimal(candles[2]), High = Convert.ToDecimal(candles[3]), Low = Convert.ToDecimal(candles[4]), Open = Convert.ToDecimal(candles[1]), Volume = Convert.ToDecimal(candles[5].ToString().Replace("]", "")), MTS = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToInt64(candles[0])).ToLocalTime() });
@@ -196,7 +196,7 @@ namespace ELEVEN.Services
             // Specify the date-time argument scale type for the series,
             // as it is qualitative, by default.
             series1.ArgumentScaleType = ScaleType.DateTime;
-          
+
             series1.ArgumentDataMember = "MTS";
             series1.ValueDataMembers.AddRange(new string[] { "Low", "High", "Open", "Close" });
 
@@ -205,16 +205,13 @@ namespace ELEVEN.Services
             form.chart1.Series["Stock Prices"].DataSource = bindingList;
             // Access the view-type-specific options of the series.
             CandleStickSeriesView myView = (CandleStickSeriesView)series1.View;
-
             myView.LineThickness = 2;
             myView.LevelLineLength = 0.25;
-
             // Specify the series reduction options.
             myView.ReductionOptions.ColorMode = ReductionColorMode.OpenToCloseValue;
             myView.ReductionOptions.FillMode = CandleStickFillMode.FilledOnReduction;
             myView.ReductionOptions.Level = StockLevel.Open;
             myView.ReductionOptions.Visible = true;
-
             // Access the chart's diagram.
             XYDiagram diagram = ((XYDiagram)form.chart1.Diagram);
 
@@ -223,15 +220,9 @@ namespace ELEVEN.Services
             diagram.AxisY.WholeRange.MaxValue = max;
             diagram.AxisY.WholeRange.SideMarginsValue = 0.5;
 
-      
             // Exclude weekends from the X-axis range,
             // to avoid gaps in the chart's data.
             diagram.AxisX.DateTimeScaleOptions.WorkdaysOnly = true;
-           
-
-
-
-
 
         }
 

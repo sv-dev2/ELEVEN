@@ -26,6 +26,7 @@ namespace ELEVEN
         public string broker { get; set; }
         public string symbol { get; set; }
         private MT4API mT4API { get; set; }
+        public string candleTimeFrame = "1m";
         public List<string> annotationList = new List<string>();
         public ImageList imgList = new ImageList();
         public frmCharts(MDIParentForm parentForm, string broker, string symbol)
@@ -48,10 +49,18 @@ namespace ELEVEN
         }
         private void InitBitFinex()
         {
-            BitfinexSocket.Instance.Init(symbol, this);
-
+            BitfinexSocket.Instance.Init(symbol, this, candleTimeFrame);
+            BindCombobox();
         }
-
+        private void BindCombobox()
+        {
+            var timeFrame = clsComman.GetBitTimeFrame();
+            comboTimeFrame.SelectedValue = candleTimeFrame;
+            comboTimeFrame.DataSource = timeFrame;
+            comboTimeFrame.ValueMember = "Value";
+            comboTimeFrame.DisplayMember = "Text";
+           
+        }
 
         private void CustomizedLineSeries_Load(object sender, EventArgs e)
         {
@@ -404,6 +413,23 @@ namespace ELEVEN
                 BtnLockUnLock.StateCommon.Back.Image = imgList.Images[0];
             }
         }
+       
+        private void comboTimeFrame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combo = sender as KryptonComboBox;
+            string bitTimeframe =Convert.ToString(combo.SelectedValue);
+            var isExist = clsComman.GetBitTimeFrame().Where(m => m.Value == bitTimeframe).FirstOrDefault();
+            if(bitTimeframe!=null && isExist!=null && bitTimeframe != candleTimeFrame)
+            {
+                candleTimeFrame = bitTimeframe;
+               
+            }
+           
+
+
+        }
+
+       
     }
 
 

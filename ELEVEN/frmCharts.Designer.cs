@@ -40,11 +40,16 @@
             this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.comboTimeFrame = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelTools)).BeginInit();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboTimeFrame)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
@@ -203,12 +208,33 @@
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.kryptonPanel1);
             this.kryptonPanel2.Controls.Add(this.chart1);
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(39, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Size = new System.Drawing.Size(645, 383);
             this.kryptonPanel2.TabIndex = 2;
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.comboTimeFrame);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(645, 29);
+            this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
+            this.kryptonPanel1.TabIndex = 1;
+            // 
+            // comboTimeFrame
+            // 
+            this.comboTimeFrame.DropDownWidth = 122;
+            this.comboTimeFrame.Location = new System.Drawing.Point(0, 5);
+            this.comboTimeFrame.Name = "comboTimeFrame";
+            this.comboTimeFrame.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
+            this.comboTimeFrame.Size = new System.Drawing.Size(76, 21);
+            this.comboTimeFrame.TabIndex = 0;
+            this.comboTimeFrame.SelectedIndexChanged += new System.EventHandler(this.comboTimeFrame_SelectedIndexChanged);
             // 
             // frmCharts
             // 
@@ -234,6 +260,9 @@
             this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.comboTimeFrame)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -249,5 +278,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnShowHide;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnLockUnLock;
         public ComponentFactory.Krypton.Toolkit.KryptonPanel panelTools;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox comboTimeFrame;
     }
 }
