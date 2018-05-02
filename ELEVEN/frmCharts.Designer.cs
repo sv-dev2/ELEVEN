@@ -260,7 +260,7 @@
             this.btnLineChart.Size = new System.Drawing.Size(37, 29);
             this.btnLineChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.btnLineChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.btnLineChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.chart_line;
+            this.btnLineChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.chart_renko;
             this.btnLineChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
             this.btnLineChart.TabIndex = 4;
             this.btnLineChart.TabStop = false;

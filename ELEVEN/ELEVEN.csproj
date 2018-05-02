@@ -437,6 +437,7 @@
     <Content Include="Images\BlankIcon.ico" />
     <Content Include="Images\candlestick_chart.png" />
     <Content Include="Images\chart_line.png" />
+    <Content Include="Images\chart_renko.png" />
     <Content Include="Images\close-x.png" />
     <Content Include="Images\ClosedFolder.ICO" />
     <Content Include="Images\CSFile.ico" />

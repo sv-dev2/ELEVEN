@@ -39,12 +39,12 @@ namespace ELEVEN
             this.symbol = symbol;
 
             zoomList = new List<ChartZoomOut>();
-            SetInitials();
+           
         }
         private void SetInitials()
         {
-            customToolTip.SetToolTip(btnBarChart, "Bar Chart");
-            customToolTip.SetToolTip(btnLineChart, "Line Chart");
+            customToolTip.SetToolTip(btnBarChart, "Range Bar Chart");
+            customToolTip.SetToolTip(btnLineChart, "Renko Chart");
             customToolTip.SetToolTip(BtnCandleStickChart, "Candlestick Chart");
             customToolTip.SetToolTip(BtnToggleZoom, "Zoom In");
             customToolTip.SetToolTip(BtnZoomOut, "Zoom Out");
@@ -254,6 +254,9 @@ namespace ELEVEN
 
                 if (e.Delta > 0)
                 {
+                    double pX = chart1.ChartAreas[0].CursorX.Position; //X Axis Coordinate of your mouse cursor
+                    double pY = chart1.ChartAreas[0].CursorY.Position; //Y Axis Coordinate of your mouse cursor
+
                     double xMin = chart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
                     double xMax = chart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
                     double yMin = chart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
@@ -261,8 +264,8 @@ namespace ELEVEN
 
                     double posXStart = chart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 5;
                     double posXFinish = chart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 5;
-                    double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 5;
-                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 5;
+                    double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 2;
+                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + (yMax - yMin) /2;
 
                     chart1.ChartAreas[0].AxisX.ScaleView.Zoom(posXStart, posXFinish);
                     chart1.ChartAreas[0].AxisY.ScaleView.Zoom(posYStart, posYFinish);
@@ -317,40 +320,46 @@ namespace ELEVEN
         bool firstVisit = false;
         private void BtnToggleZoom_Click(object sender, EventArgs e)
         {
-            ZoomIn = sender as KryptonButton;
-            chart1.Cursor = System.Windows.Forms.Cursors.Default;
-            isPan = false;
-            firstVisit = true;
-            if (zoomList.Count < 5)
+            try
             {
-                double xMin = chart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-                double xMax = chart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
-                double yMin = chart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                double yMax = chart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
-                int width = this.Width;
-                int height = this.Height;
-                double posXStart = chart1.ChartAreas[0].AxisX.PixelPositionToValue(width / 2) - (xMax - xMin) / 5;
-                double posXFinish = chart1.ChartAreas[0].AxisX.PixelPositionToValue(width / 2) + (xMax - xMin) / 5;
-                double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(height / 2) - (yMax - yMin) / 2;
-                double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(height / 2) + (yMax - yMin) / 2;
-
-                chart1.ChartAreas[0].AxisX.ScaleView.Zoom(posXStart, posXFinish);
-                chart1.ChartAreas[0].AxisY.ScaleView.Zoom(posYStart, posYFinish);
-                zoomList.Add(new ChartZoomOut { Index = zoomList.Count + 1, PosXFinish = posXFinish, PosXStart = posXStart, PosYFinish = posYFinish, PosYStart = posYStart });
-                if (ZoomOut != null)
+                ZoomIn = sender as KryptonButton;
+                chart1.Cursor = System.Windows.Forms.Cursors.Default;
+                isPan = false;
+                firstVisit = true;
+                if (zoomList.Count < 5)
                 {
-                    ZoomOut.Enabled = true;
+                    double pX = chart1.ChartAreas[0].CursorX.Position; //X Axis Coordinate of your mouse cursor
+                    double pY = chart1.ChartAreas[0].CursorY.Position; //Y Axis Coordinate of your mouse cursor
+
+                    double xMin = chart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+                    double xMax = chart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
+                    double yMin = chart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+                    double yMax = chart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
+                    int width = this.Width;
+                    int height = this.Height;
+                    double posXStart = chart1.ChartAreas[0].AxisX.PixelPositionToValue(width / 2) - (xMax - xMin) / 5;
+                    double posXFinish = chart1.ChartAreas[0].AxisX.PixelPositionToValue(width / 2) + (xMax - xMin) / 5;
+                    double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(height / 2) - (yMax - yMin) / 2;
+                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(height / 2) + (yMax - yMin) / 2;
+
+                    chart1.ChartAreas[0].AxisX.ScaleView.Zoom(posXStart, posXFinish);
+                    chart1.ChartAreas[0].AxisY.ScaleView.Zoom(posYStart, posYFinish);
+                    zoomList.Add(new ChartZoomOut { Index = zoomList.Count + 1, PosXFinish = posXFinish, PosXStart = posXStart, PosYFinish = posYFinish, PosYStart = posYStart });
+                    if (ZoomOut != null)
+                    {
+                        ZoomOut.Enabled = true;
+                    }
+                }
+                else
+                {
+                    ZoomIn.Enabled = false;
                 }
             }
-            else
+            catch 
             {
-                ZoomIn.Enabled = false;
             }
+         
         }
-
-
-
-
 
         private void BtnZoomOut_Click(object sender, EventArgs e)
         {
@@ -496,17 +505,20 @@ namespace ELEVEN
 
         private void btnBarChart_Click(object sender, EventArgs e)
         {
+            chart1.Series["Series1"].ChartType = SeriesChartType.RangeBar;
+            
 
         }
 
         private void btnLineChart_Click(object sender, EventArgs e)
         {
-
+            chart1.Series["Series1"].ChartType = SeriesChartType.Renko;
         }
 
         private void BtnCandleStickChart_Click(object sender, EventArgs e)
         {
-
+            chart1.Series["Series1"].ChartType = SeriesChartType.Candlestick;
+           
         }
     }
 
