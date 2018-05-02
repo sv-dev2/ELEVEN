@@ -51,6 +51,7 @@ namespace ELEVEN
             customToolTip.SetToolTip(BtnPan, "Cursor/Pan");
             customToolTip.SetToolTip(BtnShowHide, "Hide Tool");
             customToolTip.SetToolTip(BtnLockUnLock, "Lock/UnLock Tools");
+            customToolTip.SetToolTip(BtnHeikenAshi, "Heikin-Ashi Chart");
         }
         
         private void InitBitFinex()
@@ -217,7 +218,14 @@ namespace ELEVEN
                 return;
             }
             Axis ax = chart1.ChartAreas[0].AxisX;
-            mDown = ax.PixelPositionToValue(e.Location.X);
+            try
+            {
+                mDown = ax.PixelPositionToValue(e.Location.X);
+            }
+            catch
+            {
+            }
+          
         }
         private void chart1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -328,6 +336,7 @@ namespace ELEVEN
                 firstVisit = true;
                 if (zoomList.Count < 5)
                 {
+                    chart1.Capture = false;
                     double pX = chart1.ChartAreas[0].CursorX.Position; //X Axis Coordinate of your mouse cursor
                     double pY = chart1.ChartAreas[0].CursorY.Position; //Y Axis Coordinate of your mouse cursor
 
@@ -337,10 +346,10 @@ namespace ELEVEN
                     double yMax = chart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
                     int width = this.Width;
                     int height = this.Height;
-                    double posXStart = chart1.ChartAreas[0].AxisX.PixelPositionToValue(width / 2) - (xMax - xMin) / 5;
-                    double posXFinish = chart1.ChartAreas[0].AxisX.PixelPositionToValue(width / 2) + (xMax - xMin) / 5;
-                    double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(height / 2) - (yMax - yMin) / 2;
-                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(height / 2) + (yMax - yMin) / 2;
+                    double posXStart = chart1.ChartAreas[0].AxisX.PixelPositionToValue(70) - (xMax - xMin) / 5;
+                    double posXFinish = chart1.ChartAreas[0].AxisX.PixelPositionToValue(70) + (xMax - xMin) / 5;
+                    double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(70) - (yMax - yMin) / 2;
+                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(70) + (yMax - yMin) / 2;
 
                     chart1.ChartAreas[0].AxisX.ScaleView.Zoom(posXStart, posXFinish);
                     chart1.ChartAreas[0].AxisY.ScaleView.Zoom(posYStart, posYFinish);
@@ -519,6 +528,11 @@ namespace ELEVEN
         {
             chart1.Series["Series1"].ChartType = SeriesChartType.Candlestick;
            
+        }
+
+        private void BtnHeikenAshi_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

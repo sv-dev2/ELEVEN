@@ -34,6 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCharts));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panelTools = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnTrendline = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnShowHide = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnLockUnLock = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnAddText = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -42,6 +43,7 @@
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.BtnHeikenAshi = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.btnLineChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnCandleStickChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -117,6 +119,7 @@
             // 
             // panelTools
             // 
+            this.panelTools.Controls.Add(this.BtnTrendline);
             this.panelTools.Controls.Add(this.BtnShowHide);
             this.panelTools.Controls.Add(this.BtnLockUnLock);
             this.panelTools.Controls.Add(this.BtnAddText);
@@ -133,9 +136,22 @@
             this.panelTools.StateNormal.Color2 = System.Drawing.Color.White;
             this.panelTools.TabIndex = 1;
             // 
+            // BtnTrendline
+            // 
+            this.BtnTrendline.Location = new System.Drawing.Point(1, 120);
+            this.BtnTrendline.Name = "BtnTrendline";
+            this.BtnTrendline.Size = new System.Drawing.Size(37, 29);
+            this.BtnTrendline.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnTrendline.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnTrendline.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.line;
+            this.BtnTrendline.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnTrendline.TabIndex = 6;
+            this.BtnTrendline.TabStop = false;
+            this.BtnTrendline.Values.Text = "";
+            // 
             // BtnShowHide
             // 
-            this.BtnShowHide.Location = new System.Drawing.Point(1, 150);
+            this.BtnShowHide.Location = new System.Drawing.Point(1, 180);
             this.BtnShowHide.Name = "BtnShowHide";
             this.BtnShowHide.Size = new System.Drawing.Size(37, 29);
             this.BtnShowHide.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -149,7 +165,7 @@
             // 
             // BtnLockUnLock
             // 
-            this.BtnLockUnLock.Location = new System.Drawing.Point(2, 120);
+            this.BtnLockUnLock.Location = new System.Drawing.Point(2, 150);
             this.BtnLockUnLock.Name = "BtnLockUnLock";
             this.BtnLockUnLock.Size = new System.Drawing.Size(37, 29);
             this.BtnLockUnLock.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -228,6 +244,7 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.BtnHeikenAshi);
             this.kryptonPanel1.Controls.Add(this.kryptonSeparator2);
             this.kryptonPanel1.Controls.Add(this.btnLineChart);
             this.kryptonPanel1.Controls.Add(this.BtnCandleStickChart);
@@ -241,9 +258,23 @@
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.TabIndex = 1;
             // 
+            // BtnHeikenAshi
+            // 
+            this.BtnHeikenAshi.Location = new System.Drawing.Point(198, 1);
+            this.BtnHeikenAshi.Name = "BtnHeikenAshi";
+            this.BtnHeikenAshi.Size = new System.Drawing.Size(37, 29);
+            this.BtnHeikenAshi.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnHeikenAshi.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnHeikenAshi.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
+            this.BtnHeikenAshi.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnHeikenAshi.TabIndex = 6;
+            this.BtnHeikenAshi.TabStop = false;
+            this.BtnHeikenAshi.Values.Text = "";
+            this.BtnHeikenAshi.Click += new System.EventHandler(this.BtnHeikenAshi_Click);
+            // 
             // kryptonSeparator2
             // 
-            this.kryptonSeparator2.Location = new System.Drawing.Point(197, 1);
+            this.kryptonSeparator2.Location = new System.Drawing.Point(235, 1);
             this.kryptonSeparator2.Name = "kryptonSeparator2";
             this.kryptonSeparator2.Size = new System.Drawing.Size(10, 27);
             this.kryptonSeparator2.SplitterWidth = 1;
@@ -368,5 +399,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnBarChart;
         private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator1;
         private System.Windows.Forms.ToolTip customToolTip;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnHeikenAshi;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnTrendline;
     }
 }
