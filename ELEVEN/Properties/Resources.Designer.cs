@@ -103,6 +103,16 @@ namespace ELEVEN.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bar_Chart {
+            get {
+                object obj = ResourceManager.GetObject("Bar_Chart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Calender {
             get {
                 object obj = ResourceManager.GetObject("Calender", resourceCulture);
@@ -116,6 +126,26 @@ namespace ELEVEN.Properties {
         internal static System.Drawing.Bitmap Calender1 {
             get {
                 object obj = ResourceManager.GetObject("Calender1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap candlestick_chart {
+            get {
+                object obj = ResourceManager.GetObject("candlestick_chart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chart_line {
+            get {
+                object obj = ResourceManager.GetObject("chart_line", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

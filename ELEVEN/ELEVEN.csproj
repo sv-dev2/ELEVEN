@@ -432,8 +432,11 @@
     <None Include="Images\arrowgreen.png" />
     <None Include="Images\arrowred.png" />
     <Content Include="Images\ArrowUp.bmp" />
+    <Content Include="Images\Bar_Chart.png" />
     <Content Include="Images\Bitmap.ico" />
     <Content Include="Images\BlankIcon.ico" />
+    <Content Include="Images\candlestick_chart.png" />
+    <Content Include="Images\chart_line.png" />
     <Content Include="Images\close-x.png" />
     <Content Include="Images\ClosedFolder.ICO" />
     <Content Include="Images\CSFile.ico" />

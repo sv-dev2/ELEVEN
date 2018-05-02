@@ -480,6 +480,21 @@ namespace ELEVEN
                 }
             }
         }
+
+        private void btnBarChart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLineChart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnCandleStickChart_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

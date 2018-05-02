@@ -41,6 +41,11 @@
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
+            this.btnLineChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.BtnCandleStickChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnBarChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.comboTimeFrame = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelTools)).BeginInit();
@@ -49,6 +54,8 @@
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboTimeFrame)).BeginInit();
             this.SuspendLayout();
             // 
@@ -219,6 +226,11 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonSeparator2);
+            this.kryptonPanel1.Controls.Add(this.btnLineChart);
+            this.kryptonPanel1.Controls.Add(this.BtnCandleStickChart);
+            this.kryptonPanel1.Controls.Add(this.btnBarChart);
+            this.kryptonPanel1.Controls.Add(this.kryptonSeparator1);
             this.kryptonPanel1.Controls.Add(this.comboTimeFrame);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -227,10 +239,76 @@
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.TabIndex = 1;
             // 
+            // kryptonSeparator2
+            // 
+            this.kryptonSeparator2.Location = new System.Drawing.Point(197, 1);
+            this.kryptonSeparator2.Name = "kryptonSeparator2";
+            this.kryptonSeparator2.Size = new System.Drawing.Size(10, 27);
+            this.kryptonSeparator2.SplitterWidth = 1;
+            this.kryptonSeparator2.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonSeparator2.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonSeparator2.StateCommon.Separator.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonSeparator2.StateCommon.Separator.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonSeparator2.TabIndex = 5;
+            // 
+            // btnLineChart
+            // 
+            this.btnLineChart.Location = new System.Drawing.Point(122, 0);
+            this.btnLineChart.Name = "btnLineChart";
+            this.btnLineChart.Size = new System.Drawing.Size(37, 29);
+            this.btnLineChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.btnLineChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.btnLineChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.chart_line;
+            this.btnLineChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.btnLineChart.TabIndex = 4;
+            this.btnLineChart.TabStop = false;
+            this.btnLineChart.Values.Text = "";
+            this.btnLineChart.Click += new System.EventHandler(this.btnLineChart_Click);
+            // 
+            // BtnCandleStickChart
+            // 
+            this.BtnCandleStickChart.Location = new System.Drawing.Point(160, 0);
+            this.BtnCandleStickChart.Name = "BtnCandleStickChart";
+            this.BtnCandleStickChart.Size = new System.Drawing.Size(37, 29);
+            this.BtnCandleStickChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.BtnCandleStickChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.BtnCandleStickChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
+            this.BtnCandleStickChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.BtnCandleStickChart.TabIndex = 3;
+            this.BtnCandleStickChart.TabStop = false;
+            this.BtnCandleStickChart.Values.Text = "";
+            this.BtnCandleStickChart.Click += new System.EventHandler(this.BtnCandleStickChart_Click);
+            // 
+            // btnBarChart
+            // 
+            this.btnBarChart.Location = new System.Drawing.Point(84, 0);
+            this.btnBarChart.Name = "btnBarChart";
+            this.btnBarChart.Size = new System.Drawing.Size(37, 29);
+            this.btnBarChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.btnBarChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
+            this.btnBarChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.Bar_Chart;
+            this.btnBarChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
+            this.btnBarChart.TabIndex = 2;
+            this.btnBarChart.TabStop = false;
+            this.btnBarChart.Values.Text = "";
+            this.btnBarChart.Click += new System.EventHandler(this.btnBarChart_Click);
+            // 
+            // kryptonSeparator1
+            // 
+            this.kryptonSeparator1.Location = new System.Drawing.Point(76, 1);
+            this.kryptonSeparator1.Name = "kryptonSeparator1";
+            this.kryptonSeparator1.Size = new System.Drawing.Size(10, 27);
+            this.kryptonSeparator1.SplitterWidth = 1;
+            this.kryptonSeparator1.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonSeparator1.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonSeparator1.StateCommon.Separator.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonSeparator1.StateCommon.Separator.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonSeparator1.TabIndex = 1;
+            // 
             // comboTimeFrame
             // 
             this.comboTimeFrame.DropDownWidth = 122;
-            this.comboTimeFrame.Location = new System.Drawing.Point(0, 5);
+            this.comboTimeFrame.Location = new System.Drawing.Point(0, 4);
             this.comboTimeFrame.Name = "comboTimeFrame";
             this.comboTimeFrame.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Black;
             this.comboTimeFrame.Size = new System.Drawing.Size(76, 21);
@@ -262,6 +340,8 @@
             this.kryptonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboTimeFrame)).EndInit();
             this.ResumeLayout(false);
 
@@ -280,5 +360,10 @@
         public ComponentFactory.Krypton.Toolkit.KryptonPanel panelTools;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comboTimeFrame;
+        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnLineChart;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnCandleStickChart;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnBarChart;
+        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator1;
     }
 }
