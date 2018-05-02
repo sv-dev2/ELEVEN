@@ -39,7 +39,20 @@ namespace ELEVEN
             this.symbol = symbol;
 
             zoomList = new List<ChartZoomOut>();
+            SetInitials();
         }
+        private void SetInitials()
+        {
+            customToolTip.SetToolTip(btnBarChart, "Bar Chart");
+            customToolTip.SetToolTip(btnLineChart, "Line Chart");
+            customToolTip.SetToolTip(BtnCandleStickChart, "Candlestick Chart");
+            customToolTip.SetToolTip(BtnToggleZoom, "Zoom In");
+            customToolTip.SetToolTip(BtnZoomOut, "Zoom Out");
+            customToolTip.SetToolTip(BtnPan, "Cursor/Pan");
+            customToolTip.SetToolTip(BtnShowHide, "Hide Tool");
+            customToolTip.SetToolTip(BtnLockUnLock, "Lock/UnLock Tools");
+        }
+        
         private void InitBitFinex()
         {
             BitfinexSocket.Instance.Init(symbol, this, candleTimeFrame);
@@ -65,7 +78,7 @@ namespace ELEVEN
             LoadAnnotations();
             LoadZoomPoints();
             LoadFormToolState();
-
+            SetInitials();
             if (broker.ToLower() == "bitfinex")
                 InitBitFinex();
             else

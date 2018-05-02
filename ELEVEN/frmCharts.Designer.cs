@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCharts));
@@ -47,6 +48,7 @@
             this.btnBarChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
             this.comboTimeFrame = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.customToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelTools)).BeginInit();
             this.panelTools.SuspendLayout();
@@ -365,5 +367,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnCandleStickChart;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnBarChart;
         private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator1;
+        private System.Windows.Forms.ToolTip customToolTip;
     }
 }
