@@ -450,9 +450,36 @@ namespace ELEVEN
             }
         }
 
+        private void chart1_AxisViewChanging(object sender, ViewEventArgs e)
+        {
+           
 
+          
+        }
 
+        private void chart1_AxisScrollBarClicked(object sender, ScrollBarEventArgs e)
+        {
+            if (e.ButtonType == ScrollBarButtonType.ZoomReset)
+            {
+                e.IsHandled = true;
 
+                chart1.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                chart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);               
+
+                this.chart1.ChartAreas[0].CursorX.SelectionStart = double.NaN;
+                this.chart1.ChartAreas[0].CursorY.SelectionEnd = double.NaN;
+
+                zoomList = new List<ChartZoomOut>();
+                if (ZoomOut != null)
+                {
+                    ZoomOut.Enabled = false;
+                }
+                if (ZoomIn != null)
+                {
+                    ZoomIn.Enabled = true;
+                }
+            }
+        }
     }
 
 

@@ -104,6 +104,7 @@
             this.chart1.Size = new System.Drawing.Size(645, 383);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            this.chart1.AxisScrollBarClicked += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ScrollBarEventArgs>(this.chart1_AxisScrollBarClicked);
             // 
             // panelTools
             // 

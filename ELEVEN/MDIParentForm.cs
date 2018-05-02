@@ -242,7 +242,7 @@ namespace ELEVEN
         }
         private void BindCurrencies()
         {
-            BrokerInstrumentMapping instrumentMapping = new BrokerInstrumentMapping(); ;
+            BrokerInstrumentMapping instrumentMapping = new BrokerInstrumentMapping();
             var result = instrumentMapping.SearchMapping();
             foreach (var item in result)
             {
