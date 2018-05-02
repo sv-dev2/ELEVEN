@@ -39,7 +39,7 @@ namespace ELEVEN
             this.symbol = symbol;
 
             zoomList = new List<ChartZoomOut>();
-           
+
         }
         private void SetInitials()
         {
@@ -53,7 +53,7 @@ namespace ELEVEN
             customToolTip.SetToolTip(BtnLockUnLock, "Lock/UnLock Tools");
             customToolTip.SetToolTip(BtnHeikenAshi, "Heikin-Ashi Chart");
         }
-        
+
         private void InitBitFinex()
         {
             BitfinexSocket.Instance.Init(symbol, this, candleTimeFrame);
@@ -85,7 +85,7 @@ namespace ELEVEN
             else
             {
                 mT4API = new MT4API(this);
-                if (candleTimeFrame == null || candleTimeFrame=="1m")
+                if (candleTimeFrame == null || candleTimeFrame == "1m")
                 {
                     candleTimeFrame = "0";
                 }
@@ -209,7 +209,10 @@ namespace ELEVEN
             //chart1.MouseWheel += Chart1_MouseWheel;
             chart1.MouseDown += Chart1_MouseDown;
             chart1.MouseMove += chart1_MouseMove;
+           
         }
+
+
         double mDown = double.NaN;
         private void Chart1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -225,7 +228,7 @@ namespace ELEVEN
             catch
             {
             }
-          
+
         }
         private void chart1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -273,7 +276,7 @@ namespace ELEVEN
                     double posXStart = chart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 5;
                     double posXFinish = chart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 5;
                     double posYStart = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 2;
-                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + (yMax - yMin) /2;
+                    double posYFinish = chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 2;
 
                     chart1.ChartAreas[0].AxisX.ScaleView.Zoom(posXStart, posXFinish);
                     chart1.ChartAreas[0].AxisY.ScaleView.Zoom(posYStart, posYFinish);
@@ -364,10 +367,10 @@ namespace ELEVEN
                     ZoomIn.Enabled = false;
                 }
             }
-            catch 
+            catch
             {
             }
-         
+
         }
 
         private void BtnZoomOut_Click(object sender, EventArgs e)
@@ -481,12 +484,7 @@ namespace ELEVEN
             }
         }
 
-        private void chart1_AxisViewChanging(object sender, ViewEventArgs e)
-        {
-           
 
-          
-        }
 
         private void chart1_AxisScrollBarClicked(object sender, ScrollBarEventArgs e)
         {
@@ -495,7 +493,7 @@ namespace ELEVEN
                 e.IsHandled = true;
 
                 chart1.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-                chart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);               
+                chart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);
 
                 this.chart1.ChartAreas[0].CursorX.SelectionStart = double.NaN;
                 this.chart1.ChartAreas[0].CursorY.SelectionEnd = double.NaN;
@@ -515,7 +513,7 @@ namespace ELEVEN
         private void btnBarChart_Click(object sender, EventArgs e)
         {
             chart1.Series["Series1"].ChartType = SeriesChartType.RangeBar;
-            
+
 
         }
 
@@ -527,11 +525,49 @@ namespace ELEVEN
         private void BtnCandleStickChart_Click(object sender, EventArgs e)
         {
             chart1.Series["Series1"].ChartType = SeriesChartType.Candlestick;
-           
+
         }
 
         private void BtnHeikenAshi_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+
+
+        private void BtnTrendline_Click(object sender, EventArgs e)
+        {
+
+           // chart1.MouseClick += Chart1_MouseClick;
+           // chart1.Paint += Chart1_Paint;
+
+        }
+        private void Chart1_MouseClick(object sender, MouseEventArgs e)
+        {
+            points.Add(e.Location);
+            chart1.Invalidate();
+            //chart1.MouseClick -= Chart1_MouseClick;
+        }
+
+        List<Point> points = new List<Point>();
+        Point lastPoint = Point.Empty;
+        private void Chart1_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (Point pt in points)
+            {
+                double dx = chart1.ChartAreas[0].AxisX.PixelPositionToValue(pt.X);
+                double dy = chart1.ChartAreas[0].AxisY.PixelPositionToValue(pt.Y);
+                chart1.Series[0].Points.AddXY(dx, dy);
+            }
+            if (points.Count > 1)
+            {
+                using (Pen pen = new Pen(Color.Red, 2.5f))
+                    e.Graphics.DrawLines(pen, points.ToArray());
+                
+            }
+
+
 
         }
     }

@@ -148,6 +148,7 @@
             this.BtnTrendline.TabIndex = 6;
             this.BtnTrendline.TabStop = false;
             this.BtnTrendline.Values.Text = "";
+            this.BtnTrendline.Click += new System.EventHandler(this.BtnTrendline_Click);
             // 
             // BtnShowHide
             // 
