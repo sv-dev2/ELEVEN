@@ -259,11 +259,17 @@ namespace ELEVEN
                 {
                     if (sbTraders.Length>0 && sbTraders.ToString().ToLower().IndexOf(item.Instrument.ToLower()) > -1)
                     {
-                        this.Invoke((Action)delegate ()
+                        //Check if already not added
+                        var CheckNull = ObjTrading.Where(m => m.pair.IndexOf(item.Instrument) > -1).FirstOrDefault();
+                        if(CheckNull==null)
                         {
-                            ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item.Instrument, bid = item.Bid.ToString(), ask = item.Ask.ToString(), last_price = "0", volume = "0" });
+                            this.Invoke((Action)delegate ()
+                            {
+                                ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item.Instrument, bid = item.Bid.ToString(), ask = item.Ask.ToString(), last_price = "0", volume = "0" });
 
-                        });
+                            });
+                        }
+                     
                     }
                        
 

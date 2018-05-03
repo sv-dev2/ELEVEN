@@ -145,7 +145,7 @@ namespace ELEVEN.Services
         private void UpdateWatchList(MtQuote quote)
         {
             //check if Form is watchlist
-            var forms = watchListForms.Where(m => m.symbol == quote.Instrument).ToList();
+            var forms = watchListForms.Where(m => m.symbol.Split(',').Contains(quote.Instrument)).ToList();
             foreach (var item in forms)
             {
                 frmMarketWatch = item.form;
