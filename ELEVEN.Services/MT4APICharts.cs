@@ -121,7 +121,7 @@ namespace ELEVEN.Services
             Console.WriteLine("Symbom:" + e.Quote.Instrument + " -Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
             try
             {
-               
+
                 if (listCandles != null && listCandles.Count > 0)
                 {
                     var checkCandle = listCandles.Where(m => m.Symbol == e.Quote.Instrument).FirstOrDefault();
@@ -140,7 +140,7 @@ namespace ELEVEN.Services
 
 
         }
-      
+
         private void CandleAddition(string symbol, ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)
         {
             var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, 0, 1);
@@ -158,9 +158,12 @@ namespace ELEVEN.Services
                     candleData.Volume = rate.RealVolume;
                     listCandles.Add(candleData);
                 }
+                var max = listCandles.Max(m => m.High);
+                var min = listCandles.Min(m => m.Low);
                 frmChart.Invoke((Action)delegate ()
                 {
-                    frmChart.chart1.DataSource = null;
+                    frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
+                    frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
                     frmChart.chart1.DataSource = listCandles;
 
                 });
@@ -178,18 +181,7 @@ namespace ELEVEN.Services
 
         }
 
-        public List<MtQuote> GetQuotes()
-        {
 
-            System.Threading.Thread.Sleep(1000);//Mt server take time to connect
-            if (apiClient.ConnectionState == MtConnectionState.Connected)
-            {
-
-                return apiClient.GetQuotes();
-            }
-
-            return new List<MtQuote>();
-        }
         private void _tradeMonitor_AvailabilityOrdersChanged(object sender, AvailabilityOrdersEventArgs e)
         {
             if (e.Opened != null)
@@ -215,10 +207,12 @@ namespace ELEVEN.Services
                 candleData.MTS = e.TimeBar.CloseTime;
                 candleData.Open = e.TimeBar.Open;
                 listCandles.Add(candleData);
-
+                var max = listCandles.Max(m => m.High);
+                var min = listCandles.Min(m => m.Low);
                 frmChart.Invoke((Action)delegate ()
                 {
-                    frmChart.chart1.DataSource = null;
+                    frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
+                    frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
                     frmChart.chart1.DataSource = listCandles;
 
                 });
