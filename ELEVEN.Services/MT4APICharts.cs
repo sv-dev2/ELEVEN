@@ -14,7 +14,7 @@ namespace ELEVEN.Services
     {
         #region "MetaTrader Objects"
         MtApiClient apiClient = null;
-        public BindingList<CandleDataMT> listCandles = null;
+
         public bool IsConnected { get; private set; }
         private readonly TimeframeTradeMonitor _timeframeTradeMonitor;
         private readonly TimerTradeMonitor _timerTradeMonitor;
@@ -93,11 +93,13 @@ namespace ELEVEN.Services
             _timeframeTradeMonitor.Start();
             apiClient.BeginConnect(8222);
         }
-        public void Init(dynamic frmChart)
+        List<MT4Form> forms = new List<MT4Form>();
+        public void Init(dynamic frmChart, string symbol)
         {
             #region "Connect to MetaTrader Server"  
             this.frmChart = frmChart;
-            listCandles = new BindingList<CandleDataMT>();
+
+            forms.Add(new MT4Form { form = frmChart, symbol = symbol });
             #endregion
         }
 
@@ -121,18 +123,9 @@ namespace ELEVEN.Services
             Console.WriteLine("Symbom:" + e.Quote.Instrument + " -Bid= " + e.Quote.Bid.ToString() + " -Ask = " + e.Quote.Ask.ToString());
             try
             {
-
-                if (listCandles != null && listCandles.Count > 0)
-                {
-                    var checkCandle = listCandles.Where(m => m.Symbol == e.Quote.Instrument).FirstOrDefault();
-                    if (checkCandle != null)
-                    {
-                        CandleAddition(e.Quote.Instrument);
-                    }
-
-                }
+                CandleAddition(e.Quote.Instrument);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
 
@@ -143,31 +136,37 @@ namespace ELEVEN.Services
 
         private void CandleAddition(string symbol, ENUM_TIMEFRAMES pERIOD_CURRENT = ENUM_TIMEFRAMES.PERIOD_CURRENT)
         {
-            var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, 0, 1);
-            if (rates != null)
+            var Form = forms.Where(m => m.symbol == symbol).FirstOrDefault();
+            if (Form != null)
             {
-                foreach (var rate in rates)
+                var formCandle = Form.form.candleDataMT as BindingList<CandleDataMT>;
+                var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, 0, 1);
+                if (rates != null)
                 {
-                    CandleDataMT candleData = new CandleDataMT();
-                    candleData.Symbol = symbol;
-                    candleData.Close = rate.Close;
-                    candleData.High = rate.High;
-                    candleData.Low = rate.Low;
-                    candleData.MTS = rate.Time;
-                    candleData.Open = rate.Open;
-                    candleData.Volume = rate.RealVolume;
-                    listCandles.Add(candleData);
-                }
-                var max = listCandles.Max(m => m.High);
-                var min = listCandles.Min(m => m.Low);
-                frmChart.Invoke((Action)delegate ()
-                {
-                    frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
-                    frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
-                    frmChart.chart1.DataSource = listCandles;
+                    foreach (var rate in rates)
+                    {
+                        CandleDataMT candleData = new CandleDataMT();
+                        candleData.Symbol = symbol;
+                        candleData.Close = rate.Close;
+                        candleData.High = rate.High;
+                        candleData.Low = rate.Low;
+                        candleData.MTS = rate.Time;
+                        candleData.Open = rate.Open;
+                        candleData.Volume = rate.RealVolume;
+                        formCandle.Add(candleData);
+                    }
+                    var max = formCandle.Max(m => m.High);
+                    var min = formCandle.Min(m => m.Low);
+                    frmChart.Invoke((Action)delegate ()
+                    {
+                        frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
+                        frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
+                        frmChart.chart1.DataSource = formCandle;
 
-                });
+                    });
+                }
             }
+
         }
         public BindingList<CandleDataMT> HistoricalCandles(string symbol, string candleTimeFrame)
         {
@@ -177,7 +176,7 @@ namespace ELEVEN.Services
             {
                 return RequestHistoricalCandles(symbol, GetENUM_TIMEFRAMES(candleTimeFrame));
             }
-            return listCandles;
+            return new BindingList<CandleDataMT>();
 
         }
 
@@ -196,9 +195,11 @@ namespace ELEVEN.Services
         }
         private void apiClient_OnLastTimeBar(object sender, TimeBarArgs e)
         {
-            var checkCandle = listCandles.Where(m => m.Symbol == e.TimeBar.Symbol).FirstOrDefault();
-            if (checkCandle != null)
+            //var checkCandle = listCandles.Where(m => m.Symbol == e.TimeBar.Symbol).FirstOrDefault();
+            var Form = forms.Where(m => m.symbol == e.TimeBar.Symbol).FirstOrDefault();
+            if (Form != null)
             {
+                var formCandle = Form.form.candleDataMT as BindingList<CandleDataMT>;
                 CandleDataMT candleData = new CandleDataMT();
                 candleData.Symbol = e.TimeBar.Symbol;
                 candleData.Close = e.TimeBar.Close;
@@ -206,14 +207,14 @@ namespace ELEVEN.Services
                 candleData.Low = e.TimeBar.Low;
                 candleData.MTS = e.TimeBar.CloseTime;
                 candleData.Open = e.TimeBar.Open;
-                listCandles.Add(candleData);
-                var max = listCandles.Max(m => m.High);
-                var min = listCandles.Min(m => m.Low);
+                formCandle.Add(candleData);
+                var max = formCandle.Max(m => m.High);
+                var min = formCandle.Min(m => m.Low);
                 frmChart.Invoke((Action)delegate ()
                 {
                     frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Minimum = Convert.ToDouble(min);
                     frmChart.chart1.ChartAreas["ChartArea1"].AxisY.Maximum = Convert.ToDouble(max);
-                    frmChart.chart1.DataSource = listCandles;
+                    frmChart.chart1.DataSource = formCandle;
 
                 });
             }
@@ -221,6 +222,7 @@ namespace ELEVEN.Services
 
         private BindingList<CandleDataMT> RequestHistoricalCandles(string symbol, ENUM_TIMEFRAMES pERIOD_CURRENT)
         {
+            var listCandles = new BindingList<CandleDataMT>();
             var rates = apiClient.CopyRates(symbol, pERIOD_CURRENT, DateTime.Now.AddDays(-15), DateTime.Now);
             if (rates != null)
             {
@@ -288,5 +290,10 @@ namespace ELEVEN.Services
             apiClient.BeginDisconnect();
         }
         #endregion
+    }
+    public class MT4Form
+    {
+        public dynamic form { get; set; }
+        public string symbol { get; set; }
     }
 }

@@ -21,10 +21,10 @@ namespace ELEVEN
         private MDIParentForm parentForm;
 
         public BindingList<CandleData> candleData;
-        BindingList<CandleDataMT> candleDataMT;
+        public BindingList<CandleDataMT> candleDataMT;
         public List<ChartZoomOut> zoomList { get; set; }
         public string broker { get; set; }
-        public string symbol { get; set; }     
+        public string symbol { get; set; }
         public string candleTimeFrame = "1m";
         public List<string> annotationList = new List<string>();
         public ImageList imgList = new ImageList();
@@ -84,8 +84,8 @@ namespace ELEVEN
                 InitBitFinex();
             else
             {
-               
-                MT4APICharts.Instance.Init(this);
+
+                MT4APICharts.Instance.Init(this, symbol);
                 if (candleTimeFrame == null || candleTimeFrame == "1m")
                 {
                     candleTimeFrame = "0";
@@ -96,8 +96,8 @@ namespace ELEVEN
                 BindCombobox(timeFrame);
                 BindDataSource();
             }
-            this.Text = broker + "." + symbol.Replace("t", "");          
-           
+            this.Text = broker + "." + symbol.Replace("t", "");
+
             comboTimeFrame.SelectedIndexChanged += ComboTimeFrame_SelectedIndexChanged;
         }
 
@@ -118,7 +118,7 @@ namespace ELEVEN
                 {
                     MT4APICharts.Instance.Dispose();
                     MT4APICharts.Instance.StartGateway();
-                    MT4APICharts.Instance.listCandles = new BindingList<CandleDataMT>();
+                    candleDataMT = new BindingList<CandleDataMT>();
                     BindDataSource();
                 }
 
@@ -182,14 +182,14 @@ namespace ELEVEN
         public void BindDataSource()
         {
             candleDataMT = (BindingList<CandleDataMT>)MT4APICharts.Instance.HistoricalCandles(symbol, candleTimeFrame);
-            if (MT4APICharts.Instance.listCandles.Count > 0)
+            if (candleDataMT != null && candleDataMT.Count > 0)
             {
-                var max = MT4APICharts.Instance.listCandles.Max(m => m.High);
-                var min = MT4APICharts.Instance.listCandles.Min(m => m.Low);
+                var max = candleDataMT.Max(m => m.High);
+                var min = candleDataMT.Min(m => m.Low);
                 chart1.ChartAreas["ChartArea1"].AxisY.Minimum = min;
                 chart1.ChartAreas["ChartArea1"].AxisY.Maximum = max;
             }
-            chart1.DataSource = MT4APICharts.Instance.listCandles;
+            chart1.DataSource = candleDataMT;
         }
         private void ChartSettings()
         {
