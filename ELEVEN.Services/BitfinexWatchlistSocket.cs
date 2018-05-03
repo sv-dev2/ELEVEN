@@ -220,7 +220,7 @@ namespace ELEVEN.Services
                                 var items = data[2].Split(',');
                                 item.form.Invoke((Action)delegate ()
                                 {
-                                    item.form.ObjTrading.Add(new FinexTicker { Id = Convert.ToInt32(instrument), broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + listSymbol.Replace("t", "").Replace("f", ""), bid = items[1], ask = items[3], last_price = items[7], volume = items[8] });
+                                    item.form.ObjTrading.Add(new FinexTicker { Id = Convert.ToInt32(instrument), broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + listSymbol.Replace("t", "").Replace("f", ""), bid = items[0], ask = items[2], last_price = items[6], volume = items[7] });
                                     item.form.dataGridMarketData.DataSource = item.form.ObjTrading;
                                 });
                             }
@@ -248,7 +248,7 @@ namespace ELEVEN.Services
 
                                     item.form.Invoke((Action)delegate ()
                                     {
-                                        item.form.ObjTrading.Add(new FinexTicker { Id = Convert.ToInt32(instrument), broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + listSymbol.Replace("t", "").Replace("f", ""), bid = items[1], ask = items[3], last_price = items[7], volume = items[8] });
+                                        item.form.ObjTrading.Add(new FinexTicker { Id = Convert.ToInt32(instrument), broker = Broker.BitFinex.ToString().ToUpper(), pair = Broker.BitFinex.ToString().ToUpper() + "." + listSymbol.Replace("t", "").Replace("f", ""), bid = items[0], ask = items[2], last_price = items[6], volume = items[7] });
                                         item.form.dataGridMarketData.DataSource = item.form.ObjTrading;
                                     });
                                 }
@@ -297,10 +297,10 @@ namespace ELEVEN.Services
             {
                 ((TextAndImageCell)form.dataGridMarketData.Rows[index].Cells[0]).Image = form.imgList.Images[1];
             }
-            p.ask = Convert.ToString((items[3]));
-            p.bid = Convert.ToString((items[1]));
-            p.last_price = Convert.ToString(items[7]);
-            p.volume = Convert.ToString(items[8]);
+            p.ask = Convert.ToString((items[2]));
+            p.bid = Convert.ToString((items[0]));
+            p.last_price = Convert.ToString(items[6]);
+            p.volume = Convert.ToString(items[7]);
         }
 
         public void AddSymbolTxtFile(dynamic form, dynamic txtAddRow)
