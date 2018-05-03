@@ -443,6 +443,7 @@
     <Content Include="Images\CSFile.ico" />
     <Content Include="Images\CSProject.ico" />
     <Content Include="Images\Delete.png" />
+    <Content Include="Images\Horizontalline.png" />
     <Content Include="Images\line.png" />
     <Content Include="Images\lock-icon.png" />
     <Content Include="Images\open-lock.png" />
@@ -468,6 +469,7 @@
     <Content Include="Images\SolutionExplorer.ico" />
     <Content Include="Images\TaskListWindow.ico" />
     <Content Include="Images\ToolboxWindow.ico" />
+    <Content Include="Images\VerticalLine.png" />
     <Content Include="Images\XmlFile.ico" />
     <None Include="Resources\Timer1.png" />
     <None Include="Resources\Timer.png" />

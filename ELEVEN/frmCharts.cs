@@ -510,8 +510,8 @@ namespace ELEVEN
         private void BtnTrendline_Click(object sender, EventArgs e)
         {
 
-            // chart1.MouseClick += Chart1_MouseClick;
-            // chart1.Paint += Chart1_Paint;
+            chart1.MouseClick += Chart1_MouseClick;
+            chart1.Paint += Chart1_Paint;
 
         }
         private void Chart1_MouseClick(object sender, MouseEventArgs e)
@@ -563,6 +563,28 @@ namespace ELEVEN
         private void heikinAshiChartToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnTrendline_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+            
+                KryptonButton btnSender = (KryptonButton)sender;
+                Point ptLowerLeft = new Point(btnSender.Location.X+ btnSender.Width,0);
+                ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+                contextMenuStripLines.Show(ptLowerLeft);
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                
+            }
+        }
+
+        private void toolStripMenuItemTrendLine_Click(object sender, EventArgs e)
+        {
+           // chart1.MouseClick += Chart1_MouseClick;
+           // chart1.Paint += Chart1_Paint;
         }
     }
 

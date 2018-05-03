@@ -203,6 +203,16 @@ namespace ELEVEN.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Horizontalline {
+            get {
+                object obj = ResourceManager.GetObject("Horizontalline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap line {
             get {
                 object obj = ResourceManager.GetObject("line", resourceCulture);
@@ -316,6 +326,16 @@ namespace ELEVEN.Properties {
         internal static System.Drawing.Bitmap Timer1 {
             get {
                 object obj = ResourceManager.GetObject("Timer1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VerticalLine {
+            get {
+                object obj = ResourceManager.GetObject("VerticalLine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

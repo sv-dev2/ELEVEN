@@ -41,6 +41,10 @@
             this.BtnPan = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnZoomOut = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.contextMenuStripLines = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripHorizontalLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemVerticleLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTrendLine = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.toolStripChartType = new System.Windows.Forms.ToolStrip();
@@ -54,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelTools)).BeginInit();
             this.panelTools.SuspendLayout();
+            this.contextMenuStripLines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -147,7 +152,7 @@
             this.BtnTrendline.TabIndex = 6;
             this.BtnTrendline.TabStop = false;
             this.BtnTrendline.Values.Text = "";
-            this.BtnTrendline.Click += new System.EventHandler(this.BtnTrendline_Click);
+            this.BtnTrendline.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnTrendline_MouseDown);
             // 
             // BtnShowHide
             // 
@@ -232,6 +237,38 @@
             this.BtnToggleZoom.Values.Text = "";
             this.BtnToggleZoom.Click += new System.EventHandler(this.BtnToggleZoom_Click);
             // 
+            // contextMenuStripLines
+            // 
+            this.contextMenuStripLines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStripLines.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripHorizontalLine,
+            this.toolStripMenuItemVerticleLine,
+            this.toolStripMenuItemTrendLine});
+            this.contextMenuStripLines.Name = "contextMenuStrip1";
+            this.contextMenuStripLines.Size = new System.Drawing.Size(155, 92);
+            // 
+            // toolStripHorizontalLine
+            // 
+            this.toolStripHorizontalLine.Image = global::ELEVEN.Properties.Resources.Horizontalline;
+            this.toolStripHorizontalLine.Name = "toolStripHorizontalLine";
+            this.toolStripHorizontalLine.Size = new System.Drawing.Size(154, 22);
+            this.toolStripHorizontalLine.Text = "Horizontal Line";
+            // 
+            // toolStripMenuItemVerticleLine
+            // 
+            this.toolStripMenuItemVerticleLine.Image = global::ELEVEN.Properties.Resources.VerticalLine;
+            this.toolStripMenuItemVerticleLine.Name = "toolStripMenuItemVerticleLine";
+            this.toolStripMenuItemVerticleLine.Size = new System.Drawing.Size(154, 22);
+            this.toolStripMenuItemVerticleLine.Text = "Vertical Line";
+            // 
+            // toolStripMenuItemTrendLine
+            // 
+            this.toolStripMenuItemTrendLine.Image = global::ELEVEN.Properties.Resources.line;
+            this.toolStripMenuItemTrendLine.Name = "toolStripMenuItemTrendLine";
+            this.toolStripMenuItemTrendLine.Size = new System.Drawing.Size(154, 22);
+            this.toolStripMenuItemTrendLine.Text = "Trend Line";
+            this.toolStripMenuItemTrendLine.Click += new System.EventHandler(this.toolStripMenuItemTrendLine_Click);
+            // 
             // kryptonPanel2
             // 
             this.kryptonPanel2.Controls.Add(this.kryptonPanel1);
@@ -263,7 +300,7 @@
             this.toolStripChartType.Location = new System.Drawing.Point(78, 3);
             this.toolStripChartType.Name = "toolStripChartType";
             this.toolStripChartType.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStripChartType.Size = new System.Drawing.Size(75, 25);
+            this.toolStripChartType.Size = new System.Drawing.Size(44, 25);
             this.toolStripChartType.TabIndex = 7;
             // 
             // toolStripSplitButtonChartType
@@ -343,6 +380,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelTools)).EndInit();
             this.panelTools.ResumeLayout(false);
+            this.contextMenuStripLines.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
@@ -369,12 +407,16 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comboTimeFrame;
         private System.Windows.Forms.ToolTip customToolTip;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnTrendline;
         private System.Windows.Forms.ToolStrip toolStripChartType;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonChartType;
         private System.Windows.Forms.ToolStripMenuItem candlestickChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rangeBarChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renkoChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem heikinAshiChartToolStripMenuItem;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnTrendline;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripLines;
+        private System.Windows.Forms.ToolStripMenuItem toolStripHorizontalLine;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemVerticleLine;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTrendLine;
     }
 }
