@@ -61,9 +61,10 @@ namespace ELEVEN
             SymbolFileExist();
             CreateDataGridColumn();
             BitfinexWatchlistSocket.Instance.Init(this);
-            MT4API.Instance.Init(this);
+            
             #region "Meta Trader"
             GetMetaTraderSymbols();
+            MT4API.Instance.Init(this,sbTraders.ToString());
             #endregion
         }
 

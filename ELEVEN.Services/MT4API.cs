@@ -21,6 +21,7 @@ namespace ELEVEN.Services
         private readonly TimeframeTradeMonitor _timeframeTradeMonitor;
         private readonly TimerTradeMonitor _timerTradeMonitor;
         private dynamic frmMarketWatch;
+        List<MT4WatchList> watchListForms = new List<MT4WatchList>();
         #endregion
         #region "Properties"
         /// <summary>
@@ -75,8 +76,6 @@ namespace ELEVEN.Services
         {
             Gateway = gateway;
             GatewayParameters = gatewayParameters;
-
-
         }
         private static MT4API instance = new MT4API();
         // gets the instance of the singleton object
@@ -104,11 +103,11 @@ namespace ELEVEN.Services
             _timeframeTradeMonitor.Start();
             apiClient.BeginConnect(8222);
         }
-        public void Init(dynamic frmMarketWatch)
+        public void Init(dynamic frmMarketWatch, string symbol)
         {
             #region "Connect to MetaTrader Server"  
-            this.frmMarketWatch = frmMarketWatch;
-
+            //this.frmMarketWatch = frmMarketWatch;
+            watchListForms.Add(new MT4WatchList { form = frmMarketWatch, symbol = symbol });
             #endregion
         }
 
@@ -146,9 +145,10 @@ namespace ELEVEN.Services
         private void UpdateWatchList(MtQuote quote)
         {
             //check if Form is watchlist
-            string formType = frmMarketWatch.Tag;
-            if (formType == "frmMarketWatchWin")
+            var forms = watchListForms.Where(m => m.symbol == quote.Instrument).ToList();
+            foreach (var item in forms)
             {
+                frmMarketWatch = item.form;
                 var watchList = frmMarketWatch.ObjTrading as BindingList<FinexTicker>;
                 var watch = watchList.Where(m => m.pair == Broker.MT.ToString() + "." + quote.Instrument).FirstOrDefault();
                 if (watch != null)
@@ -186,30 +186,16 @@ namespace ELEVEN.Services
                     watch.bid = quote.Bid.ToString();
                 }
             }
+        
+
         }
 
 
 
         public List<MtQuote> GetQuotes()
         {
-            // bool isConnected = true;
-            // int ifClosed = 1;//MT Server is closed
             System.Threading.Thread.Sleep(1000);//Mt server take time to connect
             return apiClient.GetQuotes();
-            //while (isConnected)
-            //{
-            //    if (apiClient.ConnectionState == MtConnectionState.Connected)
-            //    {
-
-            //        isConnected = false;
-            //    }
-            //    ifClosed++;
-            //    if (ifClosed > 2000)
-            //        isConnected = false;
-            //}
-
-
-
         }
         private void _tradeMonitor_AvailabilityOrdersChanged(object sender, AvailabilityOrdersEventArgs e)
         {
@@ -244,5 +230,15 @@ namespace ELEVEN.Services
             apiClient.BeginDisconnect();
         }
         #endregion
+    }
+    public class MT4WatchList
+    {
+        public MT4WatchList()
+        {
+
+        }
+
+        public dynamic form { get; set; }
+        public string symbol { get; set; }
     }
 }
