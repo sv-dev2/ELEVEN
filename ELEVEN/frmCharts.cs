@@ -24,8 +24,7 @@ namespace ELEVEN
         BindingList<CandleDataMT> candleDataMT;
         public List<ChartZoomOut> zoomList { get; set; }
         public string broker { get; set; }
-        public string symbol { get; set; }
-        private MT4API mT4API { get; set; }
+        public string symbol { get; set; }     
         public string candleTimeFrame = "1m";
         public List<string> annotationList = new List<string>();
         public ImageList imgList = new ImageList();
@@ -79,12 +78,14 @@ namespace ELEVEN
             LoadAnnotations();
             LoadZoomPoints();
             LoadFormToolState();
+            ChartSettings();
             SetInitials();
             if (broker.ToLower() == "bitfinex")
                 InitBitFinex();
             else
             {
-                mT4API = new MT4API(this);
+               
+                MT4APICharts.Instance.Init(this);
                 if (candleTimeFrame == null || candleTimeFrame == "1m")
                 {
                     candleTimeFrame = "0";
@@ -93,13 +94,10 @@ namespace ELEVEN
                 candleDataMT = new BindingList<CandleDataMT>();
                 var timeFrame = clsComman.GetMTTimeFrame();
                 BindCombobox(timeFrame);
-            }
-            this.Text = broker + "." + symbol.Replace("t", "");
-            ChartSettings();
-            if (mT4API != null)
-            {
                 BindDataSource();
             }
+            this.Text = broker + "." + symbol.Replace("t", "");          
+           
             comboTimeFrame.SelectedIndexChanged += ComboTimeFrame_SelectedIndexChanged;
         }
 
@@ -118,9 +116,9 @@ namespace ELEVEN
                 }
                 else if (broker.ToLower() == Broker.MT.ToString().ToLower())
                 {
-                    mT4API.Dispose();
-                    mT4API.StartGateway();
-                    mT4API.listCandles = new BindingList<CandleDataMT>();
+                    MT4APICharts.Instance.Dispose();
+                    MT4APICharts.Instance.StartGateway();
+                    MT4APICharts.Instance.listCandles = new BindingList<CandleDataMT>();
                     BindDataSource();
                 }
 
@@ -183,15 +181,15 @@ namespace ELEVEN
         }
         public void BindDataSource()
         {
-            candleDataMT = (BindingList<CandleDataMT>)mT4API.HistoricalCandles(symbol, candleTimeFrame);
-            if (mT4API.listCandles.Count > 0)
+            candleDataMT = (BindingList<CandleDataMT>)MT4APICharts.Instance.HistoricalCandles(symbol, candleTimeFrame);
+            if (MT4APICharts.Instance.listCandles.Count > 0)
             {
-                var max = mT4API.listCandles.Max(m => m.High);
-                var min = mT4API.listCandles.Min(m => m.Low);
+                var max = MT4APICharts.Instance.listCandles.Max(m => m.High);
+                var min = MT4APICharts.Instance.listCandles.Min(m => m.Low);
                 chart1.ChartAreas["ChartArea1"].AxisY.Minimum = min;
                 chart1.ChartAreas["ChartArea1"].AxisY.Maximum = max;
             }
-            chart1.DataSource = mT4API.listCandles;
+            chart1.DataSource = MT4APICharts.Instance.listCandles;
         }
         private void ChartSettings()
         {
@@ -209,7 +207,7 @@ namespace ELEVEN
             //chart1.MouseWheel += Chart1_MouseWheel;
             chart1.MouseDown += Chart1_MouseDown;
             chart1.MouseMove += chart1_MouseMove;
-           
+
         }
 
 
@@ -539,8 +537,8 @@ namespace ELEVEN
         private void BtnTrendline_Click(object sender, EventArgs e)
         {
 
-           // chart1.MouseClick += Chart1_MouseClick;
-           // chart1.Paint += Chart1_Paint;
+            // chart1.MouseClick += Chart1_MouseClick;
+            // chart1.Paint += Chart1_Paint;
 
         }
         private void Chart1_MouseClick(object sender, MouseEventArgs e)
@@ -564,7 +562,7 @@ namespace ELEVEN
             {
                 using (Pen pen = new Pen(Color.Red, 2.5f))
                     e.Graphics.DrawLines(pen, points.ToArray());
-                
+
             }
 
 

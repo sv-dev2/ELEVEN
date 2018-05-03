@@ -36,20 +36,21 @@ namespace ELEVEN
         BindingList<FinexTicker> oldCustomerList = new BindingList<FinexTicker>();
         public BindingList<FinexTicker> ObjTrading = new BindingList<FinexTicker>();
         #endregion
-        MT4API mT4API = null;
+        //MT4API mT4API = null;
         clsComman comman = null;
         public frmMarketWatchWin()
         {
             InitializeComponent();
 
-            mT4API = new MT4API(this);
+            // mT4API = new MT4API(this);
+
             comman = new clsComman();
             #region "Bitfinex"
             instrumentMapping = new BrokerInstrumentMapping();
             AutoCompletetxtAddRow();
             txtAddRow.GotFocus += TxtQuantity_GotFocus;
             txtAddRow.LostFocus += TxtQuantity_LostFocus;
-           
+
             #endregion
 
         }
@@ -60,6 +61,7 @@ namespace ELEVEN
             SymbolFileExist();
             CreateDataGridColumn();
             BitfinexWatchlistSocket.Instance.Init(this);
+            MT4API.Instance.Init(this);
             #region "Meta Trader"
             GetMetaTraderSymbols();
             #endregion
@@ -155,7 +157,12 @@ namespace ELEVEN
                 else
                 {
                     BitfinexWatchlistSocket.Instance.AddSymbolTxtFile(this, txtAddRow);
+                    if (txtAddRow.Text.ToLower().IndexOf("mt") > -1)
+                    {
+                        GetMetaTraderSymbols();
+                    }
                     txtAddRow.Text = "click to add..";
+
                 }
 
             }
@@ -167,11 +174,11 @@ namespace ELEVEN
         }
 
 
-      
+
         BindingList<FinexTicker> list = new BindingList<FinexTicker>();
-       
-      
-     
+
+
+
 
         public void AutoCompletetxtAddRow()
         {
@@ -198,7 +205,7 @@ namespace ELEVEN
                 string broker = dataGridMarketData["broker", e.RowIndex].Value.ToString();
                 if (broker.ToLower() == Broker.BitFinex.ToString().ToLower())
                 {
-                     BitfinexWatchlistSocket.Instance.ReadWriteNotepad(symbol, this.Name,this);
+                    BitfinexWatchlistSocket.Instance.ReadWriteNotepad(symbol, this.Name, this);
                 }
                 else if (broker.ToLower() == Broker.MT.ToString().ToLower())
                 {
@@ -213,7 +220,7 @@ namespace ELEVEN
             TabControl tabControl = this.MdiParent.Controls["tabControl1"] as TabControl;
             tabControl.TabPages.RemoveByKey(this.Name);
             var formObj = BitfinexWatchlistSocket.Instance.listForms.Where(m => m.form == this).FirstOrDefault();
-            if(formObj != null)
+            if (formObj != null)
             {
                 BitfinexWatchlistSocket.Instance.listForms.Remove(formObj);
             }
@@ -244,14 +251,20 @@ namespace ELEVEN
             if (symbols != null)
             {
                 comman.Seprateticklers(symbols, ref sbBitfinex, ref sbTraders, ref sbIGMarket, ref sbICMarket);
-                var quotes = mT4API.GetQuotes();
+                var quotes = MT4API.Instance.GetQuotes();
+                if (quotes == null)
+                    return;
                 foreach (var item in quotes)
                 {
-                    this.Invoke((Action)delegate ()
-                   {
-                       ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item.Instrument, bid = item.Bid.ToString(), ask = item.Ask.ToString(), last_price = "0", volume = "0" });
+                    if (sbTraders.Length>0 && sbTraders.ToString().ToLower().IndexOf(item.Instrument.ToLower()) > -1)
+                    {
+                        this.Invoke((Action)delegate ()
+                        {
+                            ObjTrading.Add(new FinexTicker { Id = 0, broker = Broker.MT.ToString().ToUpper(), pair = Broker.MT.ToString().ToUpper() + "." + item.Instrument, bid = item.Bid.ToString(), ask = item.Ask.ToString(), last_price = "0", volume = "0" });
 
-                   });
+                        });
+                    }
+                       
 
 
                 }

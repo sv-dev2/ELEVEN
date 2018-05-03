@@ -76,6 +76,7 @@
     <Compile Include="Gateway.cs" />
     <Compile Include="IGMarketAPI.cs" />
     <Compile Include="MT4API.cs" />
+    <Compile Include="MT4APICharts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
