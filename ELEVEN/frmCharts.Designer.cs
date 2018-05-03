@@ -43,12 +43,12 @@
             this.BtnToggleZoom = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.BtnHeikenAshi = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
-            this.btnLineChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.BtnCandleStickChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnBarChart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonSeparator();
+            this.toolStripChartType = new System.Windows.Forms.ToolStrip();
+            this.toolStripSplitButtonChartType = new System.Windows.Forms.ToolStripSplitButton();
+            this.candlestickChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rangeBarChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renkoChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.heikinAshiChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboTimeFrame = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.customToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -58,8 +58,7 @@
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).BeginInit();
+            this.toolStripChartType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboTimeFrame)).BeginInit();
             this.SuspendLayout();
             // 
@@ -245,12 +244,7 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.BtnHeikenAshi);
-            this.kryptonPanel1.Controls.Add(this.kryptonSeparator2);
-            this.kryptonPanel1.Controls.Add(this.btnLineChart);
-            this.kryptonPanel1.Controls.Add(this.BtnCandleStickChart);
-            this.kryptonPanel1.Controls.Add(this.btnBarChart);
-            this.kryptonPanel1.Controls.Add(this.kryptonSeparator1);
+            this.kryptonPanel1.Controls.Add(this.toolStripChartType);
             this.kryptonPanel1.Controls.Add(this.comboTimeFrame);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
@@ -259,85 +253,64 @@
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.White;
             this.kryptonPanel1.TabIndex = 1;
             // 
-            // BtnHeikenAshi
+            // toolStripChartType
             // 
-            this.BtnHeikenAshi.Location = new System.Drawing.Point(198, 1);
-            this.BtnHeikenAshi.Name = "BtnHeikenAshi";
-            this.BtnHeikenAshi.Size = new System.Drawing.Size(37, 29);
-            this.BtnHeikenAshi.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.BtnHeikenAshi.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.BtnHeikenAshi.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
-            this.BtnHeikenAshi.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
-            this.BtnHeikenAshi.TabIndex = 6;
-            this.BtnHeikenAshi.TabStop = false;
-            this.BtnHeikenAshi.Values.Text = "";
-            this.BtnHeikenAshi.Click += new System.EventHandler(this.BtnHeikenAshi_Click);
+            this.toolStripChartType.BackColor = System.Drawing.Color.White;
+            this.toolStripChartType.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripChartType.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripChartType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSplitButtonChartType});
+            this.toolStripChartType.Location = new System.Drawing.Point(78, 3);
+            this.toolStripChartType.Name = "toolStripChartType";
+            this.toolStripChartType.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStripChartType.Size = new System.Drawing.Size(75, 25);
+            this.toolStripChartType.TabIndex = 7;
             // 
-            // kryptonSeparator2
+            // toolStripSplitButtonChartType
             // 
-            this.kryptonSeparator2.Location = new System.Drawing.Point(235, 1);
-            this.kryptonSeparator2.Name = "kryptonSeparator2";
-            this.kryptonSeparator2.Size = new System.Drawing.Size(10, 27);
-            this.kryptonSeparator2.SplitterWidth = 1;
-            this.kryptonSeparator2.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.kryptonSeparator2.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.kryptonSeparator2.StateCommon.Separator.Back.Color1 = System.Drawing.Color.White;
-            this.kryptonSeparator2.StateCommon.Separator.Back.Color2 = System.Drawing.Color.White;
-            this.kryptonSeparator2.TabIndex = 5;
+            this.toolStripSplitButtonChartType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButtonChartType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.candlestickChartToolStripMenuItem,
+            this.rangeBarChartToolStripMenuItem,
+            this.renkoChartToolStripMenuItem,
+            this.heikinAshiChartToolStripMenuItem});
+            this.toolStripSplitButtonChartType.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
+            this.toolStripSplitButtonChartType.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButtonChartType.Name = "toolStripSplitButtonChartType";
+            this.toolStripSplitButtonChartType.Size = new System.Drawing.Size(32, 22);
+            this.toolStripSplitButtonChartType.ToolTipText = "Choose Chart Type";
             // 
-            // btnLineChart
+            // candlestickChartToolStripMenuItem
             // 
-            this.btnLineChart.Location = new System.Drawing.Point(122, 0);
-            this.btnLineChart.Name = "btnLineChart";
-            this.btnLineChart.Size = new System.Drawing.Size(37, 29);
-            this.btnLineChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.btnLineChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.btnLineChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.chart_renko;
-            this.btnLineChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
-            this.btnLineChart.TabIndex = 4;
-            this.btnLineChart.TabStop = false;
-            this.btnLineChart.Values.Text = "";
-            this.btnLineChart.Click += new System.EventHandler(this.btnLineChart_Click);
+            this.candlestickChartToolStripMenuItem.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
+            this.candlestickChartToolStripMenuItem.Name = "candlestickChartToolStripMenuItem";
+            this.candlestickChartToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.candlestickChartToolStripMenuItem.Text = "CandleStick Chart";
+            this.candlestickChartToolStripMenuItem.Click += new System.EventHandler(this.candlestickChartToolStripMenuItem_Click);
             // 
-            // BtnCandleStickChart
+            // rangeBarChartToolStripMenuItem
             // 
-            this.BtnCandleStickChart.Location = new System.Drawing.Point(160, 0);
-            this.BtnCandleStickChart.Name = "BtnCandleStickChart";
-            this.BtnCandleStickChart.Size = new System.Drawing.Size(37, 29);
-            this.BtnCandleStickChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.BtnCandleStickChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.BtnCandleStickChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
-            this.BtnCandleStickChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
-            this.BtnCandleStickChart.TabIndex = 3;
-            this.BtnCandleStickChart.TabStop = false;
-            this.BtnCandleStickChart.Values.Text = "";
-            this.BtnCandleStickChart.Click += new System.EventHandler(this.BtnCandleStickChart_Click);
+            this.rangeBarChartToolStripMenuItem.Image = global::ELEVEN.Properties.Resources.Bar_Chart;
+            this.rangeBarChartToolStripMenuItem.Name = "rangeBarChartToolStripMenuItem";
+            this.rangeBarChartToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.rangeBarChartToolStripMenuItem.Text = "Range Bar Chart";
+            this.rangeBarChartToolStripMenuItem.Click += new System.EventHandler(this.rangeBarChartToolStripMenuItem_Click);
             // 
-            // btnBarChart
+            // renkoChartToolStripMenuItem
             // 
-            this.btnBarChart.Location = new System.Drawing.Point(84, 0);
-            this.btnBarChart.Name = "btnBarChart";
-            this.btnBarChart.Size = new System.Drawing.Size(37, 29);
-            this.btnBarChart.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.btnBarChart.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
-            this.btnBarChart.StateCommon.Back.Image = global::ELEVEN.Properties.Resources.Bar_Chart;
-            this.btnBarChart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
-            this.btnBarChart.TabIndex = 2;
-            this.btnBarChart.TabStop = false;
-            this.btnBarChart.Values.Text = "";
-            this.btnBarChart.Click += new System.EventHandler(this.btnBarChart_Click);
+            this.renkoChartToolStripMenuItem.Image = global::ELEVEN.Properties.Resources.chart_renko;
+            this.renkoChartToolStripMenuItem.Name = "renkoChartToolStripMenuItem";
+            this.renkoChartToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.renkoChartToolStripMenuItem.Text = "Renko Chart";
+            this.renkoChartToolStripMenuItem.Click += new System.EventHandler(this.renkoChartToolStripMenuItem_Click);
             // 
-            // kryptonSeparator1
+            // heikinAshiChartToolStripMenuItem
             // 
-            this.kryptonSeparator1.Location = new System.Drawing.Point(76, 1);
-            this.kryptonSeparator1.Name = "kryptonSeparator1";
-            this.kryptonSeparator1.Size = new System.Drawing.Size(10, 27);
-            this.kryptonSeparator1.SplitterWidth = 1;
-            this.kryptonSeparator1.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.kryptonSeparator1.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.kryptonSeparator1.StateCommon.Separator.Back.Color1 = System.Drawing.Color.White;
-            this.kryptonSeparator1.StateCommon.Separator.Back.Color2 = System.Drawing.Color.White;
-            this.kryptonSeparator1.TabIndex = 1;
+            this.heikinAshiChartToolStripMenuItem.Image = global::ELEVEN.Properties.Resources.candlestick_chart;
+            this.heikinAshiChartToolStripMenuItem.Name = "heikinAshiChartToolStripMenuItem";
+            this.heikinAshiChartToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.heikinAshiChartToolStripMenuItem.Text = "Heikin-Ashi Chart";
+            this.heikinAshiChartToolStripMenuItem.Click += new System.EventHandler(this.heikinAshiChartToolStripMenuItem_Click);
             // 
             // comboTimeFrame
             // 
@@ -374,8 +347,9 @@
             this.kryptonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSeparator1)).EndInit();
+            this.kryptonPanel1.PerformLayout();
+            this.toolStripChartType.ResumeLayout(false);
+            this.toolStripChartType.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboTimeFrame)).EndInit();
             this.ResumeLayout(false);
 
@@ -394,13 +368,13 @@
         public ComponentFactory.Krypton.Toolkit.KryptonPanel panelTools;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comboTimeFrame;
-        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator2;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnLineChart;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnCandleStickChart;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnBarChart;
-        private ComponentFactory.Krypton.Toolkit.KryptonSeparator kryptonSeparator1;
         private System.Windows.Forms.ToolTip customToolTip;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton BtnHeikenAshi;
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnTrendline;
+        private System.Windows.Forms.ToolStrip toolStripChartType;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonChartType;
+        private System.Windows.Forms.ToolStripMenuItem candlestickChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rangeBarChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renkoChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem heikinAshiChartToolStripMenuItem;
     }
 }

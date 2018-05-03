@@ -1,5 +1,6 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using ELEVEN.DBConnection;
+using ELEVEN.Model;
 using ELEVEN.Models;
 using ELEVEN.Services;
 using System;
@@ -38,19 +39,17 @@ namespace ELEVEN
             this.symbol = symbol;
 
             zoomList = new List<ChartZoomOut>();
-
+            toolStripChartType.Renderer = new MainFormToolStripRenderer();
         }
         private void SetInitials()
         {
-            customToolTip.SetToolTip(btnBarChart, "Range Bar Chart");
-            customToolTip.SetToolTip(btnLineChart, "Renko Chart");
-            customToolTip.SetToolTip(BtnCandleStickChart, "Candlestick Chart");
+        
             customToolTip.SetToolTip(BtnToggleZoom, "Zoom In");
             customToolTip.SetToolTip(BtnZoomOut, "Zoom Out");
             customToolTip.SetToolTip(BtnPan, "Cursor/Pan");
             customToolTip.SetToolTip(BtnShowHide, "Hide Tool");
             customToolTip.SetToolTip(BtnLockUnLock, "Lock/UnLock Tools");
-            customToolTip.SetToolTip(BtnHeikenAshi, "Heikin-Ashi Chart");
+           
         }
 
         private void InitBitFinex()
@@ -507,33 +506,7 @@ namespace ELEVEN
                 }
             }
         }
-
-        private void btnBarChart_Click(object sender, EventArgs e)
-        {
-            chart1.Series["Series1"].ChartType = SeriesChartType.RangeBar;
-
-
-        }
-
-        private void btnLineChart_Click(object sender, EventArgs e)
-        {
-            chart1.Series["Series1"].ChartType = SeriesChartType.Renko;
-        }
-
-        private void BtnCandleStickChart_Click(object sender, EventArgs e)
-        {
-            chart1.Series["Series1"].ChartType = SeriesChartType.Candlestick;
-
-        }
-
-        private void BtnHeikenAshi_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
+        
         private void BtnTrendline_Click(object sender, EventArgs e)
         {
 
@@ -566,6 +539,29 @@ namespace ELEVEN
             }
 
 
+
+        }
+
+        private void candlestickChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].ChartType = SeriesChartType.Candlestick;
+            toolStripSplitButtonChartType.Image = Properties.Resources.candlestick_chart;
+        }
+
+        private void renkoChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].ChartType = SeriesChartType.Renko;
+            toolStripSplitButtonChartType.Image = Properties.Resources.chart_renko;
+        }
+
+        private void rangeBarChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].ChartType = SeriesChartType.RangeBar;
+            toolStripSplitButtonChartType.Image = Properties.Resources.Bar_Chart;
+        }
+
+        private void heikinAshiChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }
